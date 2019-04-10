@@ -1,0 +1,19 @@
+var projectPath: String { return "Example.xcodeproj" }
+var projectWorkspace: String { return "Example.xcworkspace" }
+var projectScheme: String { return "Example" }
+
+var fallbackAppleId: String { return "developer@example.com" }
+var appIdentifier: String { return "com.example.app" } // The bundle identifier of your app
+
+var slackUrl: String { return "https://hooks.slack.com/services/XXX/XXX/XXX" }
+var slackChannel: String { return "#example-ci" }
+var slackDebugChannel: String { return "#example-ci-debug" }
+
+var itcTeam: String? { return "000000000" } // App Store Connect Team ID
+var teamID: String { return "XXXXXXXXXX" } // Apple Developer Portal Team ID
+
+var matchGitUrl: String { return "git@github.com:user/codesign-ios.git" }
+var matchGitBranch: String { return "master" }
+
+// For more information about the Appfile, see:
+//     https://docs.fastlane.tools/advanced/#appfile
