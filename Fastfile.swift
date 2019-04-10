@@ -48,7 +48,7 @@ class Fastfile: LaneFile {
             useAutomaticSigning: true
         )
 		uploadToTestflight(
-            username: appleID ?? defaultAppleID,
+            username: "developer@rallyreader.com",
             skipSubmission: true,
             skipWaitingForBuildProcessing: true,
             teamId: itcTeam
