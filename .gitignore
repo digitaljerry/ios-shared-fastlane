@@ -63,3 +63,4 @@ vendor/
 /screenshots
 /test_output
 UserInterfaceState.xcuserstate
+/FastlaneRunner
