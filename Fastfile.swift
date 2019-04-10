@@ -10,11 +10,11 @@ import Foundation
 
 class Fastfile: LaneFile {
     
-    var appleID: String?
+    var appleID: String = "developer@rallyreader.com"
     var defaultAppleID: String = fallbackAppleId
     
     func beforeAll() {
-        appleID = prompt(text: "Apple ID: ")
+//        appleID = prompt(text: "Apple ID: ")
     }
     
     func afterAll(currentLane: String) {}
@@ -25,11 +25,11 @@ class Fastfile: LaneFile {
     
 	func betaLane() {
 	desc("Push a new beta build to TestFlight")
-		syncCodeSigning(
+        syncCodeSigning(
             type: "appstore",
             readonly: true,
             appIdentifier: [appIdentifier],
-            username: appleID ?? defaultAppleID,
+            username: appleID,
             teamId: teamID,
             gitUrl: matchGitUrl,
             gitBranch: matchGitBranch,
@@ -40,15 +40,15 @@ class Fastfile: LaneFile {
             path: projectPath,
             useAutomaticSigning: false
         )
-		buildBumpLane()
+        buildBumpLane()
         cocoapods()
-		buildApp(workspace: projectWorkspace, scheme: projectScheme)
+        buildApp(workspace: projectWorkspace, scheme: projectScheme)
         automaticCodeSigning(
             path: projectPath,
             useAutomaticSigning: true
         )
 		uploadToTestflight(
-            username: "developer@rallyreader.com",
+            username: appleID,
             skipSubmission: true,
             skipWaitingForBuildProcessing: true,
             teamId: itcTeam
@@ -62,7 +62,6 @@ class Fastfile: LaneFile {
             type: "appstore",
             readonly: false,
             appIdentifier: [appIdentifier],
-            username: appleID ?? defaultAppleID,
             teamId: teamID,
             teamName: teamID,
             gitUrl: matchGitUrl,
