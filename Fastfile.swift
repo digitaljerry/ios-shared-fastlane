@@ -36,21 +36,11 @@ class Fastfile: LaneFile {
             shallowClone: true,
             cloneBranchDirectly: true
         )
-        automaticCodeSigning(
-            path: projectPath,
-            useAutomaticSigning: false
-        )
         buildBumpLane()
         cocoapods()
         buildApp(
             workspace: projectWorkspace,
-            scheme: projectScheme,
-            codesigningIdentity: "match Appstore \(appIdentifier)",
-            skipProfileDetection: true
-        )
-        automaticCodeSigning(
-            path: projectPath,
-            useAutomaticSigning: true
+            scheme: projectScheme
         )
 		uploadToTestflight(
             username: appleID,
