@@ -42,7 +42,12 @@ class Fastfile: LaneFile {
         )
         buildBumpLane()
         cocoapods()
-        buildApp(workspace: projectWorkspace, scheme: projectScheme)
+        buildApp(
+            workspace: projectWorkspace,
+            scheme: projectScheme,
+            codesigningIdentity: "match Appstore \(appIdentifier)",
+            skipProfileDetection: true
+        )
         automaticCodeSigning(
             path: projectPath,
             useAutomaticSigning: true
