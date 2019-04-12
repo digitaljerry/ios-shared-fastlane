@@ -1042,15 +1042,13 @@ func commitVersionBump(message: String? = nil,
                        force: Bool = false,
                        settings: Bool = false,
                        ignore: String? = nil,
-                       include: [String] = [],
-                       noVerify: Bool = false) {
+                       include: [String] = []) {
   let command = RubyCommand(commandID: "", methodName: "commit_version_bump", className: nil, args: [RubyCommand.Argument(name: "message", value: message),
                                                                                                      RubyCommand.Argument(name: "xcodeproj", value: xcodeproj),
                                                                                                      RubyCommand.Argument(name: "force", value: force),
                                                                                                      RubyCommand.Argument(name: "settings", value: settings),
                                                                                                      RubyCommand.Argument(name: "ignore", value: ignore),
-                                                                                                     RubyCommand.Argument(name: "include", value: include),
-                                                                                                     RubyCommand.Argument(name: "no_verify", value: noVerify)])
+                                                                                                     RubyCommand.Argument(name: "include", value: include)])
   _ = runner.executeCommand(command)
 }
 func copyArtifacts(keepOriginal: Bool = true,
@@ -1681,12 +1679,10 @@ func gitAdd(path: String? = nil,
 }
 func gitCommit(path: String,
                message: String,
-               skipGitHooks: Bool? = nil,
-               allowNothingToCommit: Bool? = nil) {
+               skipGitHooks: Bool? = nil) {
   let command = RubyCommand(commandID: "", methodName: "git_commit", className: nil, args: [RubyCommand.Argument(name: "path", value: path),
                                                                                             RubyCommand.Argument(name: "message", value: message),
-                                                                                            RubyCommand.Argument(name: "skip_git_hooks", value: skipGitHooks),
-                                                                                            RubyCommand.Argument(name: "allow_nothing_to_commit", value: allowNothingToCommit)])
+                                                                                            RubyCommand.Argument(name: "skip_git_hooks", value: skipGitHooks)])
   _ = runner.executeCommand(command)
 }
 func gitPull(onlyTags: Bool = false) {
@@ -2593,16 +2589,14 @@ func pushToGitRemote(localBranch: String? = nil,
                      forceWithLease: Bool = false,
                      tags: Bool = true,
                      remote: String = "origin",
-                     noVerify: Bool = false,
-                     setUpstream: Bool = false) {
+                     noVerify: Bool = false) {
   let command = RubyCommand(commandID: "", methodName: "push_to_git_remote", className: nil, args: [RubyCommand.Argument(name: "local_branch", value: localBranch),
                                                                                                     RubyCommand.Argument(name: "remote_branch", value: remoteBranch),
                                                                                                     RubyCommand.Argument(name: "force", value: force),
                                                                                                     RubyCommand.Argument(name: "force_with_lease", value: forceWithLease),
                                                                                                     RubyCommand.Argument(name: "tags", value: tags),
                                                                                                     RubyCommand.Argument(name: "remote", value: remote),
-                                                                                                    RubyCommand.Argument(name: "no_verify", value: noVerify),
-                                                                                                    RubyCommand.Argument(name: "set_upstream", value: setUpstream)])
+                                                                                                    RubyCommand.Argument(name: "no_verify", value: noVerify)])
   _ = runner.executeCommand(command)
 }
 func puts(message: String? = nil) {
@@ -4305,4 +4299,4 @@ let screengrabfile: Screengrabfile = Screengrabfile()
 let snapshotfile: Snapshotfile = Snapshotfile()
 // Please don't remove the lines below
 // They are used to detect outdated files
-// FastlaneRunnerAPIVersion [0.9.45]
+// FastlaneRunnerAPIVersion [0.9.43]
