@@ -37,7 +37,7 @@ class Fastfile: LaneFile {
             cloneBranchDirectly: true
         )
         buildBumpLane()
-        cocoapods()
+        cocoapods(repoUpdate: true)
         buildApp(
             workspace: projectWorkspace,
             scheme: projectScheme
