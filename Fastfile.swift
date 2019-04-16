@@ -6,15 +6,22 @@
 //     https://docs.fastlane.tools/actions
 //
 
+// To edit fastlane swift run:
+// open ./fastlane/swift/FastlaneSwiftRunner/FastlaneSwiftRunner.xcodeproj
+
 import Foundation
 
 class Fastfile: LaneFile {
     
     var appleID: String = "developer@rallyreader.com"
+    var devApp: Bool = false
     var defaultAppleID: String = fallbackAppleId
+    var appID: String { return appIdentifier + (devApp ? ".dev" : "") }
+    var scheme: String { return projectScheme + (devApp ? "DEV" : "") }
     
     func beforeAll() {
-//        appleID = prompt(text: "Apple ID: ")
+        //appleID = prompt(text: "Apple ID: ")
+        devApp = prompt(text: "DEV App? (y/n)") == "y"
     }
     
     func afterAll(currentLane: String) {}
@@ -25,10 +32,11 @@ class Fastfile: LaneFile {
     
 	func betaLane() {
 	desc("Push a new beta build to TestFlight")
+        checkTargetsLane()
         syncCodeSigning(
             type: "appstore",
             readonly: true,
-            appIdentifier: [appIdentifier],
+            appIdentifier: [appID],
             username: appleID,
             teamId: teamID,
             gitUrl: matchGitUrl,
@@ -37,10 +45,10 @@ class Fastfile: LaneFile {
             cloneBranchDirectly: true
         )
         buildBumpLane()
-        cocoapods(repoUpdate: true)
+        cocoapods()
         buildApp(
             workspace: projectWorkspace,
-            scheme: projectScheme
+            scheme: scheme
         )
 		uploadToTestflight(
             username: appleID,
@@ -56,7 +64,7 @@ class Fastfile: LaneFile {
         match(
             type: "appstore",
             readonly: false,
-            appIdentifier: [appIdentifier],
+            appIdentifier: [appID],
             teamId: teamID,
             teamName: teamID,
             gitUrl: matchGitUrl,
@@ -74,7 +82,7 @@ class Fastfile: LaneFile {
         match(
             type: "appstore",
             readonly: false,
-            appIdentifier: [appIdentifier],
+            appIdentifier: [appID],
             teamId: teamID,
             gitUrl: matchGitUrl,
             gitBranch: matchGitBranch
@@ -108,6 +116,10 @@ class Fastfile: LaneFile {
         let slackMessage = "Version bump \(newVersionNumber)"
         slackNotify(message: slackMessage)
     }
+
+    public func bumpLane() {
+        buildBumpLane()
+    }
     
     private func buildBumpLane(buildNumber: String? = nil, commitPrefix: String = "Build bump", force: Bool = false) {
         let lastCommit = lastGitCommit()
@@ -130,7 +142,7 @@ class Fastfile: LaneFile {
         
         pushToGitRemote(force: false)
         
-        let versionNumber = getVersionNumber(target: projectScheme).trim()
+        let versionNumber = getVersionNumber(target: scheme).trim()
         let slackMessage = "\(commitPrefix) version \(newBuildNumber) build \(versionNumber)"
         slackNotify(message: slackMessage)
     }
