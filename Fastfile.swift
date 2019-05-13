@@ -18,9 +18,10 @@ class Fastfile: LaneFile {
     var defaultAppleID: String = fallbackAppleId
     var appID: String { return appIdentifier + (devApp ? ".dev" : "") }
     var scheme: String { return projectScheme + (devApp ? "DEV" : "") }
+    var filePath: String { return "./\(scheme).ipa" }
     
     func beforeAll() {
-        //appleID = prompt(text: "Apple ID: ")
+        appleID = prompt(text: "Apple ID: ")
         devApp = prompt(text: "DEV App? (y/n)") == "y"
     }
     
@@ -32,6 +33,12 @@ class Fastfile: LaneFile {
     
 	func betaLane() {
 	desc("Push a new beta build to TestFlight")
+        guard FileManager.default.fileExists(atPath: filePath) == false else {
+            println(message: "IPA file already exists. Not building a new one.")
+            uploadIPA()
+            return
+        }
+        
         checkTargetsLane()
         syncCodeSigning(
             type: "appstore",
@@ -50,13 +57,17 @@ class Fastfile: LaneFile {
             workspace: projectWorkspace,
             scheme: scheme
         )
-		uploadToTestflight(
+	}
+    
+    private func uploadIPA() {
+        uploadToTestflight(
             username: appleID,
             skipSubmission: true,
             skipWaitingForBuildProcessing: true,
             teamId: itcTeam
         )
-	}
+        cleanBuildArtifacts()
+    }
     
     // MARK: Codes signing
     
