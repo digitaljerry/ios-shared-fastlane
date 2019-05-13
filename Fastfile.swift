@@ -66,6 +66,10 @@ class Fastfile: LaneFile {
             skipWaitingForBuildProcessing: true,
             teamId: itcTeam
         )
+        
+        let slackMessage = "\(appID) testflight uploaded successfully :ok_hand:."
+        slackNotify(message: slackMessage)
+        
         cleanBuildArtifacts()
     }
     
@@ -124,7 +128,7 @@ class Fastfile: LaneFile {
         
         pushToGitRemote(force: false)
         
-        let slackMessage = "Version bump \(newVersionNumber)"
+        let slackMessage = "Version bump \(newVersionNumber) for \(appID)"
         slackNotify(message: slackMessage)
     }
 
@@ -154,7 +158,7 @@ class Fastfile: LaneFile {
         pushToGitRemote(force: false)
         
         let versionNumber = getVersionNumber(target: scheme).trim()
-        let slackMessage = "\(commitPrefix) version \(newBuildNumber) build \(versionNumber)"
+        let slackMessage = "\(commitPrefix) version \(newBuildNumber) build \(versionNumber) for \(appID)"
         slackNotify(message: slackMessage)
     }
     
