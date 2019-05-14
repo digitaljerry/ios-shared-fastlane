@@ -57,6 +57,7 @@ class Fastfile: LaneFile {
             workspace: projectWorkspace,
             scheme: scheme
         )
+        uploadIPA()
 	}
     
     private func uploadIPA() {
