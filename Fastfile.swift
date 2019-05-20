@@ -13,7 +13,7 @@ import Foundation
 
 class Fastfile: LaneFile {
     
-    var appleID: String = "developer@rallyreader.com"
+    var appleID: String = "jernej.z@gmail.com"
     var devApp: Bool = false
     var defaultAppleID: String = fallbackAppleId
     var appID: String { return appIdentifier + (devApp ? ".dev" : "") }
