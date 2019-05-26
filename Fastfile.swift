@@ -13,16 +13,17 @@ import Foundation
 
 class Fastfile: LaneFile {
     
-    var appleID: String = "jernej.z@gmail.com"
+    var appleID: String?
     var devApp: Bool = false
-    var defaultAppleID: String = fallbackAppleId
     var appID: String { return appIdentifier + (devApp ? ".dev" : "") }
     var scheme: String { return projectScheme + (devApp ? "DEV" : "") }
     var filePath: String { return "./\(scheme).ipa" }
     
     func beforeAll() {
         appleID = prompt(text: "Apple ID: ")
-        devApp = prompt(text: "DEV App? (y/n)") == "y"
+        if supportsDevApp {
+            devApp = prompt(text: "DEV App? (y/n)") == "y"
+        }
     }
     
     func afterAll(currentLane: String) {}
@@ -33,10 +34,16 @@ class Fastfile: LaneFile {
     
 	func betaLane() {
 	desc("Push a new beta build to TestFlight")
-        guard FileManager.default.fileExists(atPath: filePath) == false else {
-            println(message: "IPA file already exists. Not building a new one.")
-            uploadIPA()
-            return
+        if FileManager.default.fileExists(atPath: filePath) {
+            if let attributes = try? FileManager.default.attributesOfItem(atPath: filePath) as [FileAttributeKey: Any],
+                let creationDate = attributes[FileAttributeKey.creationDate] as? Date {
+                print(creationDate)
+                if creationDate.timeIntervalSinceNow <= 3600 {
+                    println(message: "Recent IPA file already exists. Not building a new one.")
+                    uploadIPA()
+                    return
+                }
+            }
         }
         
         checkTargetsLane()
@@ -44,7 +51,7 @@ class Fastfile: LaneFile {
             type: "appstore",
             readonly: true,
             appIdentifier: [appID],
-            username: appleID,
+            username: appleID ?? defaultAppleId,
             teamId: teamID,
             gitUrl: matchGitUrl,
             gitBranch: matchGitBranch,
@@ -62,7 +69,7 @@ class Fastfile: LaneFile {
     
     private func uploadIPA() {
         uploadToTestflight(
-            username: appleID,
+            username: appleID ?? defaultAppleId,
             skipSubmission: true,
             skipWaitingForBuildProcessing: true,
             teamId: itcTeam
