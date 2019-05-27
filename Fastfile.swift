@@ -140,8 +140,10 @@ class Fastfile: LaneFile {
         slackNotify(message: slackMessage)
     }
 
-    public func bumpLane() {
-        buildBumpLane()
+    public func bumpLane(withOptions options:[String: String]?) {
+        if options?["force"] == "true" {
+            buildBumpLane(force: true)
+        }
     }
     
     private func buildBumpLane(buildNumber: String? = nil, commitPrefix: String = "Build bump", force: Bool = false) {
