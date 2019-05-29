@@ -18,6 +18,8 @@ class Fastfile: LaneFile {
     var appID: String { return appIdentifier + (devApp ? ".dev" : "") }
     var scheme: String { return projectScheme + (devApp ? "DEV" : "") }
     var filePath: String { return "./\(scheme).ipa" }
+    var IPAFilePath: String { return "./\(scheme).ipa" }
+    var dsymFilePath: String { return "./\(scheme).app.dSYM.zip" }
     
     func beforeAll() {
         appleID = prompt(text: "Apple ID: ")
@@ -65,7 +67,17 @@ class Fastfile: LaneFile {
             scheme: scheme
         )
         uploadIPA()
+        deleteArchiveFilesLane()
 	}
+    
+    public func deleteArchiveFilesLane() {
+        if FileManager.default.fileExists(atPath: IPAFilePath) == true {
+            try! FileManager.default.removeItem(atPath: IPAFilePath)
+        }
+        if FileManager.default.fileExists(atPath: dsymFilePath) == true {
+            try! FileManager.default.removeItem(atPath: dsymFilePath)
+        }
+    }
     
     private func uploadIPA() {
         uploadToTestflight(
