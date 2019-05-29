@@ -15,6 +15,7 @@ class Fastfile: LaneFile {
     
     var appleID: String?
     var devApp: Bool = false
+    var defaultAppleID: String = fallbackAppleId
     var appID: String { return appIdentifier + (devApp ? ".dev" : "") }
     var scheme: String { return projectScheme + (devApp ? "DEV" : "") }
     var filePath: String { return "./\(scheme).ipa" }
