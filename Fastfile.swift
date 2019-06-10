@@ -156,6 +156,8 @@ class Fastfile: LaneFile {
     public func bumpLane(withOptions options:[String: String]?) {
         if options?["force"] == "true" {
             buildBumpLane(force: true)
+        } else {
+            buildBumpLane(force: false)
         }
     }
     
