@@ -14,7 +14,7 @@ import Foundation
 class Fastfile: LaneFile {
     
     var appleID: String?
-    var devApp: Bool = false
+    var devApp: Bool = true
     var defaultAppleId: String = fallbackAppleId
     var appID: String { return appIdentifier + (devApp ? ".dev" : "") }
     var scheme: String { return projectScheme + (devApp ? "DEV" : "") }
@@ -23,10 +23,17 @@ class Fastfile: LaneFile {
     var dsymFilePath: String { return "./\(scheme).app.dSYM.zip" }
     
     func beforeAll() {
-        appleID = prompt(text: "Apple ID: ")
+        appleID = prompt(text: "Apple ID: ", ciInput: "jernej.z@gmail.com")
         if supportsDevApp {
-            devApp = prompt(text: "DEV App? (y/n)") == "y"
+            devApp = prompt(text: "DEV App? (y/n)", ciInput: "y") == "y"
         }
+        
+        puts(message: "----------------------")
+        puts(message: "BUILD INPUT ARGUMENTS")
+        puts(message: "----------------------")
+        puts(message: "AppleID: \(String(describing: appleID))")
+        puts(message: "DEV App? \(devApp ? "Y" : "N")")
+        puts(message: "----------------------")
     }
     
     func afterAll(currentLane: String) {}
@@ -68,7 +75,9 @@ class Fastfile: LaneFile {
             scheme: scheme
         )
         uploadIPA()
+        uploadDSYM()
         deleteArchiveFilesLane()
+        cleanBuildArtifacts()
 	}
     
     public func deleteArchiveFilesLane() {
@@ -90,8 +99,18 @@ class Fastfile: LaneFile {
         
         let slackMessage = "\(appID) testflight uploaded successfully :ok_hand:."
         slackNotify(message: slackMessage)
-        
-        cleanBuildArtifacts()
+    }
+    
+    public func uploadDSYM() {
+        let gspPath = devApp ? "./RallyReaderApp/DEV/GoogleService-Info.plist" : "./RallyReaderApp/GoogleService-Info.plist"
+        let dsymPath = devApp ? "./RallyReaderAppDEV.app.dSYM.zip" : "./RallyReaderApp.app.dSYM.zip"
+        uploadSymbolsToCrashlytics(
+            dsymPath: dsymPath,
+            gspPath: gspPath,
+            dsymWorkerThreads: 3
+        )
+        let slackMessage = "\(appID) dSYM files uploaded."
+        slackNotify(message: slackMessage)
     }
     
     // MARK: Codes signing
