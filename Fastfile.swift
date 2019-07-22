@@ -23,7 +23,7 @@ class Fastfile: LaneFile {
     var dsymFilePath: String { return "./\(scheme).app.dSYM.zip" }
     
     func beforeAll() {
-        appleID = prompt(text: "Apple ID: ", ciInput: "jernej.z@gmail.com")
+        appleID = prompt(text: "Apple ID: ", ciInput: "developer@rallyreader.com")
         if supportsDevApp {
             devApp = prompt(text: "DEV App? (y/n)", ciInput: "y") == "y"
         }
