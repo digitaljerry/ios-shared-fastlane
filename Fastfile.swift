@@ -57,17 +57,21 @@ class Fastfile: LaneFile {
         }
         
         checkTargetsLane()
-        syncCodeSigning(
-            type: "appstore",
-            readonly: true,
-            appIdentifier: [appID],
-            username: appleID ?? defaultAppleId,
-            teamId: teamID,
-            gitUrl: matchGitUrl,
-            gitBranch: matchGitBranch,
-            shallowClone: true,
-            cloneBranchDirectly: true
-        )
+        
+        if automaticCodeSigning == false {
+            syncCodeSigning(
+                type: "appstore",
+                readonly: true,
+                appIdentifier: [appID],
+                username: appleID ?? defaultAppleId,
+                teamId: teamID,
+                gitUrl: matchGitUrl,
+                gitBranch: matchGitBranch,
+                shallowClone: true,
+                cloneBranchDirectly: true
+            )
+        }
+        
         buildBumpLane()
         cocoapods()
         buildApp(
