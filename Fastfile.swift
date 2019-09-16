@@ -26,6 +26,8 @@ class Fastfile: LaneFile {
         appleID = prompt(text: "Apple ID: ", ciInput: "developer@rallyreader.com")
         if supportsDevApp {
             devApp = prompt(text: "DEV App? (y/n)", ciInput: "y") == "y"
+        } else {
+            devApp = false
         }
         
         puts(message: "----------------------")
