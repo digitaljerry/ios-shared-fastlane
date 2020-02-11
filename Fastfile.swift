@@ -24,8 +24,13 @@ class Fastfile: LaneFile {
     
     func beforeAll() {
         appleID = prompt(text: "Apple ID: ", ciInput: "developer@rallyreader.com")
+        var ciInput = environmentVariable(get: "DEV_APP")
+        if ciInput == "" {
+            ciInput = "y"
+        }
+        
         if supportsDevApp {
-            devApp = prompt(text: "DEV App? (y/n)", ciInput: "y") == "y"
+            devApp = prompt(text: "DEV App? (y/n)", ciInput: ciInput) == "y"
         } else {
             devApp = false
         }
