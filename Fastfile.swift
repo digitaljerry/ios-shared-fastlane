@@ -50,11 +50,12 @@ class Fastfile: LaneFile {
     }
     
     func distributeLatestBuildLane() {
-        slackNotify(message: "Distributing latest build to External testers...")
+        let whichApp = devApp ? "DEV" : "PROD"
+        slackNotify(message: "Distributing latest \(whichApp) build to External testers...")
         let username = String(describing: (appleID ?? defaultAppleId))
         let groups = (devApp == true ? externalTestersGroupDEV : externalTestersGroup) ?? ""
         sh(command: "bundle exec fastlane pilot distribute --app_identifier \"\(appID)\" --username \"\(username)\" --distribute_external --groups \(groups) --notify_external_testers")
-        slackSuccess(message: "Successfully distributed build to External testers 🚀")
+        slackSuccess(message: "Successfully distributed \(whichApp) build to External testers 🚀")
     }
     
 	func betaLane() {
