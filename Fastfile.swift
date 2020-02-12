@@ -123,9 +123,8 @@ class Fastfile: LaneFile {
     
     public func uploadDSYM() {
         let gspPath = devApp ? "./\(projectScheme)/DEV/GoogleService-Info.plist" : "./\(projectScheme)/GoogleService-Info.plist"
-        let dsymPath = devApp ? "./\(projectScheme).app.dSYM.zip" : "./\(projectScheme).app.dSYM.zip"
         uploadSymbolsToCrashlytics(
-            dsymPath: dsymPath,
+            dsymPath: dsymFilePath,
             gspPath: gspPath,
             dsymWorkerThreads: 3
         )
