@@ -49,6 +49,14 @@ class Fastfile: LaneFile {
         slackError(message: errorInfo)
     }
     
+    func distributeLatestBuildLane() {
+        slackNotify(message: "Distributing latest build to External testers...")
+        let username = String(describing: (appleID ?? defaultAppleId))
+        let groups = (devApp == true ? externalTestersGroupDEV : externalTestersGroup) ?? ""
+        sh(command: "bundle exec fastlane pilot distribute --app_identifier \"\(appID)\" --username \"\(username)\" --distribute_external --groups \(groups) --notify_external_testers")
+        slackSuccess(message: "Successfully distributed build to External testers 🚀")
+    }
+    
 	func betaLane() {
 	desc("Push a new beta build to TestFlight")
         if FileManager.default.fileExists(atPath: filePath) {
@@ -109,7 +117,7 @@ class Fastfile: LaneFile {
         )
         
         let slackMessage = "\(appID) testflight uploaded successfully :ok_hand:."
-        slackNotify(message: slackMessage)
+        slackSuccess(message: slackMessage)
     }
     
     public func uploadDSYM() {
@@ -121,7 +129,7 @@ class Fastfile: LaneFile {
             dsymWorkerThreads: 3
         )
         let slackMessage = "\(appID) dSYM files uploaded."
-        slackNotify(message: slackMessage)
+        slackSuccess(message: slackMessage)
     }
     
     // MARK: Codes signing
@@ -180,7 +188,7 @@ class Fastfile: LaneFile {
         pushToGitRemote(force: false)
         
         let slackMessage = "Version bump \(newVersionNumber) for \(appID)"
-        slackNotify(message: slackMessage)
+        slackSuccess(message: slackMessage)
     }
 
     public func bumpLane(withOptions options:[String: String]?) {
@@ -214,7 +222,7 @@ class Fastfile: LaneFile {
         
         let versionNumber = getVersionNumber(target: scheme).trim()
         let slackMessage = "\(commitPrefix) version \(newBuildNumber) build \(versionNumber) for \(appID)"
-        slackNotify(message: slackMessage)
+        slackSuccess(message: slackMessage)
     }
     
     public func checkTargetsLane() {
