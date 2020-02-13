@@ -59,6 +59,7 @@ class Fastfile: LaneFile {
     }
     
     public func devBuildLane() {
+        betaLane(bumpLane: true)
         betaLane()
     }
     
@@ -67,7 +68,7 @@ class Fastfile: LaneFile {
         tagTestflightBuildLane()
     }
     
-    func betaLane(bumpLane: Bool? = false) {
+    func betaLane(bumpLane: Bool? = true) {
 	desc("Push a new beta build to TestFlight")
         if FileManager.default.fileExists(atPath: filePath) {
             if let attributes = try? FileManager.default.attributesOfItem(atPath: filePath) as [FileAttributeKey: Any],
