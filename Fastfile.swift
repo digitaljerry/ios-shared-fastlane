@@ -60,7 +60,6 @@ class Fastfile: LaneFile {
     
     public func devBuildLane() {
         betaLane(bumpLane: true)
-        betaLane()
     }
     
     public func prodBuildLane() {
