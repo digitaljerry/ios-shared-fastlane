@@ -58,7 +58,16 @@ class Fastfile: LaneFile {
         slackSuccess(message: "Successfully distributed \(whichApp) build to External testers 🚀")
     }
     
-	func betaLane() {
+    public func devBuildLane() {
+        betaLane()
+    }
+    
+    public func prodBuildLane() {
+        betaLane(bumpLane: false)
+        tagTestflightBuildLane()
+    }
+    
+    func betaLane(bumpLane: Bool? = false) {
 	desc("Push a new beta build to TestFlight")
         if FileManager.default.fileExists(atPath: filePath) {
             if let attributes = try? FileManager.default.attributesOfItem(atPath: filePath) as [FileAttributeKey: Any],
@@ -88,7 +97,10 @@ class Fastfile: LaneFile {
             )
         }
         
-        buildBumpLane()
+        if bumpLane == true {
+            buildBumpLane()
+        }
+        
         cocoapods()
         buildApp(
             workspace: projectWorkspace,
