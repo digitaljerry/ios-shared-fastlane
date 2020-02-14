@@ -24,6 +24,9 @@ class Fastfile: LaneFile {
     
     func beforeAll() {
         appleID = prompt(text: "Apple ID: ", ciInput: "developer@rallyreader.com")
+    }
+    
+    func devOrProdPrompt() {
         var ciInput = environmentVariable(get: "DEV_APP")
         if ciInput == "" {
             ciInput = "y"
@@ -49,7 +52,7 @@ class Fastfile: LaneFile {
         slackError(message: errorInfo)
     }
     
-    func distributeLatestBuildLane() {
+    public func distributeLatestBuildLane() {
         let whichApp = devApp ? "DEV" : "PROD"
         slackNotify(message: "Distributing latest \(whichApp) build to External testers...")
         let username = String(describing: (appleID ?? defaultAppleId))
@@ -59,15 +62,22 @@ class Fastfile: LaneFile {
     }
     
     public func devBuildLane() {
+        devApp = true
         betaLane(bumpLane: true)
     }
     
     public func prodBuildLane() {
+        devApp = false
         betaLane(bumpLane: false)
         tagTestflightBuildLane()
     }
     
-    func betaLane(bumpLane: Bool? = true) {
+    public func newBuildLane() {
+        devOrProdPrompt()
+        betaLane()
+    }
+    
+    private func betaLane(bumpLane: Bool? = true) {
 	desc("Push a new beta build to TestFlight")
         if FileManager.default.fileExists(atPath: filePath) {
             if let attributes = try? FileManager.default.attributesOfItem(atPath: filePath) as [FileAttributeKey: Any],
