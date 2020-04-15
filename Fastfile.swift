@@ -134,6 +134,16 @@ class Fastfile: LaneFile {
     private func uploadIPA() {
         uploadToTestflight(
             username: appleID ?? defaultAppleId,
+            betaAppReviewInfo: [
+                "contact_email": reviewInfoContactEmail as Any,
+                "contact_first_name": reviewInfoContactFirstName as Any,
+                "contact_last_name": reviewInfoContactLastName as Any,
+                "contact_phone": reviewInfoContactPhone as Any,
+                "notes": "This is review note for the reviewer <3 thank you for reviewing"
+            ],
+            betaAppDescription: betaAppDescription,
+            betaAppFeedbackEmail: betaAppFeedbackEmail,
+            changelog: changelogSinceLastBuildBump(),
             skipSubmission: true,
             skipWaitingForBuildProcessing: true,
             teamId: itcTeam
