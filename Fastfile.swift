@@ -273,14 +273,18 @@ class Fastfile: LaneFile {
 //            sh(command: "wget -q \"https://www.dropbox.com/s/XXX?dl=1\" -O \(libavcodecFile)")
 //        }
     }
+    public func changelogLane() {
+        let changelog = changelogSinceLastBuildBump()
+        print(changelog)
+    }
     
     func changelogSinceLastBuildBump() -> String {
         let lastCommit = sh(command: "git log --pretty=format:'%H' -n 1")
-        let lastBuildBumpCommit = sh(command: "git log --pretty=format:'%H' --grep='Build bump' --skip 1 -n 1 ")
+        let lastBuildBumpCommit = sh(command: "git log --pretty=format:'%H' --grep='Build bump' --skip 2 -n 1 ")
         
         let changelog = changelogFromGitCommits(
             between: "\(lastCommit),\(lastBuildBumpCommit)",
-            pretty: "%s <%an>",
+            pretty: "%s",
             dateFormat: "short",
             mergeCommitFiltering: "exclude_merges"
         )
