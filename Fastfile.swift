@@ -171,11 +171,24 @@ class Fastfile: LaneFile {
             type: "appstore",
             readonly: false,
             appIdentifier: [appID],
+            username: appleID,
             teamId: teamID,
             teamName: teamID,
             gitUrl: matchGitUrl,
             gitBranch: matchGitBranch
         )
+        for extensionSuffix in extensionIdentifiersSuffixes {
+            match(
+                type: "appstore",
+                readonly: false,
+                appIdentifier: [appID+"."+extensionSuffix],
+                username: appleID,
+                teamId: teamID,
+                teamName: teamID,
+                gitUrl: matchGitUrl,
+                gitBranch: matchGitBranch
+            )
+        }
     }
     
     public func refreshProfilesLane() {
