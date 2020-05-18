@@ -23,7 +23,11 @@ class Fastfile: LaneFile {
     var dsymFilePath: String { return "./\(scheme).app.dSYM.zip" }
     
     func beforeAll() {
-        appleID = prompt(text: "Apple ID: ", ciInput: "developer@rallyreader.com")
+        if let appleIDenv = environmentVariable(get: "APPLEID") as? String {
+            appleID = appleIDenv
+        } else {
+            appleID = prompt(text: "Apple ID: ", ciInput: "developer@rallyreader.com")
+        }
     }
     
     func devOrProdPrompt() {
@@ -166,7 +170,8 @@ class Fastfile: LaneFile {
     
     // MARK: Codes signing
     
-    public func certificatesForReleaseLane() {
+    public func     Lane() {
+        print("BUHU \(appID)")
         match(
             type: "appstore",
             readonly: false,
@@ -178,6 +183,7 @@ class Fastfile: LaneFile {
             gitBranch: matchGitBranch
         )
         for extensionSuffix in extensionIdentifiersSuffixes {
+            print("BUHU \(appID+"."+extensionSuffix)")
             match(
                 type: "appstore",
                 readonly: false,
