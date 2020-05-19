@@ -23,11 +23,11 @@ class Fastfile: LaneFile {
     var dsymFilePath: String { return "./\(scheme).app.dSYM.zip" }
     
     func beforeAll() {
-        if let appleIDenv = environmentVariable(get: "APPLEID") as? String {
-            appleID = appleIDenv
-        } else {
+//        if let appleIDenv = environmentVariable(get: "APPLEID") as? String {
+//            appleID = appleIDenv
+//        } else {
             appleID = prompt(text: "Apple ID: ", ciInput: "developer@rallyreader.com")
-        }
+//        }
     }
     
     func devOrProdPrompt() {
