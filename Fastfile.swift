@@ -109,6 +109,19 @@ class Fastfile: LaneFile {
                 shallowClone: true,
                 cloneBranchDirectly: true
             )
+            for extensionSuffix in extensionIdentifiersSuffixes {
+                syncCodeSigning(
+                    type: "appstore",
+                    readonly: true,
+                    appIdentifier: [appID+"."+extensionSuffix],
+                    username: appleID ?? defaultAppleId,
+                    teamId: teamID,
+                    gitUrl: matchGitUrl,
+                    gitBranch: matchGitBranch,
+                    shallowClone: true,
+                    cloneBranchDirectly: true
+                )
+            }
         }
         
         if bumpLane == true {
@@ -170,8 +183,7 @@ class Fastfile: LaneFile {
     
     // MARK: Codes signing
     
-    public func     Lane() {
-        print("BUHU \(appID)")
+    public func certificatesForReleaseLane() {
         match(
             type: "appstore",
             readonly: false,
@@ -183,7 +195,6 @@ class Fastfile: LaneFile {
             gitBranch: matchGitBranch
         )
         for extensionSuffix in extensionIdentifiersSuffixes {
-            print("BUHU \(appID+"."+extensionSuffix)")
             match(
                 type: "appstore",
                 readonly: false,
