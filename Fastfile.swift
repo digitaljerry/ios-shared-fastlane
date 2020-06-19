@@ -61,7 +61,7 @@ class Fastfile: LaneFile {
         slackNotify(message: "Distributing latest \(whichApp) build to External testers...")
         let username = String(describing: (appleID ?? defaultAppleId))
         let groups = (devApp == true ? externalTestersGroupDEV : externalTestersGroup) ?? ""
-        sh(command: "bundle exec fastlane pilot distribute --app_identifier \"\(appID)\" --username \"\(username)\" --distribute_external --groups \(groups) --notify_external_testers --beta_app_review_info '{\"contact_email\": \"\(reviewInfoContactEmail!)\",\"contact_first_name\": \"\(reviewInfoContactFirstName!)\", \"contact_last_name\": \"\(reviewInfoContactLastName!)\", \"contact_phone\": \"\(reviewInfoContactPhone!)\"}'")
+        sh(command: "bundle exec fastlane pilot distribute --app_identifier \"\(appID)\" --username \"\(username)\" --distribute_external true --groups \(groups) --notify_external_testers true --beta_app_review_info '{\"contact_email\": \"\(reviewInfoContactEmail!)\",\"contact_first_name\": \"\(reviewInfoContactFirstName!)\", \"contact_last_name\": \"\(reviewInfoContactLastName!)\", \"contact_phone\": \"\(reviewInfoContactPhone!)\"}'")
         slackSuccess(message: "Successfully distributed \(whichApp) build to External testers 🚀")
     }
     
