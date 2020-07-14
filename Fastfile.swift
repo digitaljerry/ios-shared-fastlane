@@ -237,7 +237,12 @@ class Fastfile: LaneFile {
         slackError(message: "Lorem ipsum ERROR :arenadev:")
     }
     
-    private func versionBumpLane(versionNumber: String? = nil) {
+    public func versionBumpLane() {
+        let versionNumber = prompt(text: "New version: ")
+        appVersionBumpLane(versionNumber: versionNumber)
+    }
+    
+    private func appVersionBumpLane(versionNumber: String? = nil) {
         let newVersionNumber = incrementVersionNumber(versionNumber: versionNumber).trim()
         let message = "Version bump \(newVersionNumber) by fastlane"
         
