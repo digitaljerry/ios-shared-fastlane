@@ -62,7 +62,7 @@ class Fastfile: LaneFile {
         let username = String(describing: (appleID ?? defaultAppleId))
         let groups = (devApp == true ? externalTestersGroupDEV : externalTestersGroup) ?? ""
         sh(command: "bundle exec fastlane pilot distribute --app_identifier \"\(appID)\" --username \"\(username)\" --distribute_external true --groups \(groups) --notify_external_testers true --beta_app_review_info '{\"contact_email\": \"\(reviewInfoContactEmail!)\",\"contact_first_name\": \"\(reviewInfoContactFirstName!)\", \"contact_last_name\": \"\(reviewInfoContactLastName!)\", \"contact_phone\": \"\(reviewInfoContactPhone!)\"}'")
-        slackSuccess(message: "Successfully distributed \(whichApp) build to External testers 🚀")
+        slackSuccess(message: "Successfully distributed LATEST \(whichApp) build to External testers 🚀 Groups: \(groups)")
     }
     
     public func devBuildLane() {
@@ -166,7 +166,9 @@ class Fastfile: LaneFile {
             teamId: itcTeam
         )
         
-        let slackMessage = "\(appID) testflight uploaded successfully :ok_hand:."
+        let buildNumber = getBuildNumber().trim()
+        let versionNumber = getVersionNumber().trim()
+        let slackMessage = "\(appID) testflight uploaded successfully :ok_hand: v\(versionNumber) #\(buildNumber)"
         slackSuccess(message: slackMessage)
     }
     
@@ -177,7 +179,9 @@ class Fastfile: LaneFile {
             gspPath: gspPath,
             dsymWorkerThreads: 3
         )
-        let slackMessage = "\(appID) dSYM files uploaded."
+        let buildNumber = getBuildNumber().trim()
+        let versionNumber = getVersionNumber().trim()
+        let slackMessage = "\(appID) dSYM files uploaded :ok_hand: v\(versionNumber) #\(buildNumber)"
         slackSuccess(message: slackMessage)
     }
     
