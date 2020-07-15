@@ -31,11 +31,14 @@ enum CommandType {
 protocol RubyCommandable {
     var type: CommandType { get }
     var commandJson: String { get }
+    var id: String { get }
 }
 
 extension RubyCommandable {
     var json: String {
-        return "{\"commandType\" : \"\(self.type.token)\", \"command\" : \(self.commandJson)}"
+        return """
+        { "commandType": "\(type.token)", "command": \(commandJson) }
+        """
     }
 }
 
