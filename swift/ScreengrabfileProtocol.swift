@@ -1,96 +1,97 @@
 protocol ScreengrabfileProtocol: class {
-    /// Path to the root of your Android SDK installation, e.g. ~/tools/android-sdk-macosx
-    var androidHome: String? { get }
 
-    /// The Android build tools version to use, e.g. '23.0.2'
-    var buildToolsVersion: String? { get }
+  /// Path to the root of your Android SDK installation, e.g. ~/tools/android-sdk-macosx
+  var androidHome: String? { get }
 
-    /// A list of locales which should be used
-    var locales: [String] { get }
+  /// The Android build tools version to use, e.g. '23.0.2'
+  var buildToolsVersion: String? { get }
 
-    /// Enabling this option will automatically clear previously generated screenshots before running screengrab
-    var clearPreviousScreenshots: Bool { get }
+  /// A list of locales which should be used
+  var locales: [String] { get }
 
-    /// The directory where to store the screenshots
-    var outputDirectory: String { get }
+  /// Enabling this option will automatically clear previously generated screenshots before running screengrab
+  var clearPreviousScreenshots: Bool { get }
 
-    /// Don't open the summary after running _screengrab_
-    var skipOpenSummary: Bool { get }
+  /// The directory where to store the screenshots
+  var outputDirectory: String { get }
 
-    /// The package name of the app under test (e.g. com.yourcompany.yourapp)
-    var appPackageName: String { get }
+  /// Don't open the summary after running _screengrab_
+  var skipOpenSummary: Bool { get }
 
-    /// The package name of the tests bundle (e.g. com.yourcompany.yourapp.test)
-    var testsPackageName: String? { get }
+  /// The package name of the app under test (e.g. com.yourcompany.yourapp)
+  var appPackageName: String { get }
 
-    /// Only run tests in these Java packages
-    var useTestsInPackages: [String]? { get }
+  /// The package name of the tests bundle (e.g. com.yourcompany.yourapp.test)
+  var testsPackageName: String? { get }
 
-    /// Only run tests in these Java classes
-    var useTestsInClasses: [String]? { get }
+  /// Only run tests in these Java packages
+  var useTestsInPackages: [String]? { get }
 
-    /// Additional launch arguments
-    var launchArguments: [String]? { get }
+  /// Only run tests in these Java classes
+  var useTestsInClasses: [String]? { get }
 
-    /// The fully qualified class name of your test instrumentation runner
-    var testInstrumentationRunner: String { get }
+  /// Additional launch arguments
+  var launchArguments: [String]? { get }
 
-    /// Return the device to this locale after running tests
-    var endingLocale: String { get }
+  /// The fully qualified class name of your test instrumentation runner
+  var testInstrumentationRunner: String { get }
 
-    /// Restarts the adb daemon using `adb root` to allow access to screenshots directories on device. Use if getting 'Permission denied' errors
-    var useAdbRoot: Bool { get }
+  /// Return the device to this locale after running tests
+  var endingLocale: String { get }
 
-    /// The path to the APK for the app under test
-    var appApkPath: String? { get }
+  /// Restarts the adb daemon using `adb root` to allow access to screenshots directories on device. Use if getting 'Permission denied' errors
+  var useAdbRoot: Bool { get }
 
-    /// The path to the APK for the the tests bundle
-    var testsApkPath: String? { get }
+  /// The path to the APK for the app under test
+  var appApkPath: String? { get }
 
-    /// Use the device or emulator with the given serial number or qualifier
-    var specificDevice: String? { get }
+  /// The path to the APK for the the tests bundle
+  var testsApkPath: String? { get }
 
-    /// Type of device used for screenshots. Matches Google Play Types (phone, sevenInch, tenInch, tv, wear)
-    var deviceType: String { get }
+  /// Use the device or emulator with the given serial number or qualifier
+  var specificDevice: String? { get }
 
-    /// Whether or not to exit Screengrab on test failure. Exiting on failure will not copy sceenshots to local machine nor open sceenshots summary
-    var exitOnTestFailure: Bool { get }
+  /// Type of device used for screenshots. Matches Google Play Types (phone, sevenInch, tenInch, tv, wear)
+  var deviceType: String { get }
 
-    /// Enabling this option will automatically uninstall the application before running it
-    var reinstallApp: Bool { get }
+  /// Whether or not to exit Screengrab on test failure. Exiting on failure will not copy sceenshots to local machine nor open sceenshots summary
+  var exitOnTestFailure: Bool { get }
 
-    /// Add timestamp suffix to screenshot filename
-    var useTimestampSuffix: Bool { get }
+  /// Enabling this option will automatically uninstall the application before running it
+  var reinstallApp: Bool { get }
 
-    /// Configure the host used by adb to connect, allows running on remote devices farm
-    var adbHost: String? { get }
+  /// Add timestamp suffix to screenshot filename
+  var useTimestampSuffix: Bool { get }
+
+  /// Configure the host used by adb to connect, allows running on remote devices farm
+  var adbHost: String? { get }
 }
 
 extension ScreengrabfileProtocol {
-    var androidHome: String? { return nil }
-    var buildToolsVersion: String? { return nil }
-    var locales: [String] { return ["en-US"] }
-    var clearPreviousScreenshots: Bool { return false }
-    var outputDirectory: String { return "fastlane/metadata/android" }
-    var skipOpenSummary: Bool { return false }
-    var appPackageName: String { return "" }
-    var testsPackageName: String? { return nil }
-    var useTestsInPackages: [String]? { return nil }
-    var useTestsInClasses: [String]? { return nil }
-    var launchArguments: [String]? { return nil }
-    var testInstrumentationRunner: String { return "androidx.test.runner.AndroidJUnitRunner" }
-    var endingLocale: String { return "en-US" }
-    var useAdbRoot: Bool { return false }
-    var appApkPath: String? { return nil }
-    var testsApkPath: String? { return nil }
-    var specificDevice: String? { return nil }
-    var deviceType: String { return "phone" }
-    var exitOnTestFailure: Bool { return true }
-    var reinstallApp: Bool { return false }
-    var useTimestampSuffix: Bool { return true }
-    var adbHost: String? { return nil }
+  var androidHome: String? { return nil }
+  var buildToolsVersion: String? { return nil }
+  var locales: [String] { return ["en-US"] }
+  var clearPreviousScreenshots: Bool { return false }
+  var outputDirectory: String { return "fastlane/metadata/android" }
+  var skipOpenSummary: Bool { return false }
+  var appPackageName: String { return "" }
+  var testsPackageName: String? { return nil }
+  var useTestsInPackages: [String]? { return nil }
+  var useTestsInClasses: [String]? { return nil }
+  var launchArguments: [String]? { return nil }
+  var testInstrumentationRunner: String { return "androidx.test.runner.AndroidJUnitRunner" }
+  var endingLocale: String { return "en-US" }
+  var useAdbRoot: Bool { return false }
+  var appApkPath: String? { return nil }
+  var testsApkPath: String? { return nil }
+  var specificDevice: String? { return nil }
+  var deviceType: String { return "phone" }
+  var exitOnTestFailure: Bool { return true }
+  var reinstallApp: Bool { return false }
+  var useTimestampSuffix: Bool { return true }
+  var adbHost: String? { return nil }
 }
 
 // Please don't remove the lines below
 // They are used to detect outdated files
-// FastlaneRunnerAPIVersion [0.9.22]
+// FastlaneRunnerAPIVersion [0.9.13]
