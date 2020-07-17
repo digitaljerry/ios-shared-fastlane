@@ -167,7 +167,7 @@ class Fastfile: LaneFile {
         )
         
         let buildNumber = getBuildNumber().trim()
-        let versionNumber = getVersionNumber().trim()
+        let versionNumber = getVersionNumber(target: scheme).trim()
         let slackMessage = "\(appID) testflight uploaded successfully :ok_hand: v\(versionNumber) #\(buildNumber)"
         slackSuccess(message: slackMessage)
     }
@@ -180,7 +180,7 @@ class Fastfile: LaneFile {
             dsymWorkerThreads: 3
         )
         let buildNumber = getBuildNumber().trim()
-        let versionNumber = getVersionNumber().trim()
+        let versionNumber = getVersionNumber(target: scheme).trim()
         let slackMessage = "\(appID) dSYM files uploaded :ok_hand: v\(versionNumber) #\(buildNumber)"
         slackSuccess(message: slackMessage)
     }
@@ -358,7 +358,7 @@ class Fastfile: LaneFile {
     
     func tagAppstoreVersionLane() {
         let lastCommit = lastGitCommit()
-        let versionNumber = getVersionNumber().trim()
+        let versionNumber = getVersionNumber(target: scheme).trim()
         let buildNumber = getBuildNumber().trim()
         addGitTag(tag: "appstore/\(versionNumber)", buildNumber: buildNumber, commit: lastCommit["commit_hash"])
         pushGitTags()
