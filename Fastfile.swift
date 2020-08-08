@@ -270,6 +270,11 @@ class Fastfile: LaneFile {
         }
     }
     
+    public func specificBuildBumpLane() {
+        let build = prompt(text: "New build number: ")
+        buildBumpLane(buildNumber: build, force: true)
+    }
+    
     private func buildBumpLane(buildNumber: String? = nil, commitPrefix: String = "Build bump", force: Bool = false) {
         let lastCommit = lastGitCommit()
         
