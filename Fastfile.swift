@@ -11,13 +11,43 @@
 
 import Foundation
 
+public enum Enviorment {
+    case dev, stage, prod
+    
+    var description: String {
+      switch self {
+      case .dev: return "DEV"
+      case .stage: return "STAGE"
+      case .prod: return "PROD"
+      }
+    }
+    
+    var appIIDSuffix: String {
+      switch self {
+      case .dev: return ".dev"
+      case .stage: return ".stage"
+      case .prod: return ""
+      }
+    }
+    
+    var schemeSuffix: String {
+      switch self {
+      case .dev: return "DEV"
+      case .stage: return "STAGE"
+      case .prod: return ""
+      }
+    }
+}
+
 class Fastfile: LaneFile {
     
+    var enviorment: Enviorment = .dev
+    
     var appleID: String?
-    var devApp: Bool = true
+    var supportedEnviorments: [Enviorment] = [.dev, .stage, .prod]
     var defaultAppleId: String = fallbackAppleId
-    var appID: String { return appIdentifier + (devApp ? ".dev" : "") }
-    var scheme: String { return projectScheme + (devApp ? "DEV" : "") }
+    var appID: String { return appIdentifier + enviorment.appIIDSuffix }
+    var scheme: String { return projectScheme + enviorment.schemeSuffix }
     var filePath: String { return "./\(scheme).ipa" }
     var IPAFilePath: String { return "./\(scheme).ipa" }
     var dsymFilePath: String { return "./\(scheme).app.dSYM.zip" }
@@ -30,23 +60,38 @@ class Fastfile: LaneFile {
 //        }
     }
     
-    func devOrProdPrompt() {
-        var ciInput = environmentVariable(get: "DEV_APP")
+    func envPrompt() {
+        var ciInput = environmentVariable(get: "ENV")
         if ciInput == "" {
-            ciInput = "y"
+            ciInput = "1"
         }
         
-        if supportsDevApp {
-            devApp = prompt(text: "DEV App? (y/n)", ciInput: ciInput) == "y"
+        if supportedEnviorments.count > 1 {
+            println(message: "Which env would you like to use? Type in the number.")
+            for (index, value) in supportedEnviorments.enumerated() {
+                println(message: "\(index+1)) \(value.description)")
+            }
+            let env = prompt(text: "?", ciInput: ciInput)
+            
+            switch env {
+            case "1":
+                enviorment = .dev
+            case "2":
+                enviorment = .stage
+            case "3":
+                enviorment = .prod
+            default:
+                enviorment = .dev
+            }
         } else {
-            devApp = false
+            enviorment = supportedEnviorments.first ?? .dev
         }
         
         puts(message: "----------------------")
         puts(message: "BUILD INPUT ARGUMENTS")
         puts(message: "----------------------")
         puts(message: "AppleID: \(String(describing: appleID))")
-        puts(message: "DEV App? \(devApp ? "Y" : "N")")
+        puts(message: "Enviorment: \(enviorment.description)")
         puts(message: "----------------------")
     }
     
@@ -57,28 +102,49 @@ class Fastfile: LaneFile {
     }
     
     public func distributeLatestBuildLane() {
-        let whichApp = devApp ? "DEV" : "PROD"
-        slackNotify(message: "Distributing latest \(whichApp) build to External testers...")
+        slackNotify(message: "Distributing latest \(enviorment.description) build to External testers...")
         let username = String(describing: (appleID ?? defaultAppleId))
-        let groups = (devApp == true ? externalTestersGroupDEV : externalTestersGroup) ?? ""
+        
+        var groups: String
+        
+        switch enviorment {
+        case .dev:
+            groups = externalTestersGroupDEV
+        case .stage:
+            groups = externalTestersGroupSTAGE
+        case .prod:
+            groups = externalTestersGroup
+        }
+        
         sh(command: "bundle exec fastlane pilot distribute --app_identifier \"\(appID)\" --username \"\(username)\" --distribute_external true --groups \(groups) --notify_external_testers true --beta_app_review_info '{\"contact_email\": \"\(reviewInfoContactEmail!)\",\"contact_first_name\": \"\(reviewInfoContactFirstName!)\", \"contact_last_name\": \"\(reviewInfoContactLastName!)\", \"contact_phone\": \"\(reviewInfoContactPhone!)\"}'")
-        slackSuccess(message: "Successfully distributed LATEST \(whichApp) build to External testers 🚀 Groups: \(groups)")
+        
+        slackSuccess(message: "Successfully distributed LATEST \(enviorment.description) build to External testers 🚀 Groups: \(groups)")
     }
     
     public func devBuildLane() {
-        devApp = true
+        enviorment = .dev
         betaLane(bumpLane: true)
     }
     
+    public func stageBuildLane() {
+        enviorment = .stage
+        betaLane(bumpLane: false)
+    }
+    
     public func prodBuildLane() {
-        devApp = false
+        enviorment = .prod
         betaLane(bumpLane: false)
         tagTestflightBuildLane()
     }
     
     public func newBuildLane() {
-        devOrProdPrompt()
-        betaLane()
+        envPrompt()
+        
+        if enviorment == .dev {
+            betaLane(bumpLane: true)
+        } else {
+            betaLane(bumpLane: false)
+        }
     }
     
     private func betaLane(bumpLane: Bool? = true) {
@@ -173,7 +239,7 @@ class Fastfile: LaneFile {
     }
     
     public func uploadDSYM() {
-        let gspPath = devApp ? "./\(projectScheme)/DEV/GoogleService-Info.plist" : "./\(projectScheme)/GoogleService-Info.plist"
+        let gspPath = enviorment == .prod ? "./\(projectScheme)/GoogleService-Info.plist" : "./\(projectScheme)/(enviorment.schemeSuffix)/GoogleService-Info.plist"
         uploadSymbolsToCrashlytics(
             dsymPath: dsymFilePath,
             gspPath: gspPath,
