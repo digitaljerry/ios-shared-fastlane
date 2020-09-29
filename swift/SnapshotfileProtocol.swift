@@ -1,4 +1,13 @@
+<<<<<<< Updated upstream
 protocol SnapshotfileProtocol: class {
+=======
+// SnapshotfileProtocol.swift
+// Copyright (c) 2020 FastlaneTools
+
+public protocol SnapshotfileProtocol: class {
+    /// Path the workspace file
+    var workspace: String? { get }
+>>>>>>> Stashed changes
 
   /// Path the workspace file
   var workspace: String? { get }
@@ -42,8 +51,16 @@ protocol SnapshotfileProtocol: class {
   /// Enabling this option will automatically uninstall the application before running it
   var reinstallApp: Bool { get }
 
+<<<<<<< Updated upstream
   /// Enabling this option will automatically erase the simulator before running the application
   var eraseSimulator: Bool { get }
+=======
+    /// Enabling this option will prevent displaying the simulator window
+    var headless: Bool { get }
+
+    /// Enabling this option wil automatically override the status bar to show 9:41 AM, full battery, and full reception
+    var overrideStatusBar: Bool { get }
+>>>>>>> Stashed changes
 
   /// Enabling this option wil automatically override the status bar to show 9:41 AM, full battery, and full reception
   var overrideStatusBar: Bool { get }
@@ -120,6 +137,7 @@ protocol SnapshotfileProtocol: class {
   /// Array of strings matching Test Bundle/Test Suite/Test Cases to run
   var onlyTesting: String? { get }
 
+<<<<<<< Updated upstream
   /// Array of strings matching Test Bundle/Test Suite/Test Cases to skip
   var skipTesting: String? { get }
 
@@ -170,8 +188,66 @@ extension SnapshotfileProtocol {
   var onlyTesting: String? { return nil }
   var skipTesting: String? { return nil }
   var disableXcpretty: Bool? { return nil }
+=======
+    /// Disable xcpretty formatting of build
+    var disableXcpretty: Bool? { get }
+
+    /// Suppress the output of xcodebuild to stdout. Output is still saved in buildlog_path
+    var suppressXcodeOutput: Bool? { get }
+}
+
+public extension SnapshotfileProtocol {
+    var workspace: String? { return nil }
+    var project: String? { return nil }
+    var xcargs: String? { return nil }
+    var xcconfig: String? { return nil }
+    var devices: [String]? { return nil }
+    var languages: [String] { return ["en-US"] }
+    var launchArguments: [String] { return [""] }
+    var outputDirectory: String { return "screenshots" }
+    var outputSimulatorLogs: Bool { return false }
+    var iosVersion: String? { return nil }
+    var skipOpenSummary: Bool { return false }
+    var skipHelperVersionCheck: Bool { return false }
+    var clearPreviousScreenshots: Bool { return false }
+    var reinstallApp: Bool { return false }
+    var eraseSimulator: Bool { return false }
+    var headless: Bool { return true }
+    var overrideStatusBar: Bool { return false }
+    var localizeSimulator: Bool { return false }
+    var darkMode: Bool? { return nil }
+    var appIdentifier: String? { return nil }
+    var addPhotos: [String]? { return nil }
+    var addVideos: [String]? { return nil }
+    var htmlTemplate: String? { return nil }
+    var buildlogPath: String { return "~/Library/Logs/snapshot" }
+    var clean: Bool { return false }
+    var testWithoutBuilding: Bool? { return nil }
+    var configuration: String? { return nil }
+    var xcprettyArgs: String? { return nil }
+    var sdk: String? { return nil }
+    var scheme: String? { return nil }
+    var numberOfRetries: Int { return 1 }
+    var stopAfterFirstError: Bool { return false }
+    var derivedDataPath: String? { return nil }
+    var resultBundle: Bool { return false }
+    var testTargetName: String? { return nil }
+    var namespaceLogFiles: String? { return nil }
+    var concurrentSimulators: Bool { return true }
+    var disableSlideToType: Bool { return false }
+    var clonedSourcePackagesPath: String? { return nil }
+    var testplan: String? { return nil }
+    var onlyTesting: String? { return nil }
+    var skipTesting: String? { return nil }
+    var disableXcpretty: Bool? { return nil }
+    var suppressXcodeOutput: Bool? { return nil }
+>>>>>>> Stashed changes
 }
 
 // Please don't remove the lines below
 // They are used to detect outdated files
+<<<<<<< Updated upstream
 // FastlaneRunnerAPIVersion [0.9.10]
+=======
+// FastlaneRunnerAPIVersion [0.9.36]
+>>>>>>> Stashed changes

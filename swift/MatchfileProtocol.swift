@@ -1,4 +1,13 @@
+<<<<<<< Updated upstream
 protocol MatchfileProtocol: class {
+=======
+// MatchfileProtocol.swift
+// Copyright (c) 2020 FastlaneTools
+
+public protocol MatchfileProtocol: class {
+    /// Define the profile type, can be appstore, adhoc, development, enterprise, developer_id
+    var type: String { get }
+>>>>>>> Stashed changes
 
   /// Define the profile type, can be appstore, adhoc, development, enterprise, developer_id
   var type: String { get }
@@ -48,11 +57,22 @@ protocol MatchfileProtocol: class {
   /// Clone just the branch specified, instead of the whole repo. This requires that the branch already exists. Otherwise the command will fail
   var cloneBranchDirectly: Bool { get }
 
+<<<<<<< Updated upstream
   /// Use a basic authorization header to access the git repo (e.g.: access via HTTPS, GitHub Actions, etc), usually a string in Base64
   var gitBasicAuthorization: String? { get }
 
   /// Use a bearer authorization header to access the git repo (e.g.: access to an Azure Devops repository), usually a string in Base64
   var gitBearerAuthorization: String? { get }
+=======
+    /// Use a bearer authorization header to access the git repo (e.g.: access to an Azure DevOps repository), usually a string in Base64
+    var gitBearerAuthorization: String? { get }
+
+    /// Use a private key to access the git repo (e.g.: access to GitHub repository via Deploy keys), usually a id_rsa named file or the contents hereof
+    var gitPrivateKey: String? { get }
+
+    /// Name of the Google Cloud Storage bucket to use
+    var googleCloudBucketName: String? { get }
+>>>>>>> Stashed changes
 
   /// Name of the Google Cloud Storage bucket to use
   var googleCloudBucketName: String? { get }
@@ -93,11 +113,22 @@ protocol MatchfileProtocol: class {
   /// Skip generation of a README.md for the created git repository
   var skipDocs: Bool { get }
 
+<<<<<<< Updated upstream
   /// Set the provisioning profile's platform to work with (i.e. ios, tvos, macos)
   var platform: String { get }
 
   /// The name of provisioning profile template. If the developer account has provisioning profile templates (aka: custom entitlements), the template name can be found by inspecting the Entitlements drop-down while creating/editing a provisioning profile (e.g. "Apple Pay Pass Suppression Development")
   var templateName: String? { get }
+=======
+    /// Set the provisioning profile's platform to work with (i.e. ios, tvos, macos, catalyst)
+    var platform: String { get }
+
+    /// Enable this if you have the Mac Catalyst capability enabled and your project was created with Xcode 11.3 or earlier. Prepends 'maccatalyst.' to the app identifier for the provisioning profile mapping
+    var deriveCatalystAppIdentifier: Bool { get }
+
+    /// The name of provisioning profile template. If the developer account has provisioning profile templates (aka: custom entitlements), the template name can be found by inspecting the Entitlements drop-down while creating/editing a provisioning profile (e.g. "Apple Pay Pass Suppression Development")
+    var templateName: String? { get }
+>>>>>>> Stashed changes
 
   /// A custom name for the provisioning profile. This will replace the default provisioning profile name if specified
   var profileName: String? { get }
@@ -112,6 +143,7 @@ protocol MatchfileProtocol: class {
   var verbose: Bool { get }
 }
 
+<<<<<<< Updated upstream
 extension MatchfileProtocol {
   var type: String { return "development" }
   var additionalCertTypes: [String]? { return nil }
@@ -150,8 +182,55 @@ extension MatchfileProtocol {
   var failOnNameTaken: Bool { return false }
   var outputPath: String? { return nil }
   var verbose: Bool { return false }
+=======
+public extension MatchfileProtocol {
+    var type: String { return "development" }
+    var additionalCertTypes: [String]? { return nil }
+    var readonly: Bool { return false }
+    var generateAppleCerts: Bool { return true }
+    var skipProvisioningProfiles: Bool { return false }
+    var appIdentifier: [String] { return [] }
+    var username: String { return "" }
+    var teamId: String? { return nil }
+    var teamName: String? { return nil }
+    var storageMode: String { return "git" }
+    var gitUrl: String { return "" }
+    var gitBranch: String { return "master" }
+    var gitFullName: String? { return nil }
+    var gitUserEmail: String? { return nil }
+    var shallowClone: Bool { return false }
+    var cloneBranchDirectly: Bool { return false }
+    var gitBasicAuthorization: String? { return nil }
+    var gitBearerAuthorization: String? { return nil }
+    var gitPrivateKey: String? { return nil }
+    var googleCloudBucketName: String? { return nil }
+    var googleCloudKeysFile: String? { return nil }
+    var googleCloudProjectId: String? { return nil }
+    var s3Region: String? { return nil }
+    var s3AccessKey: String? { return nil }
+    var s3SecretAccessKey: String? { return nil }
+    var s3Bucket: String? { return nil }
+    var s3ObjectPrefix: String? { return nil }
+    var keychainName: String { return "login.keychain" }
+    var keychainPassword: String? { return nil }
+    var force: Bool { return false }
+    var forceForNewDevices: Bool { return false }
+    var skipConfirmation: Bool { return false }
+    var skipDocs: Bool { return false }
+    var platform: String { return "ios" }
+    var deriveCatalystAppIdentifier: Bool { return false }
+    var templateName: String? { return nil }
+    var profileName: String? { return nil }
+    var failOnNameTaken: Bool { return false }
+    var outputPath: String? { return nil }
+    var verbose: Bool { return false }
+>>>>>>> Stashed changes
 }
 
 // Please don't remove the lines below
 // They are used to detect outdated files
+<<<<<<< Updated upstream
 // FastlaneRunnerAPIVersion [0.9.17]
+=======
+// FastlaneRunnerAPIVersion [0.9.41]
+>>>>>>> Stashed changes

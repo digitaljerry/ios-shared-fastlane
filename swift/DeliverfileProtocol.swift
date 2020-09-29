@@ -1,4 +1,19 @@
+<<<<<<< Updated upstream
 protocol DeliverfileProtocol: class {
+=======
+// DeliverfileProtocol.swift
+// Copyright (c) 2020 FastlaneTools
+
+public protocol DeliverfileProtocol: class {
+    /// Path to your App Store Connect API Key JSON file (https://docs.fastlane.tools/app-store-connect-api/#using-fastlane-api-key-json-file)
+    var apiKeyPath: String? { get }
+
+    /// Your App Store Connect API Key information (https://docs.fastlane.tools/app-store-connect-api/#use-return-value-and-pass-in-as-an-option)
+    var apiKey: [String: Any]? { get }
+
+    /// Your Apple ID Username
+    var username: String { get }
+>>>>>>> Stashed changes
 
   /// Your Apple ID Username
   var username: String { get }
@@ -39,8 +54,13 @@ protocol DeliverfileProtocol: class {
   /// Don't upload the screenshots
   var skipScreenshots: Bool { get }
 
+<<<<<<< Updated upstream
   /// Don't upload the metadata (e.g. title, description). This will still upload screenshots
   var skipMetadata: Bool { get }
+=======
+    /// Don’t create or update the app version that is being prepared for submission
+    var skipAppVersionUpdate: Bool { get }
+>>>>>>> Stashed changes
 
   /// Don't update app version for submission
   var skipAppVersionUpdate: Bool { get }
@@ -96,8 +116,13 @@ protocol DeliverfileProtocol: class {
   /// Run precheck before submitting to app review
   var runPrecheckBeforeSubmit: Bool { get }
 
+<<<<<<< Updated upstream
   /// The default precheck rule level unless otherwise configured
   var precheckDefaultRuleLevel: String { get }
+=======
+    /// **DEPRECATED!** Removed after the migration to the new App Store Connect API in June 2020 - An array of localized metadata items to upload individually by language so that errors can be identified. E.g. ['name', 'keywords', 'description']. Note: slow
+    var individualMetadataItems: [String]? { get }
+>>>>>>> Stashed changes
 
   /// An array of localized metadata items to upload individually by language so that errors can be identified. E.g. ['name', 'keywords', 'description']. Note: slow
   var individualMetadataItems: [String] { get }
@@ -181,6 +206,7 @@ protocol DeliverfileProtocol: class {
   var app: String { get }
 }
 
+<<<<<<< Updated upstream
 extension DeliverfileProtocol {
   var username: String { return "" }
   var appIdentifier: String? { return nil }
@@ -242,8 +268,77 @@ extension DeliverfileProtocol {
   var ignoreLanguageDirectoryValidation: Bool { return false }
   var precheckIncludeInAppPurchases: Bool { return true }
   var app: String { return "" }
+=======
+public extension DeliverfileProtocol {
+    var apiKeyPath: String? { return nil }
+    var apiKey: [String: Any]? { return nil }
+    var username: String { return "" }
+    var appIdentifier: String? { return nil }
+    var appVersion: String? { return nil }
+    var ipa: String? { return nil }
+    var pkg: String? { return nil }
+    var buildNumber: String? { return nil }
+    var platform: String { return "ios" }
+    var editLive: Bool { return false }
+    var useLiveVersion: Bool { return false }
+    var metadataPath: String? { return nil }
+    var screenshotsPath: String? { return nil }
+    var skipBinaryUpload: Bool { return false }
+    var skipScreenshots: Bool { return false }
+    var skipMetadata: Bool { return false }
+    var skipAppVersionUpdate: Bool { return false }
+    var force: Bool { return false }
+    var overwriteScreenshots: Bool { return false }
+    var submitForReview: Bool { return false }
+    var rejectIfPossible: Bool { return false }
+    var automaticRelease: Bool { return false }
+    var autoReleaseDate: Int? { return nil }
+    var phasedRelease: Bool { return false }
+    var resetRatings: Bool { return false }
+    var priceTier: String? { return nil }
+    var appRatingConfigPath: String? { return nil }
+    var submissionInformation: [String: Any]? { return nil }
+    var teamId: String? { return nil }
+    var teamName: String? { return nil }
+    var devPortalTeamId: String? { return nil }
+    var devPortalTeamName: String? { return nil }
+    var itcProvider: String? { return nil }
+    var runPrecheckBeforeSubmit: Bool { return true }
+    var precheckDefaultRuleLevel: String { return "warn" }
+    var individualMetadataItems: [String]? { return nil }
+    var appIcon: String? { return nil }
+    var appleWatchAppIcon: String? { return nil }
+    var copyright: String? { return nil }
+    var primaryCategory: String? { return nil }
+    var secondaryCategory: String? { return nil }
+    var primaryFirstSubCategory: String? { return nil }
+    var primarySecondSubCategory: String? { return nil }
+    var secondaryFirstSubCategory: String? { return nil }
+    var secondarySecondSubCategory: String? { return nil }
+    var tradeRepresentativeContactInformation: [String: Any]? { return nil }
+    var appReviewInformation: [String: Any]? { return nil }
+    var appReviewAttachmentFile: String? { return nil }
+    var description: String? { return nil }
+    var name: String? { return nil }
+    var subtitle: [String: Any]? { return nil }
+    var keywords: [String: Any]? { return nil }
+    var promotionalText: [String: Any]? { return nil }
+    var releaseNotes: String? { return nil }
+    var privacyUrl: String? { return nil }
+    var appleTvPrivacyPolicy: String? { return nil }
+    var supportUrl: String? { return nil }
+    var marketingUrl: String? { return nil }
+    var languages: [String]? { return nil }
+    var ignoreLanguageDirectoryValidation: Bool { return false }
+    var precheckIncludeInAppPurchases: Bool { return true }
+    var app: String { return "" }
+>>>>>>> Stashed changes
 }
 
 // Please don't remove the lines below
 // They are used to detect outdated files
+<<<<<<< Updated upstream
 // FastlaneRunnerAPIVersion [0.9.19]
+=======
+// FastlaneRunnerAPIVersion [0.9.44]
+>>>>>>> Stashed changes

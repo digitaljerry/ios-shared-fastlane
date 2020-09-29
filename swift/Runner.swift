@@ -1,9 +1,5 @@
-//
-//  Runner.swift
-//  FastlaneSwiftRunner
-//
-//  Created by Joshua Liebowitz on 8/26/17.
-//
+// Runner.swift
+// Copyright (c) 2020 FastlaneTools
 
 //
 //  ** NOTE **
@@ -27,6 +23,7 @@ func desc(_ laneDescription: String) {
 }
 
 class Runner {
+<<<<<<< Updated upstream
     fileprivate var thread: Thread!
     fileprivate var socketClient: SocketClient!
     fileprivate let dispatchGroup: DispatchGroup = DispatchGroup()
@@ -34,14 +31,30 @@ class Runner {
     fileprivate var currentlyExecutingCommand: RubyCommandable? = nil
     fileprivate var shouldLeaveDispatchGroupDuringDisconnect = false
     
+=======
+    private var thread: Thread!
+    private var socketClient: SocketClient!
+    private let dispatchGroup = DispatchGroup()
+    private var returnValue: String? // lol, so safe
+    private var currentlyExecutingCommand: RubyCommandable?
+    private var shouldLeaveDispatchGroupDuringDisconnect = false
+    private var executeNext: [String: Bool] = [:]
+
+>>>>>>> Stashed changes
     func executeCommand(_ command: RubyCommandable) -> String {
         self.dispatchGroup.enter()
         currentlyExecutingCommand = command
         socketClient.send(rubyCommand: command)
         
         let secondsToWait = DispatchTimeInterval.seconds(SocketClient.defaultCommandTimeoutSeconds)
+<<<<<<< Updated upstream
         let connectTimeout = DispatchTime.now() + secondsToWait
         let timeoutResult = self.dispatchGroup.wait(timeout: connectTimeout)
+=======
+        // swiftlint:disable next
+        let timeoutResult = Self.waitWithPolling(self.executeNext[command.id], toEventually: { $0 == true }, timeout: SocketClient.defaultCommandTimeoutSeconds)
+        executeNext.removeValue(forKey: command.id)
+>>>>>>> Stashed changes
         let failureMessage = "command didn't execute in: \(SocketClient.defaultCommandTimeoutSeconds) seconds"
         let success = testDispatchTimeoutResult(timeoutResult, failureMessage: failureMessage, timeToWait: secondsToWait)
         guard success else {
@@ -55,6 +68,49 @@ class Runner {
             return ""
         }
     }
+<<<<<<< Updated upstream
+=======
+
+    static func waitWithPolling<T>(_ expression: @autoclosure @escaping () throws -> T, toEventually predicate: @escaping (T) -> Bool, timeout: Int, pollingInterval: DispatchTimeInterval = .milliseconds(4)) -> DispatchTimeoutResult {
+        func memoizedClosure<T>(_ closure: @escaping () throws -> T) -> (Bool) throws -> T {
+            var cache: T?
+            return { withoutCaching in
+                if withoutCaching || cache == nil {
+                    cache = try closure()
+                }
+                guard let cache = cache else {
+                    preconditionFailure()
+                }
+
+                return cache
+            }
+        }
+
+        let runLoop = RunLoop.current
+        let timeoutDate = Date(timeInterval: TimeInterval(timeout), since: Date())
+        var fulfilled: Bool = false
+        let _expression = memoizedClosure(expression)
+        repeat {
+            do {
+                let exp = try _expression(true)
+                fulfilled = predicate(exp)
+            } catch {
+                fatalError("Error raised \(error.localizedDescription)")
+            }
+            if !fulfilled {
+                runLoop.run(until: Date(timeIntervalSinceNow: pollingInterval.timeInterval))
+            } else {
+                break
+            }
+        } while Date().compare(timeoutDate) == .orderedAscending
+
+        if fulfilled {
+            return .success
+        } else {
+            return .timedOut
+        }
+    }
+>>>>>>> Stashed changes
 }
 
 // Handle threading stuff

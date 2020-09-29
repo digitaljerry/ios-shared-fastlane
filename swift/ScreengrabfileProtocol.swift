@@ -1,4 +1,13 @@
+<<<<<<< Updated upstream
 protocol ScreengrabfileProtocol: class {
+=======
+// ScreengrabfileProtocol.swift
+// Copyright (c) 2020 FastlaneTools
+
+public protocol ScreengrabfileProtocol: class {
+    /// Path to the root of your Android SDK installation, e.g. ~/tools/android-sdk-macosx
+    var androidHome: String? { get }
+>>>>>>> Stashed changes
 
   /// Path to the root of your Android SDK installation, e.g. ~/tools/android-sdk-macosx
   var androidHome: String? { get }
@@ -67,6 +76,7 @@ protocol ScreengrabfileProtocol: class {
   var adbHost: String? { get }
 }
 
+<<<<<<< Updated upstream
 extension ScreengrabfileProtocol {
   var androidHome: String? { return nil }
   var buildToolsVersion: String? { return nil }
@@ -90,8 +100,37 @@ extension ScreengrabfileProtocol {
   var reinstallApp: Bool { return false }
   var useTimestampSuffix: Bool { return true }
   var adbHost: String? { return nil }
+=======
+public extension ScreengrabfileProtocol {
+    var androidHome: String? { return nil }
+    var buildToolsVersion: String? { return nil }
+    var locales: [String] { return ["en-US"] }
+    var clearPreviousScreenshots: Bool { return false }
+    var outputDirectory: String { return "fastlane/metadata/android" }
+    var skipOpenSummary: Bool { return false }
+    var appPackageName: String { return "" }
+    var testsPackageName: String? { return nil }
+    var useTestsInPackages: [String]? { return nil }
+    var useTestsInClasses: [String]? { return nil }
+    var launchArguments: [String]? { return nil }
+    var testInstrumentationRunner: String { return "androidx.test.runner.AndroidJUnitRunner" }
+    var endingLocale: String { return "en-US" }
+    var useAdbRoot: Bool { return false }
+    var appApkPath: String? { return nil }
+    var testsApkPath: String? { return nil }
+    var specificDevice: String? { return nil }
+    var deviceType: String { return "phone" }
+    var exitOnTestFailure: Bool { return true }
+    var reinstallApp: Bool { return false }
+    var useTimestampSuffix: Bool { return true }
+    var adbHost: String? { return nil }
+>>>>>>> Stashed changes
 }
 
 // Please don't remove the lines below
 // They are used to detect outdated files
+<<<<<<< Updated upstream
 // FastlaneRunnerAPIVersion [0.9.13]
+=======
+// FastlaneRunnerAPIVersion [0.9.42]
+>>>>>>> Stashed changes
