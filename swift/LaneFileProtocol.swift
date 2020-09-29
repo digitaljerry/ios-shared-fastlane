@@ -12,34 +12,20 @@ import Foundation
 
 public protocol LaneFileProtocol: class {
     var fastlaneVersion: String { get }
-<<<<<<< Updated upstream
-    static func runLane(named: String, parameters: [String : String]) -> Bool
-=======
     static func runLane(from fastfile: LaneFile?, named: String, parameters: [String: String]) -> Bool
->>>>>>> Stashed changes
 
     func recordLaneDescriptions()
-    func beforeAll(currentLane: String, parameters: [String : String])
     func beforeAll()
     func afterAll(currentLane: String)
     func onError(currentLane: String, errorInfo: String)
 }
 
 public extension LaneFileProtocol {
-<<<<<<< Updated upstream
-    var fastlaneVersion: String { return "" } // default "" because that means any is fine
-    func beforeAll(currentLane: String, parameters: [String : String]) { } // no op by default
-    func beforeAll() { } // no op by default
-    func afterAll(currentLane: String) { } // no op by default
-    func onError(currentLane: String, errorInfo: String) {} // no op by default
-    func recordLaneDescriptions() { } // no op by default
-=======
     var fastlaneVersion: String { return "" } // Defaults to "" because that means any is fine
     func beforeAll() {} // No-op by default
     func afterAll(currentLane _: String) {} // No-op by default
     func onError(currentLane _: String, errorInfo _: String) {} // No-op by default
     func recordLaneDescriptions() {} // No-op by default
->>>>>>> Stashed changes
 }
 
 @objcMembers
@@ -47,12 +33,7 @@ open class LaneFile: NSObject, LaneFileProtocol {
     private(set) static var fastfileInstance: LaneFile?
 
     // Called before any lane is executed.
-<<<<<<< Updated upstream
-    private func setupAllTheThings(lane: String, parameters: [String : String]) {
-        LaneFile.fastfileInstance!.beforeAll(currentLane: lane, parameters: parameters)
-=======
     private func setUpAllTheThings() {
->>>>>>> Stashed changes
         LaneFile.fastfileInstance!.beforeAll()
     }
 
@@ -67,10 +48,6 @@ open class LaneFile: NSObject, LaneFileProtocol {
     private static var laneFunctionNames: [String] {
         var lanes: [String] = []
         var methodCount: UInt32 = 0
-<<<<<<< Updated upstream
-        let methodList = class_copyMethodList(self, &methodCount)
-        for i in 0..<Int(methodCount) {
-=======
         #if !SWIFT_PACKAGE
             let methodList = class_copyMethodList(self, &methodCount)
         #else
@@ -80,7 +57,6 @@ open class LaneFile: NSObject, LaneFileProtocol {
             let methodList = class_copyMethodList(type(of: fastfileInstance!), &methodCount)
         #endif
         for i in 0 ..< Int(methodCount) {
->>>>>>> Stashed changes
             let selName = sel_getName(method_getName(methodList![i]))
             let name = String(cString: selName)
             let lowercasedName = name.lowercased()
@@ -91,9 +67,9 @@ open class LaneFile: NSObject, LaneFileProtocol {
         return lanes
     }
 
-    public static var lanes: [String : String] {
-        var laneToMethodName: [String : String] = [:]
-        self.laneFunctionNames.forEach { name in
+    public static var lanes: [String: String] {
+        var laneToMethodName: [String: String] = [:]
+        laneFunctionNames.forEach { name in
             let lowercasedName = name.lowercased()
             if lowercasedName.hasSuffix("lane") {
                 laneToMethodName[lowercasedName] = name
@@ -111,27 +87,14 @@ open class LaneFile: NSObject, LaneFileProtocol {
     }
 
     public static func loadFastfile() {
-        if self.fastfileInstance == nil {
-            let fastfileType: AnyObject.Type = NSClassFromString(self.className())!
+        if fastfileInstance == nil {
+            let fastfileType: AnyObject.Type = NSClassFromString(className())!
             let fastfileAsNSObjectType: NSObject.Type = fastfileType as! NSObject.Type
             let currentFastfileInstance: Fastfile? = fastfileAsNSObjectType.init() as? Fastfile
-            self.fastfileInstance = currentFastfileInstance
+            fastfileInstance = currentFastfileInstance
         }
     }
 
-<<<<<<< Updated upstream
-    public static func runLane(named: String, parameters: [String : String]) -> Bool {
-        log(message: "Running lane: \(named)")
-        self.loadFastfile()
-
-        guard let fastfileInstance: Fastfile = self.fastfileInstance else {
-            let message = "Unable to instantiate class named: \(self.className())"
-            log(message: message)
-            fatalError(message)
-        }
-
-        let currentLanes = self.lanes
-=======
     public static func runLane(from fastfile: LaneFile?, named: String, parameters: [String: String]) -> Bool {
         log(message: "Running lane: \(named)")
         #if !SWIFT_PACKAGE
@@ -153,11 +116,10 @@ open class LaneFile: NSObject, LaneFileProtocol {
             self.fastfileInstance = fastfileInstance
         #endif
         let currentLanes = lanes
->>>>>>> Stashed changes
         let lowerCasedLaneRequested = named.lowercased()
 
         guard let laneMethod = currentLanes[lowerCasedLaneRequested] else {
-            let laneNames = self.laneFunctionNames.map { laneFuctionName in
+            let laneNames = laneFunctionNames.map { laneFuctionName in
                 if laneFuctionName.hasSuffix("lanewithoptions:") {
                     return trimLaneWithOptionsFromName(laneName: laneFuctionName)
                 } else {
@@ -173,13 +135,8 @@ open class LaneFile: NSObject, LaneFileProtocol {
             return false
         }
 
-<<<<<<< Updated upstream
-        // call all methods that need to be called before we start calling lanes
-        fastfileInstance.setupAllTheThings(lane: named, parameters: parameters)
-=======
         // Call all methods that need to be called before we start calling lanes.
         fastfileInstance.setUpAllTheThings()
->>>>>>> Stashed changes
 
         // We need to catch all possible errors here and display a nice message.
         _ = fastfileInstance.perform(NSSelectorFromString(laneMethod), with: parameters)

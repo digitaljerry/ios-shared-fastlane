@@ -13,16 +13,6 @@ import Foundation
  - returns: The output of the adb command
 
  see adb --help for more details
-<<<<<<< Updated upstream
-*/
-@discardableResult func adb(serial: String = "",
-                            command: String? = nil,
-                            adbPath: String = "adb") -> String {
-  let command = RubyCommand(commandID: "", methodName: "adb", className: nil, args: [RubyCommand.Argument(name: "serial", value: serial),
-                                                                                     RubyCommand.Argument(name: "command", value: command),
-                                                                                     RubyCommand.Argument(name: "adb_path", value: adbPath)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func adb(serial: String = "",
                                    command: String? = nil,
@@ -32,7 +22,6 @@ import Foundation
                                                                                        RubyCommand.Argument(name: "command", value: command),
                                                                                        RubyCommand.Argument(name: "adb_path", value: adbPath)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -43,34 +32,20 @@ import Foundation
  - returns: Returns an array of all currently connected android devices. Example: []
 
  Fetches device list via adb, e.g. run an adb command on all connected devices.
-<<<<<<< Updated upstream
-*/
-func adbDevices(adbPath: String = "adb") {
-  let command = RubyCommand(commandID: "", methodName: "adb_devices", className: nil, args: [RubyCommand.Argument(name: "adb_path", value: adbPath)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func adbDevices(adbPath: String = "adb") {
     let command = RubyCommand(commandID: "", methodName: "adb_devices", className: nil, args: [RubyCommand.Argument(name: "adb_path", value: adbPath)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Modify the default list of supported platforms
 
  - parameter platforms: The optional extra platforms to support
-<<<<<<< Updated upstream
-*/
-func addExtraPlatforms(platforms: [String] = []) {
-  let command = RubyCommand(commandID: "", methodName: "add_extra_platforms", className: nil, args: [RubyCommand.Argument(name: "platforms", value: platforms)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func addExtraPlatforms(platforms: [String] = []) {
     let command = RubyCommand(commandID: "", methodName: "add_extra_platforms", className: nil, args: [RubyCommand.Argument(name: "platforms", value: platforms)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -96,28 +71,6 @@ public func addExtraPlatforms(platforms: [String] = []) {
  - `build_number` is the build number, which defaults to the value emitted by the `increment_build_number` action|
  >|
  For example, for build 1234 in the 'appstore' lane, it will tag the commit with `builds/appstore/1234`.
-<<<<<<< Updated upstream
-*/
-func addGitTag(tag: String? = nil,
-               grouping: String = "builds",
-               `prefix`: String = "",
-               `postfix`: String = "",
-               buildNumber: Any,
-               message: String? = nil,
-               commit: String? = nil,
-               force: Bool = false,
-               sign: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "add_git_tag", className: nil, args: [RubyCommand.Argument(name: "tag", value: tag),
-                                                                                             RubyCommand.Argument(name: "grouping", value: grouping),
-                                                                                             RubyCommand.Argument(name: "prefix", value: `prefix`),
-                                                                                             RubyCommand.Argument(name: "postfix", value: `postfix`),
-                                                                                             RubyCommand.Argument(name: "build_number", value: buildNumber),
-                                                                                             RubyCommand.Argument(name: "message", value: message),
-                                                                                             RubyCommand.Argument(name: "commit", value: commit),
-                                                                                             RubyCommand.Argument(name: "force", value: force),
-                                                                                             RubyCommand.Argument(name: "sign", value: sign)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func addGitTag(tag: String? = nil,
                       grouping: String = "builds",
@@ -139,7 +92,6 @@ public func addGitTag(tag: String? = nil,
                                                                                                RubyCommand.Argument(name: "force", value: force),
                                                                                                RubyCommand.Argument(name: "sign", value: sign)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -157,26 +109,6 @@ public func addGitTag(tag: String? = nil,
 
  Returns the current build number of either the live or testflight version - it is useful for getting the build_number of the current or ready-for-sale app version, and it also works on non-live testflight version.
  If you need to handle more build-trains please see `latest_testflight_build_number`.
-<<<<<<< Updated upstream
-*/
-func appStoreBuildNumber(initialBuildNumber: Any,
-                         appIdentifier: String,
-                         username: String,
-                         teamId: Any? = nil,
-                         live: Bool = true,
-                         version: String? = nil,
-                         platform: String = "ios",
-                         teamName: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "app_store_build_number", className: nil, args: [RubyCommand.Argument(name: "initial_build_number", value: initialBuildNumber),
-                                                                                                        RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                                        RubyCommand.Argument(name: "username", value: username),
-                                                                                                        RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                        RubyCommand.Argument(name: "live", value: live),
-                                                                                                        RubyCommand.Argument(name: "version", value: version),
-                                                                                                        RubyCommand.Argument(name: "platform", value: platform),
-                                                                                                        RubyCommand.Argument(name: "team_name", value: teamName)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func appStoreBuildNumber(initialBuildNumber: Any,
                                 appIdentifier: String,
@@ -196,7 +128,6 @@ public func appStoreBuildNumber(initialBuildNumber: Any,
                                                                                                           RubyCommand.Argument(name: "platform", value: platform),
                                                                                                           RubyCommand.Argument(name: "team_name", value: teamName)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -244,26 +175,6 @@ public func appStoreConnectApiKey(keyId: String,
  Appaloosa is a private mobile application store. This action offers a quick deployment on the platform.
  You can create an account, push to your existing account, or manage your user groups.
  We accept iOS and Android applications.
-<<<<<<< Updated upstream
-*/
-func appaloosa(binary: String,
-               apiToken: String,
-               storeId: String,
-               groupIds: String = "",
-               screenshots: String,
-               locale: String = "en-US",
-               device: String? = nil,
-               description: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "appaloosa", className: nil, args: [RubyCommand.Argument(name: "binary", value: binary),
-                                                                                           RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                           RubyCommand.Argument(name: "store_id", value: storeId),
-                                                                                           RubyCommand.Argument(name: "group_ids", value: groupIds),
-                                                                                           RubyCommand.Argument(name: "screenshots", value: screenshots),
-                                                                                           RubyCommand.Argument(name: "locale", value: locale),
-                                                                                           RubyCommand.Argument(name: "device", value: device),
-                                                                                           RubyCommand.Argument(name: "description", value: description)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func appaloosa(binary: String,
                       apiToken: String,
@@ -283,7 +194,6 @@ public func appaloosa(binary: String,
                                                                                              RubyCommand.Argument(name: "device", value: device),
                                                                                              RubyCommand.Argument(name: "description", value: description)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -299,26 +209,8 @@ public func appaloosa(binary: String,
    - note: Notes you wish to add to the uploaded app
 
  If you provide a `public_key`, this will overwrite an existing application. If you want to have this build as a new app version, you shouldn't provide this value.
- 
+
  To integrate appetize into your GitHub workflow check out the [device_grid guide](https://github.com/fastlane/fastlane/blob/master/fastlane/lib/fastlane/actions/device_grid/README.md).
-<<<<<<< Updated upstream
-*/
-func appetize(apiHost: String = "api.appetize.io",
-              apiToken: String,
-              url: String? = nil,
-              platform: String = "ios",
-              path: String? = nil,
-              publicKey: String? = nil,
-              note: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "appetize", className: nil, args: [RubyCommand.Argument(name: "api_host", value: apiHost),
-                                                                                          RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                          RubyCommand.Argument(name: "url", value: url),
-                                                                                          RubyCommand.Argument(name: "platform", value: platform),
-                                                                                          RubyCommand.Argument(name: "path", value: path),
-                                                                                          RubyCommand.Argument(name: "public_key", value: publicKey),
-                                                                                          RubyCommand.Argument(name: "note", value: note)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func appetize(apiHost: String = "api.appetize.io",
                      apiToken: String,
@@ -336,7 +228,6 @@ public func appetize(apiHost: String = "api.appetize.io",
                                                                                             RubyCommand.Argument(name: "public_key", value: publicKey),
                                                                                             RubyCommand.Argument(name: "note", value: note)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -358,32 +249,6 @@ public func appetize(apiHost: String = "api.appetize.io",
  - returns: The URL to preview the iPhone app
 
  Check out the [device_grid guide](https://github.com/fastlane/fastlane/blob/master/fastlane/lib/fastlane/actions/device_grid/README.md) for more information
-<<<<<<< Updated upstream
-*/
-func appetizeViewingUrlGenerator(publicKey: String,
-                                 baseUrl: String = "https://appetize.io/embed",
-                                 device: String = "iphone5s",
-                                 scale: String? = nil,
-                                 orientation: String = "portrait",
-                                 language: String? = nil,
-                                 color: String = "black",
-                                 launchUrl: String? = nil,
-                                 osVersion: String? = nil,
-                                 params: String? = nil,
-                                 proxy: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "appetize_viewing_url_generator", className: nil, args: [RubyCommand.Argument(name: "public_key", value: publicKey),
-                                                                                                                RubyCommand.Argument(name: "base_url", value: baseUrl),
-                                                                                                                RubyCommand.Argument(name: "device", value: device),
-                                                                                                                RubyCommand.Argument(name: "scale", value: scale),
-                                                                                                                RubyCommand.Argument(name: "orientation", value: orientation),
-                                                                                                                RubyCommand.Argument(name: "language", value: language),
-                                                                                                                RubyCommand.Argument(name: "color", value: color),
-                                                                                                                RubyCommand.Argument(name: "launch_url", value: launchUrl),
-                                                                                                                RubyCommand.Argument(name: "os_version", value: osVersion),
-                                                                                                                RubyCommand.Argument(name: "params", value: params),
-                                                                                                                RubyCommand.Argument(name: "proxy", value: proxy)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func appetizeViewingUrlGenerator(publicKey: String,
                                         baseUrl: String = "https://appetize.io/embed",
@@ -409,7 +274,6 @@ public func appetizeViewingUrlGenerator(publicKey: String,
                                                                                                                   RubyCommand.Argument(name: "params", value: params),
                                                                                                                   RubyCommand.Argument(name: "proxy", value: proxy)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -425,28 +289,6 @@ public func appetizeViewingUrlGenerator(publicKey: String,
    - appiumPath: Path to Appium executable
    - caps: Hash of caps for Appium::Driver
    - appiumLib: Hash of appium_lib for Appium::Driver
-<<<<<<< Updated upstream
-*/
-func appium(platform: String,
-            specPath: String,
-            appPath: String,
-            invokeAppiumServer: Bool = true,
-            host: String = "0.0.0.0",
-            port: Int = 4723,
-            appiumPath: String? = nil,
-            caps: [String : Any]? = nil,
-            appiumLib: [String : Any]? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "appium", className: nil, args: [RubyCommand.Argument(name: "platform", value: platform),
-                                                                                        RubyCommand.Argument(name: "spec_path", value: specPath),
-                                                                                        RubyCommand.Argument(name: "app_path", value: appPath),
-                                                                                        RubyCommand.Argument(name: "invoke_appium_server", value: invokeAppiumServer),
-                                                                                        RubyCommand.Argument(name: "host", value: host),
-                                                                                        RubyCommand.Argument(name: "port", value: port),
-                                                                                        RubyCommand.Argument(name: "appium_path", value: appiumPath),
-                                                                                        RubyCommand.Argument(name: "caps", value: caps),
-                                                                                        RubyCommand.Argument(name: "appium_lib", value: appiumLib)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func appium(platform: String,
                    specPath: String,
@@ -468,7 +310,6 @@ public func appium(platform: String,
                                                                                           RubyCommand.Argument(name: "caps", value: caps),
                                                                                           RubyCommand.Argument(name: "appium_lib", value: appiumLib)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -522,100 +363,6 @@ public func appium(platform: String,
    - verbose: Log verbosity level [0-6,xcode]
 
  Runs `appledoc [OPTIONS] <paths to source dirs or files>` for the project
-<<<<<<< Updated upstream
-*/
-func appledoc(input: Any,
-              output: String? = nil,
-              templates: String? = nil,
-              docsetInstallPath: String? = nil,
-              include: String? = nil,
-              ignore: Any? = nil,
-              excludeOutput: Any? = nil,
-              indexDesc: String? = nil,
-              projectName: String,
-              projectVersion: String? = nil,
-              projectCompany: String,
-              companyId: String? = nil,
-              createHtml: Bool = false,
-              createDocset: Bool = false,
-              installDocset: Bool = false,
-              publishDocset: Bool = false,
-              noCreateDocset: Bool = false,
-              htmlAnchors: String? = nil,
-              cleanOutput: Bool = false,
-              docsetBundleId: String? = nil,
-              docsetBundleName: String? = nil,
-              docsetDesc: String? = nil,
-              docsetCopyright: String? = nil,
-              docsetFeedName: String? = nil,
-              docsetFeedUrl: String? = nil,
-              docsetFeedFormats: String? = nil,
-              docsetPackageUrl: String? = nil,
-              docsetFallbackUrl: String? = nil,
-              docsetPublisherId: String? = nil,
-              docsetPublisherName: String? = nil,
-              docsetMinXcodeVersion: String? = nil,
-              docsetPlatformFamily: String? = nil,
-              docsetCertIssuer: String? = nil,
-              docsetCertSigner: String? = nil,
-              docsetBundleFilename: String? = nil,
-              docsetAtomFilename: String? = nil,
-              docsetXmlFilename: String? = nil,
-              docsetPackageFilename: String? = nil,
-              options: String? = nil,
-              crossrefFormat: String? = nil,
-              exitThreshold: Int = 2,
-              docsSectionTitle: String? = nil,
-              warnings: String? = nil,
-              logformat: Any? = nil,
-              verbose: Any? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "appledoc", className: nil, args: [RubyCommand.Argument(name: "input", value: input),
-                                                                                          RubyCommand.Argument(name: "output", value: output),
-                                                                                          RubyCommand.Argument(name: "templates", value: templates),
-                                                                                          RubyCommand.Argument(name: "docset_install_path", value: docsetInstallPath),
-                                                                                          RubyCommand.Argument(name: "include", value: include),
-                                                                                          RubyCommand.Argument(name: "ignore", value: ignore),
-                                                                                          RubyCommand.Argument(name: "exclude_output", value: excludeOutput),
-                                                                                          RubyCommand.Argument(name: "index_desc", value: indexDesc),
-                                                                                          RubyCommand.Argument(name: "project_name", value: projectName),
-                                                                                          RubyCommand.Argument(name: "project_version", value: projectVersion),
-                                                                                          RubyCommand.Argument(name: "project_company", value: projectCompany),
-                                                                                          RubyCommand.Argument(name: "company_id", value: companyId),
-                                                                                          RubyCommand.Argument(name: "create_html", value: createHtml),
-                                                                                          RubyCommand.Argument(name: "create_docset", value: createDocset),
-                                                                                          RubyCommand.Argument(name: "install_docset", value: installDocset),
-                                                                                          RubyCommand.Argument(name: "publish_docset", value: publishDocset),
-                                                                                          RubyCommand.Argument(name: "no_create_docset", value: noCreateDocset),
-                                                                                          RubyCommand.Argument(name: "html_anchors", value: htmlAnchors),
-                                                                                          RubyCommand.Argument(name: "clean_output", value: cleanOutput),
-                                                                                          RubyCommand.Argument(name: "docset_bundle_id", value: docsetBundleId),
-                                                                                          RubyCommand.Argument(name: "docset_bundle_name", value: docsetBundleName),
-                                                                                          RubyCommand.Argument(name: "docset_desc", value: docsetDesc),
-                                                                                          RubyCommand.Argument(name: "docset_copyright", value: docsetCopyright),
-                                                                                          RubyCommand.Argument(name: "docset_feed_name", value: docsetFeedName),
-                                                                                          RubyCommand.Argument(name: "docset_feed_url", value: docsetFeedUrl),
-                                                                                          RubyCommand.Argument(name: "docset_feed_formats", value: docsetFeedFormats),
-                                                                                          RubyCommand.Argument(name: "docset_package_url", value: docsetPackageUrl),
-                                                                                          RubyCommand.Argument(name: "docset_fallback_url", value: docsetFallbackUrl),
-                                                                                          RubyCommand.Argument(name: "docset_publisher_id", value: docsetPublisherId),
-                                                                                          RubyCommand.Argument(name: "docset_publisher_name", value: docsetPublisherName),
-                                                                                          RubyCommand.Argument(name: "docset_min_xcode_version", value: docsetMinXcodeVersion),
-                                                                                          RubyCommand.Argument(name: "docset_platform_family", value: docsetPlatformFamily),
-                                                                                          RubyCommand.Argument(name: "docset_cert_issuer", value: docsetCertIssuer),
-                                                                                          RubyCommand.Argument(name: "docset_cert_signer", value: docsetCertSigner),
-                                                                                          RubyCommand.Argument(name: "docset_bundle_filename", value: docsetBundleFilename),
-                                                                                          RubyCommand.Argument(name: "docset_atom_filename", value: docsetAtomFilename),
-                                                                                          RubyCommand.Argument(name: "docset_xml_filename", value: docsetXmlFilename),
-                                                                                          RubyCommand.Argument(name: "docset_package_filename", value: docsetPackageFilename),
-                                                                                          RubyCommand.Argument(name: "options", value: options),
-                                                                                          RubyCommand.Argument(name: "crossref_format", value: crossrefFormat),
-                                                                                          RubyCommand.Argument(name: "exit_threshold", value: exitThreshold),
-                                                                                          RubyCommand.Argument(name: "docs_section_title", value: docsSectionTitle),
-                                                                                          RubyCommand.Argument(name: "warnings", value: warnings),
-                                                                                          RubyCommand.Argument(name: "logformat", value: logformat),
-                                                                                          RubyCommand.Argument(name: "verbose", value: verbose)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func appledoc(input: Any,
                      output: String? = nil,
@@ -709,7 +456,6 @@ public func appledoc(input: Any,
                                                                                             RubyCommand.Argument(name: "logformat", value: logformat),
                                                                                             RubyCommand.Argument(name: "verbose", value: verbose)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -751,9 +497,9 @@ public func appledoc(input: Any,
    - itcProvider: The provider short name to be used with the iTMSTransporter to identify your team. This value will override the automatically detected provider short name. To get provider short name run `pathToXcode.app/Contents/Applications/Application\ Loader.app/Contents/itms/bin/iTMSTransporter -m provider -u 'USERNAME' -p 'PASSWORD' -account_type itunes_connect -v off`. The short names of providers should be listed in the second column
    - runPrecheckBeforeSubmit: Run precheck before submitting to app review
    - precheckDefaultRuleLevel: The default precheck rule level unless otherwise configured
-   - individualMetadataItems: An array of localized metadata items to upload individually by language so that errors can be identified. E.g. ['name', 'keywords', 'description']. Note: slow
-   - appIcon: Metadata: The path to the app icon
-   - appleWatchAppIcon: Metadata: The path to the Apple Watch app icon
+   - individualMetadataItems: **DEPRECATED!** Removed after the migration to the new App Store Connect API in June 2020 - An array of localized metadata items to upload individually by language so that errors can be identified. E.g. ['name', 'keywords', 'description']. Note: slow
+   - appIcon: **DEPRECATED!** Removed after the migration to the new App Store Connect API in June 2020 - Metadata: The path to the app icon
+   - appleWatchAppIcon: **DEPRECATED!** Removed after the migration to the new App Store Connect API in June 2020 - Metadata: The path to the Apple Watch app icon
    - copyright: Metadata: The copyright notice
    - primaryCategory: Metadata: The english name of the primary category (e.g. `Business`, `Books`)
    - secondaryCategory: Metadata: The english name of the secondary category (e.g. `Business`, `Books`)
@@ -780,135 +526,11 @@ public func appledoc(input: Any,
    - app: The (spaceship) app ID of the app you want to use/modify
 
  Using _upload_to_app_store_ after _build_app_ and _capture_screenshots_ will automatically upload the latest ipa and screenshots with no other configuration.
- 
+
  If you don't want a PDF report for App Store builds, use the `:force` option.
  This is useful when running _fastlane_ on your Continuous Integration server:
  `_upload_to_app_store_(force: true)`
  If your account is on multiple teams and you need to tell the `iTMSTransporter` which 'provider' to use, you can set the `:itc_provider` option to pass this info.
-<<<<<<< Updated upstream
-*/
-func appstore(username: String,
-              appIdentifier: String? = nil,
-              appVersion: String? = nil,
-              ipa: String? = nil,
-              pkg: String? = nil,
-              buildNumber: String? = nil,
-              platform: String = "ios",
-              editLive: Bool = false,
-              useLiveVersion: Bool = false,
-              metadataPath: String? = nil,
-              screenshotsPath: String? = nil,
-              skipBinaryUpload: Bool = false,
-              skipScreenshots: Bool = false,
-              skipMetadata: Bool = false,
-              skipAppVersionUpdate: Bool = false,
-              force: Bool = false,
-              overwriteScreenshots: Bool = false,
-              submitForReview: Bool = false,
-              rejectIfPossible: Bool = false,
-              automaticRelease: Bool = false,
-              autoReleaseDate: Any? = nil,
-              phasedRelease: Bool = false,
-              resetRatings: Bool = false,
-              priceTier: Any? = nil,
-              appRatingConfigPath: String? = nil,
-              submissionInformation: Any? = nil,
-              teamId: Any? = nil,
-              teamName: String? = nil,
-              devPortalTeamId: String? = nil,
-              devPortalTeamName: String? = nil,
-              itcProvider: String? = nil,
-              runPrecheckBeforeSubmit: Bool = true,
-              precheckDefaultRuleLevel: Any = "warn",
-              individualMetadataItems: [String] = [],
-              appIcon: String? = nil,
-              appleWatchAppIcon: String? = nil,
-              copyright: String? = nil,
-              primaryCategory: String? = nil,
-              secondaryCategory: String? = nil,
-              primaryFirstSubCategory: String? = nil,
-              primarySecondSubCategory: String? = nil,
-              secondaryFirstSubCategory: String? = nil,
-              secondarySecondSubCategory: String? = nil,
-              tradeRepresentativeContactInformation: [String : Any]? = nil,
-              appReviewInformation: [String : Any]? = nil,
-              appReviewAttachmentFile: String? = nil,
-              description: Any? = nil,
-              name: Any? = nil,
-              subtitle: [String : Any]? = nil,
-              keywords: [String : Any]? = nil,
-              promotionalText: [String : Any]? = nil,
-              releaseNotes: Any? = nil,
-              privacyUrl: Any? = nil,
-              appleTvPrivacyPolicy: Any? = nil,
-              supportUrl: Any? = nil,
-              marketingUrl: Any? = nil,
-              languages: [String]? = nil,
-              ignoreLanguageDirectoryValidation: Bool = false,
-              precheckIncludeInAppPurchases: Bool = true,
-              app: Any) {
-  let command = RubyCommand(commandID: "", methodName: "appstore", className: nil, args: [RubyCommand.Argument(name: "username", value: username),
-                                                                                          RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                          RubyCommand.Argument(name: "app_version", value: appVersion),
-                                                                                          RubyCommand.Argument(name: "ipa", value: ipa),
-                                                                                          RubyCommand.Argument(name: "pkg", value: pkg),
-                                                                                          RubyCommand.Argument(name: "build_number", value: buildNumber),
-                                                                                          RubyCommand.Argument(name: "platform", value: platform),
-                                                                                          RubyCommand.Argument(name: "edit_live", value: editLive),
-                                                                                          RubyCommand.Argument(name: "use_live_version", value: useLiveVersion),
-                                                                                          RubyCommand.Argument(name: "metadata_path", value: metadataPath),
-                                                                                          RubyCommand.Argument(name: "screenshots_path", value: screenshotsPath),
-                                                                                          RubyCommand.Argument(name: "skip_binary_upload", value: skipBinaryUpload),
-                                                                                          RubyCommand.Argument(name: "skip_screenshots", value: skipScreenshots),
-                                                                                          RubyCommand.Argument(name: "skip_metadata", value: skipMetadata),
-                                                                                          RubyCommand.Argument(name: "skip_app_version_update", value: skipAppVersionUpdate),
-                                                                                          RubyCommand.Argument(name: "force", value: force),
-                                                                                          RubyCommand.Argument(name: "overwrite_screenshots", value: overwriteScreenshots),
-                                                                                          RubyCommand.Argument(name: "submit_for_review", value: submitForReview),
-                                                                                          RubyCommand.Argument(name: "reject_if_possible", value: rejectIfPossible),
-                                                                                          RubyCommand.Argument(name: "automatic_release", value: automaticRelease),
-                                                                                          RubyCommand.Argument(name: "auto_release_date", value: autoReleaseDate),
-                                                                                          RubyCommand.Argument(name: "phased_release", value: phasedRelease),
-                                                                                          RubyCommand.Argument(name: "reset_ratings", value: resetRatings),
-                                                                                          RubyCommand.Argument(name: "price_tier", value: priceTier),
-                                                                                          RubyCommand.Argument(name: "app_rating_config_path", value: appRatingConfigPath),
-                                                                                          RubyCommand.Argument(name: "submission_information", value: submissionInformation),
-                                                                                          RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                          RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                          RubyCommand.Argument(name: "dev_portal_team_id", value: devPortalTeamId),
-                                                                                          RubyCommand.Argument(name: "dev_portal_team_name", value: devPortalTeamName),
-                                                                                          RubyCommand.Argument(name: "itc_provider", value: itcProvider),
-                                                                                          RubyCommand.Argument(name: "run_precheck_before_submit", value: runPrecheckBeforeSubmit),
-                                                                                          RubyCommand.Argument(name: "precheck_default_rule_level", value: precheckDefaultRuleLevel),
-                                                                                          RubyCommand.Argument(name: "individual_metadata_items", value: individualMetadataItems),
-                                                                                          RubyCommand.Argument(name: "app_icon", value: appIcon),
-                                                                                          RubyCommand.Argument(name: "apple_watch_app_icon", value: appleWatchAppIcon),
-                                                                                          RubyCommand.Argument(name: "copyright", value: copyright),
-                                                                                          RubyCommand.Argument(name: "primary_category", value: primaryCategory),
-                                                                                          RubyCommand.Argument(name: "secondary_category", value: secondaryCategory),
-                                                                                          RubyCommand.Argument(name: "primary_first_sub_category", value: primaryFirstSubCategory),
-                                                                                          RubyCommand.Argument(name: "primary_second_sub_category", value: primarySecondSubCategory),
-                                                                                          RubyCommand.Argument(name: "secondary_first_sub_category", value: secondaryFirstSubCategory),
-                                                                                          RubyCommand.Argument(name: "secondary_second_sub_category", value: secondarySecondSubCategory),
-                                                                                          RubyCommand.Argument(name: "trade_representative_contact_information", value: tradeRepresentativeContactInformation),
-                                                                                          RubyCommand.Argument(name: "app_review_information", value: appReviewInformation),
-                                                                                          RubyCommand.Argument(name: "app_review_attachment_file", value: appReviewAttachmentFile),
-                                                                                          RubyCommand.Argument(name: "description", value: description),
-                                                                                          RubyCommand.Argument(name: "name", value: name),
-                                                                                          RubyCommand.Argument(name: "subtitle", value: subtitle),
-                                                                                          RubyCommand.Argument(name: "keywords", value: keywords),
-                                                                                          RubyCommand.Argument(name: "promotional_text", value: promotionalText),
-                                                                                          RubyCommand.Argument(name: "release_notes", value: releaseNotes),
-                                                                                          RubyCommand.Argument(name: "privacy_url", value: privacyUrl),
-                                                                                          RubyCommand.Argument(name: "apple_tv_privacy_policy", value: appleTvPrivacyPolicy),
-                                                                                          RubyCommand.Argument(name: "support_url", value: supportUrl),
-                                                                                          RubyCommand.Argument(name: "marketing_url", value: marketingUrl),
-                                                                                          RubyCommand.Argument(name: "languages", value: languages),
-                                                                                          RubyCommand.Argument(name: "ignore_language_directory_validation", value: ignoreLanguageDirectoryValidation),
-                                                                                          RubyCommand.Argument(name: "precheck_include_in_app_purchases", value: precheckIncludeInAppPurchases),
-                                                                                          RubyCommand.Argument(name: "app", value: app)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func appstore(apiKeyPath: String? = nil,
                      apiKey: [String: Any]? = nil,
@@ -1036,7 +658,6 @@ public func appstore(apiKeyPath: String? = nil,
                                                                                             RubyCommand.Argument(name: "precheck_include_in_app_purchases", value: precheckIncludeInAppPurchases),
                                                                                             RubyCommand.Argument(name: "app", value: app)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -1046,16 +667,6 @@ public func appstore(apiKeyPath: String? = nil,
    - dsym: dSYM.zip file to upload to Apteligent
    - appId: Apteligent App ID key e.g. 569f5c87cb99e10e00c7xxxx
    - apiKey: Apteligent App API key e.g. IXPQIi8yCbHaLliqzRoo065tH0lxxxxx
-<<<<<<< Updated upstream
-*/
-func apteligent(dsym: String? = nil,
-                appId: String,
-                apiKey: String) {
-  let command = RubyCommand(commandID: "", methodName: "apteligent", className: nil, args: [RubyCommand.Argument(name: "dsym", value: dsym),
-                                                                                            RubyCommand.Argument(name: "app_id", value: appId),
-                                                                                            RubyCommand.Argument(name: "api_key", value: apiKey)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func apteligent(dsym: String? = nil,
                        appId: String,
@@ -1065,7 +676,6 @@ public func apteligent(dsym: String? = nil,
                                                                                               RubyCommand.Argument(name: "app_id", value: appId),
                                                                                               RubyCommand.Argument(name: "api_key", value: apiKey)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -1086,38 +696,6 @@ public func apteligent(dsym: String? = nil,
    - proxyAddress: Proxy address
    - proxyPort: Proxy port
    - readTimeout: Read timeout
-<<<<<<< Updated upstream
-*/
-func artifactory(file: String,
-                 repo: String,
-                 repoPath: String,
-                 endpoint: String,
-                 username: String,
-                 password: String,
-                 properties: [String : Any] = [:],
-                 sslPemFile: String? = nil,
-                 sslVerify: Bool = true,
-                 proxyUsername: String? = nil,
-                 proxyPassword: String? = nil,
-                 proxyAddress: String? = nil,
-                 proxyPort: String? = nil,
-                 readTimeout: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "artifactory", className: nil, args: [RubyCommand.Argument(name: "file", value: file),
-                                                                                             RubyCommand.Argument(name: "repo", value: repo),
-                                                                                             RubyCommand.Argument(name: "repo_path", value: repoPath),
-                                                                                             RubyCommand.Argument(name: "endpoint", value: endpoint),
-                                                                                             RubyCommand.Argument(name: "username", value: username),
-                                                                                             RubyCommand.Argument(name: "password", value: password),
-                                                                                             RubyCommand.Argument(name: "properties", value: properties),
-                                                                                             RubyCommand.Argument(name: "ssl_pem_file", value: sslPemFile),
-                                                                                             RubyCommand.Argument(name: "ssl_verify", value: sslVerify),
-                                                                                             RubyCommand.Argument(name: "proxy_username", value: proxyUsername),
-                                                                                             RubyCommand.Argument(name: "proxy_password", value: proxyPassword),
-                                                                                             RubyCommand.Argument(name: "proxy_address", value: proxyAddress),
-                                                                                             RubyCommand.Argument(name: "proxy_port", value: proxyPort),
-                                                                                             RubyCommand.Argument(name: "read_timeout", value: readTimeout)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func artifactory(file: String,
                         repo: String,
@@ -1149,7 +727,6 @@ public func artifactory(file: String,
                                                                                                RubyCommand.Argument(name: "proxy_port", value: proxyPort),
                                                                                                RubyCommand.Argument(name: "read_timeout", value: readTimeout)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -1168,26 +745,6 @@ public func artifactory(file: String,
  - returns: The current status (boolean) of codesigning after modification
 
  Configures Xcode's Codesigning options of all targets in the project
-<<<<<<< Updated upstream
-*/
-func automaticCodeSigning(path: String,
-                          useAutomaticSigning: Bool = false,
-                          teamId: String? = nil,
-                          targets: [String]? = nil,
-                          codeSignIdentity: String? = nil,
-                          profileName: String? = nil,
-                          profileUuid: String? = nil,
-                          bundleIdentifier: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "automatic_code_signing", className: nil, args: [RubyCommand.Argument(name: "path", value: path),
-                                                                                                        RubyCommand.Argument(name: "use_automatic_signing", value: useAutomaticSigning),
-                                                                                                        RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                        RubyCommand.Argument(name: "targets", value: targets),
-                                                                                                        RubyCommand.Argument(name: "code_sign_identity", value: codeSignIdentity),
-                                                                                                        RubyCommand.Argument(name: "profile_name", value: profileName),
-                                                                                                        RubyCommand.Argument(name: "profile_uuid", value: profileUuid),
-                                                                                                        RubyCommand.Argument(name: "bundle_identifier", value: bundleIdentifier)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func automaticCodeSigning(path: String,
                                  useAutomaticSigning: Bool = false,
@@ -1207,24 +764,16 @@ public func automaticCodeSigning(path: String,
                                                                                                           RubyCommand.Argument(name: "profile_uuid", value: profileUuid),
                                                                                                           RubyCommand.Argument(name: "bundle_identifier", value: bundleIdentifier)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  This action backs up your file to "[path].back"
 
  - parameter path: Path to the file you want to backup
-<<<<<<< Updated upstream
-*/
-func backupFile(path: String) {
-  let command = RubyCommand(commandID: "", methodName: "backup_file", className: nil, args: [RubyCommand.Argument(name: "path", value: path)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func backupFile(path: String) {
     let command = RubyCommand(commandID: "", methodName: "backup_file", className: nil, args: [RubyCommand.Argument(name: "path", value: path)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -1236,20 +785,6 @@ public func backupFile(path: String) {
    - zip: Enable compression of the archive
    - zipFilename: Filename of the compressed archive. Will be appended by `.xcarchive.zip`. Default value is the output xcarchive filename
    - versioned: Create a versioned (date and app version) subfolder where to put the archive
-<<<<<<< Updated upstream
-*/
-func backupXcarchive(xcarchive: String,
-                     destination: String,
-                     zip: Bool = true,
-                     zipFilename: String? = nil,
-                     versioned: Bool = true) {
-  let command = RubyCommand(commandID: "", methodName: "backup_xcarchive", className: nil, args: [RubyCommand.Argument(name: "xcarchive", value: xcarchive),
-                                                                                                  RubyCommand.Argument(name: "destination", value: destination),
-                                                                                                  RubyCommand.Argument(name: "zip", value: zip),
-                                                                                                  RubyCommand.Argument(name: "zip_filename", value: zipFilename),
-                                                                                                  RubyCommand.Argument(name: "versioned", value: versioned)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func backupXcarchive(xcarchive: String,
                             destination: String,
@@ -1263,7 +798,6 @@ public func backupXcarchive(xcarchive: String,
                                                                                                     RubyCommand.Argument(name: "zip_filename", value: zipFilename),
                                                                                                     RubyCommand.Argument(name: "versioned", value: versioned)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -1287,32 +821,6 @@ public func backupXcarchive(xcarchive: String,
  You can also provide your custom badge/overlay or add a shield for more customization.
  More info: [https://github.com/HazAT/badge](https://github.com/HazAT/badge)
  **Note**: If you want to reset the badge back to default, you can use `sh 'git checkout -- <path>/Assets.xcassets/'`.
-<<<<<<< Updated upstream
-*/
-func badge(dark: Any? = nil,
-           custom: String? = nil,
-           noBadge: Any? = nil,
-           shield: String? = nil,
-           alpha: Any? = nil,
-           path: String = ".",
-           shieldIoTimeout: Any? = nil,
-           glob: String? = nil,
-           alphaChannel: Any? = nil,
-           shieldGravity: String? = nil,
-           shieldNoResize: Any? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "badge", className: nil, args: [RubyCommand.Argument(name: "dark", value: dark),
-                                                                                       RubyCommand.Argument(name: "custom", value: custom),
-                                                                                       RubyCommand.Argument(name: "no_badge", value: noBadge),
-                                                                                       RubyCommand.Argument(name: "shield", value: shield),
-                                                                                       RubyCommand.Argument(name: "alpha", value: alpha),
-                                                                                       RubyCommand.Argument(name: "path", value: path),
-                                                                                       RubyCommand.Argument(name: "shield_io_timeout", value: shieldIoTimeout),
-                                                                                       RubyCommand.Argument(name: "glob", value: glob),
-                                                                                       RubyCommand.Argument(name: "alpha_channel", value: alphaChannel),
-                                                                                       RubyCommand.Argument(name: "shield_gravity", value: shieldGravity),
-                                                                                       RubyCommand.Argument(name: "shield_no_resize", value: shieldNoResize)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func badge(dark: Any? = nil,
                   custom: String? = nil,
@@ -1338,7 +846,6 @@ public func badge(dark: Any? = nil,
                                                                                          RubyCommand.Argument(name: "shield_gravity", value: shieldGravity),
                                                                                          RubyCommand.Argument(name: "shield_no_resize", value: shieldNoResize)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -1353,20 +860,6 @@ public func badge(dark: Any? = nil,
 
  This should be called from danger.
  More information in the [device_grid guide](https://github.com/fastlane/fastlane/blob/master/fastlane/lib/fastlane/actions/device_grid/README.md).
-<<<<<<< Updated upstream
-*/
-func buildAndUploadToAppetize(xcodebuild: [String : Any] = [:],
-                              scheme: String? = nil,
-                              apiToken: String,
-                              publicKey: String? = nil,
-                              note: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "build_and_upload_to_appetize", className: nil, args: [RubyCommand.Argument(name: "xcodebuild", value: xcodebuild),
-                                                                                                              RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                                              RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                                              RubyCommand.Argument(name: "public_key", value: publicKey),
-                                                                                                              RubyCommand.Argument(name: "note", value: note)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func buildAndUploadToAppetize(xcodebuild: [String: Any] = [:],
                                      scheme: String? = nil,
@@ -1380,7 +873,6 @@ public func buildAndUploadToAppetize(xcodebuild: [String: Any] = [:],
                                                                                                                 RubyCommand.Argument(name: "public_key", value: publicKey),
                                                                                                                 RubyCommand.Argument(name: "note", value: note)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -1403,34 +895,6 @@ public func buildAndUploadToAppetize(xcodebuild: [String: Any] = [:],
  - returns: The output of running the gradle task
 
  Run `./gradlew tasks` to get a list of all available gradle tasks for your project
-<<<<<<< Updated upstream
-*/
-func buildAndroidApp(task: String? = nil,
-                     flavor: String? = nil,
-                     buildType: String? = nil,
-                     tasks: [String]? = nil,
-                     flags: String? = nil,
-                     projectDir: String = ".",
-                     gradlePath: String? = nil,
-                     properties: Any? = nil,
-                     systemProperties: Any? = nil,
-                     serial: String = "",
-                     printCommand: Bool = true,
-                     printCommandOutput: Bool = true) {
-  let command = RubyCommand(commandID: "", methodName: "build_android_app", className: nil, args: [RubyCommand.Argument(name: "task", value: task),
-                                                                                                   RubyCommand.Argument(name: "flavor", value: flavor),
-                                                                                                   RubyCommand.Argument(name: "build_type", value: buildType),
-                                                                                                   RubyCommand.Argument(name: "tasks", value: tasks),
-                                                                                                   RubyCommand.Argument(name: "flags", value: flags),
-                                                                                                   RubyCommand.Argument(name: "project_dir", value: projectDir),
-                                                                                                   RubyCommand.Argument(name: "gradle_path", value: gradlePath),
-                                                                                                   RubyCommand.Argument(name: "properties", value: properties),
-                                                                                                   RubyCommand.Argument(name: "system_properties", value: systemProperties),
-                                                                                                   RubyCommand.Argument(name: "serial", value: serial),
-                                                                                                   RubyCommand.Argument(name: "print_command", value: printCommand),
-                                                                                                   RubyCommand.Argument(name: "print_command_output", value: printCommandOutput)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func buildAndroidApp(task: String? = nil,
                             flavor: String? = nil,
@@ -1458,7 +922,6 @@ public func buildAndroidApp(task: String? = nil,
                                                                                                      RubyCommand.Argument(name: "print_command", value: printCommand),
                                                                                                      RubyCommand.Argument(name: "print_command_output", value: printCommandOutput)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -1513,98 +976,6 @@ public func buildAndroidApp(task: String? = nil,
  - returns: The absolute path to the generated ipa file
 
  More information: https://fastlane.tools/gym
-<<<<<<< Updated upstream
-*/
-func buildApp(workspace: String? = nil,
-              project: String? = nil,
-              scheme: String? = nil,
-              clean: Bool = false,
-              outputDirectory: String = ".",
-              outputName: String? = nil,
-              configuration: String? = nil,
-              silent: Bool = false,
-              codesigningIdentity: String? = nil,
-              skipPackageIpa: Bool = false,
-              skipPackagePkg: Bool = false,
-              includeSymbols: Bool? = nil,
-              includeBitcode: Bool? = nil,
-              exportMethod: String? = nil,
-              exportOptions: [String : Any]? = nil,
-              exportXcargs: String? = nil,
-              skipBuildArchive: Bool? = nil,
-              skipArchive: Bool? = nil,
-              skipCodesigning: Bool? = nil,
-              catalystPlatform: String? = nil,
-              installerCertName: String? = nil,
-              buildPath: String? = nil,
-              archivePath: String? = nil,
-              derivedDataPath: String? = nil,
-              resultBundle: Bool = false,
-              resultBundlePath: String? = nil,
-              buildlogPath: String = "~/Library/Logs/gym",
-              sdk: String? = nil,
-              toolchain: String? = nil,
-              destination: String? = nil,
-              exportTeamId: String? = nil,
-              xcargs: String? = nil,
-              xcconfig: String? = nil,
-              suppressXcodeOutput: Bool? = nil,
-              disableXcpretty: Bool? = nil,
-              xcprettyTestFormat: Bool? = nil,
-              xcprettyFormatter: String? = nil,
-              xcprettyReportJunit: String? = nil,
-              xcprettyReportHtml: String? = nil,
-              xcprettyReportJson: String? = nil,
-              analyzeBuildTime: Bool? = nil,
-              xcprettyUtf: Bool? = nil,
-              skipProfileDetection: Bool = false,
-              clonedSourcePackagesPath: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "build_app", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
-                                                                                           RubyCommand.Argument(name: "project", value: project),
-                                                                                           RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                           RubyCommand.Argument(name: "clean", value: clean),
-                                                                                           RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                           RubyCommand.Argument(name: "output_name", value: outputName),
-                                                                                           RubyCommand.Argument(name: "configuration", value: configuration),
-                                                                                           RubyCommand.Argument(name: "silent", value: silent),
-                                                                                           RubyCommand.Argument(name: "codesigning_identity", value: codesigningIdentity),
-                                                                                           RubyCommand.Argument(name: "skip_package_ipa", value: skipPackageIpa),
-                                                                                           RubyCommand.Argument(name: "skip_package_pkg", value: skipPackagePkg),
-                                                                                           RubyCommand.Argument(name: "include_symbols", value: includeSymbols),
-                                                                                           RubyCommand.Argument(name: "include_bitcode", value: includeBitcode),
-                                                                                           RubyCommand.Argument(name: "export_method", value: exportMethod),
-                                                                                           RubyCommand.Argument(name: "export_options", value: exportOptions),
-                                                                                           RubyCommand.Argument(name: "export_xcargs", value: exportXcargs),
-                                                                                           RubyCommand.Argument(name: "skip_build_archive", value: skipBuildArchive),
-                                                                                           RubyCommand.Argument(name: "skip_archive", value: skipArchive),
-                                                                                           RubyCommand.Argument(name: "skip_codesigning", value: skipCodesigning),
-                                                                                           RubyCommand.Argument(name: "catalyst_platform", value: catalystPlatform),
-                                                                                           RubyCommand.Argument(name: "installer_cert_name", value: installerCertName),
-                                                                                           RubyCommand.Argument(name: "build_path", value: buildPath),
-                                                                                           RubyCommand.Argument(name: "archive_path", value: archivePath),
-                                                                                           RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath),
-                                                                                           RubyCommand.Argument(name: "result_bundle", value: resultBundle),
-                                                                                           RubyCommand.Argument(name: "result_bundle_path", value: resultBundlePath),
-                                                                                           RubyCommand.Argument(name: "buildlog_path", value: buildlogPath),
-                                                                                           RubyCommand.Argument(name: "sdk", value: sdk),
-                                                                                           RubyCommand.Argument(name: "toolchain", value: toolchain),
-                                                                                           RubyCommand.Argument(name: "destination", value: destination),
-                                                                                           RubyCommand.Argument(name: "export_team_id", value: exportTeamId),
-                                                                                           RubyCommand.Argument(name: "xcargs", value: xcargs),
-                                                                                           RubyCommand.Argument(name: "xcconfig", value: xcconfig),
-                                                                                           RubyCommand.Argument(name: "suppress_xcode_output", value: suppressXcodeOutput),
-                                                                                           RubyCommand.Argument(name: "disable_xcpretty", value: disableXcpretty),
-                                                                                           RubyCommand.Argument(name: "xcpretty_test_format", value: xcprettyTestFormat),
-                                                                                           RubyCommand.Argument(name: "xcpretty_formatter", value: xcprettyFormatter),
-                                                                                           RubyCommand.Argument(name: "xcpretty_report_junit", value: xcprettyReportJunit),
-                                                                                           RubyCommand.Argument(name: "xcpretty_report_html", value: xcprettyReportHtml),
-                                                                                           RubyCommand.Argument(name: "xcpretty_report_json", value: xcprettyReportJson),
-                                                                                           RubyCommand.Argument(name: "analyze_build_time", value: analyzeBuildTime),
-                                                                                           RubyCommand.Argument(name: "xcpretty_utf", value: xcprettyUtf),
-                                                                                           RubyCommand.Argument(name: "skip_profile_detection", value: skipProfileDetection),
-                                                                                           RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func buildApp(workspace: String? = nil,
                      project: String? = nil,
@@ -1696,7 +1067,6 @@ public func buildApp(workspace: String? = nil,
                                                                                              RubyCommand.Argument(name: "skip_profile_detection", value: skipProfileDetection),
                                                                                              RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -1748,92 +1118,6 @@ public func buildApp(workspace: String? = nil,
  - returns: The absolute path to the generated ipa file
 
  More information: https://fastlane.tools/gym
-<<<<<<< Updated upstream
-*/
-func buildIosApp(workspace: String? = nil,
-                 project: String? = nil,
-                 scheme: String? = nil,
-                 clean: Bool = false,
-                 outputDirectory: String = ".",
-                 outputName: String? = nil,
-                 configuration: String? = nil,
-                 silent: Bool = false,
-                 codesigningIdentity: String? = nil,
-                 skipPackageIpa: Bool = false,
-                 includeSymbols: Bool? = nil,
-                 includeBitcode: Bool? = nil,
-                 exportMethod: String? = nil,
-                 exportOptions: [String : Any]? = nil,
-                 exportXcargs: String? = nil,
-                 skipBuildArchive: Bool? = nil,
-                 skipArchive: Bool? = nil,
-                 skipCodesigning: Bool? = nil,
-                 buildPath: String? = nil,
-                 archivePath: String? = nil,
-                 derivedDataPath: String? = nil,
-                 resultBundle: Bool = false,
-                 resultBundlePath: String? = nil,
-                 buildlogPath: String = "~/Library/Logs/gym",
-                 sdk: String? = nil,
-                 toolchain: String? = nil,
-                 destination: String? = nil,
-                 exportTeamId: String? = nil,
-                 xcargs: String? = nil,
-                 xcconfig: String? = nil,
-                 suppressXcodeOutput: Bool? = nil,
-                 disableXcpretty: Bool? = nil,
-                 xcprettyTestFormat: Bool? = nil,
-                 xcprettyFormatter: String? = nil,
-                 xcprettyReportJunit: String? = nil,
-                 xcprettyReportHtml: String? = nil,
-                 xcprettyReportJson: String? = nil,
-                 analyzeBuildTime: Bool? = nil,
-                 xcprettyUtf: Bool? = nil,
-                 skipProfileDetection: Bool = false,
-                 clonedSourcePackagesPath: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "build_ios_app", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
-                                                                                               RubyCommand.Argument(name: "project", value: project),
-                                                                                               RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                               RubyCommand.Argument(name: "clean", value: clean),
-                                                                                               RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                               RubyCommand.Argument(name: "output_name", value: outputName),
-                                                                                               RubyCommand.Argument(name: "configuration", value: configuration),
-                                                                                               RubyCommand.Argument(name: "silent", value: silent),
-                                                                                               RubyCommand.Argument(name: "codesigning_identity", value: codesigningIdentity),
-                                                                                               RubyCommand.Argument(name: "skip_package_ipa", value: skipPackageIpa),
-                                                                                               RubyCommand.Argument(name: "include_symbols", value: includeSymbols),
-                                                                                               RubyCommand.Argument(name: "include_bitcode", value: includeBitcode),
-                                                                                               RubyCommand.Argument(name: "export_method", value: exportMethod),
-                                                                                               RubyCommand.Argument(name: "export_options", value: exportOptions),
-                                                                                               RubyCommand.Argument(name: "export_xcargs", value: exportXcargs),
-                                                                                               RubyCommand.Argument(name: "skip_build_archive", value: skipBuildArchive),
-                                                                                               RubyCommand.Argument(name: "skip_archive", value: skipArchive),
-                                                                                               RubyCommand.Argument(name: "skip_codesigning", value: skipCodesigning),
-                                                                                               RubyCommand.Argument(name: "build_path", value: buildPath),
-                                                                                               RubyCommand.Argument(name: "archive_path", value: archivePath),
-                                                                                               RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath),
-                                                                                               RubyCommand.Argument(name: "result_bundle", value: resultBundle),
-                                                                                               RubyCommand.Argument(name: "result_bundle_path", value: resultBundlePath),
-                                                                                               RubyCommand.Argument(name: "buildlog_path", value: buildlogPath),
-                                                                                               RubyCommand.Argument(name: "sdk", value: sdk),
-                                                                                               RubyCommand.Argument(name: "toolchain", value: toolchain),
-                                                                                               RubyCommand.Argument(name: "destination", value: destination),
-                                                                                               RubyCommand.Argument(name: "export_team_id", value: exportTeamId),
-                                                                                               RubyCommand.Argument(name: "xcargs", value: xcargs),
-                                                                                               RubyCommand.Argument(name: "xcconfig", value: xcconfig),
-                                                                                               RubyCommand.Argument(name: "suppress_xcode_output", value: suppressXcodeOutput),
-                                                                                               RubyCommand.Argument(name: "disable_xcpretty", value: disableXcpretty),
-                                                                                               RubyCommand.Argument(name: "xcpretty_test_format", value: xcprettyTestFormat),
-                                                                                               RubyCommand.Argument(name: "xcpretty_formatter", value: xcprettyFormatter),
-                                                                                               RubyCommand.Argument(name: "xcpretty_report_junit", value: xcprettyReportJunit),
-                                                                                               RubyCommand.Argument(name: "xcpretty_report_html", value: xcprettyReportHtml),
-                                                                                               RubyCommand.Argument(name: "xcpretty_report_json", value: xcprettyReportJson),
-                                                                                               RubyCommand.Argument(name: "analyze_build_time", value: analyzeBuildTime),
-                                                                                               RubyCommand.Argument(name: "xcpretty_utf", value: xcprettyUtf),
-                                                                                               RubyCommand.Argument(name: "skip_profile_detection", value: skipProfileDetection),
-                                                                                               RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func buildIosApp(workspace: String? = nil,
                         project: String? = nil,
@@ -1919,7 +1203,6 @@ public func buildIosApp(workspace: String? = nil,
                                                                                                  RubyCommand.Argument(name: "skip_profile_detection", value: skipProfileDetection),
                                                                                                  RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -1972,94 +1255,6 @@ public func buildIosApp(workspace: String? = nil,
  - returns: The absolute path to the generated ipa file
 
  More information: https://fastlane.tools/gym
-<<<<<<< Updated upstream
-*/
-func buildMacApp(workspace: String? = nil,
-                 project: String? = nil,
-                 scheme: String? = nil,
-                 clean: Bool = false,
-                 outputDirectory: String = ".",
-                 outputName: String? = nil,
-                 configuration: String? = nil,
-                 silent: Bool = false,
-                 codesigningIdentity: String? = nil,
-                 skipPackagePkg: Bool = false,
-                 includeSymbols: Bool? = nil,
-                 includeBitcode: Bool? = nil,
-                 exportMethod: String? = nil,
-                 exportOptions: [String : Any]? = nil,
-                 exportXcargs: String? = nil,
-                 skipBuildArchive: Bool? = nil,
-                 skipArchive: Bool? = nil,
-                 skipCodesigning: Bool? = nil,
-                 installerCertName: String? = nil,
-                 buildPath: String? = nil,
-                 archivePath: String? = nil,
-                 derivedDataPath: String? = nil,
-                 resultBundle: Bool = false,
-                 resultBundlePath: String? = nil,
-                 buildlogPath: String = "~/Library/Logs/gym",
-                 sdk: String? = nil,
-                 toolchain: String? = nil,
-                 destination: String? = nil,
-                 exportTeamId: String? = nil,
-                 xcargs: String? = nil,
-                 xcconfig: String? = nil,
-                 suppressXcodeOutput: Bool? = nil,
-                 disableXcpretty: Bool? = nil,
-                 xcprettyTestFormat: Bool? = nil,
-                 xcprettyFormatter: String? = nil,
-                 xcprettyReportJunit: String? = nil,
-                 xcprettyReportHtml: String? = nil,
-                 xcprettyReportJson: String? = nil,
-                 analyzeBuildTime: Bool? = nil,
-                 xcprettyUtf: Bool? = nil,
-                 skipProfileDetection: Bool = false,
-                 clonedSourcePackagesPath: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "build_mac_app", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
-                                                                                               RubyCommand.Argument(name: "project", value: project),
-                                                                                               RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                               RubyCommand.Argument(name: "clean", value: clean),
-                                                                                               RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                               RubyCommand.Argument(name: "output_name", value: outputName),
-                                                                                               RubyCommand.Argument(name: "configuration", value: configuration),
-                                                                                               RubyCommand.Argument(name: "silent", value: silent),
-                                                                                               RubyCommand.Argument(name: "codesigning_identity", value: codesigningIdentity),
-                                                                                               RubyCommand.Argument(name: "skip_package_pkg", value: skipPackagePkg),
-                                                                                               RubyCommand.Argument(name: "include_symbols", value: includeSymbols),
-                                                                                               RubyCommand.Argument(name: "include_bitcode", value: includeBitcode),
-                                                                                               RubyCommand.Argument(name: "export_method", value: exportMethod),
-                                                                                               RubyCommand.Argument(name: "export_options", value: exportOptions),
-                                                                                               RubyCommand.Argument(name: "export_xcargs", value: exportXcargs),
-                                                                                               RubyCommand.Argument(name: "skip_build_archive", value: skipBuildArchive),
-                                                                                               RubyCommand.Argument(name: "skip_archive", value: skipArchive),
-                                                                                               RubyCommand.Argument(name: "skip_codesigning", value: skipCodesigning),
-                                                                                               RubyCommand.Argument(name: "installer_cert_name", value: installerCertName),
-                                                                                               RubyCommand.Argument(name: "build_path", value: buildPath),
-                                                                                               RubyCommand.Argument(name: "archive_path", value: archivePath),
-                                                                                               RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath),
-                                                                                               RubyCommand.Argument(name: "result_bundle", value: resultBundle),
-                                                                                               RubyCommand.Argument(name: "result_bundle_path", value: resultBundlePath),
-                                                                                               RubyCommand.Argument(name: "buildlog_path", value: buildlogPath),
-                                                                                               RubyCommand.Argument(name: "sdk", value: sdk),
-                                                                                               RubyCommand.Argument(name: "toolchain", value: toolchain),
-                                                                                               RubyCommand.Argument(name: "destination", value: destination),
-                                                                                               RubyCommand.Argument(name: "export_team_id", value: exportTeamId),
-                                                                                               RubyCommand.Argument(name: "xcargs", value: xcargs),
-                                                                                               RubyCommand.Argument(name: "xcconfig", value: xcconfig),
-                                                                                               RubyCommand.Argument(name: "suppress_xcode_output", value: suppressXcodeOutput),
-                                                                                               RubyCommand.Argument(name: "disable_xcpretty", value: disableXcpretty),
-                                                                                               RubyCommand.Argument(name: "xcpretty_test_format", value: xcprettyTestFormat),
-                                                                                               RubyCommand.Argument(name: "xcpretty_formatter", value: xcprettyFormatter),
-                                                                                               RubyCommand.Argument(name: "xcpretty_report_junit", value: xcprettyReportJunit),
-                                                                                               RubyCommand.Argument(name: "xcpretty_report_html", value: xcprettyReportHtml),
-                                                                                               RubyCommand.Argument(name: "xcpretty_report_json", value: xcprettyReportJson),
-                                                                                               RubyCommand.Argument(name: "analyze_build_time", value: analyzeBuildTime),
-                                                                                               RubyCommand.Argument(name: "xcpretty_utf", value: xcprettyUtf),
-                                                                                               RubyCommand.Argument(name: "skip_profile_detection", value: skipProfileDetection),
-                                                                                               RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func buildMacApp(workspace: String? = nil,
                         project: String? = nil,
@@ -2147,7 +1342,6 @@ public func buildMacApp(workspace: String? = nil,
                                                                                                  RubyCommand.Argument(name: "skip_profile_detection", value: skipProfileDetection),
                                                                                                  RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -2172,46 +1366,6 @@ public func buildMacApp(workspace: String? = nil,
    - trustPolicy: Sets level of security when dealing with signed gems. Accepts `LowSecurity`, `MediumSecurity` and `HighSecurity` as values
    - without: Exclude gems that are part of the specified named group
    - with: Include gems that are part of the specified named group
-<<<<<<< Updated upstream
-*/
-func bundleInstall(binstubs: String? = nil,
-                   clean: Bool = false,
-                   fullIndex: Bool = false,
-                   gemfile: String? = nil,
-                   jobs: Bool? = nil,
-                   local: Bool = false,
-                   deployment: Bool = false,
-                   noCache: Bool = false,
-                   noPrune: Bool = false,
-                   path: String? = nil,
-                   system: Bool = false,
-                   quiet: Bool = false,
-                   retry: Bool? = nil,
-                   shebang: String? = nil,
-                   standalone: String? = nil,
-                   trustPolicy: String? = nil,
-                   without: String? = nil,
-                   with: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "bundle_install", className: nil, args: [RubyCommand.Argument(name: "binstubs", value: binstubs),
-                                                                                                RubyCommand.Argument(name: "clean", value: clean),
-                                                                                                RubyCommand.Argument(name: "full_index", value: fullIndex),
-                                                                                                RubyCommand.Argument(name: "gemfile", value: gemfile),
-                                                                                                RubyCommand.Argument(name: "jobs", value: jobs),
-                                                                                                RubyCommand.Argument(name: "local", value: local),
-                                                                                                RubyCommand.Argument(name: "deployment", value: deployment),
-                                                                                                RubyCommand.Argument(name: "no_cache", value: noCache),
-                                                                                                RubyCommand.Argument(name: "no_prune", value: noPrune),
-                                                                                                RubyCommand.Argument(name: "path", value: path),
-                                                                                                RubyCommand.Argument(name: "system", value: system),
-                                                                                                RubyCommand.Argument(name: "quiet", value: quiet),
-                                                                                                RubyCommand.Argument(name: "retry", value: retry),
-                                                                                                RubyCommand.Argument(name: "shebang", value: shebang),
-                                                                                                RubyCommand.Argument(name: "standalone", value: standalone),
-                                                                                                RubyCommand.Argument(name: "trust_policy", value: trustPolicy),
-                                                                                                RubyCommand.Argument(name: "without", value: without),
-                                                                                                RubyCommand.Argument(name: "with", value: with)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func bundleInstall(binstubs: String? = nil,
                           clean: Bool = false,
@@ -2251,7 +1405,6 @@ public func bundleInstall(binstubs: String? = nil,
                                                                                                   RubyCommand.Argument(name: "without", value: without),
                                                                                                   RubyCommand.Argument(name: "with", value: with)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -2280,54 +1433,6 @@ public func bundleInstall(binstubs: String? = nil,
    - reinstallApp: Enabling this option will automatically uninstall the application before running it
    - useTimestampSuffix: Add timestamp suffix to screenshot filename
    - adbHost: Configure the host used by adb to connect, allows running on remote devices farm
-<<<<<<< Updated upstream
-*/
-func captureAndroidScreenshots(androidHome: String? = nil,
-                               buildToolsVersion: String? = nil,
-                               locales: [String] = ["en-US"],
-                               clearPreviousScreenshots: Bool = false,
-                               outputDirectory: String = "fastlane/metadata/android",
-                               skipOpenSummary: Bool = false,
-                               appPackageName: String,
-                               testsPackageName: String? = nil,
-                               useTestsInPackages: [String]? = nil,
-                               useTestsInClasses: [String]? = nil,
-                               launchArguments: [String]? = nil,
-                               testInstrumentationRunner: String = "androidx.test.runner.AndroidJUnitRunner",
-                               endingLocale: String = "en-US",
-                               useAdbRoot: Bool = false,
-                               appApkPath: String? = nil,
-                               testsApkPath: String? = nil,
-                               specificDevice: String? = nil,
-                               deviceType: String = "phone",
-                               exitOnTestFailure: Bool = true,
-                               reinstallApp: Bool = false,
-                               useTimestampSuffix: Bool = true,
-                               adbHost: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "capture_android_screenshots", className: nil, args: [RubyCommand.Argument(name: "android_home", value: androidHome),
-                                                                                                             RubyCommand.Argument(name: "build_tools_version", value: buildToolsVersion),
-                                                                                                             RubyCommand.Argument(name: "locales", value: locales),
-                                                                                                             RubyCommand.Argument(name: "clear_previous_screenshots", value: clearPreviousScreenshots),
-                                                                                                             RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                                             RubyCommand.Argument(name: "skip_open_summary", value: skipOpenSummary),
-                                                                                                             RubyCommand.Argument(name: "app_package_name", value: appPackageName),
-                                                                                                             RubyCommand.Argument(name: "tests_package_name", value: testsPackageName),
-                                                                                                             RubyCommand.Argument(name: "use_tests_in_packages", value: useTestsInPackages),
-                                                                                                             RubyCommand.Argument(name: "use_tests_in_classes", value: useTestsInClasses),
-                                                                                                             RubyCommand.Argument(name: "launch_arguments", value: launchArguments),
-                                                                                                             RubyCommand.Argument(name: "test_instrumentation_runner", value: testInstrumentationRunner),
-                                                                                                             RubyCommand.Argument(name: "ending_locale", value: endingLocale),
-                                                                                                             RubyCommand.Argument(name: "use_adb_root", value: useAdbRoot),
-                                                                                                             RubyCommand.Argument(name: "app_apk_path", value: appApkPath),
-                                                                                                             RubyCommand.Argument(name: "tests_apk_path", value: testsApkPath),
-                                                                                                             RubyCommand.Argument(name: "specific_device", value: specificDevice),
-                                                                                                             RubyCommand.Argument(name: "device_type", value: deviceType),
-                                                                                                             RubyCommand.Argument(name: "exit_on_test_failure", value: exitOnTestFailure),
-                                                                                                             RubyCommand.Argument(name: "reinstall_app", value: reinstallApp),
-                                                                                                             RubyCommand.Argument(name: "use_timestamp_suffix", value: useTimestampSuffix),
-                                                                                                             RubyCommand.Argument(name: "adb_host", value: adbHost)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func captureAndroidScreenshots(androidHome: String? = nil,
                                       buildToolsVersion: String? = nil,
@@ -2375,7 +1480,6 @@ public func captureAndroidScreenshots(androidHome: String? = nil,
                                                                                                                RubyCommand.Argument(name: "use_timestamp_suffix", value: useTimestampSuffix),
                                                                                                                RubyCommand.Argument(name: "adb_host", value: adbHost)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -2425,94 +1529,6 @@ public func captureAndroidScreenshots(androidHome: String? = nil,
    - onlyTesting: Array of strings matching Test Bundle/Test Suite/Test Cases to run
    - skipTesting: Array of strings matching Test Bundle/Test Suite/Test Cases to skip
    - disableXcpretty: Disable xcpretty formatting of build
-<<<<<<< Updated upstream
-*/
-func captureIosScreenshots(workspace: String? = nil,
-                           project: String? = nil,
-                           xcargs: String? = nil,
-                           xcconfig: String? = nil,
-                           devices: [String]? = nil,
-                           languages: [String] = ["en-US"],
-                           launchArguments: [String] = [""],
-                           outputDirectory: String = "screenshots",
-                           outputSimulatorLogs: Bool = false,
-                           iosVersion: String? = nil,
-                           skipOpenSummary: Bool = false,
-                           skipHelperVersionCheck: Bool = false,
-                           clearPreviousScreenshots: Bool = false,
-                           reinstallApp: Bool = false,
-                           eraseSimulator: Bool = false,
-                           overrideStatusBar: Bool = false,
-                           localizeSimulator: Bool = false,
-                           darkMode: Bool? = nil,
-                           appIdentifier: String? = nil,
-                           addPhotos: [String]? = nil,
-                           addVideos: [String]? = nil,
-                           htmlTemplate: String = "/Users/josh/Projects/fastlane/fastlane/snapshot/lib/snapshot/page.html.erb",
-                           buildlogPath: String = "~/Library/Logs/snapshot",
-                           clean: Bool = false,
-                           testWithoutBuilding: Bool? = nil,
-                           configuration: String? = nil,
-                           xcprettyArgs: String? = nil,
-                           sdk: String? = nil,
-                           scheme: String? = nil,
-                           numberOfRetries: Int = 1,
-                           stopAfterFirstError: Bool = false,
-                           derivedDataPath: String? = nil,
-                           resultBundle: Bool = false,
-                           testTargetName: String? = nil,
-                           namespaceLogFiles: Any? = nil,
-                           concurrentSimulators: Bool = true,
-                           disableSlideToType: Bool = false,
-                           clonedSourcePackagesPath: String? = nil,
-                           testplan: String? = nil,
-                           onlyTesting: Any? = nil,
-                           skipTesting: Any? = nil,
-                           disableXcpretty: Bool? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "capture_ios_screenshots", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
-                                                                                                         RubyCommand.Argument(name: "project", value: project),
-                                                                                                         RubyCommand.Argument(name: "xcargs", value: xcargs),
-                                                                                                         RubyCommand.Argument(name: "xcconfig", value: xcconfig),
-                                                                                                         RubyCommand.Argument(name: "devices", value: devices),
-                                                                                                         RubyCommand.Argument(name: "languages", value: languages),
-                                                                                                         RubyCommand.Argument(name: "launch_arguments", value: launchArguments),
-                                                                                                         RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                                         RubyCommand.Argument(name: "output_simulator_logs", value: outputSimulatorLogs),
-                                                                                                         RubyCommand.Argument(name: "ios_version", value: iosVersion),
-                                                                                                         RubyCommand.Argument(name: "skip_open_summary", value: skipOpenSummary),
-                                                                                                         RubyCommand.Argument(name: "skip_helper_version_check", value: skipHelperVersionCheck),
-                                                                                                         RubyCommand.Argument(name: "clear_previous_screenshots", value: clearPreviousScreenshots),
-                                                                                                         RubyCommand.Argument(name: "reinstall_app", value: reinstallApp),
-                                                                                                         RubyCommand.Argument(name: "erase_simulator", value: eraseSimulator),
-                                                                                                         RubyCommand.Argument(name: "override_status_bar", value: overrideStatusBar),
-                                                                                                         RubyCommand.Argument(name: "localize_simulator", value: localizeSimulator),
-                                                                                                         RubyCommand.Argument(name: "dark_mode", value: darkMode),
-                                                                                                         RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                                         RubyCommand.Argument(name: "add_photos", value: addPhotos),
-                                                                                                         RubyCommand.Argument(name: "add_videos", value: addVideos),
-                                                                                                         RubyCommand.Argument(name: "html_template", value: htmlTemplate),
-                                                                                                         RubyCommand.Argument(name: "buildlog_path", value: buildlogPath),
-                                                                                                         RubyCommand.Argument(name: "clean", value: clean),
-                                                                                                         RubyCommand.Argument(name: "test_without_building", value: testWithoutBuilding),
-                                                                                                         RubyCommand.Argument(name: "configuration", value: configuration),
-                                                                                                         RubyCommand.Argument(name: "xcpretty_args", value: xcprettyArgs),
-                                                                                                         RubyCommand.Argument(name: "sdk", value: sdk),
-                                                                                                         RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                                         RubyCommand.Argument(name: "number_of_retries", value: numberOfRetries),
-                                                                                                         RubyCommand.Argument(name: "stop_after_first_error", value: stopAfterFirstError),
-                                                                                                         RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath),
-                                                                                                         RubyCommand.Argument(name: "result_bundle", value: resultBundle),
-                                                                                                         RubyCommand.Argument(name: "test_target_name", value: testTargetName),
-                                                                                                         RubyCommand.Argument(name: "namespace_log_files", value: namespaceLogFiles),
-                                                                                                         RubyCommand.Argument(name: "concurrent_simulators", value: concurrentSimulators),
-                                                                                                         RubyCommand.Argument(name: "disable_slide_to_type", value: disableSlideToType),
-                                                                                                         RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath),
-                                                                                                         RubyCommand.Argument(name: "testplan", value: testplan),
-                                                                                                         RubyCommand.Argument(name: "only_testing", value: onlyTesting),
-                                                                                                         RubyCommand.Argument(name: "skip_testing", value: skipTesting),
-                                                                                                         RubyCommand.Argument(name: "disable_xcpretty", value: disableXcpretty)])
-  _ = runner.executeCommand(command)
-=======
    - suppressXcodeOutput: Suppress the output of xcodebuild to stdout. Output is still saved in buildlog_path
  */
 public func captureIosScreenshots(workspace: String? = nil,
@@ -2605,7 +1621,6 @@ public func captureIosScreenshots(workspace: String? = nil,
                                                                                                            RubyCommand.Argument(name: "disable_xcpretty", value: disableXcpretty),
                                                                                                            RubyCommand.Argument(name: "suppress_xcode_output", value: suppressXcodeOutput)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -2655,94 +1670,6 @@ public func captureIosScreenshots(workspace: String? = nil,
    - onlyTesting: Array of strings matching Test Bundle/Test Suite/Test Cases to run
    - skipTesting: Array of strings matching Test Bundle/Test Suite/Test Cases to skip
    - disableXcpretty: Disable xcpretty formatting of build
-<<<<<<< Updated upstream
-*/
-func captureScreenshots(workspace: String? = nil,
-                        project: String? = nil,
-                        xcargs: String? = nil,
-                        xcconfig: String? = nil,
-                        devices: [String]? = nil,
-                        languages: [String] = ["en-US"],
-                        launchArguments: [String] = [""],
-                        outputDirectory: String = "screenshots",
-                        outputSimulatorLogs: Bool = false,
-                        iosVersion: String? = nil,
-                        skipOpenSummary: Bool = false,
-                        skipHelperVersionCheck: Bool = false,
-                        clearPreviousScreenshots: Bool = false,
-                        reinstallApp: Bool = false,
-                        eraseSimulator: Bool = false,
-                        overrideStatusBar: Bool = false,
-                        localizeSimulator: Bool = false,
-                        darkMode: Bool? = nil,
-                        appIdentifier: String? = nil,
-                        addPhotos: [String]? = nil,
-                        addVideos: [String]? = nil,
-                        htmlTemplate: String = "/Users/josh/Projects/fastlane/fastlane/snapshot/lib/snapshot/page.html.erb",
-                        buildlogPath: String = "~/Library/Logs/snapshot",
-                        clean: Bool = false,
-                        testWithoutBuilding: Bool? = nil,
-                        configuration: String? = nil,
-                        xcprettyArgs: String? = nil,
-                        sdk: String? = nil,
-                        scheme: String? = nil,
-                        numberOfRetries: Int = 1,
-                        stopAfterFirstError: Bool = false,
-                        derivedDataPath: String? = nil,
-                        resultBundle: Bool = false,
-                        testTargetName: String? = nil,
-                        namespaceLogFiles: Any? = nil,
-                        concurrentSimulators: Bool = true,
-                        disableSlideToType: Bool = false,
-                        clonedSourcePackagesPath: String? = nil,
-                        testplan: String? = nil,
-                        onlyTesting: Any? = nil,
-                        skipTesting: Any? = nil,
-                        disableXcpretty: Bool? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "capture_screenshots", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
-                                                                                                     RubyCommand.Argument(name: "project", value: project),
-                                                                                                     RubyCommand.Argument(name: "xcargs", value: xcargs),
-                                                                                                     RubyCommand.Argument(name: "xcconfig", value: xcconfig),
-                                                                                                     RubyCommand.Argument(name: "devices", value: devices),
-                                                                                                     RubyCommand.Argument(name: "languages", value: languages),
-                                                                                                     RubyCommand.Argument(name: "launch_arguments", value: launchArguments),
-                                                                                                     RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                                     RubyCommand.Argument(name: "output_simulator_logs", value: outputSimulatorLogs),
-                                                                                                     RubyCommand.Argument(name: "ios_version", value: iosVersion),
-                                                                                                     RubyCommand.Argument(name: "skip_open_summary", value: skipOpenSummary),
-                                                                                                     RubyCommand.Argument(name: "skip_helper_version_check", value: skipHelperVersionCheck),
-                                                                                                     RubyCommand.Argument(name: "clear_previous_screenshots", value: clearPreviousScreenshots),
-                                                                                                     RubyCommand.Argument(name: "reinstall_app", value: reinstallApp),
-                                                                                                     RubyCommand.Argument(name: "erase_simulator", value: eraseSimulator),
-                                                                                                     RubyCommand.Argument(name: "override_status_bar", value: overrideStatusBar),
-                                                                                                     RubyCommand.Argument(name: "localize_simulator", value: localizeSimulator),
-                                                                                                     RubyCommand.Argument(name: "dark_mode", value: darkMode),
-                                                                                                     RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                                     RubyCommand.Argument(name: "add_photos", value: addPhotos),
-                                                                                                     RubyCommand.Argument(name: "add_videos", value: addVideos),
-                                                                                                     RubyCommand.Argument(name: "html_template", value: htmlTemplate),
-                                                                                                     RubyCommand.Argument(name: "buildlog_path", value: buildlogPath),
-                                                                                                     RubyCommand.Argument(name: "clean", value: clean),
-                                                                                                     RubyCommand.Argument(name: "test_without_building", value: testWithoutBuilding),
-                                                                                                     RubyCommand.Argument(name: "configuration", value: configuration),
-                                                                                                     RubyCommand.Argument(name: "xcpretty_args", value: xcprettyArgs),
-                                                                                                     RubyCommand.Argument(name: "sdk", value: sdk),
-                                                                                                     RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                                     RubyCommand.Argument(name: "number_of_retries", value: numberOfRetries),
-                                                                                                     RubyCommand.Argument(name: "stop_after_first_error", value: stopAfterFirstError),
-                                                                                                     RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath),
-                                                                                                     RubyCommand.Argument(name: "result_bundle", value: resultBundle),
-                                                                                                     RubyCommand.Argument(name: "test_target_name", value: testTargetName),
-                                                                                                     RubyCommand.Argument(name: "namespace_log_files", value: namespaceLogFiles),
-                                                                                                     RubyCommand.Argument(name: "concurrent_simulators", value: concurrentSimulators),
-                                                                                                     RubyCommand.Argument(name: "disable_slide_to_type", value: disableSlideToType),
-                                                                                                     RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath),
-                                                                                                     RubyCommand.Argument(name: "testplan", value: testplan),
-                                                                                                     RubyCommand.Argument(name: "only_testing", value: onlyTesting),
-                                                                                                     RubyCommand.Argument(name: "skip_testing", value: skipTesting),
-                                                                                                     RubyCommand.Argument(name: "disable_xcpretty", value: disableXcpretty)])
-  _ = runner.executeCommand(command)
-=======
    - suppressXcodeOutput: Suppress the output of xcodebuild to stdout. Output is still saved in buildlog_path
  */
 public func captureScreenshots(workspace: String? = nil,
@@ -2835,7 +1762,6 @@ public func captureScreenshots(workspace: String? = nil,
                                                                                                        RubyCommand.Argument(name: "disable_xcpretty", value: disableXcpretty),
                                                                                                        RubyCommand.Argument(name: "suppress_xcode_output", value: suppressXcodeOutput)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -2863,50 +1789,6 @@ public func captureScreenshots(workspace: String? = nil,
    - newResolver: Use new resolver when resolving dependency graph
    - logPath: Path to the xcode build output
    - executable: Path to the `carthage` executable on your machine
-<<<<<<< Updated upstream
-*/
-func carthage(command: String = "bootstrap",
-              dependencies: [String] = [],
-              useSsh: Bool? = nil,
-              useSubmodules: Bool? = nil,
-              useBinaries: Bool? = nil,
-              noCheckout: Bool? = nil,
-              noBuild: Bool? = nil,
-              noSkipCurrent: Bool? = nil,
-              derivedData: String? = nil,
-              verbose: Bool? = nil,
-              platform: String? = nil,
-              cacheBuilds: Bool = false,
-              frameworks: [String] = [],
-              output: String? = nil,
-              configuration: String? = nil,
-              toolchain: String? = nil,
-              projectDirectory: String? = nil,
-              newResolver: Bool? = nil,
-              logPath: String? = nil,
-              executable: String = "carthage") {
-  let command = RubyCommand(commandID: "", methodName: "carthage", className: nil, args: [RubyCommand.Argument(name: "command", value: command),
-                                                                                          RubyCommand.Argument(name: "dependencies", value: dependencies),
-                                                                                          RubyCommand.Argument(name: "use_ssh", value: useSsh),
-                                                                                          RubyCommand.Argument(name: "use_submodules", value: useSubmodules),
-                                                                                          RubyCommand.Argument(name: "use_binaries", value: useBinaries),
-                                                                                          RubyCommand.Argument(name: "no_checkout", value: noCheckout),
-                                                                                          RubyCommand.Argument(name: "no_build", value: noBuild),
-                                                                                          RubyCommand.Argument(name: "no_skip_current", value: noSkipCurrent),
-                                                                                          RubyCommand.Argument(name: "derived_data", value: derivedData),
-                                                                                          RubyCommand.Argument(name: "verbose", value: verbose),
-                                                                                          RubyCommand.Argument(name: "platform", value: platform),
-                                                                                          RubyCommand.Argument(name: "cache_builds", value: cacheBuilds),
-                                                                                          RubyCommand.Argument(name: "frameworks", value: frameworks),
-                                                                                          RubyCommand.Argument(name: "output", value: output),
-                                                                                          RubyCommand.Argument(name: "configuration", value: configuration),
-                                                                                          RubyCommand.Argument(name: "toolchain", value: toolchain),
-                                                                                          RubyCommand.Argument(name: "project_directory", value: projectDirectory),
-                                                                                          RubyCommand.Argument(name: "new_resolver", value: newResolver),
-                                                                                          RubyCommand.Argument(name: "log_path", value: logPath),
-                                                                                          RubyCommand.Argument(name: "executable", value: executable)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func carthage(command: String = "bootstrap",
                      dependencies: [String] = [],
@@ -2952,7 +1834,6 @@ public func carthage(command: String = "bootstrap",
                                                                                             RubyCommand.Argument(name: "log_path", value: logPath),
                                                                                             RubyCommand.Argument(name: "executable", value: executable)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -2974,34 +1855,6 @@ public func carthage(command: String = "bootstrap",
 
  **Important**: It is recommended to use [match](https://docs.fastlane.tools/actions/match/) according to the [codesigning.guide](https://codesigning.guide) for generating and maintaining your certificates. Use _cert_ directly only if you want full control over what's going on and know more about codesigning.
  Use this action to download the latest code signing identity.
-<<<<<<< Updated upstream
-*/
-func cert(development: Bool = false,
-          type: String? = nil,
-          force: Bool = false,
-          generateAppleCerts: Bool = true,
-          username: String,
-          teamId: String? = nil,
-          teamName: String? = nil,
-          filename: String? = nil,
-          outputPath: String = ".",
-          keychainPath: String,
-          keychainPassword: String? = nil,
-          platform: String = "ios") {
-  let command = RubyCommand(commandID: "", methodName: "cert", className: nil, args: [RubyCommand.Argument(name: "development", value: development),
-                                                                                      RubyCommand.Argument(name: "type", value: type),
-                                                                                      RubyCommand.Argument(name: "force", value: force),
-                                                                                      RubyCommand.Argument(name: "generate_apple_certs", value: generateAppleCerts),
-                                                                                      RubyCommand.Argument(name: "username", value: username),
-                                                                                      RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                      RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                      RubyCommand.Argument(name: "filename", value: filename),
-                                                                                      RubyCommand.Argument(name: "output_path", value: outputPath),
-                                                                                      RubyCommand.Argument(name: "keychain_path", value: keychainPath),
-                                                                                      RubyCommand.Argument(name: "keychain_password", value: keychainPassword),
-                                                                                      RubyCommand.Argument(name: "platform", value: platform)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func cert(development: Bool = false,
                  type: String? = nil,
@@ -3029,7 +1882,6 @@ public func cert(development: Bool = false,
                                                                                         RubyCommand.Argument(name: "keychain_password", value: keychainPassword),
                                                                                         RubyCommand.Argument(name: "platform", value: platform)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -3051,32 +1903,6 @@ public func cert(development: Bool = false,
  - returns: Returns a String containing your formatted git commits
 
  By default, messages will be collected back to the last tag, but the range can be controlled
-<<<<<<< Updated upstream
-*/
-@discardableResult func changelogFromGitCommits(between: Any? = nil,
-                                                commitsCount: Int? = nil,
-                                                path: String = "./",
-                                                pretty: String = "%B",
-                                                dateFormat: String? = nil,
-                                                ancestryPath: Bool = false,
-                                                tagMatchPattern: String? = nil,
-                                                matchLightweightTag: Bool = true,
-                                                quiet: Bool = false,
-                                                includeMerges: Bool? = nil,
-                                                mergeCommitFiltering: String = "include_merges") -> String {
-  let command = RubyCommand(commandID: "", methodName: "changelog_from_git_commits", className: nil, args: [RubyCommand.Argument(name: "between", value: between),
-                                                                                                            RubyCommand.Argument(name: "commits_count", value: commitsCount),
-                                                                                                            RubyCommand.Argument(name: "path", value: path),
-                                                                                                            RubyCommand.Argument(name: "pretty", value: pretty),
-                                                                                                            RubyCommand.Argument(name: "date_format", value: dateFormat),
-                                                                                                            RubyCommand.Argument(name: "ancestry_path", value: ancestryPath),
-                                                                                                            RubyCommand.Argument(name: "tag_match_pattern", value: tagMatchPattern),
-                                                                                                            RubyCommand.Argument(name: "match_lightweight_tag", value: matchLightweightTag),
-                                                                                                            RubyCommand.Argument(name: "quiet", value: quiet),
-                                                                                                            RubyCommand.Argument(name: "include_merges", value: includeMerges),
-                                                                                                            RubyCommand.Argument(name: "merge_commit_filtering", value: mergeCommitFiltering)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func changelogFromGitCommits(between: Any? = nil,
                                                        commitsCount: Int? = nil,
@@ -3102,7 +1928,6 @@ public func cert(development: Bool = false,
                                                                                                               RubyCommand.Argument(name: "include_merges", value: includeMerges),
                                                                                                               RubyCommand.Argument(name: "merge_commit_filtering", value: mergeCommitFiltering)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -3115,18 +1940,6 @@ public func cert(development: Bool = false,
    - success: Was this build successful? (true/false)
 
  Information on how to obtain an API token: [http://developer.chatwork.com/ja/authenticate.html](http://developer.chatwork.com/ja/authenticate.html)
-<<<<<<< Updated upstream
-*/
-func chatwork(apiToken: String,
-              message: String,
-              roomid: Any,
-              success: Bool = true) {
-  let command = RubyCommand(commandID: "", methodName: "chatwork", className: nil, args: [RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                          RubyCommand.Argument(name: "message", value: message),
-                                                                                          RubyCommand.Argument(name: "roomid", value: roomid),
-                                                                                          RubyCommand.Argument(name: "success", value: success)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func chatwork(apiToken: String,
                      message: String,
@@ -3138,7 +1951,6 @@ public func chatwork(apiToken: String,
                                                                                             RubyCommand.Argument(name: "roomid", value: roomid),
                                                                                             RubyCommand.Argument(name: "success", value: success)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -3168,42 +1980,6 @@ public func chatwork(apiToken: String,
  - returns: true if precheck passes, else, false
 
  More information: https://fastlane.tools/precheck
-<<<<<<< Updated upstream
-*/
-func checkAppStoreMetadata(appIdentifier: String,
-                           username: String,
-                           teamId: String? = nil,
-                           teamName: String? = nil,
-                           defaultRuleLevel: Any = "error",
-                           includeInAppPurchases: Bool = true,
-                           negativeAppleSentiment: Any? = nil,
-                           placeholderText: Any? = nil,
-                           otherPlatforms: Any? = nil,
-                           futureFunctionality: Any? = nil,
-                           testWords: Any? = nil,
-                           curseWords: Any? = nil,
-                           freeStuffInIap: Any? = nil,
-                           customText: Any? = nil,
-                           copyrightDate: Any? = nil,
-                           unreachableUrls: Any? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "check_app_store_metadata", className: nil, args: [RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                                          RubyCommand.Argument(name: "username", value: username),
-                                                                                                          RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                          RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                                          RubyCommand.Argument(name: "default_rule_level", value: defaultRuleLevel),
-                                                                                                          RubyCommand.Argument(name: "include_in_app_purchases", value: includeInAppPurchases),
-                                                                                                          RubyCommand.Argument(name: "negative_apple_sentiment", value: negativeAppleSentiment),
-                                                                                                          RubyCommand.Argument(name: "placeholder_text", value: placeholderText),
-                                                                                                          RubyCommand.Argument(name: "other_platforms", value: otherPlatforms),
-                                                                                                          RubyCommand.Argument(name: "future_functionality", value: futureFunctionality),
-                                                                                                          RubyCommand.Argument(name: "test_words", value: testWords),
-                                                                                                          RubyCommand.Argument(name: "curse_words", value: curseWords),
-                                                                                                          RubyCommand.Argument(name: "free_stuff_in_iap", value: freeStuffInIap),
-                                                                                                          RubyCommand.Argument(name: "custom_text", value: customText),
-                                                                                                          RubyCommand.Argument(name: "copyright_date", value: copyrightDate),
-                                                                                                          RubyCommand.Argument(name: "unreachable_urls", value: unreachableUrls)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func checkAppStoreMetadata(apiKeyPath: String? = nil,
                                   apiKey: [String: Any]? = nil,
@@ -3245,7 +2021,6 @@ public func checkAppStoreMetadata(apiKeyPath: String? = nil,
                                                                                                             RubyCommand.Argument(name: "copyright_date", value: copyrightDate),
                                                                                                             RubyCommand.Argument(name: "unreachable_urls", value: unreachableUrls)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -3254,36 +2029,22 @@ public func checkAppStoreMetadata(apiKeyPath: String? = nil,
  - parameter excludePattern: Exclude all files from clearing that match the given Regex pattern: e.g. '.*.mobileprovision'
 
  This action deletes the files that get created in your repo as a result of running the _gym_ and _sigh_ commands. It doesn't delete the `fastlane/report.xml` though, this is probably more suited for the .gitignore.
- 
+
  Useful if you quickly want to send out a test build by dropping down to the command line and typing something like `fastlane beta`, without leaving your repo in a messy state afterwards.
-<<<<<<< Updated upstream
-*/
-func cleanBuildArtifacts(excludePattern: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "clean_build_artifacts", className: nil, args: [RubyCommand.Argument(name: "exclude_pattern", value: excludePattern)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func cleanBuildArtifacts(excludePattern: String? = nil) {
     let command = RubyCommand(commandID: "", methodName: "clean_build_artifacts", className: nil, args: [RubyCommand.Argument(name: "exclude_pattern", value: excludePattern)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Remove the cache for pods
 
  - parameter name: Pod name to be removed from cache
-<<<<<<< Updated upstream
-*/
-func cleanCocoapodsCache(name: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "clean_cocoapods_cache", className: nil, args: [RubyCommand.Argument(name: "name", value: name)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func cleanCocoapodsCache(name: String? = nil) {
     let command = RubyCommand(commandID: "", methodName: "clean_cocoapods_cache", className: nil, args: [RubyCommand.Argument(name: "name", value: name)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -3292,34 +2053,20 @@ public func cleanCocoapodsCache(name: String? = nil) {
  - parameter derivedDataPath: Custom path for derivedData
 
  Deletes the Derived Data from path set on Xcode or a supplied path
-<<<<<<< Updated upstream
-*/
-func clearDerivedData(derivedDataPath: String = "~/Library/Developer/Xcode/DerivedData") {
-  let command = RubyCommand(commandID: "", methodName: "clear_derived_data", className: nil, args: [RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func clearDerivedData(derivedDataPath: String = "~/Library/Developer/Xcode/DerivedData") {
     let command = RubyCommand(commandID: "", methodName: "clear_derived_data", className: nil, args: [RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Copies a given string into the clipboard. Works only on macOS
 
  - parameter value: The string that should be copied into the clipboard
-<<<<<<< Updated upstream
-*/
-func clipboard(value: String) {
-  let command = RubyCommand(commandID: "", methodName: "clipboard", className: nil, args: [RubyCommand.Argument(name: "value", value: value)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func clipboard(value: String) {
     let command = RubyCommand(commandID: "", methodName: "clipboard", className: nil, args: [RubyCommand.Argument(name: "value", value: value)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -3334,20 +2081,6 @@ public func clipboard(value: String) {
 
  This action will run cloc to generate a SLOC report that the Jenkins SLOCCount plugin can read.
  See [https://wiki.jenkins-ci.org/display/JENKINS/SLOCCount+Plugin](https://wiki.jenkins-ci.org/display/JENKINS/SLOCCount+Plugin) and [https://github.com/AlDanial/cloc](https://github.com/AlDanial/cloc) for more information.
-<<<<<<< Updated upstream
-*/
-func cloc(binaryPath: String = "/usr/local/bin/cloc",
-          excludeDir: String? = nil,
-          outputDirectory: String = "build",
-          sourceDirectory: String = "",
-          xml: Bool = true) {
-  let command = RubyCommand(commandID: "", methodName: "cloc", className: nil, args: [RubyCommand.Argument(name: "binary_path", value: binaryPath),
-                                                                                      RubyCommand.Argument(name: "exclude_dir", value: excludeDir),
-                                                                                      RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                      RubyCommand.Argument(name: "source_directory", value: sourceDirectory),
-                                                                                      RubyCommand.Argument(name: "xml", value: xml)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func cloc(binaryPath: String = "/usr/local/bin/cloc",
                  excludeDir: String? = nil,
@@ -3361,22 +2094,14 @@ public func cloc(binaryPath: String = "/usr/local/bin/cloc",
                                                                                         RubyCommand.Argument(name: "source_directory", value: sourceDirectory),
                                                                                         RubyCommand.Argument(name: "xml", value: xml)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Print a Club Mate in your build output
-<<<<<<< Updated upstream
-*/
-func clubmate() {
-  let command = RubyCommand(commandID: "", methodName: "clubmate", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func clubmate() {
     let command = RubyCommand(commandID: "", methodName: "clubmate", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -3397,70 +2122,6 @@ public func clubmate() {
    - integrate: **DEPRECATED!** (Option removed from cocoapods) Integrate the Pods libraries into the Xcode project(s)
 
  If you use [CocoaPods](http://cocoapods.org) you can use the `cocoapods` integration to run `pod install` before building your app.
-<<<<<<< Updated upstream
-*/
-func cocoapods(repoUpdate: Bool = false,
-               cleanInstall: Bool = false,
-               silent: Bool = false,
-               verbose: Bool = false,
-               ansi: Bool = true,
-               useBundleExec: Bool = true,
-               podfile: String? = nil,
-               errorCallback: Any? = nil,
-               tryRepoUpdateOnError: Bool = false,
-               deployment: Bool = false,
-               clean: Bool = true,
-               integrate: Bool = true) {
-  let command = RubyCommand(commandID: "", methodName: "cocoapods", className: nil, args: [RubyCommand.Argument(name: "repo_update", value: repoUpdate),
-                                                                                           RubyCommand.Argument(name: "clean_install", value: cleanInstall),
-                                                                                           RubyCommand.Argument(name: "silent", value: silent),
-                                                                                           RubyCommand.Argument(name: "verbose", value: verbose),
-                                                                                           RubyCommand.Argument(name: "ansi", value: ansi),
-                                                                                           RubyCommand.Argument(name: "use_bundle_exec", value: useBundleExec),
-                                                                                           RubyCommand.Argument(name: "podfile", value: podfile),
-                                                                                           RubyCommand.Argument(name: "error_callback", value: errorCallback),
-                                                                                           RubyCommand.Argument(name: "try_repo_update_on_error", value: tryRepoUpdateOnError),
-                                                                                           RubyCommand.Argument(name: "deployment", value: deployment),
-                                                                                           RubyCommand.Argument(name: "clean", value: clean),
-                                                                                           RubyCommand.Argument(name: "integrate", value: integrate)])
-  _ = runner.executeCommand(command)
-}
-
-/**
- This will commit a file directly on GitHub via the API
-
- - parameters:
-   - repositoryName: The path to your repo, e.g. 'fastlane/fastlane'
-   - serverUrl: The server url. e.g. 'https://your.internal.github.host/api/v3' (Default: 'https://api.github.com')
-   - apiToken: Personal API Token for GitHub - generate one at https://github.com/settings/tokens
-   - branch: The branch that the file should be committed on (default: master)
-   - path: The relative path to your file from project root e.g. assets/my_app.xcarchive
-   - message: The commit message. Defaults to the file name
-   - secure: Optionally disable secure requests (ssl_verify_peer)
-
- - returns: A hash containing all relevant information for this commit
-Access things like 'html_url', 'sha', 'message'
-
- Commits a file directly to GitHub. You must provide your GitHub Personal token (get one from [https://github.com/settings/tokens/new](https://github.com/settings/tokens/new)), the repository name and the relative file path from the root git project.
- Out parameters provide the commit sha created, which can be used for later usage for examples such as releases, the direct download link and the full response JSON.
- Documentation: [https://developer.github.com/v3/repos/contents/#create-a-file](https://developer.github.com/v3/repos/contents/#create-a-file).
-*/
-@discardableResult func commitGithubFile(repositoryName: String,
-                                         serverUrl: String = "https://api.github.com",
-                                         apiToken: String,
-                                         branch: String = "master",
-                                         path: String,
-                                         message: String? = nil,
-                                         secure: Bool = true) -> [String : String] {
-  let command = RubyCommand(commandID: "", methodName: "commit_github_file", className: nil, args: [RubyCommand.Argument(name: "repository_name", value: repositoryName),
-                                                                                                    RubyCommand.Argument(name: "server_url", value: serverUrl),
-                                                                                                    RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                                    RubyCommand.Argument(name: "branch", value: branch),
-                                                                                                    RubyCommand.Argument(name: "path", value: path),
-                                                                                                    RubyCommand.Argument(name: "message", value: message),
-                                                                                                    RubyCommand.Argument(name: "secure", value: secure)])
-  return parseDictionary(fromString: runner.executeCommand(command))
-=======
  */
 public func cocoapods(repoUpdate: Bool = false,
                       cleanInstall: Bool = false,
@@ -3525,7 +2186,6 @@ public func cocoapods(repoUpdate: Bool = false,
                                                                                                       RubyCommand.Argument(name: "message", value: message),
                                                                                                       RubyCommand.Argument(name: "secure", value: secure)])
     return parseDictionary(fromString: runner.executeCommand(command))
->>>>>>> Stashed changes
 }
 
 /**
@@ -3549,24 +2209,6 @@ public func cocoapods(repoUpdate: Bool = false,
  Then commits those files to the repo.
  Customize the message with the `:message` option. It defaults to 'Version Bump'.
  If you have other uncommitted changes in your repo, this action will fail. If you started off in a clean repo, and used the _ipa_ and or _sigh_ actions, then you can use the [clean_build_artifacts](https://docs.fastlane.tools/actions/clean_build_artifacts/) action to clean those temporary files up before running this action.
-<<<<<<< Updated upstream
-*/
-func commitVersionBump(message: String? = nil,
-                       xcodeproj: String? = nil,
-                       force: Bool = false,
-                       settings: Bool = false,
-                       ignore: Any? = nil,
-                       include: [String] = [],
-                       noVerify: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "commit_version_bump", className: nil, args: [RubyCommand.Argument(name: "message", value: message),
-                                                                                                     RubyCommand.Argument(name: "xcodeproj", value: xcodeproj),
-                                                                                                     RubyCommand.Argument(name: "force", value: force),
-                                                                                                     RubyCommand.Argument(name: "settings", value: settings),
-                                                                                                     RubyCommand.Argument(name: "ignore", value: ignore),
-                                                                                                     RubyCommand.Argument(name: "include", value: include),
-                                                                                                     RubyCommand.Argument(name: "no_verify", value: noVerify)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func commitVersionBump(message: String? = nil,
                               xcodeproj: String? = nil,
@@ -3584,7 +2226,6 @@ public func commitVersionBump(message: String? = nil,
                                                                                                        RubyCommand.Argument(name: "include", value: include),
                                                                                                        RubyCommand.Argument(name: "no_verify", value: noVerify)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -3598,18 +2239,6 @@ public func commitVersionBump(message: String? = nil,
 
  This action copies artifacts to a target directory. It's useful if you have a CI that will pick up these artifacts and attach them to the build. Useful e.g. for storing your `.ipa`s, `.dSYM.zip`s, `.mobileprovision`s, `.cert`s.
  Make sure your `:target_path` is ignored from git, and if you use `reset_git_repo`, make sure the artifacts are added to the exclude list.
-<<<<<<< Updated upstream
-*/
-func copyArtifacts(keepOriginal: Bool = true,
-                   targetPath: Any = "artifacts",
-                   artifacts: [String] = [],
-                   failOnMissing: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "copy_artifacts", className: nil, args: [RubyCommand.Argument(name: "keep_original", value: keepOriginal),
-                                                                                                RubyCommand.Argument(name: "target_path", value: targetPath),
-                                                                                                RubyCommand.Argument(name: "artifacts", value: artifacts),
-                                                                                                RubyCommand.Argument(name: "fail_on_missing", value: failOnMissing)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func copyArtifacts(keepOriginal: Bool = true,
                           targetPath: Any = "artifacts",
@@ -3621,7 +2250,6 @@ public func copyArtifacts(keepOriginal: Bool = true,
                                                                                                   RubyCommand.Argument(name: "artifacts", value: artifacts),
                                                                                                   RubyCommand.Argument(name: "fail_on_missing", value: failOnMissing)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -3643,32 +2271,6 @@ public func copyArtifacts(keepOriginal: Bool = true,
  Additionally, you can specify `notes`, `emails`, `groups` and `notifications`.
  Distributing to Groups: When using the `groups` parameter, it's important to use the group **alias** names for each group you'd like to distribute to. A group's alias can be found in the web UI. If you're viewing the Beta page, you can open the groups dialog by clicking the 'Manage Groups' button.
  This action uses the `submit` binary provided by the Crashlytics framework. If the binary is not found in its usual path, you'll need to specify the path manually by using the `crashlytics_path` option.
-<<<<<<< Updated upstream
-*/
-func crashlytics(ipaPath: String? = nil,
-                 apkPath: String? = nil,
-                 crashlyticsPath: String? = nil,
-                 apiToken: String,
-                 buildSecret: String,
-                 notesPath: String? = nil,
-                 notes: String? = nil,
-                 groups: Any? = nil,
-                 emails: Any? = nil,
-                 notifications: Bool = true,
-                 debug: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "crashlytics", className: nil, args: [RubyCommand.Argument(name: "ipa_path", value: ipaPath),
-                                                                                             RubyCommand.Argument(name: "apk_path", value: apkPath),
-                                                                                             RubyCommand.Argument(name: "crashlytics_path", value: crashlyticsPath),
-                                                                                             RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                             RubyCommand.Argument(name: "build_secret", value: buildSecret),
-                                                                                             RubyCommand.Argument(name: "notes_path", value: notesPath),
-                                                                                             RubyCommand.Argument(name: "notes", value: notes),
-                                                                                             RubyCommand.Argument(name: "groups", value: groups),
-                                                                                             RubyCommand.Argument(name: "emails", value: emails),
-                                                                                             RubyCommand.Argument(name: "notifications", value: notifications),
-                                                                                             RubyCommand.Argument(name: "debug", value: debug)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func crashlytics(ipaPath: String? = nil,
                         apkPath: String? = nil,
@@ -3694,7 +2296,6 @@ public func crashlytics(ipaPath: String? = nil,
                                                                                                RubyCommand.Argument(name: "notifications", value: notifications),
                                                                                                RubyCommand.Argument(name: "debug", value: debug)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -3711,26 +2312,6 @@ public func crashlytics(ipaPath: String? = nil,
    - timeout: Timeout for read, open, and send (in seconds)
 
  Create new apps on Managed Google Play.
-<<<<<<< Updated upstream
-*/
-func createAppOnManagedPlayStore(jsonKey: String? = nil,
-                                 jsonKeyData: String? = nil,
-                                 developerAccountId: String,
-                                 apk: String,
-                                 appTitle: String,
-                                 language: String = "en_US",
-                                 rootUrl: String? = nil,
-                                 timeout: Int = 300) {
-  let command = RubyCommand(commandID: "", methodName: "create_app_on_managed_play_store", className: nil, args: [RubyCommand.Argument(name: "json_key", value: jsonKey),
-                                                                                                                  RubyCommand.Argument(name: "json_key_data", value: jsonKeyData),
-                                                                                                                  RubyCommand.Argument(name: "developer_account_id", value: developerAccountId),
-                                                                                                                  RubyCommand.Argument(name: "apk", value: apk),
-                                                                                                                  RubyCommand.Argument(name: "app_title", value: appTitle),
-                                                                                                                  RubyCommand.Argument(name: "language", value: language),
-                                                                                                                  RubyCommand.Argument(name: "root_url", value: rootUrl),
-                                                                                                                  RubyCommand.Argument(name: "timeout", value: timeout)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func createAppOnManagedPlayStore(jsonKey: String? = nil,
                                         jsonKeyData: String? = nil,
@@ -3750,7 +2331,6 @@ public func createAppOnManagedPlayStore(jsonKey: String? = nil,
                                                                                                                     RubyCommand.Argument(name: "root_url", value: rootUrl),
                                                                                                                     RubyCommand.Argument(name: "timeout", value: timeout)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -3765,7 +2345,7 @@ public func createAppOnManagedPlayStore(jsonKey: String? = nil,
    - sku: SKU Number (e.g. '1234')
    - platform: The platform to use (optional)
    - platforms: The platforms to use (optional)
-   - language: Primary Language (e.g. 'English', 'German')
+   - language: Primary Language (e.g. 'en-US', 'fr-FR')
    - companyName: The name of your company. Only required if it's the first app you create
    - skipItc: Skip the creation of the app on App Store Connect
    - itcUsers: Array of App Store Connect users. If provided, you can limit access to this newly created app for users with the App Manager, Developer, Marketer or Sales roles
@@ -3780,48 +2360,6 @@ public func createAppOnManagedPlayStore(jsonKey: String? = nil,
  Create new apps on App Store Connect and Apple Developer Portal via _produce_.
  If the app already exists, `create_app_online` will not do anything.
  For more information about _produce_, visit its documentation page: [https://docs.fastlane.tools/actions/produce/](https://docs.fastlane.tools/actions/produce/).
-<<<<<<< Updated upstream
-*/
-func createAppOnline(username: String,
-                     appIdentifier: String,
-                     bundleIdentifierSuffix: String? = nil,
-                     appName: String,
-                     appVersion: String? = nil,
-                     sku: String,
-                     platform: String = "ios",
-                     platforms: [String]? = nil,
-                     language: String = "English",
-                     companyName: String? = nil,
-                     skipItc: Bool = false,
-                     itcUsers: [String]? = nil,
-                     enabledFeatures: [String : Any] = [:],
-                     enableServices: [String : Any] = [:],
-                     skipDevcenter: Bool = false,
-                     teamId: String? = nil,
-                     teamName: String? = nil,
-                     itcTeamId: Any? = nil,
-                     itcTeamName: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "create_app_online", className: nil, args: [RubyCommand.Argument(name: "username", value: username),
-                                                                                                   RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                                   RubyCommand.Argument(name: "bundle_identifier_suffix", value: bundleIdentifierSuffix),
-                                                                                                   RubyCommand.Argument(name: "app_name", value: appName),
-                                                                                                   RubyCommand.Argument(name: "app_version", value: appVersion),
-                                                                                                   RubyCommand.Argument(name: "sku", value: sku),
-                                                                                                   RubyCommand.Argument(name: "platform", value: platform),
-                                                                                                   RubyCommand.Argument(name: "platforms", value: platforms),
-                                                                                                   RubyCommand.Argument(name: "language", value: language),
-                                                                                                   RubyCommand.Argument(name: "company_name", value: companyName),
-                                                                                                   RubyCommand.Argument(name: "skip_itc", value: skipItc),
-                                                                                                   RubyCommand.Argument(name: "itc_users", value: itcUsers),
-                                                                                                   RubyCommand.Argument(name: "enabled_features", value: enabledFeatures),
-                                                                                                   RubyCommand.Argument(name: "enable_services", value: enableServices),
-                                                                                                   RubyCommand.Argument(name: "skip_devcenter", value: skipDevcenter),
-                                                                                                   RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                   RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                                   RubyCommand.Argument(name: "itc_team_id", value: itcTeamId),
-                                                                                                   RubyCommand.Argument(name: "itc_team_name", value: itcTeamName)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func createAppOnline(username: String,
                             appIdentifier: String,
@@ -3863,7 +2401,6 @@ public func createAppOnline(username: String,
                                                                                                      RubyCommand.Argument(name: "itc_team_id", value: itcTeamId),
                                                                                                      RubyCommand.Argument(name: "itc_team_name", value: itcTeamName)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -3880,30 +2417,6 @@ public func createAppOnline(username: String,
    - lockAfterTimeout: Lock keychain after timeout interval
    - addToSearchList: Add keychain to search list
    - requireCreate: Fail the action if the Keychain already exists
-<<<<<<< Updated upstream
-*/
-func createKeychain(name: String? = nil,
-                    path: String? = nil,
-                    password: String,
-                    defaultKeychain: Bool = false,
-                    unlock: Bool = false,
-                    timeout: Int = 300,
-                    lockWhenSleeps: Bool = false,
-                    lockAfterTimeout: Bool = false,
-                    addToSearchList: Bool = true,
-                    requireCreate: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "create_keychain", className: nil, args: [RubyCommand.Argument(name: "name", value: name),
-                                                                                                 RubyCommand.Argument(name: "path", value: path),
-                                                                                                 RubyCommand.Argument(name: "password", value: password),
-                                                                                                 RubyCommand.Argument(name: "default_keychain", value: defaultKeychain),
-                                                                                                 RubyCommand.Argument(name: "unlock", value: unlock),
-                                                                                                 RubyCommand.Argument(name: "timeout", value: timeout),
-                                                                                                 RubyCommand.Argument(name: "lock_when_sleeps", value: lockWhenSleeps),
-                                                                                                 RubyCommand.Argument(name: "lock_after_timeout", value: lockAfterTimeout),
-                                                                                                 RubyCommand.Argument(name: "add_to_search_list", value: addToSearchList),
-                                                                                                 RubyCommand.Argument(name: "require_create", value: requireCreate)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func createKeychain(name: String? = nil,
                            path: String? = nil,
@@ -3927,7 +2440,6 @@ public func createKeychain(name: String? = nil,
                                                                                                    RubyCommand.Argument(name: "add_to_search_list", value: addToSearchList),
                                                                                                    RubyCommand.Argument(name: "require_create", value: requireCreate)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -3949,36 +2461,6 @@ public func createKeychain(name: String? = nil,
    - teamReviewers: The team reviewers (slug) for the pull request
 
  - returns: The pull request URL when successful
-<<<<<<< Updated upstream
-*/
-func createPullRequest(apiToken: String,
-                       repo: String,
-                       title: String,
-                       body: String? = nil,
-                       draft: Bool? = nil,
-                       labels: [String]? = nil,
-                       milestone: String? = nil,
-                       head: String? = nil,
-                       base: String = "master",
-                       apiUrl: String = "https://api.github.com",
-                       assignees: [String]? = nil,
-                       reviewers: [String]? = nil,
-                       teamReviewers: [String]? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "create_pull_request", className: nil, args: [RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                                     RubyCommand.Argument(name: "repo", value: repo),
-                                                                                                     RubyCommand.Argument(name: "title", value: title),
-                                                                                                     RubyCommand.Argument(name: "body", value: body),
-                                                                                                     RubyCommand.Argument(name: "draft", value: draft),
-                                                                                                     RubyCommand.Argument(name: "labels", value: labels),
-                                                                                                     RubyCommand.Argument(name: "milestone", value: milestone),
-                                                                                                     RubyCommand.Argument(name: "head", value: head),
-                                                                                                     RubyCommand.Argument(name: "base", value: base),
-                                                                                                     RubyCommand.Argument(name: "api_url", value: apiUrl),
-                                                                                                     RubyCommand.Argument(name: "assignees", value: assignees),
-                                                                                                     RubyCommand.Argument(name: "reviewers", value: reviewers),
-                                                                                                     RubyCommand.Argument(name: "team_reviewers", value: teamReviewers)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func createPullRequest(apiToken: String,
                               repo: String,
@@ -4008,7 +2490,6 @@ public func createPullRequest(apiToken: String,
                                                                                                        RubyCommand.Argument(name: "reviewers", value: reviewers),
                                                                                                        RubyCommand.Argument(name: "team_reviewers", value: teamReviewers)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4029,32 +2510,6 @@ public func createPullRequest(apiToken: String,
 
  Formalize your Pull Request etiquette.
  More information: [https://github.com/danger/danger](https://github.com/danger/danger).
-<<<<<<< Updated upstream
-*/
-func danger(useBundleExec: Bool = true,
-            verbose: Bool = false,
-            dangerId: String? = nil,
-            dangerfile: String? = nil,
-            githubApiToken: String? = nil,
-            failOnErrors: Bool = false,
-            newComment: Bool = false,
-            removePreviousComments: Bool = false,
-            base: String? = nil,
-            head: String? = nil,
-            pr: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "danger", className: nil, args: [RubyCommand.Argument(name: "use_bundle_exec", value: useBundleExec),
-                                                                                        RubyCommand.Argument(name: "verbose", value: verbose),
-                                                                                        RubyCommand.Argument(name: "danger_id", value: dangerId),
-                                                                                        RubyCommand.Argument(name: "dangerfile", value: dangerfile),
-                                                                                        RubyCommand.Argument(name: "github_api_token", value: githubApiToken),
-                                                                                        RubyCommand.Argument(name: "fail_on_errors", value: failOnErrors),
-                                                                                        RubyCommand.Argument(name: "new_comment", value: newComment),
-                                                                                        RubyCommand.Argument(name: "remove_previous_comments", value: removePreviousComments),
-                                                                                        RubyCommand.Argument(name: "base", value: base),
-                                                                                        RubyCommand.Argument(name: "head", value: head),
-                                                                                        RubyCommand.Argument(name: "pr", value: pr)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func danger(useBundleExec: Bool = true,
                    verbose: Bool = false,
@@ -4080,37 +2535,22 @@ public func danger(useBundleExec: Bool = true,
                                                                                           RubyCommand.Argument(name: "head", value: head),
                                                                                           RubyCommand.Argument(name: "pr", value: pr)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Print out an overview of the lane context values
-<<<<<<< Updated upstream
-*/
-func debug() {
-  let command = RubyCommand(commandID: "", methodName: "debug", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func debug() {
     let command = RubyCommand(commandID: "", methodName: "debug", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Defines a default platform to not have to specify the platform
-<<<<<<< Updated upstream
-*/
-func defaultPlatform() {
-  let command = RubyCommand(commandID: "", methodName: "default_platform", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func defaultPlatform() {
     let command = RubyCommand(commandID: "", methodName: "default_platform", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4121,14 +2561,6 @@ public func defaultPlatform() {
    - keychainPath: Keychain path
 
  Keychains can be deleted after being created with `create_keychain`
-<<<<<<< Updated upstream
-*/
-func deleteKeychain(name: String? = nil,
-                    keychainPath: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "delete_keychain", className: nil, args: [RubyCommand.Argument(name: "name", value: name),
-                                                                                                 RubyCommand.Argument(name: "keychain_path", value: keychainPath)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func deleteKeychain(name: String? = nil,
                            keychainPath: String? = nil)
@@ -4136,7 +2568,6 @@ public func deleteKeychain(name: String? = nil,
     let command = RubyCommand(commandID: "", methodName: "delete_keychain", className: nil, args: [RubyCommand.Argument(name: "name", value: name),
                                                                                                    RubyCommand.Argument(name: "keychain_path", value: keychainPath)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4178,9 +2609,9 @@ public func deleteKeychain(name: String? = nil,
    - itcProvider: The provider short name to be used with the iTMSTransporter to identify your team. This value will override the automatically detected provider short name. To get provider short name run `pathToXcode.app/Contents/Applications/Application\ Loader.app/Contents/itms/bin/iTMSTransporter -m provider -u 'USERNAME' -p 'PASSWORD' -account_type itunes_connect -v off`. The short names of providers should be listed in the second column
    - runPrecheckBeforeSubmit: Run precheck before submitting to app review
    - precheckDefaultRuleLevel: The default precheck rule level unless otherwise configured
-   - individualMetadataItems: An array of localized metadata items to upload individually by language so that errors can be identified. E.g. ['name', 'keywords', 'description']. Note: slow
-   - appIcon: Metadata: The path to the app icon
-   - appleWatchAppIcon: Metadata: The path to the Apple Watch app icon
+   - individualMetadataItems: **DEPRECATED!** Removed after the migration to the new App Store Connect API in June 2020 - An array of localized metadata items to upload individually by language so that errors can be identified. E.g. ['name', 'keywords', 'description']. Note: slow
+   - appIcon: **DEPRECATED!** Removed after the migration to the new App Store Connect API in June 2020 - Metadata: The path to the app icon
+   - appleWatchAppIcon: **DEPRECATED!** Removed after the migration to the new App Store Connect API in June 2020 - Metadata: The path to the Apple Watch app icon
    - copyright: Metadata: The copyright notice
    - primaryCategory: Metadata: The english name of the primary category (e.g. `Business`, `Books`)
    - secondaryCategory: Metadata: The english name of the secondary category (e.g. `Business`, `Books`)
@@ -4207,135 +2638,11 @@ public func deleteKeychain(name: String? = nil,
    - app: The (spaceship) app ID of the app you want to use/modify
 
  Using _upload_to_app_store_ after _build_app_ and _capture_screenshots_ will automatically upload the latest ipa and screenshots with no other configuration.
- 
+
  If you don't want a PDF report for App Store builds, use the `:force` option.
  This is useful when running _fastlane_ on your Continuous Integration server:
  `_upload_to_app_store_(force: true)`
  If your account is on multiple teams and you need to tell the `iTMSTransporter` which 'provider' to use, you can set the `:itc_provider` option to pass this info.
-<<<<<<< Updated upstream
-*/
-func deliver(username: Any = deliverfile.username,
-             appIdentifier: Any? = deliverfile.appIdentifier,
-             appVersion: Any? = deliverfile.appVersion,
-             ipa: Any? = deliverfile.ipa,
-             pkg: Any? = deliverfile.pkg,
-             buildNumber: Any? = deliverfile.buildNumber,
-             platform: Any = deliverfile.platform,
-             editLive: Bool = deliverfile.editLive,
-             useLiveVersion: Bool = deliverfile.useLiveVersion,
-             metadataPath: Any? = deliverfile.metadataPath,
-             screenshotsPath: Any? = deliverfile.screenshotsPath,
-             skipBinaryUpload: Bool = deliverfile.skipBinaryUpload,
-             skipScreenshots: Bool = deliverfile.skipScreenshots,
-             skipMetadata: Bool = deliverfile.skipMetadata,
-             skipAppVersionUpdate: Bool = deliverfile.skipAppVersionUpdate,
-             force: Bool = deliverfile.force,
-             overwriteScreenshots: Bool = deliverfile.overwriteScreenshots,
-             submitForReview: Bool = deliverfile.submitForReview,
-             rejectIfPossible: Bool = deliverfile.rejectIfPossible,
-             automaticRelease: Bool = deliverfile.automaticRelease,
-             autoReleaseDate: Any? = deliverfile.autoReleaseDate,
-             phasedRelease: Bool = deliverfile.phasedRelease,
-             resetRatings: Bool = deliverfile.resetRatings,
-             priceTier: Any? = deliverfile.priceTier,
-             appRatingConfigPath: Any? = deliverfile.appRatingConfigPath,
-             submissionInformation: Any? = deliverfile.submissionInformation,
-             teamId: Any? = deliverfile.teamId,
-             teamName: Any? = deliverfile.teamName,
-             devPortalTeamId: Any? = deliverfile.devPortalTeamId,
-             devPortalTeamName: Any? = deliverfile.devPortalTeamName,
-             itcProvider: Any? = deliverfile.itcProvider,
-             runPrecheckBeforeSubmit: Bool = deliverfile.runPrecheckBeforeSubmit,
-             precheckDefaultRuleLevel: Any = deliverfile.precheckDefaultRuleLevel,
-             individualMetadataItems: [String] = deliverfile.individualMetadataItems,
-             appIcon: Any? = deliverfile.appIcon,
-             appleWatchAppIcon: Any? = deliverfile.appleWatchAppIcon,
-             copyright: Any? = deliverfile.copyright,
-             primaryCategory: Any? = deliverfile.primaryCategory,
-             secondaryCategory: Any? = deliverfile.secondaryCategory,
-             primaryFirstSubCategory: Any? = deliverfile.primaryFirstSubCategory,
-             primarySecondSubCategory: Any? = deliverfile.primarySecondSubCategory,
-             secondaryFirstSubCategory: Any? = deliverfile.secondaryFirstSubCategory,
-             secondarySecondSubCategory: Any? = deliverfile.secondarySecondSubCategory,
-             tradeRepresentativeContactInformation: [String : Any]? = deliverfile.tradeRepresentativeContactInformation,
-             appReviewInformation: [String : Any]? = deliverfile.appReviewInformation,
-             appReviewAttachmentFile: Any? = deliverfile.appReviewAttachmentFile,
-             description: Any? = deliverfile.description,
-             name: Any? = deliverfile.name,
-             subtitle: [String : Any]? = deliverfile.subtitle,
-             keywords: [String : Any]? = deliverfile.keywords,
-             promotionalText: [String : Any]? = deliverfile.promotionalText,
-             releaseNotes: Any? = deliverfile.releaseNotes,
-             privacyUrl: Any? = deliverfile.privacyUrl,
-             appleTvPrivacyPolicy: Any? = deliverfile.appleTvPrivacyPolicy,
-             supportUrl: Any? = deliverfile.supportUrl,
-             marketingUrl: Any? = deliverfile.marketingUrl,
-             languages: [String]? = deliverfile.languages,
-             ignoreLanguageDirectoryValidation: Bool = deliverfile.ignoreLanguageDirectoryValidation,
-             precheckIncludeInAppPurchases: Bool = deliverfile.precheckIncludeInAppPurchases,
-             app: Any = deliverfile.app) {
-  let command = RubyCommand(commandID: "", methodName: "deliver", className: nil, args: [RubyCommand.Argument(name: "username", value: username),
-                                                                                         RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                         RubyCommand.Argument(name: "app_version", value: appVersion),
-                                                                                         RubyCommand.Argument(name: "ipa", value: ipa),
-                                                                                         RubyCommand.Argument(name: "pkg", value: pkg),
-                                                                                         RubyCommand.Argument(name: "build_number", value: buildNumber),
-                                                                                         RubyCommand.Argument(name: "platform", value: platform),
-                                                                                         RubyCommand.Argument(name: "edit_live", value: editLive),
-                                                                                         RubyCommand.Argument(name: "use_live_version", value: useLiveVersion),
-                                                                                         RubyCommand.Argument(name: "metadata_path", value: metadataPath),
-                                                                                         RubyCommand.Argument(name: "screenshots_path", value: screenshotsPath),
-                                                                                         RubyCommand.Argument(name: "skip_binary_upload", value: skipBinaryUpload),
-                                                                                         RubyCommand.Argument(name: "skip_screenshots", value: skipScreenshots),
-                                                                                         RubyCommand.Argument(name: "skip_metadata", value: skipMetadata),
-                                                                                         RubyCommand.Argument(name: "skip_app_version_update", value: skipAppVersionUpdate),
-                                                                                         RubyCommand.Argument(name: "force", value: force),
-                                                                                         RubyCommand.Argument(name: "overwrite_screenshots", value: overwriteScreenshots),
-                                                                                         RubyCommand.Argument(name: "submit_for_review", value: submitForReview),
-                                                                                         RubyCommand.Argument(name: "reject_if_possible", value: rejectIfPossible),
-                                                                                         RubyCommand.Argument(name: "automatic_release", value: automaticRelease),
-                                                                                         RubyCommand.Argument(name: "auto_release_date", value: autoReleaseDate),
-                                                                                         RubyCommand.Argument(name: "phased_release", value: phasedRelease),
-                                                                                         RubyCommand.Argument(name: "reset_ratings", value: resetRatings),
-                                                                                         RubyCommand.Argument(name: "price_tier", value: priceTier),
-                                                                                         RubyCommand.Argument(name: "app_rating_config_path", value: appRatingConfigPath),
-                                                                                         RubyCommand.Argument(name: "submission_information", value: submissionInformation),
-                                                                                         RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                         RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                         RubyCommand.Argument(name: "dev_portal_team_id", value: devPortalTeamId),
-                                                                                         RubyCommand.Argument(name: "dev_portal_team_name", value: devPortalTeamName),
-                                                                                         RubyCommand.Argument(name: "itc_provider", value: itcProvider),
-                                                                                         RubyCommand.Argument(name: "run_precheck_before_submit", value: runPrecheckBeforeSubmit),
-                                                                                         RubyCommand.Argument(name: "precheck_default_rule_level", value: precheckDefaultRuleLevel),
-                                                                                         RubyCommand.Argument(name: "individual_metadata_items", value: individualMetadataItems),
-                                                                                         RubyCommand.Argument(name: "app_icon", value: appIcon),
-                                                                                         RubyCommand.Argument(name: "apple_watch_app_icon", value: appleWatchAppIcon),
-                                                                                         RubyCommand.Argument(name: "copyright", value: copyright),
-                                                                                         RubyCommand.Argument(name: "primary_category", value: primaryCategory),
-                                                                                         RubyCommand.Argument(name: "secondary_category", value: secondaryCategory),
-                                                                                         RubyCommand.Argument(name: "primary_first_sub_category", value: primaryFirstSubCategory),
-                                                                                         RubyCommand.Argument(name: "primary_second_sub_category", value: primarySecondSubCategory),
-                                                                                         RubyCommand.Argument(name: "secondary_first_sub_category", value: secondaryFirstSubCategory),
-                                                                                         RubyCommand.Argument(name: "secondary_second_sub_category", value: secondarySecondSubCategory),
-                                                                                         RubyCommand.Argument(name: "trade_representative_contact_information", value: tradeRepresentativeContactInformation),
-                                                                                         RubyCommand.Argument(name: "app_review_information", value: appReviewInformation),
-                                                                                         RubyCommand.Argument(name: "app_review_attachment_file", value: appReviewAttachmentFile),
-                                                                                         RubyCommand.Argument(name: "description", value: description),
-                                                                                         RubyCommand.Argument(name: "name", value: name),
-                                                                                         RubyCommand.Argument(name: "subtitle", value: subtitle),
-                                                                                         RubyCommand.Argument(name: "keywords", value: keywords),
-                                                                                         RubyCommand.Argument(name: "promotional_text", value: promotionalText),
-                                                                                         RubyCommand.Argument(name: "release_notes", value: releaseNotes),
-                                                                                         RubyCommand.Argument(name: "privacy_url", value: privacyUrl),
-                                                                                         RubyCommand.Argument(name: "apple_tv_privacy_policy", value: appleTvPrivacyPolicy),
-                                                                                         RubyCommand.Argument(name: "support_url", value: supportUrl),
-                                                                                         RubyCommand.Argument(name: "marketing_url", value: marketingUrl),
-                                                                                         RubyCommand.Argument(name: "languages", value: languages),
-                                                                                         RubyCommand.Argument(name: "ignore_language_directory_validation", value: ignoreLanguageDirectoryValidation),
-                                                                                         RubyCommand.Argument(name: "precheck_include_in_app_purchases", value: precheckIncludeInAppPurchases),
-                                                                                         RubyCommand.Argument(name: "app", value: app)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func deliver(apiKeyPath: Any? = deliverfile.apiKeyPath,
                     apiKey: [String: Any]? = deliverfile.apiKey,
@@ -4463,7 +2770,6 @@ public func deliver(apiKeyPath: Any? = deliverfile.apiKeyPath,
                                                                                            RubyCommand.Argument(name: "precheck_include_in_app_purchases", value: precheckIncludeInAppPurchases),
                                                                                            RubyCommand.Argument(name: "app", value: app)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4482,28 +2788,6 @@ public func deliver(apiKeyPath: Any? = deliverfile.apiKeyPath,
 
  You can retrieve your username and API token on [your settings page](https://deploygate.com/settings).
  More information about the available options can be found in the [DeployGate Push API document](https://deploygate.com/docs/api).
-<<<<<<< Updated upstream
-*/
-func deploygate(apiToken: String,
-                user: String,
-                ipa: String? = nil,
-                apk: String? = nil,
-                message: String = "No changelog provided",
-                distributionKey: String? = nil,
-                releaseNote: String? = nil,
-                disableNotify: Bool = false,
-                distributionName: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "deploygate", className: nil, args: [RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                            RubyCommand.Argument(name: "user", value: user),
-                                                                                            RubyCommand.Argument(name: "ipa", value: ipa),
-                                                                                            RubyCommand.Argument(name: "apk", value: apk),
-                                                                                            RubyCommand.Argument(name: "message", value: message),
-                                                                                            RubyCommand.Argument(name: "distribution_key", value: distributionKey),
-                                                                                            RubyCommand.Argument(name: "release_note", value: releaseNote),
-                                                                                            RubyCommand.Argument(name: "disable_notify", value: disableNotify),
-                                                                                            RubyCommand.Argument(name: "distribution_name", value: distributionName)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func deploygate(apiToken: String,
                        user: String,
@@ -4525,7 +2809,6 @@ public func deploygate(apiToken: String,
                                                                                               RubyCommand.Argument(name: "disable_notify", value: disableNotify),
                                                                                               RubyCommand.Argument(name: "distribution_name", value: distributionName)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4534,17 +2817,10 @@ public func deploygate(apiToken: String,
  - parameter dotgpgFile: Path to your gpg file
 
  More information about dotgpg can be found at [https://github.com/ConradIrwin/dotgpg](https://github.com/ConradIrwin/dotgpg).
-<<<<<<< Updated upstream
-*/
-func dotgpgEnvironment(dotgpgFile: String) {
-  let command = RubyCommand(commandID: "", methodName: "dotgpg_environment", className: nil, args: [RubyCommand.Argument(name: "dotgpg_file", value: dotgpgFile)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func dotgpgEnvironment(dotgpgFile: String) {
     let command = RubyCommand(commandID: "", methodName: "dotgpg_environment", className: nil, args: [RubyCommand.Argument(name: "dotgpg_file", value: dotgpgFile)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4555,17 +2831,10 @@ public func dotgpgEnvironment(dotgpgFile: String) {
  Specify the URL to download and get the content as a return value.
  Automatically parses JSON into a Ruby data structure.
  For more advanced networking code, use the Ruby functions instead: [http://docs.ruby-lang.org/en/2.0.0/Net/HTTP.html](http://docs.ruby-lang.org/en/2.0.0/Net/HTTP.html).
-<<<<<<< Updated upstream
-*/
-func download(url: String) {
-  let command = RubyCommand(commandID: "", methodName: "download", className: nil, args: [RubyCommand.Argument(name: "url", value: url)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func download(url: String) {
     let command = RubyCommand(commandID: "", methodName: "download", className: nil, args: [RubyCommand.Argument(name: "url", value: url)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4595,32 +2864,6 @@ public func download(url: String) {
  end|
  ```|
  >|
-<<<<<<< Updated upstream
-*/
-func downloadDsyms(username: String,
-                   appIdentifier: String,
-                   teamId: Any? = nil,
-                   teamName: String? = nil,
-                   platform: String = "ios",
-                   version: String? = nil,
-                   buildNumber: String? = nil,
-                   minVersion: String? = nil,
-                   outputDirectory: String? = nil,
-                   waitForDsymProcessing: Bool = false,
-                   waitTimeout: Int = 300) {
-  let command = RubyCommand(commandID: "", methodName: "download_dsyms", className: nil, args: [RubyCommand.Argument(name: "username", value: username),
-                                                                                                RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                                RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                                RubyCommand.Argument(name: "platform", value: platform),
-                                                                                                RubyCommand.Argument(name: "version", value: version),
-                                                                                                RubyCommand.Argument(name: "build_number", value: buildNumber),
-                                                                                                RubyCommand.Argument(name: "min_version", value: minVersion),
-                                                                                                RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                                RubyCommand.Argument(name: "wait_for_dsym_processing", value: waitForDsymProcessing),
-                                                                                                RubyCommand.Argument(name: "wait_timeout", value: waitTimeout)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func downloadDsyms(username: String,
                           appIdentifier: String,
@@ -4648,7 +2891,6 @@ public func downloadDsyms(username: String,
                                                                                                   RubyCommand.Argument(name: "wait_for_dsym_processing", value: waitForDsymProcessing),
                                                                                                   RubyCommand.Argument(name: "wait_timeout", value: waitTimeout)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4667,30 +2909,6 @@ public func downloadDsyms(username: String,
    - timeout: Timeout for read, open, and send (in seconds)
 
  More information: https://docs.fastlane.tools/actions/download_from_play_store/
-<<<<<<< Updated upstream
-*/
-func downloadFromPlayStore(packageName: String,
-                           versionName: String? = nil,
-                           track: String = "production",
-                           metadataPath: String? = nil,
-                           key: String? = nil,
-                           issuer: String? = nil,
-                           jsonKey: String? = nil,
-                           jsonKeyData: String? = nil,
-                           rootUrl: String? = nil,
-                           timeout: Int = 300) {
-  let command = RubyCommand(commandID: "", methodName: "download_from_play_store", className: nil, args: [RubyCommand.Argument(name: "package_name", value: packageName),
-                                                                                                          RubyCommand.Argument(name: "version_name", value: versionName),
-                                                                                                          RubyCommand.Argument(name: "track", value: track),
-                                                                                                          RubyCommand.Argument(name: "metadata_path", value: metadataPath),
-                                                                                                          RubyCommand.Argument(name: "key", value: key),
-                                                                                                          RubyCommand.Argument(name: "issuer", value: issuer),
-                                                                                                          RubyCommand.Argument(name: "json_key", value: jsonKey),
-                                                                                                          RubyCommand.Argument(name: "json_key_data", value: jsonKeyData),
-                                                                                                          RubyCommand.Argument(name: "root_url", value: rootUrl),
-                                                                                                          RubyCommand.Argument(name: "timeout", value: timeout)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func downloadFromPlayStore(packageName: String,
                                   versionName: String? = nil,
@@ -4714,7 +2932,6 @@ public func downloadFromPlayStore(packageName: String,
                                                                                                             RubyCommand.Argument(name: "root_url", value: rootUrl),
                                                                                                             RubyCommand.Argument(name: "timeout", value: timeout)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4726,16 +2943,6 @@ public func downloadFromPlayStore(packageName: String,
    - all: Whether or not all dSYM files are to be included. Optional, default is false in which only your app dSYM is included
 
  You can manually specify the path to the xcarchive (not needed if you use `xcodebuild`/`xcarchive` to build your archive)
-<<<<<<< Updated upstream
-*/
-func dsymZip(archivePath: String? = nil,
-             dsymPath: String? = nil,
-             all: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "dsym_zip", className: nil, args: [RubyCommand.Argument(name: "archive_path", value: archivePath),
-                                                                                          RubyCommand.Argument(name: "dsym_path", value: dsymPath),
-                                                                                          RubyCommand.Argument(name: "all", value: all)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func dsymZip(archivePath: String? = nil,
                     dsymPath: String? = nil,
@@ -4745,24 +2952,16 @@ public func dsymZip(archivePath: String? = nil,
                                                                                             RubyCommand.Argument(name: "dsym_path", value: dsymPath),
                                                                                             RubyCommand.Argument(name: "all", value: all)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Alias for the `puts` action
 
  - parameter message: Message to be printed out
-<<<<<<< Updated upstream
-*/
-func echo(message: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "echo", className: nil, args: [RubyCommand.Argument(name: "message", value: message)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func echo(message: String? = nil) {
     let command = RubyCommand(commandID: "", methodName: "echo", className: nil, args: [RubyCommand.Argument(name: "message", value: message)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4770,17 +2969,10 @@ public func echo(message: String? = nil) {
 
  This action will check if you are using `bundle exec` to run fastlane.
  You can put it into `before_all` to make sure that fastlane is ran using the `bundle exec fastlane` command.
-<<<<<<< Updated upstream
-*/
-func ensureBundleExec() {
-  let command = RubyCommand(commandID: "", methodName: "ensure_bundle_exec", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func ensureBundleExec() {
     let command = RubyCommand(commandID: "", methodName: "ensure_bundle_exec", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4789,17 +2981,10 @@ public func ensureBundleExec() {
  - parameter envVars: The environment variables names that should be checked
 
  This action will check if some environment variables are set.
-<<<<<<< Updated upstream
-*/
-func ensureEnvVars(envVars: [String]) {
-  let command = RubyCommand(commandID: "", methodName: "ensure_env_vars", className: nil, args: [RubyCommand.Argument(name: "env_vars", value: envVars)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func ensureEnvVars(envVars: [String]) {
     let command = RubyCommand(commandID: "", methodName: "ensure_env_vars", className: nil, args: [RubyCommand.Argument(name: "env_vars", value: envVars)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4809,17 +2994,10 @@ public func ensureEnvVars(envVars: [String]) {
 
  This action will check if your git repo is checked out to a specific branch.
  You may only want to make releases from a specific branch, so `ensure_git_branch` will stop a lane if it was accidentally executed on an incorrect branch.
-<<<<<<< Updated upstream
-*/
-func ensureGitBranch(branch: String = "master") {
-  let command = RubyCommand(commandID: "", methodName: "ensure_git_branch", className: nil, args: [RubyCommand.Argument(name: "branch", value: branch)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func ensureGitBranch(branch: String = "master") {
     let command = RubyCommand(commandID: "", methodName: "ensure_git_branch", className: nil, args: [RubyCommand.Argument(name: "branch", value: branch)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4833,14 +3011,6 @@ public func ensureGitBranch(branch: String = "master") {
  A sanity check to make sure you are working in a repo that is clean.
  Especially useful to put at the beginning of your Fastfile in the `before_all` block, if some of your other actions will touch your filesystem, do things to your git repo, or just as a general reminder to save your work.
  Also needed as a prerequisite for some other actions like `reset_git_repo`.
-<<<<<<< Updated upstream
-*/
-func ensureGitStatusClean(showUncommittedChanges: Bool = false,
-                          showDiff: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "ensure_git_status_clean", className: nil, args: [RubyCommand.Argument(name: "show_uncommitted_changes", value: showUncommittedChanges),
-                                                                                                         RubyCommand.Argument(name: "show_diff", value: showDiff)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func ensureGitStatusClean(showUncommittedChanges: Bool = false,
                                  showDiff: Bool = false,
@@ -4850,7 +3020,6 @@ public func ensureGitStatusClean(showUncommittedChanges: Bool = false,
                                                                                                            RubyCommand.Argument(name: "show_diff", value: showDiff),
                                                                                                            RubyCommand.Argument(name: "ignored", value: ignored)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4866,22 +3035,6 @@ public func ensureGitStatusClean(showUncommittedChanges: Bool = false,
 
  You don't want any debug code to slip into production.
  This can be used to check if there is any debug code still in your codebase or if you have things like `// TO DO` or similar.
-<<<<<<< Updated upstream
-*/
-func ensureNoDebugCode(text: String,
-                       path: String = ".",
-                       `extension`: String? = nil,
-                       extensions: Any? = nil,
-                       exclude: String? = nil,
-                       excludeDirs: [String]? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "ensure_no_debug_code", className: nil, args: [RubyCommand.Argument(name: "text", value: text),
-                                                                                                      RubyCommand.Argument(name: "path", value: path),
-                                                                                                      RubyCommand.Argument(name: "extension", value: `extension`),
-                                                                                                      RubyCommand.Argument(name: "extensions", value: extensions),
-                                                                                                      RubyCommand.Argument(name: "exclude", value: exclude),
-                                                                                                      RubyCommand.Argument(name: "exclude_dirs", value: excludeDirs)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func ensureNoDebugCode(text: String,
                               path: String = ".",
@@ -4897,7 +3050,6 @@ public func ensureNoDebugCode(text: String,
                                                                                                         RubyCommand.Argument(name: "exclude", value: exclude),
                                                                                                         RubyCommand.Argument(name: "exclude_dirs", value: excludeDirs)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4911,14 +3063,6 @@ public func ensureNoDebugCode(text: String,
  For example, to ensure that a beta version of Xcode is not accidentally selected to build, which would make uploading to TestFlight fail.
  You can either manually provide a specific version using `version: ` or you make use of the `.xcode-version` file.
  Using the `strict` parameter, you can either verify the full set of version numbers strictly (i.e. `11.3.1`) or only a subset of them (i.e. `11.3` or `11`).
-<<<<<<< Updated upstream
-*/
-func ensureXcodeVersion(version: String? = nil,
-                        strict: Bool = true) {
-  let command = RubyCommand(commandID: "", methodName: "ensure_xcode_version", className: nil, args: [RubyCommand.Argument(name: "version", value: version),
-                                                                                                      RubyCommand.Argument(name: "strict", value: strict)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func ensureXcodeVersion(version: String? = nil,
                                strict: Bool = true)
@@ -4926,7 +3070,6 @@ public func ensureXcodeVersion(version: String? = nil,
     let command = RubyCommand(commandID: "", methodName: "ensure_xcode_version", className: nil, args: [RubyCommand.Argument(name: "version", value: version),
                                                                                                         RubyCommand.Argument(name: "strict", value: strict)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4936,16 +3079,6 @@ public func ensureXcodeVersion(version: String? = nil,
    - set: Set the environment variables named
    - get: Get the environment variable named
    - remove: Remove the environment variable named
-<<<<<<< Updated upstream
-*/
-@discardableResult func environmentVariable(`set`: [String : Any]? = nil,
-                                            `get`: String? = nil,
-                                            remove: String? = nil) -> String {
-  let command = RubyCommand(commandID: "", methodName: "environment_variable", className: nil, args: [RubyCommand.Argument(name: "set", value: `set`),
-                                                                                                      RubyCommand.Argument(name: "get", value: `get`),
-                                                                                                      RubyCommand.Argument(name: "remove", value: remove)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func environmentVariable(set: [String: Any]? = nil,
                                                    get: String? = nil,
@@ -4955,7 +3088,6 @@ public func ensureXcodeVersion(version: String? = nil,
                                                                                                         RubyCommand.Argument(name: "get", value: get),
                                                                                                         RubyCommand.Argument(name: "remove", value: remove)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4969,16 +3101,6 @@ public func ensureXcodeVersion(version: String? = nil,
 
  Renders an ERB template with `:placeholders` given as a hash via parameter.
  If no `:destination` is set, it returns the rendered template as string.
-<<<<<<< Updated upstream
-*/
-func erb(template: String,
-         destination: String? = nil,
-         placeholders: [String : Any] = [:]) {
-  let command = RubyCommand(commandID: "", methodName: "erb", className: nil, args: [RubyCommand.Argument(name: "template", value: template),
-                                                                                     RubyCommand.Argument(name: "destination", value: destination),
-                                                                                     RubyCommand.Argument(name: "placeholders", value: placeholders)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func erb(template: String,
                 destination: String? = nil,
@@ -4990,7 +3112,6 @@ public func erb(template: String,
                                                                                        RubyCommand.Argument(name: "placeholders", value: placeholders),
                                                                                        RubyCommand.Argument(name: "trim_mode", value: trimMode)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -4998,17 +3119,10 @@ public func erb(template: String,
 
  Add this to your `Fastfile` to require a certain version of _fastlane_.
  Use it if you use an action that just recently came out and you need it.
-<<<<<<< Updated upstream
-*/
-func fastlaneVersion() {
-  let command = RubyCommand(commandID: "", methodName: "fastlane_version", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func fastlaneVersion() {
     let command = RubyCommand(commandID: "", methodName: "fastlane_version", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5020,16 +3134,6 @@ public func fastlaneVersion() {
    - baseUrl: Base URL of the Flock incoming message webhook
 
  To obtain the token, create a new [incoming message webhook](https://dev.flock.co/wiki/display/FlockAPI/Incoming+Webhooks) in your Flock admin panel.
-<<<<<<< Updated upstream
-*/
-func flock(message: String,
-           token: String,
-           baseUrl: String = "https://api.flock.co/hooks/sendMessage") {
-  let command = RubyCommand(commandID: "", methodName: "flock", className: nil, args: [RubyCommand.Argument(name: "message", value: message),
-                                                                                       RubyCommand.Argument(name: "token", value: token),
-                                                                                       RubyCommand.Argument(name: "base_url", value: baseUrl)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func flock(message: String,
                   token: String,
@@ -5039,7 +3143,6 @@ public func flock(message: String,
                                                                                          RubyCommand.Argument(name: "token", value: token),
                                                                                          RubyCommand.Argument(name: "base_url", value: baseUrl)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5066,44 +3169,6 @@ public func flock(message: String,
 
  Uses [frameit](https://docs.fastlane.tools/actions/frameit/) to prepare perfect screenshots for the App Store, your website, QA or emails.
  You can add background and titles to the framed screenshots as well.
-<<<<<<< Updated upstream
-*/
-func frameScreenshots(white: Bool? = nil,
-                      silver: Bool? = nil,
-                      roseGold: Bool? = nil,
-                      gold: Bool? = nil,
-                      forceDeviceType: String? = nil,
-                      useLegacyIphone5s: Bool = false,
-                      useLegacyIphone6s: Bool = false,
-                      useLegacyIphone7: Bool = false,
-                      useLegacyIphonex: Bool = false,
-                      useLegacyIphonexr: Bool = false,
-                      useLegacyIphonexs: Bool = false,
-                      useLegacyIphonexsmax: Bool = false,
-                      forceOrientationBlock: String? = nil,
-                      debugMode: Bool = false,
-                      resume: Bool = false,
-                      usePlatform: String = "IOS",
-                      path: String = "./") {
-  let command = RubyCommand(commandID: "", methodName: "frame_screenshots", className: nil, args: [RubyCommand.Argument(name: "white", value: white),
-                                                                                                   RubyCommand.Argument(name: "silver", value: silver),
-                                                                                                   RubyCommand.Argument(name: "rose_gold", value: roseGold),
-                                                                                                   RubyCommand.Argument(name: "gold", value: gold),
-                                                                                                   RubyCommand.Argument(name: "force_device_type", value: forceDeviceType),
-                                                                                                   RubyCommand.Argument(name: "use_legacy_iphone5s", value: useLegacyIphone5s),
-                                                                                                   RubyCommand.Argument(name: "use_legacy_iphone6s", value: useLegacyIphone6s),
-                                                                                                   RubyCommand.Argument(name: "use_legacy_iphone7", value: useLegacyIphone7),
-                                                                                                   RubyCommand.Argument(name: "use_legacy_iphonex", value: useLegacyIphonex),
-                                                                                                   RubyCommand.Argument(name: "use_legacy_iphonexr", value: useLegacyIphonexr),
-                                                                                                   RubyCommand.Argument(name: "use_legacy_iphonexs", value: useLegacyIphonexs),
-                                                                                                   RubyCommand.Argument(name: "use_legacy_iphonexsmax", value: useLegacyIphonexsmax),
-                                                                                                   RubyCommand.Argument(name: "force_orientation_block", value: forceOrientationBlock),
-                                                                                                   RubyCommand.Argument(name: "debug_mode", value: debugMode),
-                                                                                                   RubyCommand.Argument(name: "resume", value: resume),
-                                                                                                   RubyCommand.Argument(name: "use_platform", value: usePlatform),
-                                                                                                   RubyCommand.Argument(name: "path", value: path)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func frameScreenshots(white: Bool? = nil,
                              silver: Bool? = nil,
@@ -5141,7 +3206,6 @@ public func frameScreenshots(white: Bool? = nil,
                                                                                                      RubyCommand.Argument(name: "use_platform", value: usePlatform),
                                                                                                      RubyCommand.Argument(name: "path", value: path)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5168,44 +3232,6 @@ public func frameScreenshots(white: Bool? = nil,
 
  Uses [frameit](https://docs.fastlane.tools/actions/frameit/) to prepare perfect screenshots for the App Store, your website, QA or emails.
  You can add background and titles to the framed screenshots as well.
-<<<<<<< Updated upstream
-*/
-func frameit(white: Bool? = nil,
-             silver: Bool? = nil,
-             roseGold: Bool? = nil,
-             gold: Bool? = nil,
-             forceDeviceType: String? = nil,
-             useLegacyIphone5s: Bool = false,
-             useLegacyIphone6s: Bool = false,
-             useLegacyIphone7: Bool = false,
-             useLegacyIphonex: Bool = false,
-             useLegacyIphonexr: Bool = false,
-             useLegacyIphonexs: Bool = false,
-             useLegacyIphonexsmax: Bool = false,
-             forceOrientationBlock: String? = nil,
-             debugMode: Bool = false,
-             resume: Bool = false,
-             usePlatform: String = "IOS",
-             path: String = "./") {
-  let command = RubyCommand(commandID: "", methodName: "frameit", className: nil, args: [RubyCommand.Argument(name: "white", value: white),
-                                                                                         RubyCommand.Argument(name: "silver", value: silver),
-                                                                                         RubyCommand.Argument(name: "rose_gold", value: roseGold),
-                                                                                         RubyCommand.Argument(name: "gold", value: gold),
-                                                                                         RubyCommand.Argument(name: "force_device_type", value: forceDeviceType),
-                                                                                         RubyCommand.Argument(name: "use_legacy_iphone5s", value: useLegacyIphone5s),
-                                                                                         RubyCommand.Argument(name: "use_legacy_iphone6s", value: useLegacyIphone6s),
-                                                                                         RubyCommand.Argument(name: "use_legacy_iphone7", value: useLegacyIphone7),
-                                                                                         RubyCommand.Argument(name: "use_legacy_iphonex", value: useLegacyIphonex),
-                                                                                         RubyCommand.Argument(name: "use_legacy_iphonexr", value: useLegacyIphonexr),
-                                                                                         RubyCommand.Argument(name: "use_legacy_iphonexs", value: useLegacyIphonexs),
-                                                                                         RubyCommand.Argument(name: "use_legacy_iphonexsmax", value: useLegacyIphonexsmax),
-                                                                                         RubyCommand.Argument(name: "force_orientation_block", value: forceOrientationBlock),
-                                                                                         RubyCommand.Argument(name: "debug_mode", value: debugMode),
-                                                                                         RubyCommand.Argument(name: "resume", value: resume),
-                                                                                         RubyCommand.Argument(name: "use_platform", value: usePlatform),
-                                                                                         RubyCommand.Argument(name: "path", value: path)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func frameit(white: Bool? = nil,
                     silver: Bool? = nil,
@@ -5243,24 +3269,16 @@ public func frameit(white: Bool? = nil,
                                                                                            RubyCommand.Argument(name: "use_platform", value: usePlatform),
                                                                                            RubyCommand.Argument(name: "path", value: path)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Runs test coverage reports for your Xcode project
 
  Generate summarized code coverage reports using [gcovr](http://gcovr.com/)
-<<<<<<< Updated upstream
-*/
-func gcovr() {
-  let command = RubyCommand(commandID: "", methodName: "gcovr", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func gcovr() {
     let command = RubyCommand(commandID: "", methodName: "gcovr", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5272,14 +3290,6 @@ public func gcovr() {
 
  This action will return the current build number set on your project.
  You first have to set up your Xcode project, if you haven't done it already: [https://developer.apple.com/library/ios/qa/qa1827/_index.html](https://developer.apple.com/library/ios/qa/qa1827/_index.html).
-<<<<<<< Updated upstream
-*/
-@discardableResult func getBuildNumber(xcodeproj: String? = nil,
-                                       hideErrorWhenVersioningDisabled: Bool = false) -> String {
-  let command = RubyCommand(commandID: "", methodName: "get_build_number", className: nil, args: [RubyCommand.Argument(name: "xcodeproj", value: xcodeproj),
-                                                                                                  RubyCommand.Argument(name: "hide_error_when_versioning_disabled", value: hideErrorWhenVersioningDisabled)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func getBuildNumber(xcodeproj: String? = nil,
                                               hideErrorWhenVersioningDisabled: Bool = false) -> String
@@ -5287,7 +3297,6 @@ public func gcovr() {
     let command = RubyCommand(commandID: "", methodName: "get_build_number", className: nil, args: [RubyCommand.Argument(name: "xcodeproj", value: xcodeproj),
                                                                                                     RubyCommand.Argument(name: "hide_error_when_versioning_disabled", value: hideErrorWhenVersioningDisabled)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5300,17 +3309,10 @@ public func gcovr() {
  This action will get the **build number** according to what the SCM HEAD reports.
  Currently supported SCMs are svn (uses root revision), git-svn (uses svn revision), git (uses short hash) and mercurial (uses short hash or revision number).
  There is an option, `:use_hg_revision_number`, which allows to use mercurial revision number instead of hash.
-<<<<<<< Updated upstream
-*/
-func getBuildNumberRepository(useHgRevisionNumber: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "get_build_number_repository", className: nil, args: [RubyCommand.Argument(name: "use_hg_revision_number", value: useHgRevisionNumber)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func getBuildNumberRepository(useHgRevisionNumber: Bool = false) {
     let command = RubyCommand(commandID: "", methodName: "get_build_number_repository", className: nil, args: [RubyCommand.Argument(name: "use_hg_revision_number", value: useHgRevisionNumber)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5332,34 +3334,6 @@ public func getBuildNumberRepository(useHgRevisionNumber: Bool = false) {
 
  **Important**: It is recommended to use [match](https://docs.fastlane.tools/actions/match/) according to the [codesigning.guide](https://codesigning.guide) for generating and maintaining your certificates. Use _cert_ directly only if you want full control over what's going on and know more about codesigning.
  Use this action to download the latest code signing identity.
-<<<<<<< Updated upstream
-*/
-func getCertificates(development: Bool = false,
-                     type: String? = nil,
-                     force: Bool = false,
-                     generateAppleCerts: Bool = true,
-                     username: String,
-                     teamId: String? = nil,
-                     teamName: String? = nil,
-                     filename: String? = nil,
-                     outputPath: String = ".",
-                     keychainPath: String,
-                     keychainPassword: String? = nil,
-                     platform: String = "ios") {
-  let command = RubyCommand(commandID: "", methodName: "get_certificates", className: nil, args: [RubyCommand.Argument(name: "development", value: development),
-                                                                                                  RubyCommand.Argument(name: "type", value: type),
-                                                                                                  RubyCommand.Argument(name: "force", value: force),
-                                                                                                  RubyCommand.Argument(name: "generate_apple_certs", value: generateAppleCerts),
-                                                                                                  RubyCommand.Argument(name: "username", value: username),
-                                                                                                  RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                  RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                                  RubyCommand.Argument(name: "filename", value: filename),
-                                                                                                  RubyCommand.Argument(name: "output_path", value: outputPath),
-                                                                                                  RubyCommand.Argument(name: "keychain_path", value: keychainPath),
-                                                                                                  RubyCommand.Argument(name: "keychain_password", value: keychainPassword),
-                                                                                                  RubyCommand.Argument(name: "platform", value: platform)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func getCertificates(development: Bool = false,
                             type: String? = nil,
@@ -5387,7 +3361,6 @@ public func getCertificates(development: Bool = false,
                                                                                                     RubyCommand.Argument(name: "keychain_password", value: keychainPassword),
                                                                                                     RubyCommand.Argument(name: "platform", value: platform)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5441,18 +3414,6 @@ public func getCertificates(development: Bool = false,
  }|
  ```|
  >|
-<<<<<<< Updated upstream
-*/
-func getGithubRelease(url: String,
-                      serverUrl: String = "https://api.github.com",
-                      version: String,
-                      apiToken: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "get_github_release", className: nil, args: [RubyCommand.Argument(name: "url", value: url),
-                                                                                                    RubyCommand.Argument(name: "server_url", value: serverUrl),
-                                                                                                    RubyCommand.Argument(name: "version", value: version),
-                                                                                                    RubyCommand.Argument(name: "api_token", value: apiToken)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func getGithubRelease(url: String,
                              serverUrl: String = "https://api.github.com",
@@ -5464,7 +3425,6 @@ public func getGithubRelease(url: String,
                                                                                                       RubyCommand.Argument(name: "version", value: version),
                                                                                                       RubyCommand.Argument(name: "api_token", value: apiToken)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5475,14 +3435,6 @@ public func getGithubRelease(url: String,
    - path: Path to plist file you want to read
 
  Get a value from a plist file, which can be used to fetch the app identifier and more information about your app
-<<<<<<< Updated upstream
-*/
-@discardableResult func getInfoPlistValue(key: String,
-                                          path: String) -> String {
-  let command = RubyCommand(commandID: "", methodName: "get_info_plist_value", className: nil, args: [RubyCommand.Argument(name: "key", value: key),
-                                                                                                      RubyCommand.Argument(name: "path", value: path)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func getInfoPlistValue(key: String,
                                                  path: String) -> String
@@ -5490,7 +3442,6 @@ public func getGithubRelease(url: String,
     let command = RubyCommand(commandID: "", methodName: "get_info_plist_value", className: nil, args: [RubyCommand.Argument(name: "key", value: key),
                                                                                                         RubyCommand.Argument(name: "path", value: path)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5503,14 +3454,6 @@ public func getGithubRelease(url: String,
  - returns: Returns the value in the .ipa's Info.plist corresponding to the passed in Key
 
  This is useful for introspecting Info.plist files for `.ipa` files that have already been built.
-<<<<<<< Updated upstream
-*/
-@discardableResult func getIpaInfoPlistValue(key: String,
-                                             ipa: String) -> String {
-  let command = RubyCommand(commandID: "", methodName: "get_ipa_info_plist_value", className: nil, args: [RubyCommand.Argument(name: "key", value: key),
-                                                                                                          RubyCommand.Argument(name: "ipa", value: ipa)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func getIpaInfoPlistValue(key: String,
                                                     ipa: String) -> String
@@ -5518,7 +3461,6 @@ public func getGithubRelease(url: String,
     let command = RubyCommand(commandID: "", methodName: "get_ipa_info_plist_value", className: nil, args: [RubyCommand.Argument(name: "key", value: key),
                                                                                                             RubyCommand.Argument(name: "ipa", value: ipa)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5534,14 +3476,6 @@ public func getGithubRelease(url: String,
  "[Enable the Google Play Custom App Publishing API](https://developers.google.com/android/work/play/custom-app-api/get-started#enable_the_google_play_custom_app_publishing_api)" and "[Create a service account](https://developers.google.com/android/work/play/custom-app-api/get-started#create_a_service_account)".
  You need the "service account's private key file" to continue.
  Run the action and supply the "private key file" to it as the `json_key` parameter. The command will output a URL to visit. After logging in you are redirected to a page that outputs your "Developer Account ID" - take note of that, you will need it to be able to use [`create_app_on_managed_play_store`](https://docs.fastlane.tools/actions/create_app_on_managed_play_store/).
-<<<<<<< Updated upstream
-*/
-func getManagedPlayStorePublishingRights(jsonKey: String? = nil,
-                                         jsonKeyData: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "get_managed_play_store_publishing_rights", className: nil, args: [RubyCommand.Argument(name: "json_key", value: jsonKey),
-                                                                                                                          RubyCommand.Argument(name: "json_key_data", value: jsonKeyData)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func getManagedPlayStorePublishingRights(jsonKey: String? = nil,
                                                 jsonKeyData: String? = nil)
@@ -5549,7 +3483,6 @@ public func getManagedPlayStorePublishingRights(jsonKey: String? = nil,
     let command = RubyCommand(commandID: "", methodName: "get_managed_play_store_publishing_rights", className: nil, args: [RubyCommand.Argument(name: "json_key", value: jsonKey),
                                                                                                                             RubyCommand.Argument(name: "json_key_data", value: jsonKeyData)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5568,7 +3501,7 @@ public func getManagedPlayStorePublishingRights(jsonKey: String? = nil,
    - provisioningName: The name of the profile that is used on the Apple Developer Portal
    - ignoreProfilesWithDifferentName: Use in combination with :provisioning_name - when true only profiles matching this exact name will be downloaded
    - outputPath: Directory in which the profile should be stored
-   - certId: The ID of the code signing certificate to use (e.g. 78ADL6LVAA) 
+   - certId: The ID of the code signing certificate to use (e.g. 78ADL6LVAA)
    - certOwnerName: The certificate name to use for new profiles, or to renew with. (e.g. "Felix Krause")
    - filename: Filename to use for the generated provisioning profile (must include .mobileprovision)
    - skipFetchProfiles: Skips the verification of existing profiles which is useful if you have thousands of profiles
@@ -5581,52 +3514,6 @@ public func getManagedPlayStorePublishingRights(jsonKey: String? = nil,
  - returns: The UUID of the profile sigh just fetched/generated
 
  **Note**: It is recommended to use [match](https://docs.fastlane.tools/actions/match/) according to the [codesigning.guide](https://codesigning.guide) for generating and maintaining your provisioning profiles. Use _sigh_ directly only if you want full control over what's going on and know more about codesigning.
-<<<<<<< Updated upstream
-*/
-func getProvisioningProfile(adhoc: Bool = false,
-                            developerId: Bool = false,
-                            development: Bool = false,
-                            skipInstall: Bool = false,
-                            force: Bool = false,
-                            appIdentifier: String,
-                            username: String,
-                            teamId: String? = nil,
-                            teamName: String? = nil,
-                            provisioningName: String? = nil,
-                            ignoreProfilesWithDifferentName: Bool = false,
-                            outputPath: String = ".",
-                            certId: String? = nil,
-                            certOwnerName: String? = nil,
-                            filename: String? = nil,
-                            skipFetchProfiles: Bool = false,
-                            skipCertificateVerification: Bool = false,
-                            platform: Any = "ios",
-                            readonly: Bool = false,
-                            templateName: String? = nil,
-                            failOnNameTaken: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "get_provisioning_profile", className: nil, args: [RubyCommand.Argument(name: "adhoc", value: adhoc),
-                                                                                                          RubyCommand.Argument(name: "developer_id", value: developerId),
-                                                                                                          RubyCommand.Argument(name: "development", value: development),
-                                                                                                          RubyCommand.Argument(name: "skip_install", value: skipInstall),
-                                                                                                          RubyCommand.Argument(name: "force", value: force),
-                                                                                                          RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                                          RubyCommand.Argument(name: "username", value: username),
-                                                                                                          RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                          RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                                          RubyCommand.Argument(name: "provisioning_name", value: provisioningName),
-                                                                                                          RubyCommand.Argument(name: "ignore_profiles_with_different_name", value: ignoreProfilesWithDifferentName),
-                                                                                                          RubyCommand.Argument(name: "output_path", value: outputPath),
-                                                                                                          RubyCommand.Argument(name: "cert_id", value: certId),
-                                                                                                          RubyCommand.Argument(name: "cert_owner_name", value: certOwnerName),
-                                                                                                          RubyCommand.Argument(name: "filename", value: filename),
-                                                                                                          RubyCommand.Argument(name: "skip_fetch_profiles", value: skipFetchProfiles),
-                                                                                                          RubyCommand.Argument(name: "skip_certificate_verification", value: skipCertificateVerification),
-                                                                                                          RubyCommand.Argument(name: "platform", value: platform),
-                                                                                                          RubyCommand.Argument(name: "readonly", value: readonly),
-                                                                                                          RubyCommand.Argument(name: "template_name", value: templateName),
-                                                                                                          RubyCommand.Argument(name: "fail_on_name_taken", value: failOnNameTaken)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func getProvisioningProfile(adhoc: Bool = false,
                                    developerId: Bool = false,
@@ -5672,7 +3559,6 @@ public func getProvisioningProfile(adhoc: Bool = false,
                                                                                                             RubyCommand.Argument(name: "template_name", value: templateName),
                                                                                                             RubyCommand.Argument(name: "fail_on_name_taken", value: failOnNameTaken)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5705,38 +3591,6 @@ public func getProvisioningProfile(adhoc: Bool = false,
  )|
  ```|
  >|
-<<<<<<< Updated upstream
-*/
-func getPushCertificate(development: Bool = false,
-                        websitePush: Bool = false,
-                        generateP12: Bool = true,
-                        activeDaysLimit: Int = 30,
-                        force: Bool = false,
-                        savePrivateKey: Bool = true,
-                        appIdentifier: String,
-                        username: String,
-                        teamId: String? = nil,
-                        teamName: String? = nil,
-                        p12Password: String,
-                        pemName: String? = nil,
-                        outputPath: String = ".",
-                        newProfile: Any? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "get_push_certificate", className: nil, args: [RubyCommand.Argument(name: "development", value: development),
-                                                                                                      RubyCommand.Argument(name: "website_push", value: websitePush),
-                                                                                                      RubyCommand.Argument(name: "generate_p12", value: generateP12),
-                                                                                                      RubyCommand.Argument(name: "active_days_limit", value: activeDaysLimit),
-                                                                                                      RubyCommand.Argument(name: "force", value: force),
-                                                                                                      RubyCommand.Argument(name: "save_private_key", value: savePrivateKey),
-                                                                                                      RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                                      RubyCommand.Argument(name: "username", value: username),
-                                                                                                      RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                      RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                                      RubyCommand.Argument(name: "p12_password", value: p12Password),
-                                                                                                      RubyCommand.Argument(name: "pem_name", value: pemName),
-                                                                                                      RubyCommand.Argument(name: "output_path", value: outputPath),
-                                                                                                      RubyCommand.Argument(name: "new_profile", value: newProfile)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func getPushCertificate(development: Bool = false,
                                websitePush: Bool = false,
@@ -5768,7 +3622,6 @@ public func getPushCertificate(development: Bool = false,
                                                                                                         RubyCommand.Argument(name: "output_path", value: outputPath),
                                                                                                         RubyCommand.Argument(name: "new_profile", value: newProfile)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5780,16 +3633,6 @@ public func getPushCertificate(development: Bool = false,
    - configuration: Configuration name, optional. Will be needed if you have altered the configurations from the default or your version number depends on the configuration selected
 
  This action will return the current version number set on your project.
-<<<<<<< Updated upstream
-*/
-@discardableResult func getVersionNumber(xcodeproj: String? = nil,
-                                         target: String? = nil,
-                                         configuration: String? = nil) -> String {
-  let command = RubyCommand(commandID: "", methodName: "get_version_number", className: nil, args: [RubyCommand.Argument(name: "xcodeproj", value: xcodeproj),
-                                                                                                    RubyCommand.Argument(name: "target", value: target),
-                                                                                                    RubyCommand.Argument(name: "configuration", value: configuration)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func getVersionNumber(xcodeproj: String? = nil,
                                                 target: String? = nil,
@@ -5799,7 +3642,6 @@ public func getPushCertificate(development: Bool = false,
                                                                                                       RubyCommand.Argument(name: "target", value: target),
                                                                                                       RubyCommand.Argument(name: "configuration", value: configuration)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5809,16 +3651,6 @@ public func getPushCertificate(development: Bool = false,
    - path: The file(s) and path(s) you want to add
    - shellEscape: Shell escapes paths (set to false if using wildcards or manually escaping spaces in :path)
    - pathspec: **DEPRECATED!** Use `--path` instead - The pathspec you want to add files from
-<<<<<<< Updated upstream
-*/
-func gitAdd(path: Any? = nil,
-            shellEscape: Bool = true,
-            pathspec: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "git_add", className: nil, args: [RubyCommand.Argument(name: "path", value: path),
-                                                                                         RubyCommand.Argument(name: "shell_escape", value: shellEscape),
-                                                                                         RubyCommand.Argument(name: "pathspec", value: pathspec)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func gitAdd(path: Any? = nil,
                    shellEscape: Bool = true,
@@ -5828,24 +3660,16 @@ public func gitAdd(path: Any? = nil,
                                                                                            RubyCommand.Argument(name: "shell_escape", value: shellEscape),
                                                                                            RubyCommand.Argument(name: "pathspec", value: pathspec)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Returns the name of the current git branch, possibly as managed by CI ENV vars
 
  If no branch could be found, this action will return an empty string
-<<<<<<< Updated upstream
-*/
-@discardableResult func gitBranch() -> String {
-  let command = RubyCommand(commandID: "", methodName: "git_branch", className: nil, args: [])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func gitBranch() -> String {
     let command = RubyCommand(commandID: "", methodName: "git_branch", className: nil, args: [])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5856,18 +3680,6 @@ public func gitAdd(path: Any? = nil,
    - message: The commit message that should be used
    - skipGitHooks: Set to true to pass --no-verify to git
    - allowNothingToCommit: Set to true to allow commit without any git changes
-<<<<<<< Updated upstream
-*/
-func gitCommit(path: Any,
-               message: String,
-               skipGitHooks: Bool? = nil,
-               allowNothingToCommit: Bool? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "git_commit", className: nil, args: [RubyCommand.Argument(name: "path", value: path),
-                                                                                            RubyCommand.Argument(name: "message", value: message),
-                                                                                            RubyCommand.Argument(name: "skip_git_hooks", value: skipGitHooks),
-                                                                                            RubyCommand.Argument(name: "allow_nothing_to_commit", value: allowNothingToCommit)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func gitCommit(path: Any,
                       message: String,
@@ -5879,19 +3691,11 @@ public func gitCommit(path: Any,
                                                                                               RubyCommand.Argument(name: "skip_git_hooks", value: skipGitHooks),
                                                                                               RubyCommand.Argument(name: "allow_nothing_to_commit", value: allowNothingToCommit)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Executes a simple git pull command
 
-<<<<<<< Updated upstream
- - parameter onlyTags: Simply pull the tags, and not bring new commits to the current branch from the remote
-*/
-func gitPull(onlyTags: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "git_pull", className: nil, args: [RubyCommand.Argument(name: "only_tags", value: onlyTags)])
-  _ = runner.executeCommand(command)
-=======
  - parameters:
    - onlyTags: Simply pull the tags, and not bring new commits to the current branch from the remote
    - rebase: Rebase on top of the remote branch instead of merge
@@ -5902,7 +3706,6 @@ public func gitPull(onlyTags: Bool = false,
     let command = RubyCommand(commandID: "", methodName: "git_pull", className: nil, args: [RubyCommand.Argument(name: "only_tags", value: onlyTags),
                                                                                             RubyCommand.Argument(name: "rebase", value: rebase)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5911,14 +3714,6 @@ public func gitPull(onlyTags: Bool = false,
  - parameters:
    - recursive: Should the submodules be updated recursively
    - init: Should the submodules be initiated before update
-<<<<<<< Updated upstream
-*/
-func gitSubmoduleUpdate(recursive: Bool = false,
-                        `init`: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "git_submodule_update", className: nil, args: [RubyCommand.Argument(name: "recursive", value: recursive),
-                                                                                                      RubyCommand.Argument(name: "init", value: `init`)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func gitSubmoduleUpdate(recursive: Bool = false,
                                init: Bool = false)
@@ -5926,7 +3721,6 @@ public func gitSubmoduleUpdate(recursive: Bool = false,
     let command = RubyCommand(commandID: "", methodName: "git_submodule_update", className: nil, args: [RubyCommand.Argument(name: "recursive", value: recursive),
                                                                                                         RubyCommand.Argument(name: "init", value: `init`)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5938,16 +3732,6 @@ public func gitSubmoduleUpdate(recursive: Bool = false,
    - remoteName: The remote to check. Defaults to `origin`
 
  - returns: Boolean value whether the tag exists or not
-<<<<<<< Updated upstream
-*/
-func gitTagExists(tag: String,
-                  remote: Bool = false,
-                  remoteName: String = "origin") {
-  let command = RubyCommand(commandID: "", methodName: "git_tag_exists", className: nil, args: [RubyCommand.Argument(name: "tag", value: tag),
-                                                                                                RubyCommand.Argument(name: "remote", value: remote),
-                                                                                                RubyCommand.Argument(name: "remote_name", value: remoteName)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func gitTagExists(tag: String,
                          remote: Bool = false,
@@ -5957,7 +3741,6 @@ public func gitTagExists(tag: String,
                                                                                                   RubyCommand.Argument(name: "remote", value: remote),
                                                                                                   RubyCommand.Argument(name: "remote_name", value: remoteName)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -5980,30 +3763,6 @@ public func gitTagExists(tag: String,
  Calls any GitHub API endpoint. You must provide your GitHub Personal token (get one from [https://github.com/settings/tokens/new](https://github.com/settings/tokens/new)).
  Out parameters provide the status code and the full response JSON if valid, otherwise the raw response body.
  Documentation: [https://developer.github.com/v3](https://developer.github.com/v3).
-<<<<<<< Updated upstream
-*/
-func githubApi(serverUrl: String = "https://api.github.com",
-               apiToken: String,
-               httpMethod: String = "GET",
-               body: [String : Any] = [:],
-               rawBody: String? = nil,
-               path: String? = nil,
-               url: String? = nil,
-               errorHandlers: [String : Any] = [:],
-               headers: [String : Any] = [:],
-               secure: Bool = true) {
-  let command = RubyCommand(commandID: "", methodName: "github_api", className: nil, args: [RubyCommand.Argument(name: "server_url", value: serverUrl),
-                                                                                            RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                            RubyCommand.Argument(name: "http_method", value: httpMethod),
-                                                                                            RubyCommand.Argument(name: "body", value: body),
-                                                                                            RubyCommand.Argument(name: "raw_body", value: rawBody),
-                                                                                            RubyCommand.Argument(name: "path", value: path),
-                                                                                            RubyCommand.Argument(name: "url", value: url),
-                                                                                            RubyCommand.Argument(name: "error_handlers", value: errorHandlers),
-                                                                                            RubyCommand.Argument(name: "headers", value: headers),
-                                                                                            RubyCommand.Argument(name: "secure", value: secure)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func githubApi(serverUrl: String = "https://api.github.com",
                       apiToken: String,
@@ -6064,7 +3823,6 @@ public func googlePlayTrackReleaseNames(packageName: String,
                                                                                                                    RubyCommand.Argument(name: "root_url", value: rootUrl),
                                                                                                                    RubyCommand.Argument(name: "timeout", value: timeout)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -6083,26 +3841,6 @@ public func googlePlayTrackReleaseNames(packageName: String,
  - returns: Array of integers representing the version codes for the given Google Play track
 
  More information: [https://docs.fastlane.tools/actions/supply/](https://docs.fastlane.tools/actions/supply/)
-<<<<<<< Updated upstream
-*/
-func googlePlayTrackVersionCodes(packageName: String,
-                                 track: String = "production",
-                                 key: String? = nil,
-                                 issuer: String? = nil,
-                                 jsonKey: String? = nil,
-                                 jsonKeyData: String? = nil,
-                                 rootUrl: String? = nil,
-                                 timeout: Int = 300) {
-  let command = RubyCommand(commandID: "", methodName: "google_play_track_version_codes", className: nil, args: [RubyCommand.Argument(name: "package_name", value: packageName),
-                                                                                                                 RubyCommand.Argument(name: "track", value: track),
-                                                                                                                 RubyCommand.Argument(name: "key", value: key),
-                                                                                                                 RubyCommand.Argument(name: "issuer", value: issuer),
-                                                                                                                 RubyCommand.Argument(name: "json_key", value: jsonKey),
-                                                                                                                 RubyCommand.Argument(name: "json_key_data", value: jsonKeyData),
-                                                                                                                 RubyCommand.Argument(name: "root_url", value: rootUrl),
-                                                                                                                 RubyCommand.Argument(name: "timeout", value: timeout)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func googlePlayTrackVersionCodes(packageName: String,
                                         track: String = "production",
@@ -6122,7 +3860,6 @@ public func googlePlayTrackVersionCodes(packageName: String,
                                                                                                                    RubyCommand.Argument(name: "root_url", value: rootUrl),
                                                                                                                    RubyCommand.Argument(name: "timeout", value: timeout)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -6145,34 +3882,6 @@ public func googlePlayTrackVersionCodes(packageName: String,
  - returns: The output of running the gradle task
 
  Run `./gradlew tasks` to get a list of all available gradle tasks for your project
-<<<<<<< Updated upstream
-*/
-func gradle(task: String? = nil,
-            flavor: String? = nil,
-            buildType: String? = nil,
-            tasks: [String]? = nil,
-            flags: String? = nil,
-            projectDir: String = ".",
-            gradlePath: String? = nil,
-            properties: Any? = nil,
-            systemProperties: Any? = nil,
-            serial: String = "",
-            printCommand: Bool = true,
-            printCommandOutput: Bool = true) {
-  let command = RubyCommand(commandID: "", methodName: "gradle", className: nil, args: [RubyCommand.Argument(name: "task", value: task),
-                                                                                        RubyCommand.Argument(name: "flavor", value: flavor),
-                                                                                        RubyCommand.Argument(name: "build_type", value: buildType),
-                                                                                        RubyCommand.Argument(name: "tasks", value: tasks),
-                                                                                        RubyCommand.Argument(name: "flags", value: flags),
-                                                                                        RubyCommand.Argument(name: "project_dir", value: projectDir),
-                                                                                        RubyCommand.Argument(name: "gradle_path", value: gradlePath),
-                                                                                        RubyCommand.Argument(name: "properties", value: properties),
-                                                                                        RubyCommand.Argument(name: "system_properties", value: systemProperties),
-                                                                                        RubyCommand.Argument(name: "serial", value: serial),
-                                                                                        RubyCommand.Argument(name: "print_command", value: printCommand),
-                                                                                        RubyCommand.Argument(name: "print_command_output", value: printCommandOutput)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func gradle(task: String? = nil,
                    flavor: String? = nil,
@@ -6200,7 +3909,6 @@ public func gradle(task: String? = nil,
                                                                                           RubyCommand.Argument(name: "print_command", value: printCommand),
                                                                                           RubyCommand.Argument(name: "print_command_output", value: printCommandOutput)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -6255,98 +3963,6 @@ public func gradle(task: String? = nil,
  - returns: The absolute path to the generated ipa file
 
  More information: https://fastlane.tools/gym
-<<<<<<< Updated upstream
-*/
-func gym(workspace: Any? = gymfile.workspace,
-         project: Any? = gymfile.project,
-         scheme: Any? = gymfile.scheme,
-         clean: Bool = gymfile.clean,
-         outputDirectory: Any = gymfile.outputDirectory,
-         outputName: Any? = gymfile.outputName,
-         configuration: Any? = gymfile.configuration,
-         silent: Bool = gymfile.silent,
-         codesigningIdentity: Any? = gymfile.codesigningIdentity,
-         skipPackageIpa: Bool = gymfile.skipPackageIpa,
-         skipPackagePkg: Bool = gymfile.skipPackagePkg,
-         includeSymbols: Bool? = gymfile.includeSymbols,
-         includeBitcode: Bool? = gymfile.includeBitcode,
-         exportMethod: Any? = gymfile.exportMethod,
-         exportOptions: [String : Any]? = gymfile.exportOptions,
-         exportXcargs: Any? = gymfile.exportXcargs,
-         skipBuildArchive: Bool? = gymfile.skipBuildArchive,
-         skipArchive: Bool? = gymfile.skipArchive,
-         skipCodesigning: Bool? = gymfile.skipCodesigning,
-         catalystPlatform: Any? = gymfile.catalystPlatform,
-         installerCertName: Any? = gymfile.installerCertName,
-         buildPath: Any? = gymfile.buildPath,
-         archivePath: Any? = gymfile.archivePath,
-         derivedDataPath: Any? = gymfile.derivedDataPath,
-         resultBundle: Bool = gymfile.resultBundle,
-         resultBundlePath: Any? = gymfile.resultBundlePath,
-         buildlogPath: Any = gymfile.buildlogPath,
-         sdk: Any? = gymfile.sdk,
-         toolchain: Any? = gymfile.toolchain,
-         destination: Any? = gymfile.destination,
-         exportTeamId: Any? = gymfile.exportTeamId,
-         xcargs: Any? = gymfile.xcargs,
-         xcconfig: Any? = gymfile.xcconfig,
-         suppressXcodeOutput: Bool? = gymfile.suppressXcodeOutput,
-         disableXcpretty: Bool? = gymfile.disableXcpretty,
-         xcprettyTestFormat: Bool? = gymfile.xcprettyTestFormat,
-         xcprettyFormatter: Any? = gymfile.xcprettyFormatter,
-         xcprettyReportJunit: Any? = gymfile.xcprettyReportJunit,
-         xcprettyReportHtml: Any? = gymfile.xcprettyReportHtml,
-         xcprettyReportJson: Any? = gymfile.xcprettyReportJson,
-         analyzeBuildTime: Bool? = gymfile.analyzeBuildTime,
-         xcprettyUtf: Bool? = gymfile.xcprettyUtf,
-         skipProfileDetection: Bool = gymfile.skipProfileDetection,
-         clonedSourcePackagesPath: Any? = gymfile.clonedSourcePackagesPath) {
-  let command = RubyCommand(commandID: "", methodName: "gym", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
-                                                                                     RubyCommand.Argument(name: "project", value: project),
-                                                                                     RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                     RubyCommand.Argument(name: "clean", value: clean),
-                                                                                     RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                     RubyCommand.Argument(name: "output_name", value: outputName),
-                                                                                     RubyCommand.Argument(name: "configuration", value: configuration),
-                                                                                     RubyCommand.Argument(name: "silent", value: silent),
-                                                                                     RubyCommand.Argument(name: "codesigning_identity", value: codesigningIdentity),
-                                                                                     RubyCommand.Argument(name: "skip_package_ipa", value: skipPackageIpa),
-                                                                                     RubyCommand.Argument(name: "skip_package_pkg", value: skipPackagePkg),
-                                                                                     RubyCommand.Argument(name: "include_symbols", value: includeSymbols),
-                                                                                     RubyCommand.Argument(name: "include_bitcode", value: includeBitcode),
-                                                                                     RubyCommand.Argument(name: "export_method", value: exportMethod),
-                                                                                     RubyCommand.Argument(name: "export_options", value: exportOptions),
-                                                                                     RubyCommand.Argument(name: "export_xcargs", value: exportXcargs),
-                                                                                     RubyCommand.Argument(name: "skip_build_archive", value: skipBuildArchive),
-                                                                                     RubyCommand.Argument(name: "skip_archive", value: skipArchive),
-                                                                                     RubyCommand.Argument(name: "skip_codesigning", value: skipCodesigning),
-                                                                                     RubyCommand.Argument(name: "catalyst_platform", value: catalystPlatform),
-                                                                                     RubyCommand.Argument(name: "installer_cert_name", value: installerCertName),
-                                                                                     RubyCommand.Argument(name: "build_path", value: buildPath),
-                                                                                     RubyCommand.Argument(name: "archive_path", value: archivePath),
-                                                                                     RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath),
-                                                                                     RubyCommand.Argument(name: "result_bundle", value: resultBundle),
-                                                                                     RubyCommand.Argument(name: "result_bundle_path", value: resultBundlePath),
-                                                                                     RubyCommand.Argument(name: "buildlog_path", value: buildlogPath),
-                                                                                     RubyCommand.Argument(name: "sdk", value: sdk),
-                                                                                     RubyCommand.Argument(name: "toolchain", value: toolchain),
-                                                                                     RubyCommand.Argument(name: "destination", value: destination),
-                                                                                     RubyCommand.Argument(name: "export_team_id", value: exportTeamId),
-                                                                                     RubyCommand.Argument(name: "xcargs", value: xcargs),
-                                                                                     RubyCommand.Argument(name: "xcconfig", value: xcconfig),
-                                                                                     RubyCommand.Argument(name: "suppress_xcode_output", value: suppressXcodeOutput),
-                                                                                     RubyCommand.Argument(name: "disable_xcpretty", value: disableXcpretty),
-                                                                                     RubyCommand.Argument(name: "xcpretty_test_format", value: xcprettyTestFormat),
-                                                                                     RubyCommand.Argument(name: "xcpretty_formatter", value: xcprettyFormatter),
-                                                                                     RubyCommand.Argument(name: "xcpretty_report_junit", value: xcprettyReportJunit),
-                                                                                     RubyCommand.Argument(name: "xcpretty_report_html", value: xcprettyReportHtml),
-                                                                                     RubyCommand.Argument(name: "xcpretty_report_json", value: xcprettyReportJson),
-                                                                                     RubyCommand.Argument(name: "analyze_build_time", value: analyzeBuildTime),
-                                                                                     RubyCommand.Argument(name: "xcpretty_utf", value: xcprettyUtf),
-                                                                                     RubyCommand.Argument(name: "skip_profile_detection", value: skipProfileDetection),
-                                                                                     RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func gym(workspace: Any? = gymfile.workspace,
                 project: Any? = gymfile.project,
@@ -6438,24 +4054,16 @@ public func gym(workspace: Any? = gymfile.workspace,
                                                                                        RubyCommand.Argument(name: "skip_profile_detection", value: skipProfileDetection),
                                                                                        RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  This will add a hg tag to the current branch
 
  - parameter tag: Tag to create
-<<<<<<< Updated upstream
-*/
-func hgAddTag(tag: String) {
-  let command = RubyCommand(commandID: "", methodName: "hg_add_tag", className: nil, args: [RubyCommand.Argument(name: "tag", value: tag)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func hgAddTag(tag: String) {
     let command = RubyCommand(commandID: "", methodName: "hg_add_tag", className: nil, args: [RubyCommand.Argument(name: "tag", value: tag)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -6477,20 +4085,6 @@ public func hgAddTag(tag: String) {
  Then commits those files to the repo.
  Customize the message with the `:message` option, defaults to 'Version Bump'
  If you have other uncommitted changes in your repo, this action will fail. If you started off in a clean repo, and used the _ipa_ and or _sigh_ actions, then you can use the [clean_build_artifacts](https://docs.fastlane.tools/actions/clean_build_artifacts/) action to clean those temporary files up before running this action.
-<<<<<<< Updated upstream
-*/
-func hgCommitVersionBump(message: String = "Version Bump",
-                         xcodeproj: String? = nil,
-                         force: Bool = false,
-                         testDirtyFiles: String = "file1, file2",
-                         testExpectedFiles: String = "file1, file2") {
-  let command = RubyCommand(commandID: "", methodName: "hg_commit_version_bump", className: nil, args: [RubyCommand.Argument(name: "message", value: message),
-                                                                                                        RubyCommand.Argument(name: "xcodeproj", value: xcodeproj),
-                                                                                                        RubyCommand.Argument(name: "force", value: force),
-                                                                                                        RubyCommand.Argument(name: "test_dirty_files", value: testDirtyFiles),
-                                                                                                        RubyCommand.Argument(name: "test_expected_files", value: testExpectedFiles)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func hgCommitVersionBump(message: String = "Version Bump",
                                 xcodeproj: String? = nil,
@@ -6504,24 +4098,16 @@ public func hgCommitVersionBump(message: String = "Version Bump",
                                                                                                           RubyCommand.Argument(name: "test_dirty_files", value: testDirtyFiles),
                                                                                                           RubyCommand.Argument(name: "test_expected_files", value: testExpectedFiles)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Raises an exception if there are uncommitted hg changes
 
  Along the same lines as the [ensure_git_status_clean](https://docs.fastlane.tools/actions/ensure_git_status_clean/) action, this is a sanity check to ensure the working mercurial repo is clean. Especially useful to put at the beginning of your Fastfile in the `before_all` block.
-<<<<<<< Updated upstream
-*/
-func hgEnsureCleanStatus() {
-  let command = RubyCommand(commandID: "", methodName: "hg_ensure_clean_status", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func hgEnsureCleanStatus() {
     let command = RubyCommand(commandID: "", methodName: "hg_ensure_clean_status", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -6532,14 +4118,6 @@ public func hgEnsureCleanStatus() {
    - destination: The destination to push to
 
  The mercurial equivalent of [push_to_git_remote](https://docs.fastlane.tools/actions/push_to_git_remote/). Pushes your local commits to a remote mercurial repo. Useful when local changes such as adding a version bump commit or adding a tag are part of your lane’s actions.
-<<<<<<< Updated upstream
-*/
-func hgPush(force: Bool = false,
-            destination: String = "") {
-  let command = RubyCommand(commandID: "", methodName: "hg_push", className: nil, args: [RubyCommand.Argument(name: "force", value: force),
-                                                                                         RubyCommand.Argument(name: "destination", value: destination)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func hgPush(force: Bool = false,
                    destination: String = "")
@@ -6547,7 +4125,6 @@ public func hgPush(force: Bool = false,
     let command = RubyCommand(commandID: "", methodName: "hg_push", className: nil, args: [RubyCommand.Argument(name: "force", value: force),
                                                                                            RubyCommand.Argument(name: "destination", value: destination)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -6567,32 +4144,6 @@ public func hgPush(force: Bool = false,
    - from: Name the message will appear to be sent from
 
  Send a message to **room** (by default) or a direct message to **@username** with success (green) or failure (red) status.
-<<<<<<< Updated upstream
-*/
-func hipchat(message: String = "",
-             channel: String,
-             apiToken: String,
-             customColor: String? = nil,
-             success: Bool = true,
-             version: String,
-             notifyRoom: Bool = false,
-             apiHost: String = "api.hipchat.com",
-             messageFormat: String = "html",
-             includeHtmlHeader: Bool = true,
-             from: String = "fastlane") {
-  let command = RubyCommand(commandID: "", methodName: "hipchat", className: nil, args: [RubyCommand.Argument(name: "message", value: message),
-                                                                                         RubyCommand.Argument(name: "channel", value: channel),
-                                                                                         RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                         RubyCommand.Argument(name: "custom_color", value: customColor),
-                                                                                         RubyCommand.Argument(name: "success", value: success),
-                                                                                         RubyCommand.Argument(name: "version", value: version),
-                                                                                         RubyCommand.Argument(name: "notify_room", value: notifyRoom),
-                                                                                         RubyCommand.Argument(name: "api_host", value: apiHost),
-                                                                                         RubyCommand.Argument(name: "message_format", value: messageFormat),
-                                                                                         RubyCommand.Argument(name: "include_html_header", value: includeHtmlHeader),
-                                                                                         RubyCommand.Argument(name: "from", value: from)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func hipchat(message: String = "",
                     channel: String,
@@ -6618,7 +4169,6 @@ public func hipchat(message: String = "",
                                                                                            RubyCommand.Argument(name: "include_html_header", value: includeHtmlHeader),
                                                                                            RubyCommand.Argument(name: "from", value: from)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -6655,67 +4205,9 @@ public func hipchat(message: String = "",
 
  HockeyApp will be no longer supported and will be transitioned into App Center on November 16, 2019.
  Please migrate over to [App Center](https://github.com/Microsoft/fastlane-plugin-appcenter/)
- 
+
  Symbols will also be uploaded automatically if a `app.dSYM.zip` file is found next to `app.ipa`. In case it is located in a different place you can specify the path explicitly in the `:dsym` parameter.
  More information about the available options can be found in the [HockeyApp Docs](http://support.hockeyapp.net/kb/api/api-versions#upload-version).
-<<<<<<< Updated upstream
-*/
-func hockey(apk: String? = nil,
-            apiToken: String,
-            ipa: String? = nil,
-            dsym: String? = nil,
-            createUpdate: Bool = false,
-            notes: String = "No changelog given",
-            notify: String = "1",
-            status: String = "2",
-            createStatus: String = "2",
-            notesType: String = "1",
-            releaseType: String = "0",
-            mandatory: String = "0",
-            teams: String? = nil,
-            users: String? = nil,
-            tags: String? = nil,
-            bundleShortVersion: String? = nil,
-            bundleVersion: String? = nil,
-            publicIdentifier: String? = nil,
-            commitSha: String? = nil,
-            repositoryUrl: String? = nil,
-            buildServerUrl: String? = nil,
-            uploadDsymOnly: Bool = false,
-            ownerId: String? = nil,
-            strategy: String = "add",
-            timeout: Int? = nil,
-            bypassCdn: Bool = false,
-            dsaSignature: String = "") {
-  let command = RubyCommand(commandID: "", methodName: "hockey", className: nil, args: [RubyCommand.Argument(name: "apk", value: apk),
-                                                                                        RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                        RubyCommand.Argument(name: "ipa", value: ipa),
-                                                                                        RubyCommand.Argument(name: "dsym", value: dsym),
-                                                                                        RubyCommand.Argument(name: "create_update", value: createUpdate),
-                                                                                        RubyCommand.Argument(name: "notes", value: notes),
-                                                                                        RubyCommand.Argument(name: "notify", value: notify),
-                                                                                        RubyCommand.Argument(name: "status", value: status),
-                                                                                        RubyCommand.Argument(name: "create_status", value: createStatus),
-                                                                                        RubyCommand.Argument(name: "notes_type", value: notesType),
-                                                                                        RubyCommand.Argument(name: "release_type", value: releaseType),
-                                                                                        RubyCommand.Argument(name: "mandatory", value: mandatory),
-                                                                                        RubyCommand.Argument(name: "teams", value: teams),
-                                                                                        RubyCommand.Argument(name: "users", value: users),
-                                                                                        RubyCommand.Argument(name: "tags", value: tags),
-                                                                                        RubyCommand.Argument(name: "bundle_short_version", value: bundleShortVersion),
-                                                                                        RubyCommand.Argument(name: "bundle_version", value: bundleVersion),
-                                                                                        RubyCommand.Argument(name: "public_identifier", value: publicIdentifier),
-                                                                                        RubyCommand.Argument(name: "commit_sha", value: commitSha),
-                                                                                        RubyCommand.Argument(name: "repository_url", value: repositoryUrl),
-                                                                                        RubyCommand.Argument(name: "build_server_url", value: buildServerUrl),
-                                                                                        RubyCommand.Argument(name: "upload_dsym_only", value: uploadDsymOnly),
-                                                                                        RubyCommand.Argument(name: "owner_id", value: ownerId),
-                                                                                        RubyCommand.Argument(name: "strategy", value: strategy),
-                                                                                        RubyCommand.Argument(name: "timeout", value: timeout),
-                                                                                        RubyCommand.Argument(name: "bypass_cdn", value: bypassCdn),
-                                                                                        RubyCommand.Argument(name: "dsa_signature", value: dsaSignature)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func hockey(apk: String? = nil,
                    apiToken: String,
@@ -6773,7 +4265,6 @@ public func hockey(apk: String? = nil,
                                                                                           RubyCommand.Argument(name: "bypass_cdn", value: bypassCdn),
                                                                                           RubyCommand.Argument(name: "dsa_signature", value: dsaSignature)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -6787,20 +4278,6 @@ public func hockey(apk: String? = nil,
    - value3: Extra data sent with the event
 
  Connect to the IFTTT [Maker Channel](https://ifttt.com/maker). An IFTTT Recipe has two components: a Trigger and an Action. In this case, the Trigger will fire every time the Maker Channel receives a web request (made by this _fastlane_ action) to notify it of an event. The Action can be anything that IFTTT supports: email, SMS, etc.
-<<<<<<< Updated upstream
-*/
-func ifttt(apiKey: String,
-           eventName: String,
-           value1: String? = nil,
-           value2: String? = nil,
-           value3: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "ifttt", className: nil, args: [RubyCommand.Argument(name: "api_key", value: apiKey),
-                                                                                       RubyCommand.Argument(name: "event_name", value: eventName),
-                                                                                       RubyCommand.Argument(name: "value1", value: value1),
-                                                                                       RubyCommand.Argument(name: "value2", value: value2),
-                                                                                       RubyCommand.Argument(name: "value3", value: value3)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func ifttt(apiKey: String,
                   eventName: String,
@@ -6814,7 +4291,6 @@ public func ifttt(apiKey: String,
                                                                                          RubyCommand.Argument(name: "value2", value: value2),
                                                                                          RubyCommand.Argument(name: "value3", value: value3)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -6829,22 +4305,6 @@ public func ifttt(apiKey: String,
    - logOutput: If output should be logged to the console
 
  Import certificates (and private keys) into the current default keychain. Use the `create_keychain` action to create a new keychain.
-<<<<<<< Updated upstream
-*/
-func importCertificate(certificatePath: String,
-                       certificatePassword: String? = nil,
-                       keychainName: String,
-                       keychainPath: String? = nil,
-                       keychainPassword: String? = nil,
-                       logOutput: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "import_certificate", className: nil, args: [RubyCommand.Argument(name: "certificate_path", value: certificatePath),
-                                                                                                    RubyCommand.Argument(name: "certificate_password", value: certificatePassword),
-                                                                                                    RubyCommand.Argument(name: "keychain_name", value: keychainName),
-                                                                                                    RubyCommand.Argument(name: "keychain_path", value: keychainPath),
-                                                                                                    RubyCommand.Argument(name: "keychain_password", value: keychainPassword),
-                                                                                                    RubyCommand.Argument(name: "log_output", value: logOutput)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func importCertificate(certificatePath: String,
                               certificatePassword: String? = nil,
@@ -6860,7 +4320,6 @@ public func importCertificate(certificatePath: String,
                                                                                                       RubyCommand.Argument(name: "keychain_password", value: keychainPassword),
                                                                                                       RubyCommand.Argument(name: "log_output", value: logOutput)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -6871,14 +4330,6 @@ public func importCertificate(certificatePath: String,
    - xcodeproj: optional, you must specify the path to your main Xcode project if it is not in the project root directory
 
  - returns: The new build number
-<<<<<<< Updated upstream
-*/
-@discardableResult func incrementBuildNumber(buildNumber: Any? = nil,
-                                             xcodeproj: String? = nil) -> String {
-  let command = RubyCommand(commandID: "", methodName: "increment_build_number", className: nil, args: [RubyCommand.Argument(name: "build_number", value: buildNumber),
-                                                                                                        RubyCommand.Argument(name: "xcodeproj", value: xcodeproj)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func incrementBuildNumber(buildNumber: Any? = nil,
                                                     xcodeproj: String? = nil) -> String
@@ -6886,7 +4337,6 @@ public func importCertificate(certificatePath: String,
     let command = RubyCommand(commandID: "", methodName: "increment_build_number", className: nil, args: [RubyCommand.Argument(name: "build_number", value: buildNumber),
                                                                                                           RubyCommand.Argument(name: "xcodeproj", value: xcodeproj)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -6901,16 +4351,6 @@ public func importCertificate(certificatePath: String,
 
  This action will increment the version number.
  You first have to set up your Xcode project, if you haven't done it already: [https://developer.apple.com/library/ios/qa/qa1827/_index.html](https://developer.apple.com/library/ios/qa/qa1827/_index.html).
-<<<<<<< Updated upstream
-*/
-@discardableResult func incrementVersionNumber(bumpType: String = "bump",
-                                               versionNumber: String? = nil,
-                                               xcodeproj: String? = nil) -> String {
-  let command = RubyCommand(commandID: "", methodName: "increment_version_number", className: nil, args: [RubyCommand.Argument(name: "bump_type", value: bumpType),
-                                                                                                          RubyCommand.Argument(name: "version_number", value: versionNumber),
-                                                                                                          RubyCommand.Argument(name: "xcodeproj", value: xcodeproj)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func incrementVersionNumber(bumpType: String = "bump",
                                                       versionNumber: String? = nil,
@@ -6920,7 +4360,6 @@ public func importCertificate(certificatePath: String,
                                                                                                             RubyCommand.Argument(name: "version_number", value: versionNumber),
                                                                                                             RubyCommand.Argument(name: "xcodeproj", value: xcodeproj)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -6933,18 +4372,6 @@ public func importCertificate(certificatePath: String,
    - ipa: The IPA file to put on the device
 
  Installs the ipa on the device. If no id is given, the first found iOS device will be used. Works via USB or Wi-Fi. This requires `ios-deploy` to be installed. Please have a look at [ios-deploy](https://github.com/ios-control/ios-deploy). To quickly install it, use `npm -g i ios-deploy`
-<<<<<<< Updated upstream
-*/
-func installOnDevice(extra: String? = nil,
-                     deviceId: String? = nil,
-                     skipWifi: Any? = nil,
-                     ipa: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "install_on_device", className: nil, args: [RubyCommand.Argument(name: "extra", value: extra),
-                                                                                                   RubyCommand.Argument(name: "device_id", value: deviceId),
-                                                                                                   RubyCommand.Argument(name: "skip_wifi", value: skipWifi),
-                                                                                                   RubyCommand.Argument(name: "ipa", value: ipa)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func installOnDevice(extra: String? = nil,
                             deviceId: String? = nil,
@@ -6956,7 +4383,6 @@ public func installOnDevice(extra: String? = nil,
                                                                                                      RubyCommand.Argument(name: "skip_wifi", value: skipWifi),
                                                                                                      RubyCommand.Argument(name: "ipa", value: ipa)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -6967,17 +4393,10 @@ public func installOnDevice(extra: String? = nil,
  - returns: The absolute path to the installed provisioning profile
 
  Install provisioning profile from path for current user
-<<<<<<< Updated upstream
-*/
-func installProvisioningProfile(path: String) {
-  let command = RubyCommand(commandID: "", methodName: "install_provisioning_profile", className: nil, args: [RubyCommand.Argument(name: "path", value: path)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func installProvisioningProfile(path: String) {
     let command = RubyCommand(commandID: "", methodName: "install_provisioning_profile", className: nil, args: [RubyCommand.Argument(name: "path", value: path)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -6986,14 +4405,6 @@ public func installProvisioningProfile(path: String) {
  - parameters:
    - url: URL for Xcode plugin ZIP file
    - github: GitHub repository URL for Xcode plugin
-<<<<<<< Updated upstream
-*/
-func installXcodePlugin(url: String,
-                        github: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "install_xcode_plugin", className: nil, args: [RubyCommand.Argument(name: "url", value: url),
-                                                                                                      RubyCommand.Argument(name: "github", value: github)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func installXcodePlugin(url: String,
                                github: String? = nil)
@@ -7001,7 +4412,6 @@ public func installXcodePlugin(url: String,
     let command = RubyCommand(commandID: "", methodName: "install_xcode_plugin", className: nil, args: [RubyCommand.Argument(name: "url", value: url),
                                                                                                         RubyCommand.Argument(name: "github", value: github)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -7013,20 +4423,6 @@ public func installXcodePlugin(url: String,
    - notes: Release notes
    - notify: Groups to notify (e.g. 'dev,qa')
    - add: Groups to add (e.g. 'exec,ops')
-<<<<<<< Updated upstream
-*/
-func installr(apiToken: String,
-              ipa: String,
-              notes: String? = nil,
-              notify: String? = nil,
-              add: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "installr", className: nil, args: [RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                          RubyCommand.Argument(name: "ipa", value: ipa),
-                                                                                          RubyCommand.Argument(name: "notes", value: notes),
-                                                                                          RubyCommand.Argument(name: "notify", value: notify),
-                                                                                          RubyCommand.Argument(name: "add", value: add)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func installr(apiToken: String,
                      ipa: String,
@@ -7040,7 +4436,6 @@ public func installr(apiToken: String,
                                                                                             RubyCommand.Argument(name: "notify", value: notify),
                                                                                             RubyCommand.Argument(name: "add", value: add)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -7060,36 +4455,6 @@ public func installr(apiToken: String,
    - ipa: Specify the name of the .ipa file to generate (including file extension)
    - xcconfig: Use an extra XCCONFIG file to build the app
    - xcargs: Pass additional arguments to xcodebuild when building the app. Be sure to quote multiple args
-<<<<<<< Updated upstream
-*/
-func ipa(workspace: String? = nil,
-         project: String? = nil,
-         configuration: String? = nil,
-         scheme: String? = nil,
-         clean: Any? = nil,
-         archive: Any? = nil,
-         destination: String? = nil,
-         embed: String? = nil,
-         identity: String? = nil,
-         sdk: String? = nil,
-         ipa: String? = nil,
-         xcconfig: String? = nil,
-         xcargs: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "ipa", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
-                                                                                     RubyCommand.Argument(name: "project", value: project),
-                                                                                     RubyCommand.Argument(name: "configuration", value: configuration),
-                                                                                     RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                     RubyCommand.Argument(name: "clean", value: clean),
-                                                                                     RubyCommand.Argument(name: "archive", value: archive),
-                                                                                     RubyCommand.Argument(name: "destination", value: destination),
-                                                                                     RubyCommand.Argument(name: "embed", value: embed),
-                                                                                     RubyCommand.Argument(name: "identity", value: identity),
-                                                                                     RubyCommand.Argument(name: "sdk", value: sdk),
-                                                                                     RubyCommand.Argument(name: "ipa", value: ipa),
-                                                                                     RubyCommand.Argument(name: "xcconfig", value: xcconfig),
-                                                                                     RubyCommand.Argument(name: "xcargs", value: xcargs)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func ipa(workspace: String? = nil,
                 project: String? = nil,
@@ -7119,41 +4484,26 @@ public func ipa(workspace: String? = nil,
                                                                                        RubyCommand.Argument(name: "xcconfig", value: xcconfig),
                                                                                        RubyCommand.Argument(name: "xcargs", value: xcargs)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Is the current run being executed on a CI system, like Jenkins or Travis
 
  The return value of this method is true if fastlane is currently executed on Travis, Jenkins, Circle or a similar CI service
-<<<<<<< Updated upstream
-*/
-@discardableResult func isCi() -> Bool {
-  let command = RubyCommand(commandID: "", methodName: "is_ci", className: nil, args: [])
-  return parseBool(fromString: runner.executeCommand(command))
-=======
  */
 @discardableResult public func isCi() -> Bool {
     let command = RubyCommand(commandID: "", methodName: "is_ci", className: nil, args: [])
     return parseBool(fromString: runner.executeCommand(command))
->>>>>>> Stashed changes
 }
 
 /**
  Generate docs using Jazzy
 
  - parameter config: Path to jazzy config file
-<<<<<<< Updated upstream
-*/
-func jazzy(config: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "jazzy", className: nil, args: [RubyCommand.Argument(name: "config", value: config)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func jazzy(config: String? = nil) {
     let command = RubyCommand(commandID: "", methodName: "jazzy", className: nil, args: [RubyCommand.Argument(name: "config", value: config)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -7166,22 +4516,6 @@ public func jazzy(config: String? = nil) {
    - password: Password for Jira
    - ticketId: Ticket ID for Jira, i.e. IOS-123
    - commentText: Text to add to the ticket as a comment
-<<<<<<< Updated upstream
-*/
-func jira(url: String,
-          contextPath: String = "",
-          username: String,
-          password: String,
-          ticketId: String,
-          commentText: String) {
-  let command = RubyCommand(commandID: "", methodName: "jira", className: nil, args: [RubyCommand.Argument(name: "url", value: url),
-                                                                                      RubyCommand.Argument(name: "context_path", value: contextPath),
-                                                                                      RubyCommand.Argument(name: "username", value: username),
-                                                                                      RubyCommand.Argument(name: "password", value: password),
-                                                                                      RubyCommand.Argument(name: "ticket_id", value: ticketId),
-                                                                                      RubyCommand.Argument(name: "comment_text", value: commentText)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func jira(url: String,
                  contextPath: String = "",
@@ -7197,7 +4531,6 @@ public func jira(url: String,
                                                                                         RubyCommand.Argument(name: "ticket_id", value: ticketId),
                                                                                         RubyCommand.Argument(name: "comment_text", value: commentText)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -7205,34 +4538,20 @@ public func jira(url: String,
 
  Access the fastlane lane context values.
  More information about how the lane context works: [https://docs.fastlane.tools/advanced/#lane-context](https://docs.fastlane.tools/advanced/#lane-context).
-<<<<<<< Updated upstream
-*/
-@discardableResult func laneContext() -> [String : Any] {
-  let command = RubyCommand(commandID: "", methodName: "lane_context", className: nil, args: [])
-  return parseDictionary(fromString: runner.executeCommand(command))
-=======
  */
 @discardableResult public func laneContext() -> [String: Any] {
     let command = RubyCommand(commandID: "", methodName: "lane_context", className: nil, args: [])
     return parseDictionary(fromString: runner.executeCommand(command))
->>>>>>> Stashed changes
 }
 
 /**
  Return last git commit hash, abbreviated commit hash, commit message and author
 
  - returns: Returns the following dict: {commit_hash: "commit hash", abbreviated_commit_hash: "abbreviated commit hash" author: "Author", author_email: "author email", message: "commit message"}. Example: {:message=>"message", :author=>"author", :author_email=>"author_email", :commit_hash=>"commit_hash", :abbreviated_commit_hash=>"short_hash"}
-<<<<<<< Updated upstream
-*/
-@discardableResult func lastGitCommit() -> [String : String] {
-  let command = RubyCommand(commandID: "", methodName: "last_git_commit", className: nil, args: [])
-  return parseDictionary(fromString: runner.executeCommand(command))
-=======
  */
 @discardableResult public func lastGitCommit() -> [String: String] {
     let command = RubyCommand(commandID: "", methodName: "last_git_commit", className: nil, args: [])
     return parseDictionary(fromString: runner.executeCommand(command))
->>>>>>> Stashed changes
 }
 
 /**
@@ -7242,17 +4561,10 @@ public func jira(url: String,
 
  If you are using this action on a **shallow clone**, *the default with some CI systems like Bamboo*, you need to ensure that you have also pulled all the git tags appropriately. Assuming your git repo has the correct remote set you can issue `sh('git fetch --tags')`.
  Pattern parameter allows you to filter to a subset of tags.
-<<<<<<< Updated upstream
-*/
-@discardableResult func lastGitTag(pattern: String? = nil) -> String {
-  let command = RubyCommand(commandID: "", methodName: "last_git_tag", className: nil, args: [RubyCommand.Argument(name: "pattern", value: pattern)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func lastGitTag(pattern: String? = nil) -> String {
     let command = RubyCommand(commandID: "", methodName: "last_git_tag", className: nil, args: [RubyCommand.Argument(name: "pattern", value: pattern)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -7272,26 +4584,6 @@ public func jira(url: String,
 
  Provides a way to have `increment_build_number` be based on the latest build you uploaded to iTC.
  Fetches the most recent build number from TestFlight based on the version number. Provides a way to have `increment_build_number` be based on the latest build you uploaded to iTC.
-<<<<<<< Updated upstream
-*/
-@discardableResult func latestTestflightBuildNumber(live: Bool = false,
-                                                    appIdentifier: String,
-                                                    username: String,
-                                                    version: String? = nil,
-                                                    platform: String = "ios",
-                                                    initialBuildNumber: Int = 1,
-                                                    teamId: Any? = nil,
-                                                    teamName: String? = nil) -> Int {
-  let command = RubyCommand(commandID: "", methodName: "latest_testflight_build_number", className: nil, args: [RubyCommand.Argument(name: "live", value: live),
-                                                                                                                RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                                                RubyCommand.Argument(name: "username", value: username),
-                                                                                                                RubyCommand.Argument(name: "version", value: version),
-                                                                                                                RubyCommand.Argument(name: "platform", value: platform),
-                                                                                                                RubyCommand.Argument(name: "initial_build_number", value: initialBuildNumber),
-                                                                                                                RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                                RubyCommand.Argument(name: "team_name", value: teamName)])
-  return parseInt(fromString: runner.executeCommand(command))
-=======
  */
 @discardableResult public func latestTestflightBuildNumber(live: Bool = false,
                                                            appIdentifier: String,
@@ -7311,7 +4603,6 @@ public func jira(url: String,
                                                                                                                   RubyCommand.Argument(name: "team_id", value: teamId),
                                                                                                                   RubyCommand.Argument(name: "team_name", value: teamName)])
     return parseInt(fromString: runner.executeCommand(command))
->>>>>>> Stashed changes
 }
 
 /**
@@ -7322,18 +4613,6 @@ public func jira(url: String,
    - scheme: Scheme of the project
    - arch: The build arch where will search .gcda files
    - outputDir: The output directory that coverage data will be stored. If not passed will use coverage_reports as default value
-<<<<<<< Updated upstream
-*/
-func lcov(projectName: String,
-          scheme: String,
-          arch: String = "i386",
-          outputDir: String = "coverage_reports") {
-  let command = RubyCommand(commandID: "", methodName: "lcov", className: nil, args: [RubyCommand.Argument(name: "project_name", value: projectName),
-                                                                                      RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                      RubyCommand.Argument(name: "arch", value: arch),
-                                                                                      RubyCommand.Argument(name: "output_dir", value: outputDir)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func lcov(projectName: String,
                  scheme: String,
@@ -7345,7 +4624,6 @@ public func lcov(projectName: String,
                                                                                         RubyCommand.Argument(name: "arch", value: arch),
                                                                                         RubyCommand.Argument(name: "output_dir", value: outputDir)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -7368,42 +4646,6 @@ public func lcov(projectName: String,
    - replyTo: Mail Reply to
    - attachment: Mail Attachment filenames, either an array or just one string
    - customPlaceholders: Placeholders for template given as a hash
-<<<<<<< Updated upstream
-*/
-func mailgun(mailgunSandboxDomain: String? = nil,
-             mailgunSandboxPostmaster: String? = nil,
-             mailgunApikey: String? = nil,
-             postmaster: String,
-             apikey: String,
-             to: String,
-             from: String = "Mailgun Sandbox",
-             message: String,
-             subject: String = "fastlane build",
-             success: Bool = true,
-             appLink: String,
-             ciBuildLink: String? = nil,
-             templatePath: String? = nil,
-             replyTo: String? = nil,
-             attachment: Any? = nil,
-             customPlaceholders: [String : Any] = [:]) {
-  let command = RubyCommand(commandID: "", methodName: "mailgun", className: nil, args: [RubyCommand.Argument(name: "mailgun_sandbox_domain", value: mailgunSandboxDomain),
-                                                                                         RubyCommand.Argument(name: "mailgun_sandbox_postmaster", value: mailgunSandboxPostmaster),
-                                                                                         RubyCommand.Argument(name: "mailgun_apikey", value: mailgunApikey),
-                                                                                         RubyCommand.Argument(name: "postmaster", value: postmaster),
-                                                                                         RubyCommand.Argument(name: "apikey", value: apikey),
-                                                                                         RubyCommand.Argument(name: "to", value: to),
-                                                                                         RubyCommand.Argument(name: "from", value: from),
-                                                                                         RubyCommand.Argument(name: "message", value: message),
-                                                                                         RubyCommand.Argument(name: "subject", value: subject),
-                                                                                         RubyCommand.Argument(name: "success", value: success),
-                                                                                         RubyCommand.Argument(name: "app_link", value: appLink),
-                                                                                         RubyCommand.Argument(name: "ci_build_link", value: ciBuildLink),
-                                                                                         RubyCommand.Argument(name: "template_path", value: templatePath),
-                                                                                         RubyCommand.Argument(name: "reply_to", value: replyTo),
-                                                                                         RubyCommand.Argument(name: "attachment", value: attachment),
-                                                                                         RubyCommand.Argument(name: "custom_placeholders", value: customPlaceholders)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func mailgun(mailgunSandboxDomain: String? = nil,
                     mailgunSandboxPostmaster: String? = nil,
@@ -7439,7 +4681,6 @@ public func mailgun(mailgunSandboxDomain: String? = nil,
                                                                                            RubyCommand.Argument(name: "attachment", value: attachment),
                                                                                            RubyCommand.Argument(name: "custom_placeholders", value: customPlaceholders)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -7450,14 +4691,6 @@ public func mailgun(mailgunSandboxDomain: String? = nil,
    - includeCommitBody: Include the commit body along with the summary
 
  This is useful when deploying automated builds. The changelog from Jenkins lists all the commit messages since the last build.
-<<<<<<< Updated upstream
-*/
-func makeChangelogFromJenkins(fallbackChangelog: String = "",
-                              includeCommitBody: Bool = true) {
-  let command = RubyCommand(commandID: "", methodName: "make_changelog_from_jenkins", className: nil, args: [RubyCommand.Argument(name: "fallback_changelog", value: fallbackChangelog),
-                                                                                                             RubyCommand.Argument(name: "include_commit_body", value: includeCommitBody)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func makeChangelogFromJenkins(fallbackChangelog: String = "",
                                      includeCommitBody: Bool = true)
@@ -7465,7 +4698,6 @@ public func makeChangelogFromJenkins(fallbackChangelog: String = "",
     let command = RubyCommand(commandID: "", methodName: "make_changelog_from_jenkins", className: nil, args: [RubyCommand.Argument(name: "fallback_changelog", value: fallbackChangelog),
                                                                                                                RubyCommand.Argument(name: "include_commit_body", value: includeCommitBody)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -7498,6 +4730,7 @@ public func makeChangelogFromJenkins(fallbackChangelog: String = "",
    - s3AccessKey: S3 access key
    - s3SecretAccessKey: S3 secret access key
    - s3Bucket: Name of the S3 bucket
+   - s3ObjectPrefix: Prefix to be used on all objects uploaded to S3
    - keychainName: Keychain the items should be imported to
    - keychainPassword: This might be required the first time you access certificates on a new mac. For the login/default keychain this is your account password
    - force: Renew the provisioning profiles every time you run match
@@ -7513,84 +4746,6 @@ public func makeChangelogFromJenkins(fallbackChangelog: String = "",
    - verbose: Print out extra information and all commands
 
  More information: https://docs.fastlane.tools/actions/match/
-<<<<<<< Updated upstream
-*/
-func match(type: Any = matchfile.type,
-           additionalCertTypes: [String]? = matchfile.additionalCertTypes,
-           readonly: Bool = matchfile.readonly,
-           generateAppleCerts: Bool = matchfile.generateAppleCerts,
-           skipProvisioningProfiles: Bool = matchfile.skipProvisioningProfiles,
-           appIdentifier: [String] = matchfile.appIdentifier,
-           username: Any = matchfile.username,
-           teamId: Any? = matchfile.teamId,
-           teamName: Any? = matchfile.teamName,
-           storageMode: Any = matchfile.storageMode,
-           gitUrl: Any = matchfile.gitUrl,
-           gitBranch: Any = matchfile.gitBranch,
-           gitFullName: Any? = matchfile.gitFullName,
-           gitUserEmail: Any? = matchfile.gitUserEmail,
-           shallowClone: Bool = matchfile.shallowClone,
-           cloneBranchDirectly: Bool = matchfile.cloneBranchDirectly,
-           gitBasicAuthorization: Any? = matchfile.gitBasicAuthorization,
-           gitBearerAuthorization: Any? = matchfile.gitBearerAuthorization,
-           googleCloudBucketName: Any? = matchfile.googleCloudBucketName,
-           googleCloudKeysFile: Any? = matchfile.googleCloudKeysFile,
-           googleCloudProjectId: Any? = matchfile.googleCloudProjectId,
-           s3Region: Any? = matchfile.s3Region,
-           s3AccessKey: Any? = matchfile.s3AccessKey,
-           s3SecretAccessKey: Any? = matchfile.s3SecretAccessKey,
-           s3Bucket: Any? = matchfile.s3Bucket,
-           keychainName: Any = matchfile.keychainName,
-           keychainPassword: Any? = matchfile.keychainPassword,
-           force: Bool = matchfile.force,
-           forceForNewDevices: Bool = matchfile.forceForNewDevices,
-           skipConfirmation: Bool = matchfile.skipConfirmation,
-           skipDocs: Bool = matchfile.skipDocs,
-           platform: Any = matchfile.platform,
-           templateName: Any? = matchfile.templateName,
-           profileName: Any? = matchfile.profileName,
-           failOnNameTaken: Bool = matchfile.failOnNameTaken,
-           outputPath: Any? = matchfile.outputPath,
-           verbose: Bool = matchfile.verbose) {
-  let command = RubyCommand(commandID: "", methodName: "match", className: nil, args: [RubyCommand.Argument(name: "type", value: type),
-                                                                                       RubyCommand.Argument(name: "additional_cert_types", value: additionalCertTypes),
-                                                                                       RubyCommand.Argument(name: "readonly", value: readonly),
-                                                                                       RubyCommand.Argument(name: "generate_apple_certs", value: generateAppleCerts),
-                                                                                       RubyCommand.Argument(name: "skip_provisioning_profiles", value: skipProvisioningProfiles),
-                                                                                       RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                       RubyCommand.Argument(name: "username", value: username),
-                                                                                       RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                       RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                       RubyCommand.Argument(name: "storage_mode", value: storageMode),
-                                                                                       RubyCommand.Argument(name: "git_url", value: gitUrl),
-                                                                                       RubyCommand.Argument(name: "git_branch", value: gitBranch),
-                                                                                       RubyCommand.Argument(name: "git_full_name", value: gitFullName),
-                                                                                       RubyCommand.Argument(name: "git_user_email", value: gitUserEmail),
-                                                                                       RubyCommand.Argument(name: "shallow_clone", value: shallowClone),
-                                                                                       RubyCommand.Argument(name: "clone_branch_directly", value: cloneBranchDirectly),
-                                                                                       RubyCommand.Argument(name: "git_basic_authorization", value: gitBasicAuthorization),
-                                                                                       RubyCommand.Argument(name: "git_bearer_authorization", value: gitBearerAuthorization),
-                                                                                       RubyCommand.Argument(name: "google_cloud_bucket_name", value: googleCloudBucketName),
-                                                                                       RubyCommand.Argument(name: "google_cloud_keys_file", value: googleCloudKeysFile),
-                                                                                       RubyCommand.Argument(name: "google_cloud_project_id", value: googleCloudProjectId),
-                                                                                       RubyCommand.Argument(name: "s3_region", value: s3Region),
-                                                                                       RubyCommand.Argument(name: "s3_access_key", value: s3AccessKey),
-                                                                                       RubyCommand.Argument(name: "s3_secret_access_key", value: s3SecretAccessKey),
-                                                                                       RubyCommand.Argument(name: "s3_bucket", value: s3Bucket),
-                                                                                       RubyCommand.Argument(name: "keychain_name", value: keychainName),
-                                                                                       RubyCommand.Argument(name: "keychain_password", value: keychainPassword),
-                                                                                       RubyCommand.Argument(name: "force", value: force),
-                                                                                       RubyCommand.Argument(name: "force_for_new_devices", value: forceForNewDevices),
-                                                                                       RubyCommand.Argument(name: "skip_confirmation", value: skipConfirmation),
-                                                                                       RubyCommand.Argument(name: "skip_docs", value: skipDocs),
-                                                                                       RubyCommand.Argument(name: "platform", value: platform),
-                                                                                       RubyCommand.Argument(name: "template_name", value: templateName),
-                                                                                       RubyCommand.Argument(name: "profile_name", value: profileName),
-                                                                                       RubyCommand.Argument(name: "fail_on_name_taken", value: failOnNameTaken),
-                                                                                       RubyCommand.Argument(name: "output_path", value: outputPath),
-                                                                                       RubyCommand.Argument(name: "verbose", value: verbose)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func match(type: Any = matchfile.type,
                   additionalCertTypes: [String]? = matchfile.additionalCertTypes,
@@ -7674,7 +4829,6 @@ public func match(type: Any = matchfile.type,
                                                                                          RubyCommand.Argument(name: "output_path", value: outputPath),
                                                                                          RubyCommand.Argument(name: "verbose", value: verbose)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -7682,17 +4836,10 @@ public func match(type: Any = matchfile.type,
 
  Add this to your `Fastfile` to require a certain version of _fastlane_.
  Use it if you use an action that just recently came out and you need it.
-<<<<<<< Updated upstream
-*/
-func minFastlaneVersion() {
-  let command = RubyCommand(commandID: "", methodName: "min_fastlane_version", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func minFastlaneVersion() {
     let command = RubyCommand(commandID: "", methodName: "min_fastlane_version", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -7706,20 +4853,6 @@ public func minFastlaneVersion() {
    - teamName: The name of your Developer Portal team if you're in multiple teams
 
  The options are the same as `:enable_services` in the [produce action](https://docs.fastlane.tools/actions/produce/#parameters_1)
-<<<<<<< Updated upstream
-*/
-func modifyServices(username: String,
-                    appIdentifier: String,
-                    services: [String : Any] = [:],
-                    teamId: String? = nil,
-                    teamName: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "modify_services", className: nil, args: [RubyCommand.Argument(name: "username", value: username),
-                                                                                                 RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                                 RubyCommand.Argument(name: "services", value: services),
-                                                                                                 RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                 RubyCommand.Argument(name: "team_name", value: teamName)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func modifyServices(username: String,
                            appIdentifier: String,
@@ -7733,7 +4866,6 @@ public func modifyServices(username: String,
                                                                                                    RubyCommand.Argument(name: "team_id", value: teamId),
                                                                                                    RubyCommand.Argument(name: "team_name", value: teamName)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -7757,44 +4889,6 @@ public func modifyServices(username: String,
    - proxyPassword: Proxy password
    - proxyAddress: Proxy address
    - proxyPort: Proxy port
-<<<<<<< Updated upstream
-*/
-func nexusUpload(file: String,
-                 repoId: String,
-                 repoGroupId: String,
-                 repoProjectName: String,
-                 repoProjectVersion: String,
-                 repoClassifier: String? = nil,
-                 endpoint: String,
-                 mountPath: String = "/nexus",
-                 username: String,
-                 password: String,
-                 sslVerify: Bool = true,
-                 nexusVersion: Int = 2,
-                 verbose: Bool = false,
-                 proxyUsername: String? = nil,
-                 proxyPassword: String? = nil,
-                 proxyAddress: String? = nil,
-                 proxyPort: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "nexus_upload", className: nil, args: [RubyCommand.Argument(name: "file", value: file),
-                                                                                              RubyCommand.Argument(name: "repo_id", value: repoId),
-                                                                                              RubyCommand.Argument(name: "repo_group_id", value: repoGroupId),
-                                                                                              RubyCommand.Argument(name: "repo_project_name", value: repoProjectName),
-                                                                                              RubyCommand.Argument(name: "repo_project_version", value: repoProjectVersion),
-                                                                                              RubyCommand.Argument(name: "repo_classifier", value: repoClassifier),
-                                                                                              RubyCommand.Argument(name: "endpoint", value: endpoint),
-                                                                                              RubyCommand.Argument(name: "mount_path", value: mountPath),
-                                                                                              RubyCommand.Argument(name: "username", value: username),
-                                                                                              RubyCommand.Argument(name: "password", value: password),
-                                                                                              RubyCommand.Argument(name: "ssl_verify", value: sslVerify),
-                                                                                              RubyCommand.Argument(name: "nexus_version", value: nexusVersion),
-                                                                                              RubyCommand.Argument(name: "verbose", value: verbose),
-                                                                                              RubyCommand.Argument(name: "proxy_username", value: proxyUsername),
-                                                                                              RubyCommand.Argument(name: "proxy_password", value: proxyPassword),
-                                                                                              RubyCommand.Argument(name: "proxy_address", value: proxyAddress),
-                                                                                              RubyCommand.Argument(name: "proxy_port", value: proxyPort)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func nexusUpload(file: String,
                         repoId: String,
@@ -7832,7 +4926,6 @@ public func nexusUpload(file: String,
                                                                                                 RubyCommand.Argument(name: "proxy_address", value: proxyAddress),
                                                                                                 RubyCommand.Argument(name: "proxy_port", value: proxyPort)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -7846,24 +4939,6 @@ public func nexusUpload(file: String,
    - ascProvider: Provider short name for accounts associated with multiple providers
    - printLog: Whether to print notarization log file, listing issues on failure and warnings on success
    - verbose: Whether to log requests
-<<<<<<< Updated upstream
-*/
-func notarize(package: String,
-              tryEarlyStapling: Bool = false,
-              bundleId: String? = nil,
-              username: String,
-              ascProvider: String? = nil,
-              printLog: Bool = false,
-              verbose: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "notarize", className: nil, args: [RubyCommand.Argument(name: "package", value: package),
-                                                                                          RubyCommand.Argument(name: "try_early_stapling", value: tryEarlyStapling),
-                                                                                          RubyCommand.Argument(name: "bundle_id", value: bundleId),
-                                                                                          RubyCommand.Argument(name: "username", value: username),
-                                                                                          RubyCommand.Argument(name: "asc_provider", value: ascProvider),
-                                                                                          RubyCommand.Argument(name: "print_log", value: printLog),
-                                                                                          RubyCommand.Argument(name: "verbose", value: verbose)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func notarize(package: String,
                      tryEarlyStapling: Bool = false,
@@ -7881,7 +4956,6 @@ public func notarize(package: String,
                                                                                             RubyCommand.Argument(name: "print_log", value: printLog),
                                                                                             RubyCommand.Argument(name: "verbose", value: verbose)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -7897,28 +4971,6 @@ public func notarize(package: String,
    - contentImage: The URL of an image to display attached to the notification (Mavericks+ only)
    - open: URL of the resource to be opened when the notification is clicked
    - execute: Shell command to run when the notification is clicked
-<<<<<<< Updated upstream
-*/
-func notification(title: String = "fastlane",
-                  subtitle: String? = nil,
-                  message: String,
-                  sound: String? = nil,
-                  activate: String? = nil,
-                  appIcon: String? = nil,
-                  contentImage: String? = nil,
-                  open: String? = nil,
-                  execute: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "notification", className: nil, args: [RubyCommand.Argument(name: "title", value: title),
-                                                                                              RubyCommand.Argument(name: "subtitle", value: subtitle),
-                                                                                              RubyCommand.Argument(name: "message", value: message),
-                                                                                              RubyCommand.Argument(name: "sound", value: sound),
-                                                                                              RubyCommand.Argument(name: "activate", value: activate),
-                                                                                              RubyCommand.Argument(name: "app_icon", value: appIcon),
-                                                                                              RubyCommand.Argument(name: "content_image", value: contentImage),
-                                                                                              RubyCommand.Argument(name: "open", value: open),
-                                                                                              RubyCommand.Argument(name: "execute", value: execute)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func notification(title: String = "fastlane",
                          subtitle: String? = nil,
@@ -7940,22 +4992,14 @@ public func notification(title: String = "fastlane",
                                                                                                 RubyCommand.Argument(name: "open", value: open),
                                                                                                 RubyCommand.Argument(name: "execute", value: execute)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Shows a macOS notification - use `notification` instead
-<<<<<<< Updated upstream
-*/
-func notify() {
-  let command = RubyCommand(commandID: "", methodName: "notify", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func notify() {
     let command = RubyCommand(commandID: "", methodName: "notify", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -7966,17 +5010,10 @@ public func notify() {
  - returns: The total number of all commits in current git branch
 
  You can use this action to get the number of commits of this branch. This is useful if you want to set the build number to the number of commits. See `fastlane actions number_of_commits` for more details.
-<<<<<<< Updated upstream
-*/
-@discardableResult func numberOfCommits(all: Any? = nil) -> Int {
-  let command = RubyCommand(commandID: "", methodName: "number_of_commits", className: nil, args: [RubyCommand.Argument(name: "all", value: all)])
-  return parseInt(fromString: runner.executeCommand(command))
-=======
  */
 @discardableResult public func numberOfCommits(all: Any? = nil) -> Int {
     let command = RubyCommand(commandID: "", methodName: "number_of_commits", className: nil, args: [RubyCommand.Argument(name: "all", value: all)])
     return parseInt(fromString: runner.executeCommand(command))
->>>>>>> Stashed changes
 }
 
 /**
@@ -8004,48 +5041,6 @@ public func notify() {
    - extraArg: Additional argument to append to the compiler command line
 
  Run the static analyzer tool [OCLint](http://oclint.org) for your project. You need to have a `compile_commands.json` file in your _fastlane_ directory or pass a path to your file.
-<<<<<<< Updated upstream
-*/
-func oclint(oclintPath: String = "oclint",
-            compileCommands: String = "compile_commands.json",
-            selectReqex: Any? = nil,
-            selectRegex: Any? = nil,
-            excludeRegex: Any? = nil,
-            reportType: String = "html",
-            reportPath: String? = nil,
-            listEnabledRules: Bool = false,
-            rc: String? = nil,
-            thresholds: Any? = nil,
-            enableRules: Any? = nil,
-            disableRules: Any? = nil,
-            maxPriority1: Any? = nil,
-            maxPriority2: Any? = nil,
-            maxPriority3: Any? = nil,
-            enableClangStaticAnalyzer: Bool = false,
-            enableGlobalAnalysis: Bool = false,
-            allowDuplicatedViolations: Bool = false,
-            extraArg: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "oclint", className: nil, args: [RubyCommand.Argument(name: "oclint_path", value: oclintPath),
-                                                                                        RubyCommand.Argument(name: "compile_commands", value: compileCommands),
-                                                                                        RubyCommand.Argument(name: "select_reqex", value: selectReqex),
-                                                                                        RubyCommand.Argument(name: "select_regex", value: selectRegex),
-                                                                                        RubyCommand.Argument(name: "exclude_regex", value: excludeRegex),
-                                                                                        RubyCommand.Argument(name: "report_type", value: reportType),
-                                                                                        RubyCommand.Argument(name: "report_path", value: reportPath),
-                                                                                        RubyCommand.Argument(name: "list_enabled_rules", value: listEnabledRules),
-                                                                                        RubyCommand.Argument(name: "rc", value: rc),
-                                                                                        RubyCommand.Argument(name: "thresholds", value: thresholds),
-                                                                                        RubyCommand.Argument(name: "enable_rules", value: enableRules),
-                                                                                        RubyCommand.Argument(name: "disable_rules", value: disableRules),
-                                                                                        RubyCommand.Argument(name: "max_priority_1", value: maxPriority1),
-                                                                                        RubyCommand.Argument(name: "max_priority_2", value: maxPriority2),
-                                                                                        RubyCommand.Argument(name: "max_priority_3", value: maxPriority3),
-                                                                                        RubyCommand.Argument(name: "enable_clang_static_analyzer", value: enableClangStaticAnalyzer),
-                                                                                        RubyCommand.Argument(name: "enable_global_analysis", value: enableGlobalAnalysis),
-                                                                                        RubyCommand.Argument(name: "allow_duplicated_violations", value: allowDuplicatedViolations),
-                                                                                        RubyCommand.Argument(name: "extra_arg", value: extraArg)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func oclint(oclintPath: String = "oclint",
                    compileCommands: String = "compile_commands.json",
@@ -8087,7 +5082,6 @@ public func oclint(oclintPath: String = "oclint",
                                                                                           RubyCommand.Argument(name: "allow_duplicated_violations", value: allowDuplicatedViolations),
                                                                                           RubyCommand.Argument(name: "extra_arg", value: extraArg)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -8104,26 +5098,6 @@ public func oclint(oclintPath: String = "oclint",
    - apnsEnv: APNS environment
 
  You can use this action to automatically create or update a OneSignal application. You can also upload a `.p12` with password, a GCM key, or both.
-<<<<<<< Updated upstream
-*/
-func onesignal(appId: String? = nil,
-               authToken: String,
-               appName: String? = nil,
-               androidToken: String? = nil,
-               androidGcmSenderId: String? = nil,
-               apnsP12: String? = nil,
-               apnsP12Password: String? = nil,
-               apnsEnv: String = "production") {
-  let command = RubyCommand(commandID: "", methodName: "onesignal", className: nil, args: [RubyCommand.Argument(name: "app_id", value: appId),
-                                                                                           RubyCommand.Argument(name: "auth_token", value: authToken),
-                                                                                           RubyCommand.Argument(name: "app_name", value: appName),
-                                                                                           RubyCommand.Argument(name: "android_token", value: androidToken),
-                                                                                           RubyCommand.Argument(name: "android_gcm_sender_id", value: androidGcmSenderId),
-                                                                                           RubyCommand.Argument(name: "apns_p12", value: apnsP12),
-                                                                                           RubyCommand.Argument(name: "apns_p12_password", value: apnsP12Password),
-                                                                                           RubyCommand.Argument(name: "apns_env", value: apnsEnv)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func onesignal(appId: String? = nil,
                       authToken: String,
@@ -8143,24 +5117,16 @@ public func onesignal(appId: String? = nil,
                                                                                              RubyCommand.Argument(name: "apns_p12_password", value: apnsP12Password),
                                                                                              RubyCommand.Argument(name: "apns_env", value: apnsEnv)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  This will prevent reports from being uploaded when _fastlane_ crashes
 
  _fastlane_ doesn't have crash reporting any more. Feel free to remove `opt_out_crash_reporting` from your Fastfile.
-<<<<<<< Updated upstream
-*/
-func optOutCrashReporting() {
-  let command = RubyCommand(commandID: "", methodName: "opt_out_crash_reporting", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func optOutCrashReporting() {
     let command = RubyCommand(commandID: "", methodName: "opt_out_crash_reporting", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -8169,17 +5135,10 @@ public func optOutCrashReporting() {
  By default, _fastlane_ will track what actions are being used. No personal/sensitive information is recorded.
  Learn more at [https://docs.fastlane.tools/#metrics](https://docs.fastlane.tools/#metrics).
  Add `opt_out_usage` at the top of your Fastfile to disable metrics collection.
-<<<<<<< Updated upstream
-*/
-func optOutUsage() {
-  let command = RubyCommand(commandID: "", methodName: "opt_out_usage", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func optOutUsage() {
     let command = RubyCommand(commandID: "", methodName: "opt_out_usage", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -8212,38 +5171,6 @@ public func optOutUsage() {
  )|
  ```|
  >|
-<<<<<<< Updated upstream
-*/
-func pem(development: Bool = false,
-         websitePush: Bool = false,
-         generateP12: Bool = true,
-         activeDaysLimit: Int = 30,
-         force: Bool = false,
-         savePrivateKey: Bool = true,
-         appIdentifier: String,
-         username: String,
-         teamId: String? = nil,
-         teamName: String? = nil,
-         p12Password: String,
-         pemName: String? = nil,
-         outputPath: String = ".",
-         newProfile: Any? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "pem", className: nil, args: [RubyCommand.Argument(name: "development", value: development),
-                                                                                     RubyCommand.Argument(name: "website_push", value: websitePush),
-                                                                                     RubyCommand.Argument(name: "generate_p12", value: generateP12),
-                                                                                     RubyCommand.Argument(name: "active_days_limit", value: activeDaysLimit),
-                                                                                     RubyCommand.Argument(name: "force", value: force),
-                                                                                     RubyCommand.Argument(name: "save_private_key", value: savePrivateKey),
-                                                                                     RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                     RubyCommand.Argument(name: "username", value: username),
-                                                                                     RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                     RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                     RubyCommand.Argument(name: "p12_password", value: p12Password),
-                                                                                     RubyCommand.Argument(name: "pem_name", value: pemName),
-                                                                                     RubyCommand.Argument(name: "output_path", value: outputPath),
-                                                                                     RubyCommand.Argument(name: "new_profile", value: newProfile)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func pem(development: Bool = false,
                 websitePush: Bool = false,
@@ -8275,7 +5202,6 @@ public func pem(development: Bool = false,
                                                                                        RubyCommand.Argument(name: "output_path", value: outputPath),
                                                                                        RubyCommand.Argument(name: "new_profile", value: newProfile)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -8321,76 +5247,6 @@ public func pem(development: Bool = false,
 
  More details can be found on https://docs.fastlane.tools/actions/pilot/.
  This integration will only do the TestFlight upload.
-<<<<<<< Updated upstream
-*/
-func pilot(username: String,
-           appIdentifier: String? = nil,
-           appPlatform: String = "ios",
-           appleId: String? = nil,
-           ipa: String? = nil,
-           demoAccountRequired: Bool = false,
-           betaAppReviewInfo: [String : Any]? = nil,
-           localizedAppInfo: [String : Any]? = nil,
-           betaAppDescription: String? = nil,
-           betaAppFeedbackEmail: String? = nil,
-           localizedBuildInfo: [String : Any]? = nil,
-           changelog: String? = nil,
-           skipSubmission: Bool = false,
-           skipWaitingForBuildProcessing: Bool = false,
-           updateBuildInfoOnUpload: Bool = false,
-           usesNonExemptEncryption: Bool = false,
-           distributeExternal: Bool = false,
-           notifyExternalTesters: Bool = true,
-           appVersion: String? = nil,
-           buildNumber: String? = nil,
-           expirePreviousBuilds: Bool = false,
-           firstName: String? = nil,
-           lastName: String? = nil,
-           email: String? = nil,
-           testersFilePath: String = "./testers.csv",
-           groups: [String]? = nil,
-           teamId: Any? = nil,
-           teamName: String? = nil,
-           devPortalTeamId: String? = nil,
-           itcProvider: String? = nil,
-           waitProcessingInterval: Int = 30,
-           waitForUploadedBuild: Bool = false,
-           rejectBuildWaitingForReview: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "pilot", className: nil, args: [RubyCommand.Argument(name: "username", value: username),
-                                                                                       RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                       RubyCommand.Argument(name: "app_platform", value: appPlatform),
-                                                                                       RubyCommand.Argument(name: "apple_id", value: appleId),
-                                                                                       RubyCommand.Argument(name: "ipa", value: ipa),
-                                                                                       RubyCommand.Argument(name: "demo_account_required", value: demoAccountRequired),
-                                                                                       RubyCommand.Argument(name: "beta_app_review_info", value: betaAppReviewInfo),
-                                                                                       RubyCommand.Argument(name: "localized_app_info", value: localizedAppInfo),
-                                                                                       RubyCommand.Argument(name: "beta_app_description", value: betaAppDescription),
-                                                                                       RubyCommand.Argument(name: "beta_app_feedback_email", value: betaAppFeedbackEmail),
-                                                                                       RubyCommand.Argument(name: "localized_build_info", value: localizedBuildInfo),
-                                                                                       RubyCommand.Argument(name: "changelog", value: changelog),
-                                                                                       RubyCommand.Argument(name: "skip_submission", value: skipSubmission),
-                                                                                       RubyCommand.Argument(name: "skip_waiting_for_build_processing", value: skipWaitingForBuildProcessing),
-                                                                                       RubyCommand.Argument(name: "update_build_info_on_upload", value: updateBuildInfoOnUpload),
-                                                                                       RubyCommand.Argument(name: "uses_non_exempt_encryption", value: usesNonExemptEncryption),
-                                                                                       RubyCommand.Argument(name: "distribute_external", value: distributeExternal),
-                                                                                       RubyCommand.Argument(name: "notify_external_testers", value: notifyExternalTesters),
-                                                                                       RubyCommand.Argument(name: "app_version", value: appVersion),
-                                                                                       RubyCommand.Argument(name: "build_number", value: buildNumber),
-                                                                                       RubyCommand.Argument(name: "expire_previous_builds", value: expirePreviousBuilds),
-                                                                                       RubyCommand.Argument(name: "first_name", value: firstName),
-                                                                                       RubyCommand.Argument(name: "last_name", value: lastName),
-                                                                                       RubyCommand.Argument(name: "email", value: email),
-                                                                                       RubyCommand.Argument(name: "testers_file_path", value: testersFilePath),
-                                                                                       RubyCommand.Argument(name: "groups", value: groups),
-                                                                                       RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                       RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                       RubyCommand.Argument(name: "dev_portal_team_id", value: devPortalTeamId),
-                                                                                       RubyCommand.Argument(name: "itc_provider", value: itcProvider),
-                                                                                       RubyCommand.Argument(name: "wait_processing_interval", value: waitProcessingInterval),
-                                                                                       RubyCommand.Argument(name: "wait_for_uploaded_build", value: waitForUploadedBuild),
-                                                                                       RubyCommand.Argument(name: "reject_build_waiting_for_review", value: rejectBuildWaitingForReview)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func pilot(apiKeyPath: String? = nil,
                   apiKey: [String: Any]? = nil,
@@ -8466,26 +5322,12 @@ public func pilot(apiKeyPath: String? = nil,
                                                                                          RubyCommand.Argument(name: "wait_for_uploaded_build", value: waitForUploadedBuild),
                                                                                          RubyCommand.Argument(name: "reject_build_waiting_for_review", value: rejectBuildWaitingForReview)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  [31mNo description provided[0m
 
  - parameters:
-<<<<<<< Updated upstream
-   - outputPath: 
-   - templatePath: 
-   - cachePath: 
-*/
-func pluginScores(outputPath: String,
-                  templatePath: String,
-                  cachePath: String) {
-  let command = RubyCommand(commandID: "", methodName: "plugin_scores", className: nil, args: [RubyCommand.Argument(name: "output_path", value: outputPath),
-                                                                                               RubyCommand.Argument(name: "template_path", value: templatePath),
-                                                                                               RubyCommand.Argument(name: "cache_path", value: cachePath)])
-  _ = runner.executeCommand(command)
-=======
    - outputPath:
    - templatePath:
    - cachePath:
@@ -8498,7 +5340,6 @@ public func pluginScores(outputPath: String,
                                                                                                  RubyCommand.Argument(name: "template_path", value: templatePath),
                                                                                                  RubyCommand.Argument(name: "cache_path", value: cachePath)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -8527,50 +5368,6 @@ public func pluginScores(outputPath: String,
    - analyze: Validate with the Xcode Static Analysis tool (available since cocoapods >= 1.6.1)
 
  Test the syntax of your Podfile by linting the pod against the files of its directory
-<<<<<<< Updated upstream
-*/
-func podLibLint(useBundleExec: Bool = true,
-                podspec: String? = nil,
-                verbose: Bool? = nil,
-                allowWarnings: Bool? = nil,
-                sources: [String]? = nil,
-                subspec: String? = nil,
-                includePodspecs: String? = nil,
-                externalPodspecs: String? = nil,
-                swiftVersion: String? = nil,
-                useLibraries: Bool = false,
-                useModularHeaders: Bool = false,
-                failFast: Bool = false,
-                `private`: Bool = false,
-                quick: Bool = false,
-                noClean: Bool = false,
-                noSubspecs: Bool = false,
-                platforms: String? = nil,
-                skipImportValidation: Bool = false,
-                skipTests: Bool = false,
-                analyze: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "pod_lib_lint", className: nil, args: [RubyCommand.Argument(name: "use_bundle_exec", value: useBundleExec),
-                                                                                              RubyCommand.Argument(name: "podspec", value: podspec),
-                                                                                              RubyCommand.Argument(name: "verbose", value: verbose),
-                                                                                              RubyCommand.Argument(name: "allow_warnings", value: allowWarnings),
-                                                                                              RubyCommand.Argument(name: "sources", value: sources),
-                                                                                              RubyCommand.Argument(name: "subspec", value: subspec),
-                                                                                              RubyCommand.Argument(name: "include_podspecs", value: includePodspecs),
-                                                                                              RubyCommand.Argument(name: "external_podspecs", value: externalPodspecs),
-                                                                                              RubyCommand.Argument(name: "swift_version", value: swiftVersion),
-                                                                                              RubyCommand.Argument(name: "use_libraries", value: useLibraries),
-                                                                                              RubyCommand.Argument(name: "use_modular_headers", value: useModularHeaders),
-                                                                                              RubyCommand.Argument(name: "fail_fast", value: failFast),
-                                                                                              RubyCommand.Argument(name: "private", value: `private`),
-                                                                                              RubyCommand.Argument(name: "quick", value: quick),
-                                                                                              RubyCommand.Argument(name: "no_clean", value: noClean),
-                                                                                              RubyCommand.Argument(name: "no_subspecs", value: noSubspecs),
-                                                                                              RubyCommand.Argument(name: "platforms", value: platforms),
-                                                                                              RubyCommand.Argument(name: "skip_import_validation", value: skipImportValidation),
-                                                                                              RubyCommand.Argument(name: "skip_tests", value: skipTests),
-                                                                                              RubyCommand.Argument(name: "analyze", value: analyze)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func podLibLint(useBundleExec: Bool = true,
                        podspec: String? = nil,
@@ -8614,7 +5411,6 @@ public func podLibLint(useBundleExec: Bool = true,
                                                                                                 RubyCommand.Argument(name: "skip_tests", value: skipTests),
                                                                                                 RubyCommand.Argument(name: "analyze", value: analyze)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -8632,32 +5428,6 @@ public func podLibLint(useBundleExec: Bool = true,
    - skipTests: Lint skips building and running tests during validation
    - verbose: Show more debugging information
    - useModularHeaders: Use modular headers option during validation
-<<<<<<< Updated upstream
-*/
-func podPush(useBundleExec: Bool = false,
-             path: String? = nil,
-             repo: String? = nil,
-             allowWarnings: Bool? = nil,
-             useLibraries: Bool? = nil,
-             sources: [String]? = nil,
-             swiftVersion: String? = nil,
-             skipImportValidation: Bool? = nil,
-             skipTests: Bool? = nil,
-             verbose: Bool = false,
-             useModularHeaders: Bool? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "pod_push", className: nil, args: [RubyCommand.Argument(name: "use_bundle_exec", value: useBundleExec),
-                                                                                          RubyCommand.Argument(name: "path", value: path),
-                                                                                          RubyCommand.Argument(name: "repo", value: repo),
-                                                                                          RubyCommand.Argument(name: "allow_warnings", value: allowWarnings),
-                                                                                          RubyCommand.Argument(name: "use_libraries", value: useLibraries),
-                                                                                          RubyCommand.Argument(name: "sources", value: sources),
-                                                                                          RubyCommand.Argument(name: "swift_version", value: swiftVersion),
-                                                                                          RubyCommand.Argument(name: "skip_import_validation", value: skipImportValidation),
-                                                                                          RubyCommand.Argument(name: "skip_tests", value: skipTests),
-                                                                                          RubyCommand.Argument(name: "verbose", value: verbose),
-                                                                                          RubyCommand.Argument(name: "use_modular_headers", value: useModularHeaders)])
-  _ = runner.executeCommand(command)
-=======
    - synchronous: If validation depends on other recently pushed pods, synchronize
  */
 public func podPush(useBundleExec: Bool = false,
@@ -8686,7 +5456,6 @@ public func podPush(useBundleExec: Bool = false,
                                                                                             RubyCommand.Argument(name: "use_modular_headers", value: useModularHeaders),
                                                                                             RubyCommand.Argument(name: "synchronous", value: synchronous)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -8704,24 +5473,6 @@ public func podPush(useBundleExec: Bool = false,
  Use this action to create or update an item within your Podio app (see [https://help.podio.com/hc/en-us/articles/201019278-Creating-apps-](https://help.podio.com/hc/en-us/articles/201019278-Creating-apps-)).
  Pass in dictionary with field keys and their values.
  Field key is located under `Modify app` -> `Advanced` -> `Developer` -> `External ID` (see [https://developers.podio.com/examples/items](https://developers.podio.com/examples/items)).
-<<<<<<< Updated upstream
-*/
-func podioItem(clientId: String,
-               clientSecret: String,
-               appId: String,
-               appToken: String,
-               identifyingField: String,
-               identifyingValue: String,
-               otherFields: [String : Any]? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "podio_item", className: nil, args: [RubyCommand.Argument(name: "client_id", value: clientId),
-                                                                                            RubyCommand.Argument(name: "client_secret", value: clientSecret),
-                                                                                            RubyCommand.Argument(name: "app_id", value: appId),
-                                                                                            RubyCommand.Argument(name: "app_token", value: appToken),
-                                                                                            RubyCommand.Argument(name: "identifying_field", value: identifyingField),
-                                                                                            RubyCommand.Argument(name: "identifying_value", value: identifyingValue),
-                                                                                            RubyCommand.Argument(name: "other_fields", value: otherFields)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func podioItem(clientId: String,
                       clientSecret: String,
@@ -8739,7 +5490,6 @@ public func podioItem(clientId: String,
                                                                                               RubyCommand.Argument(name: "identifying_value", value: identifyingValue),
                                                                                               RubyCommand.Argument(name: "other_fields", value: otherFields)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -8760,24 +5510,6 @@ public func podioItem(clientId: String,
  - returns: true if precheck passes, else, false
 
  More information: https://fastlane.tools/precheck
-<<<<<<< Updated upstream
-*/
-func precheck(appIdentifier: Any = precheckfile.appIdentifier,
-              username: Any = precheckfile.username,
-              teamId: Any? = precheckfile.teamId,
-              teamName: Any? = precheckfile.teamName,
-              defaultRuleLevel: Any = precheckfile.defaultRuleLevel,
-              includeInAppPurchases: Bool = precheckfile.includeInAppPurchases,
-              freeStuffInIap: Any? = precheckfile.freeStuffInIap) {
-  let command = RubyCommand(commandID: "", methodName: "precheck", className: nil, args: [RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                          RubyCommand.Argument(name: "username", value: username),
-                                                                                          RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                          RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                          RubyCommand.Argument(name: "default_rule_level", value: defaultRuleLevel),
-                                                                                          RubyCommand.Argument(name: "include_in_app_purchases", value: includeInAppPurchases),
-                                                                                          RubyCommand.Argument(name: "free_stuff_in_iap", value: freeStuffInIap)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func precheck(apiKeyPath: Any? = precheckfile.apiKeyPath,
                      apiKey: [String: Any]? = precheckfile.apiKey,
@@ -8801,24 +5533,16 @@ public func precheck(apiKeyPath: Any? = precheckfile.apiKeyPath,
                                                                                             RubyCommand.Argument(name: "include_in_app_purchases", value: includeInAppPurchases),
                                                                                             RubyCommand.Argument(name: "free_stuff_in_iap", value: freeStuffInIap)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Alias for the `puts` action
 
  - parameter message: Message to be printed out
-<<<<<<< Updated upstream
-*/
-func println(message: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "println", className: nil, args: [RubyCommand.Argument(name: "message", value: message)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func println(message: String? = nil) {
     let command = RubyCommand(commandID: "", methodName: "println", className: nil, args: [RubyCommand.Argument(name: "message", value: message)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -8833,7 +5557,7 @@ public func println(message: String? = nil) {
    - sku: SKU Number (e.g. '1234')
    - platform: The platform to use (optional)
    - platforms: The platforms to use (optional)
-   - language: Primary Language (e.g. 'English', 'German')
+   - language: Primary Language (e.g. 'en-US', 'fr-FR')
    - companyName: The name of your company. Only required if it's the first app you create
    - skipItc: Skip the creation of the app on App Store Connect
    - itcUsers: Array of App Store Connect users. If provided, you can limit access to this newly created app for users with the App Manager, Developer, Marketer or Sales roles
@@ -8848,48 +5572,6 @@ public func println(message: String? = nil) {
  Create new apps on App Store Connect and Apple Developer Portal via _produce_.
  If the app already exists, `create_app_online` will not do anything.
  For more information about _produce_, visit its documentation page: [https://docs.fastlane.tools/actions/produce/](https://docs.fastlane.tools/actions/produce/).
-<<<<<<< Updated upstream
-*/
-func produce(username: String,
-             appIdentifier: String,
-             bundleIdentifierSuffix: String? = nil,
-             appName: String,
-             appVersion: String? = nil,
-             sku: String,
-             platform: String = "ios",
-             platforms: [String]? = nil,
-             language: String = "English",
-             companyName: String? = nil,
-             skipItc: Bool = false,
-             itcUsers: [String]? = nil,
-             enabledFeatures: [String : Any] = [:],
-             enableServices: [String : Any] = [:],
-             skipDevcenter: Bool = false,
-             teamId: String? = nil,
-             teamName: String? = nil,
-             itcTeamId: Any? = nil,
-             itcTeamName: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "produce", className: nil, args: [RubyCommand.Argument(name: "username", value: username),
-                                                                                         RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                         RubyCommand.Argument(name: "bundle_identifier_suffix", value: bundleIdentifierSuffix),
-                                                                                         RubyCommand.Argument(name: "app_name", value: appName),
-                                                                                         RubyCommand.Argument(name: "app_version", value: appVersion),
-                                                                                         RubyCommand.Argument(name: "sku", value: sku),
-                                                                                         RubyCommand.Argument(name: "platform", value: platform),
-                                                                                         RubyCommand.Argument(name: "platforms", value: platforms),
-                                                                                         RubyCommand.Argument(name: "language", value: language),
-                                                                                         RubyCommand.Argument(name: "company_name", value: companyName),
-                                                                                         RubyCommand.Argument(name: "skip_itc", value: skipItc),
-                                                                                         RubyCommand.Argument(name: "itc_users", value: itcUsers),
-                                                                                         RubyCommand.Argument(name: "enabled_features", value: enabledFeatures),
-                                                                                         RubyCommand.Argument(name: "enable_services", value: enableServices),
-                                                                                         RubyCommand.Argument(name: "skip_devcenter", value: skipDevcenter),
-                                                                                         RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                         RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                         RubyCommand.Argument(name: "itc_team_id", value: itcTeamId),
-                                                                                         RubyCommand.Argument(name: "itc_team_name", value: itcTeamName)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func produce(username: String,
                     appIdentifier: String,
@@ -8931,7 +5613,6 @@ public func produce(username: String,
                                                                                            RubyCommand.Argument(name: "itc_team_id", value: itcTeamId),
                                                                                            RubyCommand.Argument(name: "itc_team_name", value: itcTeamName)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -8947,20 +5628,6 @@ public func produce(username: String,
  You can use `prompt` to ask the user for a value or to just let the user confirm the next step.
  When this is executed on a CI service, the passed `ci_input` value will be returned.
  This action also supports multi-line inputs using the `multi_line_end_keyword` option.
-<<<<<<< Updated upstream
-*/
-@discardableResult func prompt(text: String = "Please enter some text: ",
-                               ciInput: String = "",
-                               boolean: Bool = false,
-                               secureText: Bool = false,
-                               multiLineEndKeyword: String? = nil) -> String {
-  let command = RubyCommand(commandID: "", methodName: "prompt", className: nil, args: [RubyCommand.Argument(name: "text", value: text),
-                                                                                        RubyCommand.Argument(name: "ci_input", value: ciInput),
-                                                                                        RubyCommand.Argument(name: "boolean", value: boolean),
-                                                                                        RubyCommand.Argument(name: "secure_text", value: secureText),
-                                                                                        RubyCommand.Argument(name: "multi_line_end_keyword", value: multiLineEndKeyword)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func prompt(text: String = "Please enter some text: ",
                                       ciInput: String = "",
@@ -8974,7 +5641,6 @@ public func produce(username: String,
                                                                                           RubyCommand.Argument(name: "secure_text", value: secureText),
                                                                                           RubyCommand.Argument(name: "multi_line_end_keyword", value: multiLineEndKeyword)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -8986,16 +5652,6 @@ public func produce(username: String,
    - tag: The tag to push to remote
 
  If you only want to push the tags and nothing else, you can use the `push_git_tags` action
-<<<<<<< Updated upstream
-*/
-func pushGitTags(force: Bool = false,
-                 remote: String = "origin",
-                 tag: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "push_git_tags", className: nil, args: [RubyCommand.Argument(name: "force", value: force),
-                                                                                               RubyCommand.Argument(name: "remote", value: remote),
-                                                                                               RubyCommand.Argument(name: "tag", value: tag)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func pushGitTags(force: Bool = false,
                         remote: String = "origin",
@@ -9005,7 +5661,6 @@ public func pushGitTags(force: Bool = false,
                                                                                                  RubyCommand.Argument(name: "remote", value: remote),
                                                                                                  RubyCommand.Argument(name: "tag", value: tag)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -9023,26 +5678,6 @@ public func pushGitTags(force: Bool = false,
 
  Lets you push your local commits to a remote git repo. Useful if you make local changes such as adding a version bump commit (using `commit_version_bump`) or a git tag (using 'add_git_tag') on a CI server, and you want to push those changes back to your canonical/main repo.
  If this is a new branch, use the `set_upstream` option to set the remote branch as upstream.
-<<<<<<< Updated upstream
-*/
-func pushToGitRemote(localBranch: String? = nil,
-                     remoteBranch: String? = nil,
-                     force: Bool = false,
-                     forceWithLease: Bool = false,
-                     tags: Bool = true,
-                     remote: String = "origin",
-                     noVerify: Bool = false,
-                     setUpstream: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "push_to_git_remote", className: nil, args: [RubyCommand.Argument(name: "local_branch", value: localBranch),
-                                                                                                    RubyCommand.Argument(name: "remote_branch", value: remoteBranch),
-                                                                                                    RubyCommand.Argument(name: "force", value: force),
-                                                                                                    RubyCommand.Argument(name: "force_with_lease", value: forceWithLease),
-                                                                                                    RubyCommand.Argument(name: "tags", value: tags),
-                                                                                                    RubyCommand.Argument(name: "remote", value: remote),
-                                                                                                    RubyCommand.Argument(name: "no_verify", value: noVerify),
-                                                                                                    RubyCommand.Argument(name: "set_upstream", value: setUpstream)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func pushToGitRemote(localBranch: String? = nil,
                             remoteBranch: String? = nil,
@@ -9062,24 +5697,16 @@ public func pushToGitRemote(localBranch: String? = nil,
                                                                                                       RubyCommand.Argument(name: "no_verify", value: noVerify),
                                                                                                       RubyCommand.Argument(name: "set_upstream", value: setUpstream)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Prints out the given text
 
  - parameter message: Message to be printed out
-<<<<<<< Updated upstream
-*/
-func puts(message: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "puts", className: nil, args: [RubyCommand.Argument(name: "message", value: message)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func puts(message: String? = nil) {
     let command = RubyCommand(commandID: "", methodName: "puts", className: nil, args: [RubyCommand.Argument(name: "message", value: message)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -9091,34 +5718,20 @@ public func puts(message: String? = nil) {
  Loads the specified (or the first found) podspec in the folder as JSON, so that you can inspect its `version`, `files` etc.
  This can be useful when basing your release process on the version string only stored in one place - in the podspec.
  As one of the first steps you'd read the podspec and its version and the rest of the workflow can use that version string (when e.g. creating a new git tag or a GitHub Release).
-<<<<<<< Updated upstream
-*/
-@discardableResult func readPodspec(path: String) -> [String : String] {
-  let command = RubyCommand(commandID: "", methodName: "read_podspec", className: nil, args: [RubyCommand.Argument(name: "path", value: path)])
-  return parseDictionary(fromString: runner.executeCommand(command))
-=======
  */
 @discardableResult public func readPodspec(path: String) -> [String: String] {
     let command = RubyCommand(commandID: "", methodName: "read_podspec", className: nil, args: [RubyCommand.Argument(name: "path", value: path)])
     return parseDictionary(fromString: runner.executeCommand(command))
->>>>>>> Stashed changes
 }
 
 /**
  Recreate not shared Xcode project schemes
 
  - parameter project: The Xcode project
-<<<<<<< Updated upstream
-*/
-func recreateSchemes(project: String) {
-  let command = RubyCommand(commandID: "", methodName: "recreate_schemes", className: nil, args: [RubyCommand.Argument(name: "project", value: project)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func recreateSchemes(project: String) {
     let command = RubyCommand(commandID: "", methodName: "recreate_schemes", className: nil, args: [RubyCommand.Argument(name: "project", value: project)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -9134,20 +5747,6 @@ public func recreateSchemes(project: String) {
  This will register an iOS device with the Developer Portal so that you can include it in your provisioning profiles.
  This is an optimistic action, in that it will only ever add a device to the member center. If the device has already been registered within the member center, it will be left alone in the member center.
  The action will connect to the Apple Developer Portal using the username you specified in your `Appfile` with `apple_id`, but you can override it using the `:username` option.
-<<<<<<< Updated upstream
-*/
-@discardableResult func registerDevice(name: String,
-                                       udid: String,
-                                       teamId: String? = nil,
-                                       teamName: String? = nil,
-                                       username: String) -> String {
-  let command = RubyCommand(commandID: "", methodName: "register_device", className: nil, args: [RubyCommand.Argument(name: "name", value: name),
-                                                                                                 RubyCommand.Argument(name: "udid", value: udid),
-                                                                                                 RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                 RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                                 RubyCommand.Argument(name: "username", value: username)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func registerDevice(name: String,
                                               udid: String,
@@ -9161,7 +5760,6 @@ public func recreateSchemes(project: String) {
                                                                                                    RubyCommand.Argument(name: "team_name", value: teamName),
                                                                                                    RubyCommand.Argument(name: "username", value: username)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -9178,22 +5776,6 @@ public func recreateSchemes(project: String) {
  This will register iOS/Mac devices with the Developer Portal so that you can include them in your provisioning profiles.
  This is an optimistic action, in that it will only ever add new devices to the member center, and never remove devices. If a device which has already been registered within the member center is not passed to this action, it will be left alone in the member center and continue to work.
  The action will connect to the Apple Developer Portal using the username you specified in your `Appfile` with `apple_id`, but you can override it using the `username` option, or by setting the env variable `ENV['DELIVER_USER']`.
-<<<<<<< Updated upstream
-*/
-func registerDevices(devices: [String : Any]? = nil,
-                     devicesFile: String? = nil,
-                     teamId: String? = nil,
-                     teamName: String? = nil,
-                     username: String,
-                     platform: String = "ios") {
-  let command = RubyCommand(commandID: "", methodName: "register_devices", className: nil, args: [RubyCommand.Argument(name: "devices", value: devices),
-                                                                                                  RubyCommand.Argument(name: "devices_file", value: devicesFile),
-                                                                                                  RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                  RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                                  RubyCommand.Argument(name: "username", value: username),
-                                                                                                  RubyCommand.Argument(name: "platform", value: platform)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func registerDevices(devices: [String: Any]? = nil,
                             devicesFile: String? = nil,
@@ -9209,7 +5791,6 @@ public func registerDevices(devices: [String: Any]? = nil,
                                                                                                     RubyCommand.Argument(name: "username", value: username),
                                                                                                     RubyCommand.Argument(name: "platform", value: platform)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -9228,20 +5809,6 @@ public func registerDevices(devices: [String: Any]? = nil,
  |
  >- You have called the `ensure_git_status_clean` action prior to calling this action. This ensures that your repo started off in a clean state, so the only things that will get destroyed by this action are files that are created as a byproduct of the fastlane run.|
  >|
-<<<<<<< Updated upstream
-*/
-func resetGitRepo(files: Any? = nil,
-                  force: Bool = false,
-                  skipClean: Bool = false,
-                  disregardGitignore: Bool = true,
-                  exclude: Any? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "reset_git_repo", className: nil, args: [RubyCommand.Argument(name: "files", value: files),
-                                                                                                RubyCommand.Argument(name: "force", value: force),
-                                                                                                RubyCommand.Argument(name: "skip_clean", value: skipClean),
-                                                                                                RubyCommand.Argument(name: "disregard_gitignore", value: disregardGitignore),
-                                                                                                RubyCommand.Argument(name: "exclude", value: exclude)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func resetGitRepo(files: Any? = nil,
                          force: Bool = false,
@@ -9255,7 +5822,6 @@ public func resetGitRepo(files: Any? = nil,
                                                                                                   RubyCommand.Argument(name: "disregard_gitignore", value: disregardGitignore),
                                                                                                   RubyCommand.Argument(name: "exclude", value: exclude)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -9264,14 +5830,6 @@ public func resetGitRepo(files: Any? = nil,
  - parameters:
    - ios: **DEPRECATED!** Use `:os_versions` instead - Which OS versions of Simulators you want to reset content and settings, this does not remove/recreate the simulators
    - osVersions: Which OS versions of Simulators you want to reset content and settings, this does not remove/recreate the simulators
-<<<<<<< Updated upstream
-*/
-func resetSimulatorContents(ios: [String]? = nil,
-                            osVersions: [String]? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "reset_simulator_contents", className: nil, args: [RubyCommand.Argument(name: "ios", value: ios),
-                                                                                                          RubyCommand.Argument(name: "os_versions", value: osVersions)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func resetSimulatorContents(ios: [String]? = nil,
                                    osVersions: [String]? = nil)
@@ -9279,7 +5837,6 @@ public func resetSimulatorContents(ios: [String]? = nil,
     let command = RubyCommand(commandID: "", methodName: "reset_simulator_contents", className: nil, args: [RubyCommand.Argument(name: "ios", value: ios),
                                                                                                             RubyCommand.Argument(name: "os_versions", value: osVersions)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -9295,34 +5852,8 @@ public func resetSimulatorContents(ios: [String]? = nil,
    - shortVersion: Short version string to force resigned ipa to use (`CFBundleShortVersionString`)
    - bundleVersion: Bundle version to force resigned ipa to use (`CFBundleVersion`)
    - bundleId: Set new bundle ID during resign (`CFBundleIdentifier`)
-   - useAppEntitlements: Extract app bundle codesigning entitlements and combine with entitlements from new provisionin profile
+   - useAppEntitlements: Extract app bundle codesigning entitlements and combine with entitlements from new provisioning profile
    - keychainPath: Provide a path to a keychain file that should be used by `/usr/bin/codesign`
-<<<<<<< Updated upstream
-*/
-func resign(ipa: String,
-            signingIdentity: String,
-            entitlements: String? = nil,
-            provisioningProfile: Any,
-            version: String? = nil,
-            displayName: String? = nil,
-            shortVersion: String? = nil,
-            bundleVersion: String? = nil,
-            bundleId: String? = nil,
-            useAppEntitlements: Any? = nil,
-            keychainPath: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "resign", className: nil, args: [RubyCommand.Argument(name: "ipa", value: ipa),
-                                                                                        RubyCommand.Argument(name: "signing_identity", value: signingIdentity),
-                                                                                        RubyCommand.Argument(name: "entitlements", value: entitlements),
-                                                                                        RubyCommand.Argument(name: "provisioning_profile", value: provisioningProfile),
-                                                                                        RubyCommand.Argument(name: "version", value: version),
-                                                                                        RubyCommand.Argument(name: "display_name", value: displayName),
-                                                                                        RubyCommand.Argument(name: "short_version", value: shortVersion),
-                                                                                        RubyCommand.Argument(name: "bundle_version", value: bundleVersion),
-                                                                                        RubyCommand.Argument(name: "bundle_id", value: bundleId),
-                                                                                        RubyCommand.Argument(name: "use_app_entitlements", value: useAppEntitlements),
-                                                                                        RubyCommand.Argument(name: "keychain_path", value: keychainPath)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func resign(ipa: String,
                    signingIdentity: String,
@@ -9348,56 +5879,34 @@ public func resign(ipa: String,
                                                                                           RubyCommand.Argument(name: "use_app_entitlements", value: useAppEntitlements),
                                                                                           RubyCommand.Argument(name: "keychain_path", value: keychainPath)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  This action restore your file that was backuped with the `backup_file` action
 
  - parameter path: Original file name you want to restore
-<<<<<<< Updated upstream
-*/
-func restoreFile(path: String) {
-  let command = RubyCommand(commandID: "", methodName: "restore_file", className: nil, args: [RubyCommand.Argument(name: "path", value: path)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func restoreFile(path: String) {
     let command = RubyCommand(commandID: "", methodName: "restore_file", className: nil, args: [RubyCommand.Argument(name: "path", value: path)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Outputs ascii-art for a rocket 🚀
 
  Print an ascii Rocket :rocket:. Useful after using _crashlytics_ or _pilot_ to indicate that your new build has been shipped to outer-space.
-<<<<<<< Updated upstream
-*/
-@discardableResult func rocket() -> String {
-  let command = RubyCommand(commandID: "", methodName: "rocket", className: nil, args: [])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func rocket() -> String {
     let command = RubyCommand(commandID: "", methodName: "rocket", className: nil, args: [])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Run tests using rspec
-<<<<<<< Updated upstream
-*/
-func rspec() {
-  let command = RubyCommand(commandID: "", methodName: "rspec", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func rspec() {
     let command = RubyCommand(commandID: "", methodName: "rspec", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -9409,16 +5918,6 @@ public func rspec() {
    - destination: destination file/folder
 
  A wrapper around `rsync`, which is a tool that lets you synchronize files, including permissions and so on. For a more detailed information about `rsync`, please see [rsync(1) man page](https://linux.die.net/man/1/rsync).
-<<<<<<< Updated upstream
-*/
-func rsync(extra: String = "-av",
-           source: String,
-           destination: String) {
-  let command = RubyCommand(commandID: "", methodName: "rsync", className: nil, args: [RubyCommand.Argument(name: "extra", value: extra),
-                                                                                       RubyCommand.Argument(name: "source", value: source),
-                                                                                       RubyCommand.Argument(name: "destination", value: destination)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func rsync(extra: String = "-av",
                   source: String,
@@ -9428,22 +5927,14 @@ public func rsync(extra: String = "-av",
                                                                                          RubyCommand.Argument(name: "source", value: source),
                                                                                          RubyCommand.Argument(name: "destination", value: destination)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Runs the code style checks
-<<<<<<< Updated upstream
-*/
-func rubocop() {
-  let command = RubyCommand(commandID: "", methodName: "rubocop", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func rubocop() {
     let command = RubyCommand(commandID: "", methodName: "rubocop", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -9451,17 +5942,10 @@ public func rubocop() {
 
  Add this to your `Fastfile` to require a certain version of _ruby_.
  Put it at the top of your `Fastfile` to ensure that _fastlane_ is executed appropriately.
-<<<<<<< Updated upstream
-*/
-func rubyVersion() {
-  let command = RubyCommand(commandID: "", methodName: "ruby_version", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func rubyVersion() {
     let command = RubyCommand(commandID: "", methodName: "ruby_version", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -9533,136 +6017,6 @@ public func rubyVersion() {
    - failBuild: Should this step stop the build if the tests fail? Set this to false if you're using trainer
 
  More information: https://docs.fastlane.tools/actions/scan/
-<<<<<<< Updated upstream
-*/
-func runTests(workspace: String? = nil,
-              project: String? = nil,
-              scheme: String? = nil,
-              device: String? = nil,
-              devices: [String]? = nil,
-              skipDetectDevices: Bool = false,
-              forceQuitSimulator: Bool = false,
-              resetSimulator: Bool = false,
-              disableSlideToType: Bool = true,
-              prelaunchSimulator: Bool? = nil,
-              reinstallApp: Bool = false,
-              appIdentifier: String? = nil,
-              onlyTesting: Any? = nil,
-              skipTesting: Any? = nil,
-              testplan: String? = nil,
-              onlyTestConfigurations: Any? = nil,
-              skipTestConfigurations: Any? = nil,
-              xctestrun: String? = nil,
-              toolchain: Any? = nil,
-              clean: Bool = false,
-              codeCoverage: Bool? = nil,
-              addressSanitizer: Bool? = nil,
-              threadSanitizer: Bool? = nil,
-              openReport: Bool = false,
-              disableXcpretty: Bool? = nil,
-              outputDirectory: String = "./test_output",
-              outputStyle: String? = nil,
-              outputTypes: String = "html,junit",
-              outputFiles: String? = nil,
-              buildlogPath: String = "~/Library/Logs/scan",
-              includeSimulatorLogs: Bool = false,
-              suppressXcodeOutput: Bool? = nil,
-              formatter: String? = nil,
-              xcprettyArgs: String? = nil,
-              derivedDataPath: String? = nil,
-              shouldZipBuildProducts: Bool = false,
-              resultBundle: Bool = false,
-              useClangReportName: Bool = false,
-              concurrentWorkers: Int? = nil,
-              maxConcurrentSimulators: Int? = nil,
-              disableConcurrentTesting: Bool = false,
-              skipBuild: Bool = false,
-              testWithoutBuilding: Bool? = nil,
-              buildForTesting: Bool? = nil,
-              sdk: String? = nil,
-              configuration: String? = nil,
-              xcargs: String? = nil,
-              xcconfig: String? = nil,
-              appName: String? = nil,
-              deploymentTargetVersion: String? = nil,
-              slackUrl: String? = nil,
-              slackChannel: String? = nil,
-              slackMessage: String? = nil,
-              slackUseWebhookConfiguredUsernameAndIcon: Bool = false,
-              slackUsername: String = "fastlane",
-              slackIconUrl: String = "https://fastlane.tools/assets/img/fastlane_icon.png",
-              skipSlack: Bool = false,
-              slackOnlyOnFailure: Bool = false,
-              destination: Any? = nil,
-              customReportFileName: String? = nil,
-              xcodebuildCommand: String = "env NSUnbufferedIO=YES xcodebuild",
-              clonedSourcePackagesPath: String? = nil,
-              failBuild: Bool = true) {
-  let command = RubyCommand(commandID: "", methodName: "run_tests", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
-                                                                                           RubyCommand.Argument(name: "project", value: project),
-                                                                                           RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                           RubyCommand.Argument(name: "device", value: device),
-                                                                                           RubyCommand.Argument(name: "devices", value: devices),
-                                                                                           RubyCommand.Argument(name: "skip_detect_devices", value: skipDetectDevices),
-                                                                                           RubyCommand.Argument(name: "force_quit_simulator", value: forceQuitSimulator),
-                                                                                           RubyCommand.Argument(name: "reset_simulator", value: resetSimulator),
-                                                                                           RubyCommand.Argument(name: "disable_slide_to_type", value: disableSlideToType),
-                                                                                           RubyCommand.Argument(name: "prelaunch_simulator", value: prelaunchSimulator),
-                                                                                           RubyCommand.Argument(name: "reinstall_app", value: reinstallApp),
-                                                                                           RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                           RubyCommand.Argument(name: "only_testing", value: onlyTesting),
-                                                                                           RubyCommand.Argument(name: "skip_testing", value: skipTesting),
-                                                                                           RubyCommand.Argument(name: "testplan", value: testplan),
-                                                                                           RubyCommand.Argument(name: "only_test_configurations", value: onlyTestConfigurations),
-                                                                                           RubyCommand.Argument(name: "skip_test_configurations", value: skipTestConfigurations),
-                                                                                           RubyCommand.Argument(name: "xctestrun", value: xctestrun),
-                                                                                           RubyCommand.Argument(name: "toolchain", value: toolchain),
-                                                                                           RubyCommand.Argument(name: "clean", value: clean),
-                                                                                           RubyCommand.Argument(name: "code_coverage", value: codeCoverage),
-                                                                                           RubyCommand.Argument(name: "address_sanitizer", value: addressSanitizer),
-                                                                                           RubyCommand.Argument(name: "thread_sanitizer", value: threadSanitizer),
-                                                                                           RubyCommand.Argument(name: "open_report", value: openReport),
-                                                                                           RubyCommand.Argument(name: "disable_xcpretty", value: disableXcpretty),
-                                                                                           RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                           RubyCommand.Argument(name: "output_style", value: outputStyle),
-                                                                                           RubyCommand.Argument(name: "output_types", value: outputTypes),
-                                                                                           RubyCommand.Argument(name: "output_files", value: outputFiles),
-                                                                                           RubyCommand.Argument(name: "buildlog_path", value: buildlogPath),
-                                                                                           RubyCommand.Argument(name: "include_simulator_logs", value: includeSimulatorLogs),
-                                                                                           RubyCommand.Argument(name: "suppress_xcode_output", value: suppressXcodeOutput),
-                                                                                           RubyCommand.Argument(name: "formatter", value: formatter),
-                                                                                           RubyCommand.Argument(name: "xcpretty_args", value: xcprettyArgs),
-                                                                                           RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath),
-                                                                                           RubyCommand.Argument(name: "should_zip_build_products", value: shouldZipBuildProducts),
-                                                                                           RubyCommand.Argument(name: "result_bundle", value: resultBundle),
-                                                                                           RubyCommand.Argument(name: "use_clang_report_name", value: useClangReportName),
-                                                                                           RubyCommand.Argument(name: "concurrent_workers", value: concurrentWorkers),
-                                                                                           RubyCommand.Argument(name: "max_concurrent_simulators", value: maxConcurrentSimulators),
-                                                                                           RubyCommand.Argument(name: "disable_concurrent_testing", value: disableConcurrentTesting),
-                                                                                           RubyCommand.Argument(name: "skip_build", value: skipBuild),
-                                                                                           RubyCommand.Argument(name: "test_without_building", value: testWithoutBuilding),
-                                                                                           RubyCommand.Argument(name: "build_for_testing", value: buildForTesting),
-                                                                                           RubyCommand.Argument(name: "sdk", value: sdk),
-                                                                                           RubyCommand.Argument(name: "configuration", value: configuration),
-                                                                                           RubyCommand.Argument(name: "xcargs", value: xcargs),
-                                                                                           RubyCommand.Argument(name: "xcconfig", value: xcconfig),
-                                                                                           RubyCommand.Argument(name: "app_name", value: appName),
-                                                                                           RubyCommand.Argument(name: "deployment_target_version", value: deploymentTargetVersion),
-                                                                                           RubyCommand.Argument(name: "slack_url", value: slackUrl),
-                                                                                           RubyCommand.Argument(name: "slack_channel", value: slackChannel),
-                                                                                           RubyCommand.Argument(name: "slack_message", value: slackMessage),
-                                                                                           RubyCommand.Argument(name: "slack_use_webhook_configured_username_and_icon", value: slackUseWebhookConfiguredUsernameAndIcon),
-                                                                                           RubyCommand.Argument(name: "slack_username", value: slackUsername),
-                                                                                           RubyCommand.Argument(name: "slack_icon_url", value: slackIconUrl),
-                                                                                           RubyCommand.Argument(name: "skip_slack", value: skipSlack),
-                                                                                           RubyCommand.Argument(name: "slack_only_on_failure", value: slackOnlyOnFailure),
-                                                                                           RubyCommand.Argument(name: "destination", value: destination),
-                                                                                           RubyCommand.Argument(name: "custom_report_file_name", value: customReportFileName),
-                                                                                           RubyCommand.Argument(name: "xcodebuild_command", value: xcodebuildCommand),
-                                                                                           RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath),
-                                                                                           RubyCommand.Argument(name: "fail_build", value: failBuild)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func runTests(workspace: String? = nil,
                      project: String? = nil,
@@ -9792,15 +6146,14 @@ public func runTests(workspace: String? = nil,
                                                                                              RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath),
                                                                                              RubyCommand.Argument(name: "fail_build", value: failBuild)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Generates a plist file and uploads all to AWS S3
 
  - parameters:
-   - ipa: .ipa file for the build 
-   - dsym: zipped .dsym package for the build 
+   - ipa: .ipa file for the build
+   - dsym: zipped .dsym package for the build
    - uploadMetadata: Upload relevant metadata for this build
    - plistTemplatePath: plist template path
    - plistFileName: uploaded plist filename
@@ -9808,53 +6161,17 @@ public func runTests(workspace: String? = nil,
    - htmlFileName: uploaded html filename
    - versionTemplatePath: version erb template path
    - versionFileName: uploaded version filename
-   - accessKey: AWS Access Key ID 
-   - secretAccessKey: AWS Secret Access Key 
+   - accessKey: AWS Access Key ID
+   - secretAccessKey: AWS Secret Access Key
    - bucket: AWS bucket name
-   - region: AWS region (for bucket creation) 
-   - path: S3 'path'. Values from Info.plist will be substituted for keys wrapped in {}  
-   - source: Optional source directory e.g. ./build 
-   - acl: Uploaded object permissions e.g public_read (default), private, public_read_write, authenticated_read 
+   - region: AWS region (for bucket creation)
+   - path: S3 'path'. Values from Info.plist will be substituted for keys wrapped in {}
+   - source: Optional source directory e.g. ./build
+   - acl: Uploaded object permissions e.g public_read (default), private, public_read_write, authenticated_read
 
  Upload a new build to Amazon S3 to distribute the build to beta testers.
  Works for both Ad Hoc and Enterprise signed applications. This step will generate the necessary HTML, plist, and version files for you.
  It is recommended to **not** store the AWS access keys in the `Fastfile`. The uploaded `version.json` file provides an easy way for apps to poll if a new update is available.
-<<<<<<< Updated upstream
-*/
-func s3(ipa: String? = nil,
-        dsym: String? = nil,
-        uploadMetadata: Bool = true,
-        plistTemplatePath: String? = nil,
-        plistFileName: String? = nil,
-        htmlTemplatePath: String? = nil,
-        htmlFileName: String? = nil,
-        versionTemplatePath: String? = nil,
-        versionFileName: String? = nil,
-        accessKey: String? = nil,
-        secretAccessKey: String? = nil,
-        bucket: String? = nil,
-        region: String? = nil,
-        path: String = "v{CFBundleShortVersionString}_b{CFBundleVersion}/",
-        source: String? = nil,
-        acl: String = "public_read") {
-  let command = RubyCommand(commandID: "", methodName: "s3", className: nil, args: [RubyCommand.Argument(name: "ipa", value: ipa),
-                                                                                    RubyCommand.Argument(name: "dsym", value: dsym),
-                                                                                    RubyCommand.Argument(name: "upload_metadata", value: uploadMetadata),
-                                                                                    RubyCommand.Argument(name: "plist_template_path", value: plistTemplatePath),
-                                                                                    RubyCommand.Argument(name: "plist_file_name", value: plistFileName),
-                                                                                    RubyCommand.Argument(name: "html_template_path", value: htmlTemplatePath),
-                                                                                    RubyCommand.Argument(name: "html_file_name", value: htmlFileName),
-                                                                                    RubyCommand.Argument(name: "version_template_path", value: versionTemplatePath),
-                                                                                    RubyCommand.Argument(name: "version_file_name", value: versionFileName),
-                                                                                    RubyCommand.Argument(name: "access_key", value: accessKey),
-                                                                                    RubyCommand.Argument(name: "secret_access_key", value: secretAccessKey),
-                                                                                    RubyCommand.Argument(name: "bucket", value: bucket),
-                                                                                    RubyCommand.Argument(name: "region", value: region),
-                                                                                    RubyCommand.Argument(name: "path", value: path),
-                                                                                    RubyCommand.Argument(name: "source", value: source),
-                                                                                    RubyCommand.Argument(name: "acl", value: acl)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func s3(ipa: String? = nil,
                dsym: String? = nil,
@@ -9890,7 +6207,6 @@ public func s3(ipa: String? = nil,
                                                                                       RubyCommand.Argument(name: "source", value: source),
                                                                                       RubyCommand.Argument(name: "acl", value: acl)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -9899,14 +6215,6 @@ public func s3(ipa: String? = nil,
  - parameters:
    - text: Text to be spoken out loud (as string or array of strings)
    - mute: If say should be muted with text printed out
-<<<<<<< Updated upstream
-*/
-func say(text: Any,
-         mute: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "say", className: nil, args: [RubyCommand.Argument(name: "text", value: text),
-                                                                                     RubyCommand.Argument(name: "mute", value: mute)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func say(text: Any,
                 mute: Bool = false)
@@ -9914,7 +6222,6 @@ public func say(text: Any,
     let command = RubyCommand(commandID: "", methodName: "say", className: nil, args: [RubyCommand.Argument(name: "text", value: text),
                                                                                        RubyCommand.Argument(name: "mute", value: mute)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -9986,136 +6293,6 @@ public func say(text: Any,
    - failBuild: Should this step stop the build if the tests fail? Set this to false if you're using trainer
 
  More information: https://docs.fastlane.tools/actions/scan/
-<<<<<<< Updated upstream
-*/
-func scan(workspace: Any? = scanfile.workspace,
-          project: Any? = scanfile.project,
-          scheme: Any? = scanfile.scheme,
-          device: Any? = scanfile.device,
-          devices: [String]? = scanfile.devices,
-          skipDetectDevices: Bool = scanfile.skipDetectDevices,
-          forceQuitSimulator: Bool = scanfile.forceQuitSimulator,
-          resetSimulator: Bool = scanfile.resetSimulator,
-          disableSlideToType: Bool = scanfile.disableSlideToType,
-          prelaunchSimulator: Bool? = scanfile.prelaunchSimulator,
-          reinstallApp: Bool = scanfile.reinstallApp,
-          appIdentifier: Any? = scanfile.appIdentifier,
-          onlyTesting: Any? = scanfile.onlyTesting,
-          skipTesting: Any? = scanfile.skipTesting,
-          testplan: Any? = scanfile.testplan,
-          onlyTestConfigurations: Any? = scanfile.onlyTestConfigurations,
-          skipTestConfigurations: Any? = scanfile.skipTestConfigurations,
-          xctestrun: Any? = scanfile.xctestrun,
-          toolchain: Any? = scanfile.toolchain,
-          clean: Bool = scanfile.clean,
-          codeCoverage: Bool? = scanfile.codeCoverage,
-          addressSanitizer: Bool? = scanfile.addressSanitizer,
-          threadSanitizer: Bool? = scanfile.threadSanitizer,
-          openReport: Bool = scanfile.openReport,
-          disableXcpretty: Bool? = scanfile.disableXcpretty,
-          outputDirectory: Any = scanfile.outputDirectory,
-          outputStyle: Any? = scanfile.outputStyle,
-          outputTypes: Any = scanfile.outputTypes,
-          outputFiles: Any? = scanfile.outputFiles,
-          buildlogPath: Any = scanfile.buildlogPath,
-          includeSimulatorLogs: Bool = scanfile.includeSimulatorLogs,
-          suppressXcodeOutput: Bool? = scanfile.suppressXcodeOutput,
-          formatter: Any? = scanfile.formatter,
-          xcprettyArgs: Any? = scanfile.xcprettyArgs,
-          derivedDataPath: Any? = scanfile.derivedDataPath,
-          shouldZipBuildProducts: Bool = scanfile.shouldZipBuildProducts,
-          resultBundle: Bool = scanfile.resultBundle,
-          useClangReportName: Bool = scanfile.useClangReportName,
-          concurrentWorkers: Int? = scanfile.concurrentWorkers,
-          maxConcurrentSimulators: Int? = scanfile.maxConcurrentSimulators,
-          disableConcurrentTesting: Bool = scanfile.disableConcurrentTesting,
-          skipBuild: Bool = scanfile.skipBuild,
-          testWithoutBuilding: Bool? = scanfile.testWithoutBuilding,
-          buildForTesting: Bool? = scanfile.buildForTesting,
-          sdk: Any? = scanfile.sdk,
-          configuration: Any? = scanfile.configuration,
-          xcargs: Any? = scanfile.xcargs,
-          xcconfig: Any? = scanfile.xcconfig,
-          appName: Any? = scanfile.appName,
-          deploymentTargetVersion: Any? = scanfile.deploymentTargetVersion,
-          slackUrl: Any? = scanfile.slackUrl,
-          slackChannel: Any? = scanfile.slackChannel,
-          slackMessage: Any? = scanfile.slackMessage,
-          slackUseWebhookConfiguredUsernameAndIcon: Bool = scanfile.slackUseWebhookConfiguredUsernameAndIcon,
-          slackUsername: Any = scanfile.slackUsername,
-          slackIconUrl: Any = scanfile.slackIconUrl,
-          skipSlack: Bool = scanfile.skipSlack,
-          slackOnlyOnFailure: Bool = scanfile.slackOnlyOnFailure,
-          destination: Any? = scanfile.destination,
-          customReportFileName: Any? = scanfile.customReportFileName,
-          xcodebuildCommand: Any = scanfile.xcodebuildCommand,
-          clonedSourcePackagesPath: Any? = scanfile.clonedSourcePackagesPath,
-          failBuild: Bool = scanfile.failBuild) {
-  let command = RubyCommand(commandID: "", methodName: "scan", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
-                                                                                      RubyCommand.Argument(name: "project", value: project),
-                                                                                      RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                      RubyCommand.Argument(name: "device", value: device),
-                                                                                      RubyCommand.Argument(name: "devices", value: devices),
-                                                                                      RubyCommand.Argument(name: "skip_detect_devices", value: skipDetectDevices),
-                                                                                      RubyCommand.Argument(name: "force_quit_simulator", value: forceQuitSimulator),
-                                                                                      RubyCommand.Argument(name: "reset_simulator", value: resetSimulator),
-                                                                                      RubyCommand.Argument(name: "disable_slide_to_type", value: disableSlideToType),
-                                                                                      RubyCommand.Argument(name: "prelaunch_simulator", value: prelaunchSimulator),
-                                                                                      RubyCommand.Argument(name: "reinstall_app", value: reinstallApp),
-                                                                                      RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                      RubyCommand.Argument(name: "only_testing", value: onlyTesting),
-                                                                                      RubyCommand.Argument(name: "skip_testing", value: skipTesting),
-                                                                                      RubyCommand.Argument(name: "testplan", value: testplan),
-                                                                                      RubyCommand.Argument(name: "only_test_configurations", value: onlyTestConfigurations),
-                                                                                      RubyCommand.Argument(name: "skip_test_configurations", value: skipTestConfigurations),
-                                                                                      RubyCommand.Argument(name: "xctestrun", value: xctestrun),
-                                                                                      RubyCommand.Argument(name: "toolchain", value: toolchain),
-                                                                                      RubyCommand.Argument(name: "clean", value: clean),
-                                                                                      RubyCommand.Argument(name: "code_coverage", value: codeCoverage),
-                                                                                      RubyCommand.Argument(name: "address_sanitizer", value: addressSanitizer),
-                                                                                      RubyCommand.Argument(name: "thread_sanitizer", value: threadSanitizer),
-                                                                                      RubyCommand.Argument(name: "open_report", value: openReport),
-                                                                                      RubyCommand.Argument(name: "disable_xcpretty", value: disableXcpretty),
-                                                                                      RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                      RubyCommand.Argument(name: "output_style", value: outputStyle),
-                                                                                      RubyCommand.Argument(name: "output_types", value: outputTypes),
-                                                                                      RubyCommand.Argument(name: "output_files", value: outputFiles),
-                                                                                      RubyCommand.Argument(name: "buildlog_path", value: buildlogPath),
-                                                                                      RubyCommand.Argument(name: "include_simulator_logs", value: includeSimulatorLogs),
-                                                                                      RubyCommand.Argument(name: "suppress_xcode_output", value: suppressXcodeOutput),
-                                                                                      RubyCommand.Argument(name: "formatter", value: formatter),
-                                                                                      RubyCommand.Argument(name: "xcpretty_args", value: xcprettyArgs),
-                                                                                      RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath),
-                                                                                      RubyCommand.Argument(name: "should_zip_build_products", value: shouldZipBuildProducts),
-                                                                                      RubyCommand.Argument(name: "result_bundle", value: resultBundle),
-                                                                                      RubyCommand.Argument(name: "use_clang_report_name", value: useClangReportName),
-                                                                                      RubyCommand.Argument(name: "concurrent_workers", value: concurrentWorkers),
-                                                                                      RubyCommand.Argument(name: "max_concurrent_simulators", value: maxConcurrentSimulators),
-                                                                                      RubyCommand.Argument(name: "disable_concurrent_testing", value: disableConcurrentTesting),
-                                                                                      RubyCommand.Argument(name: "skip_build", value: skipBuild),
-                                                                                      RubyCommand.Argument(name: "test_without_building", value: testWithoutBuilding),
-                                                                                      RubyCommand.Argument(name: "build_for_testing", value: buildForTesting),
-                                                                                      RubyCommand.Argument(name: "sdk", value: sdk),
-                                                                                      RubyCommand.Argument(name: "configuration", value: configuration),
-                                                                                      RubyCommand.Argument(name: "xcargs", value: xcargs),
-                                                                                      RubyCommand.Argument(name: "xcconfig", value: xcconfig),
-                                                                                      RubyCommand.Argument(name: "app_name", value: appName),
-                                                                                      RubyCommand.Argument(name: "deployment_target_version", value: deploymentTargetVersion),
-                                                                                      RubyCommand.Argument(name: "slack_url", value: slackUrl),
-                                                                                      RubyCommand.Argument(name: "slack_channel", value: slackChannel),
-                                                                                      RubyCommand.Argument(name: "slack_message", value: slackMessage),
-                                                                                      RubyCommand.Argument(name: "slack_use_webhook_configured_username_and_icon", value: slackUseWebhookConfiguredUsernameAndIcon),
-                                                                                      RubyCommand.Argument(name: "slack_username", value: slackUsername),
-                                                                                      RubyCommand.Argument(name: "slack_icon_url", value: slackIconUrl),
-                                                                                      RubyCommand.Argument(name: "skip_slack", value: skipSlack),
-                                                                                      RubyCommand.Argument(name: "slack_only_on_failure", value: slackOnlyOnFailure),
-                                                                                      RubyCommand.Argument(name: "destination", value: destination),
-                                                                                      RubyCommand.Argument(name: "custom_report_file_name", value: customReportFileName),
-                                                                                      RubyCommand.Argument(name: "xcodebuild_command", value: xcodebuildCommand),
-                                                                                      RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath),
-                                                                                      RubyCommand.Argument(name: "fail_build", value: failBuild)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func scan(workspace: Any? = scanfile.workspace,
                  project: Any? = scanfile.project,
@@ -10245,7 +6422,6 @@ public func scan(workspace: Any? = scanfile.workspace,
                                                                                         RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath),
                                                                                         RubyCommand.Argument(name: "fail_build", value: failBuild)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -10258,22 +6434,6 @@ public func scan(workspace: Any? = scanfile.workspace,
    - port: Port
    - upload: Upload
    - download: Download
-<<<<<<< Updated upstream
-*/
-func scp(username: String,
-         password: String? = nil,
-         host: String,
-         port: String = "22",
-         upload: [String : Any]? = nil,
-         download: [String : Any]? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "scp", className: nil, args: [RubyCommand.Argument(name: "username", value: username),
-                                                                                     RubyCommand.Argument(name: "password", value: password),
-                                                                                     RubyCommand.Argument(name: "host", value: host),
-                                                                                     RubyCommand.Argument(name: "port", value: port),
-                                                                                     RubyCommand.Argument(name: "upload", value: upload),
-                                                                                     RubyCommand.Argument(name: "download", value: download)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func scp(username: String,
                 password: String? = nil,
@@ -10289,7 +6449,6 @@ public func scp(username: String,
                                                                                        RubyCommand.Argument(name: "upload", value: upload),
                                                                                        RubyCommand.Argument(name: "download", value: download)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -10318,54 +6477,6 @@ public func scp(username: String,
    - reinstallApp: Enabling this option will automatically uninstall the application before running it
    - useTimestampSuffix: Add timestamp suffix to screenshot filename
    - adbHost: Configure the host used by adb to connect, allows running on remote devices farm
-<<<<<<< Updated upstream
-*/
-func screengrab(androidHome: Any? = screengrabfile.androidHome,
-                buildToolsVersion: Any? = screengrabfile.buildToolsVersion,
-                locales: [String] = screengrabfile.locales,
-                clearPreviousScreenshots: Bool = screengrabfile.clearPreviousScreenshots,
-                outputDirectory: Any = screengrabfile.outputDirectory,
-                skipOpenSummary: Bool = screengrabfile.skipOpenSummary,
-                appPackageName: Any = screengrabfile.appPackageName,
-                testsPackageName: Any? = screengrabfile.testsPackageName,
-                useTestsInPackages: [String]? = screengrabfile.useTestsInPackages,
-                useTestsInClasses: [String]? = screengrabfile.useTestsInClasses,
-                launchArguments: [String]? = screengrabfile.launchArguments,
-                testInstrumentationRunner: Any = screengrabfile.testInstrumentationRunner,
-                endingLocale: Any = screengrabfile.endingLocale,
-                useAdbRoot: Bool = screengrabfile.useAdbRoot,
-                appApkPath: Any? = screengrabfile.appApkPath,
-                testsApkPath: Any? = screengrabfile.testsApkPath,
-                specificDevice: Any? = screengrabfile.specificDevice,
-                deviceType: Any = screengrabfile.deviceType,
-                exitOnTestFailure: Bool = screengrabfile.exitOnTestFailure,
-                reinstallApp: Bool = screengrabfile.reinstallApp,
-                useTimestampSuffix: Bool = screengrabfile.useTimestampSuffix,
-                adbHost: Any? = screengrabfile.adbHost) {
-  let command = RubyCommand(commandID: "", methodName: "screengrab", className: nil, args: [RubyCommand.Argument(name: "android_home", value: androidHome),
-                                                                                            RubyCommand.Argument(name: "build_tools_version", value: buildToolsVersion),
-                                                                                            RubyCommand.Argument(name: "locales", value: locales),
-                                                                                            RubyCommand.Argument(name: "clear_previous_screenshots", value: clearPreviousScreenshots),
-                                                                                            RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                            RubyCommand.Argument(name: "skip_open_summary", value: skipOpenSummary),
-                                                                                            RubyCommand.Argument(name: "app_package_name", value: appPackageName),
-                                                                                            RubyCommand.Argument(name: "tests_package_name", value: testsPackageName),
-                                                                                            RubyCommand.Argument(name: "use_tests_in_packages", value: useTestsInPackages),
-                                                                                            RubyCommand.Argument(name: "use_tests_in_classes", value: useTestsInClasses),
-                                                                                            RubyCommand.Argument(name: "launch_arguments", value: launchArguments),
-                                                                                            RubyCommand.Argument(name: "test_instrumentation_runner", value: testInstrumentationRunner),
-                                                                                            RubyCommand.Argument(name: "ending_locale", value: endingLocale),
-                                                                                            RubyCommand.Argument(name: "use_adb_root", value: useAdbRoot),
-                                                                                            RubyCommand.Argument(name: "app_apk_path", value: appApkPath),
-                                                                                            RubyCommand.Argument(name: "tests_apk_path", value: testsApkPath),
-                                                                                            RubyCommand.Argument(name: "specific_device", value: specificDevice),
-                                                                                            RubyCommand.Argument(name: "device_type", value: deviceType),
-                                                                                            RubyCommand.Argument(name: "exit_on_test_failure", value: exitOnTestFailure),
-                                                                                            RubyCommand.Argument(name: "reinstall_app", value: reinstallApp),
-                                                                                            RubyCommand.Argument(name: "use_timestamp_suffix", value: useTimestampSuffix),
-                                                                                            RubyCommand.Argument(name: "adb_host", value: adbHost)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func screengrab(androidHome: Any? = screengrabfile.androidHome,
                        buildToolsVersion: Any? = screengrabfile.buildToolsVersion,
@@ -10413,7 +6524,6 @@ public func screengrab(androidHome: Any? = screengrabfile.androidHome,
                                                                                               RubyCommand.Argument(name: "use_timestamp_suffix", value: useTimestampSuffix),
                                                                                               RubyCommand.Argument(name: "adb_host", value: adbHost)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -10426,14 +6536,6 @@ public func screengrab(androidHome: Any? = screengrabfile.androidHome,
  This action will set the **build number** according to what the SCM HEAD reports.
  Currently supported SCMs are svn (uses root revision), git-svn (uses svn revision) and git (uses short hash) and mercurial (uses short hash or revision number).
  There is an option, `:use_hg_revision_number`, which allows to use mercurial revision number instead of hash.
-<<<<<<< Updated upstream
-*/
-func setBuildNumberRepository(useHgRevisionNumber: Bool = false,
-                              xcodeproj: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "set_build_number_repository", className: nil, args: [RubyCommand.Argument(name: "use_hg_revision_number", value: useHgRevisionNumber),
-                                                                                                             RubyCommand.Argument(name: "xcodeproj", value: xcodeproj)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func setBuildNumberRepository(useHgRevisionNumber: Bool = false,
                                      xcodeproj: String? = nil)
@@ -10441,7 +6543,6 @@ public func setBuildNumberRepository(useHgRevisionNumber: Bool = false,
     let command = RubyCommand(commandID: "", methodName: "set_build_number_repository", className: nil, args: [RubyCommand.Argument(name: "use_hg_revision_number", value: useHgRevisionNumber),
                                                                                                                RubyCommand.Argument(name: "xcodeproj", value: xcodeproj)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -10459,24 +6560,6 @@ public func setBuildNumberRepository(useHgRevisionNumber: Bool = false,
  This is useful if you have only one changelog for all languages.
  You can store the changelog in `./changelog.txt` and it will automatically get loaded from there. This integration is useful if you support e.g. 10 languages and want to use the same "What's new"-text for all languages.
  Defining the version is optional. _fastlane_ will try to automatically detect it if you don't provide one.
-<<<<<<< Updated upstream
-*/
-func setChangelog(appIdentifier: String,
-                  username: String,
-                  version: String? = nil,
-                  changelog: String? = nil,
-                  teamId: Any? = nil,
-                  teamName: String? = nil,
-                  platform: String = "ios") {
-  let command = RubyCommand(commandID: "", methodName: "set_changelog", className: nil, args: [RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                               RubyCommand.Argument(name: "username", value: username),
-                                                                                               RubyCommand.Argument(name: "version", value: version),
-                                                                                               RubyCommand.Argument(name: "changelog", value: changelog),
-                                                                                               RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                               RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                               RubyCommand.Argument(name: "platform", value: platform)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func setChangelog(appIdentifier: String,
                          username: String,
@@ -10494,54 +6577,23 @@ public func setChangelog(appIdentifier: String,
                                                                                                  RubyCommand.Argument(name: "team_name", value: teamName),
                                                                                                  RubyCommand.Argument(name: "platform", value: platform)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
- This will create a new release on GitHub and upload assets for it
+  This will create a new release on GitHub and upload assets for it
 
-<<<<<<< Updated upstream
- - parameters:
-   - repositoryName: The path to your repo, e.g. 'fastlane/fastlane'
-   - serverUrl: The server url. e.g. 'https://your.internal.github.host/api/v3' (Default: 'https://api.github.com')
-   - apiToken: Personal API Token for GitHub - generate one at https://github.com/settings/tokens
-   - tagName: Pass in the tag name
-   - name: Name of this release
-   - commitish: Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually master)
-   - description: Description of this release
-   - isDraft: Whether the release should be marked as draft
-   - isPrerelease: Whether the release should be marked as prerelease
-   - uploadAssets: Path to assets to be uploaded with the release
+  - parameters:
+    - repositoryName: The path to your repo, e.g. 'fastlane/fastlane'
+    - serverUrl: The server url. e.g. 'https://your.internal.github.host/api/v3' (Default: 'https://api.github.com')
+    - apiToken: Personal API Token for GitHub - generate one at https://github.com/settings/tokens
+    - tagName: Pass in the tag name
+    - name: Name of this release
+    - commitish: Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually master)
+    - description: Description of this release
+    - isDraft: Whether the release should be marked as draft
+    - isPrerelease: Whether the release should be marked as prerelease
+    - uploadAssets: Path to assets to be uploaded with the release
 
- - returns: A hash containing all relevant information of this release
-Access things like 'html_url', 'tag_name', 'name', 'body'
-
- Creates a new release on GitHub. You must provide your GitHub Personal token (get one from [https://github.com/settings/tokens/new](https://github.com/settings/tokens/new)), the repository name and tag name. By default, that's `master`.
- If the tag doesn't exist, one will be created on the commit or branch passed in as commitish.
- Out parameters provide the release's id, which can be used for later editing and the release HTML link to GitHub. You can also specify a list of assets to be uploaded to the release with the `:upload_assets` parameter.
-*/
-@discardableResult func setGithubRelease(repositoryName: String,
-                                         serverUrl: String = "https://api.github.com",
-                                         apiToken: String,
-                                         tagName: String,
-                                         name: String? = nil,
-                                         commitish: String? = nil,
-                                         description: String? = nil,
-                                         isDraft: Bool = false,
-                                         isPrerelease: Bool = false,
-                                         uploadAssets: [String]? = nil) -> [String : Any] {
-  let command = RubyCommand(commandID: "", methodName: "set_github_release", className: nil, args: [RubyCommand.Argument(name: "repository_name", value: repositoryName),
-                                                                                                    RubyCommand.Argument(name: "server_url", value: serverUrl),
-                                                                                                    RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                                    RubyCommand.Argument(name: "tag_name", value: tagName),
-                                                                                                    RubyCommand.Argument(name: "name", value: name),
-                                                                                                    RubyCommand.Argument(name: "commitish", value: commitish),
-                                                                                                    RubyCommand.Argument(name: "description", value: description),
-                                                                                                    RubyCommand.Argument(name: "is_draft", value: isDraft),
-                                                                                                    RubyCommand.Argument(name: "is_prerelease", value: isPrerelease),
-                                                                                                    RubyCommand.Argument(name: "upload_assets", value: uploadAssets)])
-  return parseDictionary(fromString: runner.executeCommand(command))
-=======
   - returns: A hash containing all relevant information of this release
  Access things like 'html_url', 'tag_name', 'name', 'body'
 
@@ -10571,7 +6623,6 @@ Access things like 'html_url', 'tag_name', 'name', 'body'
                                                                                                       RubyCommand.Argument(name: "is_prerelease", value: isPrerelease),
                                                                                                       RubyCommand.Argument(name: "upload_assets", value: uploadAssets)])
     return parseDictionary(fromString: runner.executeCommand(command))
->>>>>>> Stashed changes
 }
 
 /**
@@ -10583,20 +6634,6 @@ Access things like 'html_url', 'tag_name', 'name', 'body'
    - value: Value to setup
    - path: Path to plist file you want to update
    - outputFileName: Path to the output file you want to generate
-<<<<<<< Updated upstream
-*/
-func setInfoPlistValue(key: String,
-                       subkey: String? = nil,
-                       value: Any,
-                       path: String,
-                       outputFileName: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "set_info_plist_value", className: nil, args: [RubyCommand.Argument(name: "key", value: key),
-                                                                                                      RubyCommand.Argument(name: "subkey", value: subkey),
-                                                                                                      RubyCommand.Argument(name: "value", value: value),
-                                                                                                      RubyCommand.Argument(name: "path", value: path),
-                                                                                                      RubyCommand.Argument(name: "output_file_name", value: outputFileName)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func setInfoPlistValue(key: String,
                               subkey: String? = nil,
@@ -10610,7 +6647,6 @@ public func setInfoPlistValue(key: String,
                                                                                                         RubyCommand.Argument(name: "path", value: path),
                                                                                                         RubyCommand.Argument(name: "output_file_name", value: outputFileName)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -10623,18 +6659,6 @@ public func setInfoPlistValue(key: String,
    - project: The project name
 
  Adds a key to [cocoapods-keys](https://github.com/orta/cocoapods-keys)
-<<<<<<< Updated upstream
-*/
-func setPodKey(useBundleExec: Bool = true,
-               key: String,
-               value: String,
-               project: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "set_pod_key", className: nil, args: [RubyCommand.Argument(name: "use_bundle_exec", value: useBundleExec),
-                                                                                             RubyCommand.Argument(name: "key", value: key),
-                                                                                             RubyCommand.Argument(name: "value", value: value),
-                                                                                             RubyCommand.Argument(name: "project", value: project)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func setPodKey(useBundleExec: Bool = true,
                       key: String,
@@ -10646,7 +6670,6 @@ public func setPodKey(useBundleExec: Bool = true,
                                                                                                RubyCommand.Argument(name: "value", value: value),
                                                                                                RubyCommand.Argument(name: "project", value: project)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -10661,14 +6684,6 @@ public func setPodKey(useBundleExec: Bool = true,
  - Sets up log and test result paths to be easily collectible|
  >|
  This action helps with CI integration. Add this to the top of your Fastfile if you use CI.
-<<<<<<< Updated upstream
-*/
-func setupCi(force: Bool = false,
-             provider: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "setup_ci", className: nil, args: [RubyCommand.Argument(name: "force", value: force),
-                                                                                          RubyCommand.Argument(name: "provider", value: provider)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func setupCi(force: Bool = false,
                     provider: String? = nil)
@@ -10676,7 +6691,6 @@ public func setupCi(force: Bool = false,
     let command = RubyCommand(commandID: "", methodName: "setup_ci", className: nil, args: [RubyCommand.Argument(name: "force", value: force),
                                                                                             RubyCommand.Argument(name: "provider", value: provider)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -10689,17 +6703,10 @@ public func setupCi(force: Bool = false,
  - Sets up log and test result paths to be easily collectible|
  >|
  This action helps with CircleCI integration. Add this to the top of your Fastfile if you use CircleCI.
-<<<<<<< Updated upstream
-*/
-func setupCircleCi(force: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "setup_circle_ci", className: nil, args: [RubyCommand.Argument(name: "force", value: force)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func setupCircleCi(force: Bool = false) {
     let command = RubyCommand(commandID: "", methodName: "setup_circle_ci", className: nil, args: [RubyCommand.Argument(name: "force", value: force)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -10729,32 +6736,6 @@ public func setupCircleCi(force: Bool = false) {
  The action also works with [Keychains and Provisioning Profiles Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Keychains+and+Provisioning+Profiles+Plugin), the selected keychain will be automatically unlocked and the selected code signing identity will be used.
  [Match](https://docs.fastlane.tools/actions/match/) will be also set up to use the unlocked keychain and set in read-only mode, if its environment variables were not yet defined.
  By default this action will only work when _fastlane_ is executed on a CI system.
-<<<<<<< Updated upstream
-*/
-func setupJenkins(force: Bool = false,
-                  unlockKeychain: Bool = true,
-                  addKeychainToSearchList: Any = "replace",
-                  setDefaultKeychain: Bool = true,
-                  keychainPath: String? = nil,
-                  keychainPassword: String,
-                  setCodeSigningIdentity: Bool = true,
-                  codeSigningIdentity: String? = nil,
-                  outputDirectory: String = "./output",
-                  derivedDataPath: String = "./derivedData",
-                  resultBundle: Bool = true) {
-  let command = RubyCommand(commandID: "", methodName: "setup_jenkins", className: nil, args: [RubyCommand.Argument(name: "force", value: force),
-                                                                                               RubyCommand.Argument(name: "unlock_keychain", value: unlockKeychain),
-                                                                                               RubyCommand.Argument(name: "add_keychain_to_search_list", value: addKeychainToSearchList),
-                                                                                               RubyCommand.Argument(name: "set_default_keychain", value: setDefaultKeychain),
-                                                                                               RubyCommand.Argument(name: "keychain_path", value: keychainPath),
-                                                                                               RubyCommand.Argument(name: "keychain_password", value: keychainPassword),
-                                                                                               RubyCommand.Argument(name: "set_code_signing_identity", value: setCodeSigningIdentity),
-                                                                                               RubyCommand.Argument(name: "code_signing_identity", value: codeSigningIdentity),
-                                                                                               RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                               RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath),
-                                                                                               RubyCommand.Argument(name: "result_bundle", value: resultBundle)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func setupJenkins(force: Bool = false,
                          unlockKeychain: Bool = true,
@@ -10780,7 +6761,6 @@ public func setupJenkins(force: Bool = false,
                                                                                                  RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath),
                                                                                                  RubyCommand.Argument(name: "result_bundle", value: resultBundle)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -10792,17 +6772,10 @@ public func setupJenkins(force: Bool = false,
  - Switches match to `readonly` mode to not create new profiles/cert on CI|
  >|
  This action helps with Travis integration. Add this to the top of your Fastfile if you use Travis.
-<<<<<<< Updated upstream
-*/
-func setupTravis(force: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "setup_travis", className: nil, args: [RubyCommand.Argument(name: "force", value: force)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func setupTravis(force: Bool = false) {
     let command = RubyCommand(commandID: "", methodName: "setup_travis", className: nil, args: [RubyCommand.Argument(name: "force", value: force)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -10817,16 +6790,6 @@ public func setupTravis(force: Bool = false) {
 
  Allows running an arbitrary shell command.
  Be aware of a specific behavior of `sh` action with regard to the working directory. For details, refer to [Advanced](https://docs.fastlane.tools/advanced/#directory-behavior).
-<<<<<<< Updated upstream
-*/
-@discardableResult func sh(command: String,
-                           log: Bool = true,
-                           errorCallback: Any? = nil) -> String {
-  let command = RubyCommand(commandID: "", methodName: "sh", className: nil, args: [RubyCommand.Argument(name: "command", value: command),
-                                                                                    RubyCommand.Argument(name: "log", value: log),
-                                                                                    RubyCommand.Argument(name: "error_callback", value: errorCallback)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func sh(command: String,
                                   log: Bool = true,
@@ -10836,7 +6799,6 @@ public func setupTravis(force: Bool = false) {
                                                                                       RubyCommand.Argument(name: "log", value: log),
                                                                                       RubyCommand.Argument(name: "error_callback", value: errorCallback, type: .stringClosure)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -10855,7 +6817,7 @@ public func setupTravis(force: Bool = false) {
    - provisioningName: The name of the profile that is used on the Apple Developer Portal
    - ignoreProfilesWithDifferentName: Use in combination with :provisioning_name - when true only profiles matching this exact name will be downloaded
    - outputPath: Directory in which the profile should be stored
-   - certId: The ID of the code signing certificate to use (e.g. 78ADL6LVAA) 
+   - certId: The ID of the code signing certificate to use (e.g. 78ADL6LVAA)
    - certOwnerName: The certificate name to use for new profiles, or to renew with. (e.g. "Felix Krause")
    - filename: Filename to use for the generated provisioning profile (must include .mobileprovision)
    - skipFetchProfiles: Skips the verification of existing profiles which is useful if you have thousands of profiles
@@ -10868,52 +6830,6 @@ public func setupTravis(force: Bool = false) {
  - returns: The UUID of the profile sigh just fetched/generated
 
  **Note**: It is recommended to use [match](https://docs.fastlane.tools/actions/match/) according to the [codesigning.guide](https://codesigning.guide) for generating and maintaining your provisioning profiles. Use _sigh_ directly only if you want full control over what's going on and know more about codesigning.
-<<<<<<< Updated upstream
-*/
-func sigh(adhoc: Bool = false,
-          developerId: Bool = false,
-          development: Bool = false,
-          skipInstall: Bool = false,
-          force: Bool = false,
-          appIdentifier: String,
-          username: String,
-          teamId: String? = nil,
-          teamName: String? = nil,
-          provisioningName: String? = nil,
-          ignoreProfilesWithDifferentName: Bool = false,
-          outputPath: String = ".",
-          certId: String? = nil,
-          certOwnerName: String? = nil,
-          filename: String? = nil,
-          skipFetchProfiles: Bool = false,
-          skipCertificateVerification: Bool = false,
-          platform: Any = "ios",
-          readonly: Bool = false,
-          templateName: String? = nil,
-          failOnNameTaken: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "sigh", className: nil, args: [RubyCommand.Argument(name: "adhoc", value: adhoc),
-                                                                                      RubyCommand.Argument(name: "developer_id", value: developerId),
-                                                                                      RubyCommand.Argument(name: "development", value: development),
-                                                                                      RubyCommand.Argument(name: "skip_install", value: skipInstall),
-                                                                                      RubyCommand.Argument(name: "force", value: force),
-                                                                                      RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                      RubyCommand.Argument(name: "username", value: username),
-                                                                                      RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                      RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                      RubyCommand.Argument(name: "provisioning_name", value: provisioningName),
-                                                                                      RubyCommand.Argument(name: "ignore_profiles_with_different_name", value: ignoreProfilesWithDifferentName),
-                                                                                      RubyCommand.Argument(name: "output_path", value: outputPath),
-                                                                                      RubyCommand.Argument(name: "cert_id", value: certId),
-                                                                                      RubyCommand.Argument(name: "cert_owner_name", value: certOwnerName),
-                                                                                      RubyCommand.Argument(name: "filename", value: filename),
-                                                                                      RubyCommand.Argument(name: "skip_fetch_profiles", value: skipFetchProfiles),
-                                                                                      RubyCommand.Argument(name: "skip_certificate_verification", value: skipCertificateVerification),
-                                                                                      RubyCommand.Argument(name: "platform", value: platform),
-                                                                                      RubyCommand.Argument(name: "readonly", value: readonly),
-                                                                                      RubyCommand.Argument(name: "template_name", value: templateName),
-                                                                                      RubyCommand.Argument(name: "fail_on_name_taken", value: failOnNameTaken)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func sigh(adhoc: Bool = false,
                  developerId: Bool = false,
@@ -10959,24 +6875,16 @@ public func sigh(adhoc: Bool = false,
                                                                                         RubyCommand.Argument(name: "template_name", value: templateName),
                                                                                         RubyCommand.Argument(name: "fail_on_name_taken", value: failOnNameTaken)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Skip the creation of the fastlane/README.md file when running fastlane
 
  Tell _fastlane_ to not automatically create a `fastlane/README.md` when running _fastlane_. You can always trigger the creation of this file manually by running `fastlane docs`.
-<<<<<<< Updated upstream
-*/
-func skipDocs() {
-  let command = RubyCommand(commandID: "", methodName: "skip_docs", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func skipDocs() {
     let command = RubyCommand(commandID: "", methodName: "skip_docs", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -10998,36 +6906,6 @@ public func skipDocs() {
    - linkNames: Find and link channel names and usernames (true/false)
 
  Create an Incoming WebHook and export this as `SLACK_URL`. Can send a message to **#channel** (by default), a direct message to **@username** or a message to a private group **group** with success (green) or failure (red) status.
-<<<<<<< Updated upstream
-*/
-func slack(message: String? = nil,
-           pretext: String? = nil,
-           channel: String? = nil,
-           useWebhookConfiguredUsernameAndIcon: Bool = false,
-           slackUrl: String,
-           username: String = "fastlane",
-           iconUrl: String = "https://fastlane.tools/assets/img/fastlane_icon.png",
-           payload: [String : Any] = [:],
-           defaultPayloads: [String]? = nil,
-           attachmentProperties: [String : Any] = [:],
-           success: Bool = true,
-           failOnError: Bool = true,
-           linkNames: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "slack", className: nil, args: [RubyCommand.Argument(name: "message", value: message),
-                                                                                       RubyCommand.Argument(name: "pretext", value: pretext),
-                                                                                       RubyCommand.Argument(name: "channel", value: channel),
-                                                                                       RubyCommand.Argument(name: "use_webhook_configured_username_and_icon", value: useWebhookConfiguredUsernameAndIcon),
-                                                                                       RubyCommand.Argument(name: "slack_url", value: slackUrl),
-                                                                                       RubyCommand.Argument(name: "username", value: username),
-                                                                                       RubyCommand.Argument(name: "icon_url", value: iconUrl),
-                                                                                       RubyCommand.Argument(name: "payload", value: payload),
-                                                                                       RubyCommand.Argument(name: "default_payloads", value: defaultPayloads),
-                                                                                       RubyCommand.Argument(name: "attachment_properties", value: attachmentProperties),
-                                                                                       RubyCommand.Argument(name: "success", value: success),
-                                                                                       RubyCommand.Argument(name: "fail_on_error", value: failOnError),
-                                                                                       RubyCommand.Argument(name: "link_names", value: linkNames)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func slack(message: String? = nil,
                   pretext: String? = nil,
@@ -11057,27 +6935,12 @@ public func slack(message: String? = nil,
                                                                                          RubyCommand.Argument(name: "fail_on_error", value: failOnError),
                                                                                          RubyCommand.Argument(name: "link_names", value: linkNames)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Show a train of the fastlane progress
 
  - returns: A string that is being sent to slack
-<<<<<<< Updated upstream
-*/
-func slackTrain() {
-  let command = RubyCommand(commandID: "", methodName: "slack_train", className: nil, args: [])
-  _ = runner.executeCommand(command)
-}
-
-/**
- 
-*/
-func slackTrainCrash() {
-  let command = RubyCommand(commandID: "", methodName: "slack_train_crash", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func slackTrain() {
     let command = RubyCommand(commandID: "", methodName: "slack_train", className: nil, args: [])
@@ -11090,7 +6953,6 @@ public func slackTrain() {
 public func slackTrainCrash() {
     let command = RubyCommand(commandID: "", methodName: "slack_train_crash", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -11101,18 +6963,6 @@ public func slackTrainCrash() {
    - train: Train emoji
    - rail: Character or emoji for the rail
    - reverseDirection: Pass true if you want the train to go from left to right
-<<<<<<< Updated upstream
-*/
-func slackTrainStart(distance: Int = 5,
-                     train: String = "🚝",
-                     rail: String = "=",
-                     reverseDirection: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "slack_train_start", className: nil, args: [RubyCommand.Argument(name: "distance", value: distance),
-                                                                                                   RubyCommand.Argument(name: "train", value: train),
-                                                                                                   RubyCommand.Argument(name: "rail", value: rail),
-                                                                                                   RubyCommand.Argument(name: "reverse_direction", value: reverseDirection)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func slackTrainStart(distance: Int = 5,
                             train: String = "🚝",
@@ -11124,7 +6974,6 @@ public func slackTrainStart(distance: Int = 5,
                                                                                                      RubyCommand.Argument(name: "rail", value: rail),
                                                                                                      RubyCommand.Argument(name: "reverse_direction", value: reverseDirection)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -11149,6 +6998,7 @@ public func slackTrainStart(distance: Int = 5,
    - coberturaXml: Tell slather that it should output results as Cobertura XML format
    - sonarqubeXml: Tell slather that it should output results as SonarQube Generic XML format
    - llvmCov: Tell slather that it should output results as llvm-cov show format
+   - json: Tell slather that it should output results as static JSON report
    - html: Tell slather that it should output results as static HTML pages
    - show: Tell slather that it should open static html pages automatically
    - sourceDirectory: Tell slather the location of your source files
@@ -11164,70 +7014,6 @@ public func slackTrainStart(distance: Int = 5,
 
  Slather works with multiple code coverage formats, including Xcode 7 code coverage.
  Slather is available at [https://github.com/SlatherOrg/slather](https://github.com/SlatherOrg/slather).
-<<<<<<< Updated upstream
-*/
-func slather(buildDirectory: String? = nil,
-             proj: String? = nil,
-             workspace: String? = nil,
-             scheme: String? = nil,
-             configuration: String? = nil,
-             inputFormat: String? = nil,
-             buildkite: Bool? = nil,
-             teamcity: Bool? = nil,
-             jenkins: Bool? = nil,
-             travis: Bool? = nil,
-             travisPro: Bool? = nil,
-             circleci: Bool? = nil,
-             coveralls: Bool? = nil,
-             simpleOutput: Bool? = nil,
-             gutterJson: Bool? = nil,
-             coberturaXml: Bool? = nil,
-             sonarqubeXml: Bool? = nil,
-             llvmCov: Any? = nil,
-             html: Bool? = nil,
-             show: Bool = false,
-             sourceDirectory: String? = nil,
-             outputDirectory: String? = nil,
-             ignore: [String]? = nil,
-             verbose: Bool? = nil,
-             useBundleExec: Bool = false,
-             binaryBasename: Bool = false,
-             binaryFile: [String]? = nil,
-             arch: String? = nil,
-             sourceFiles: Bool = false,
-             decimals: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "slather", className: nil, args: [RubyCommand.Argument(name: "build_directory", value: buildDirectory),
-                                                                                         RubyCommand.Argument(name: "proj", value: proj),
-                                                                                         RubyCommand.Argument(name: "workspace", value: workspace),
-                                                                                         RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                         RubyCommand.Argument(name: "configuration", value: configuration),
-                                                                                         RubyCommand.Argument(name: "input_format", value: inputFormat),
-                                                                                         RubyCommand.Argument(name: "buildkite", value: buildkite),
-                                                                                         RubyCommand.Argument(name: "teamcity", value: teamcity),
-                                                                                         RubyCommand.Argument(name: "jenkins", value: jenkins),
-                                                                                         RubyCommand.Argument(name: "travis", value: travis),
-                                                                                         RubyCommand.Argument(name: "travis_pro", value: travisPro),
-                                                                                         RubyCommand.Argument(name: "circleci", value: circleci),
-                                                                                         RubyCommand.Argument(name: "coveralls", value: coveralls),
-                                                                                         RubyCommand.Argument(name: "simple_output", value: simpleOutput),
-                                                                                         RubyCommand.Argument(name: "gutter_json", value: gutterJson),
-                                                                                         RubyCommand.Argument(name: "cobertura_xml", value: coberturaXml),
-                                                                                         RubyCommand.Argument(name: "sonarqube_xml", value: sonarqubeXml),
-                                                                                         RubyCommand.Argument(name: "llvm_cov", value: llvmCov),
-                                                                                         RubyCommand.Argument(name: "html", value: html),
-                                                                                         RubyCommand.Argument(name: "show", value: show),
-                                                                                         RubyCommand.Argument(name: "source_directory", value: sourceDirectory),
-                                                                                         RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                         RubyCommand.Argument(name: "ignore", value: ignore),
-                                                                                         RubyCommand.Argument(name: "verbose", value: verbose),
-                                                                                         RubyCommand.Argument(name: "use_bundle_exec", value: useBundleExec),
-                                                                                         RubyCommand.Argument(name: "binary_basename", value: binaryBasename),
-                                                                                         RubyCommand.Argument(name: "binary_file", value: binaryFile),
-                                                                                         RubyCommand.Argument(name: "arch", value: arch),
-                                                                                         RubyCommand.Argument(name: "source_files", value: sourceFiles),
-                                                                                         RubyCommand.Argument(name: "decimals", value: decimals)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func slather(buildDirectory: String? = nil,
                     proj: String? = nil,
@@ -11293,7 +7079,6 @@ public func slather(buildDirectory: String? = nil,
                                                                                            RubyCommand.Argument(name: "source_files", value: sourceFiles),
                                                                                            RubyCommand.Argument(name: "decimals", value: decimals)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -11343,94 +7128,6 @@ public func slather(buildDirectory: String? = nil,
    - onlyTesting: Array of strings matching Test Bundle/Test Suite/Test Cases to run
    - skipTesting: Array of strings matching Test Bundle/Test Suite/Test Cases to skip
    - disableXcpretty: Disable xcpretty formatting of build
-<<<<<<< Updated upstream
-*/
-func snapshot(workspace: Any? = snapshotfile.workspace,
-              project: Any? = snapshotfile.project,
-              xcargs: Any? = snapshotfile.xcargs,
-              xcconfig: Any? = snapshotfile.xcconfig,
-              devices: [String]? = snapshotfile.devices,
-              languages: [String] = snapshotfile.languages,
-              launchArguments: [String] = snapshotfile.launchArguments,
-              outputDirectory: Any = snapshotfile.outputDirectory,
-              outputSimulatorLogs: Bool = snapshotfile.outputSimulatorLogs,
-              iosVersion: Any? = snapshotfile.iosVersion,
-              skipOpenSummary: Bool = snapshotfile.skipOpenSummary,
-              skipHelperVersionCheck: Bool = snapshotfile.skipHelperVersionCheck,
-              clearPreviousScreenshots: Bool = snapshotfile.clearPreviousScreenshots,
-              reinstallApp: Bool = snapshotfile.reinstallApp,
-              eraseSimulator: Bool = snapshotfile.eraseSimulator,
-              overrideStatusBar: Bool = snapshotfile.overrideStatusBar,
-              localizeSimulator: Bool = snapshotfile.localizeSimulator,
-              darkMode: Bool? = snapshotfile.darkMode,
-              appIdentifier: Any? = snapshotfile.appIdentifier,
-              addPhotos: [String]? = snapshotfile.addPhotos,
-              addVideos: [String]? = snapshotfile.addVideos,
-              htmlTemplate: Any = snapshotfile.htmlTemplate,
-              buildlogPath: Any = snapshotfile.buildlogPath,
-              clean: Bool = snapshotfile.clean,
-              testWithoutBuilding: Bool? = snapshotfile.testWithoutBuilding,
-              configuration: Any? = snapshotfile.configuration,
-              xcprettyArgs: Any? = snapshotfile.xcprettyArgs,
-              sdk: Any? = snapshotfile.sdk,
-              scheme: Any? = snapshotfile.scheme,
-              numberOfRetries: Int = snapshotfile.numberOfRetries,
-              stopAfterFirstError: Bool = snapshotfile.stopAfterFirstError,
-              derivedDataPath: Any? = snapshotfile.derivedDataPath,
-              resultBundle: Bool = snapshotfile.resultBundle,
-              testTargetName: Any? = snapshotfile.testTargetName,
-              namespaceLogFiles: Any? = snapshotfile.namespaceLogFiles,
-              concurrentSimulators: Bool = snapshotfile.concurrentSimulators,
-              disableSlideToType: Bool = snapshotfile.disableSlideToType,
-              clonedSourcePackagesPath: Any? = snapshotfile.clonedSourcePackagesPath,
-              testplan: Any? = snapshotfile.testplan,
-              onlyTesting: Any? = snapshotfile.onlyTesting,
-              skipTesting: Any? = snapshotfile.skipTesting,
-              disableXcpretty: Bool? = snapshotfile.disableXcpretty) {
-  let command = RubyCommand(commandID: "", methodName: "snapshot", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
-                                                                                          RubyCommand.Argument(name: "project", value: project),
-                                                                                          RubyCommand.Argument(name: "xcargs", value: xcargs),
-                                                                                          RubyCommand.Argument(name: "xcconfig", value: xcconfig),
-                                                                                          RubyCommand.Argument(name: "devices", value: devices),
-                                                                                          RubyCommand.Argument(name: "languages", value: languages),
-                                                                                          RubyCommand.Argument(name: "launch_arguments", value: launchArguments),
-                                                                                          RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                          RubyCommand.Argument(name: "output_simulator_logs", value: outputSimulatorLogs),
-                                                                                          RubyCommand.Argument(name: "ios_version", value: iosVersion),
-                                                                                          RubyCommand.Argument(name: "skip_open_summary", value: skipOpenSummary),
-                                                                                          RubyCommand.Argument(name: "skip_helper_version_check", value: skipHelperVersionCheck),
-                                                                                          RubyCommand.Argument(name: "clear_previous_screenshots", value: clearPreviousScreenshots),
-                                                                                          RubyCommand.Argument(name: "reinstall_app", value: reinstallApp),
-                                                                                          RubyCommand.Argument(name: "erase_simulator", value: eraseSimulator),
-                                                                                          RubyCommand.Argument(name: "override_status_bar", value: overrideStatusBar),
-                                                                                          RubyCommand.Argument(name: "localize_simulator", value: localizeSimulator),
-                                                                                          RubyCommand.Argument(name: "dark_mode", value: darkMode),
-                                                                                          RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                          RubyCommand.Argument(name: "add_photos", value: addPhotos),
-                                                                                          RubyCommand.Argument(name: "add_videos", value: addVideos),
-                                                                                          RubyCommand.Argument(name: "html_template", value: htmlTemplate),
-                                                                                          RubyCommand.Argument(name: "buildlog_path", value: buildlogPath),
-                                                                                          RubyCommand.Argument(name: "clean", value: clean),
-                                                                                          RubyCommand.Argument(name: "test_without_building", value: testWithoutBuilding),
-                                                                                          RubyCommand.Argument(name: "configuration", value: configuration),
-                                                                                          RubyCommand.Argument(name: "xcpretty_args", value: xcprettyArgs),
-                                                                                          RubyCommand.Argument(name: "sdk", value: sdk),
-                                                                                          RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                          RubyCommand.Argument(name: "number_of_retries", value: numberOfRetries),
-                                                                                          RubyCommand.Argument(name: "stop_after_first_error", value: stopAfterFirstError),
-                                                                                          RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath),
-                                                                                          RubyCommand.Argument(name: "result_bundle", value: resultBundle),
-                                                                                          RubyCommand.Argument(name: "test_target_name", value: testTargetName),
-                                                                                          RubyCommand.Argument(name: "namespace_log_files", value: namespaceLogFiles),
-                                                                                          RubyCommand.Argument(name: "concurrent_simulators", value: concurrentSimulators),
-                                                                                          RubyCommand.Argument(name: "disable_slide_to_type", value: disableSlideToType),
-                                                                                          RubyCommand.Argument(name: "cloned_source_packages_path", value: clonedSourcePackagesPath),
-                                                                                          RubyCommand.Argument(name: "testplan", value: testplan),
-                                                                                          RubyCommand.Argument(name: "only_testing", value: onlyTesting),
-                                                                                          RubyCommand.Argument(name: "skip_testing", value: skipTesting),
-                                                                                          RubyCommand.Argument(name: "disable_xcpretty", value: disableXcpretty)])
-  _ = runner.executeCommand(command)
-=======
    - suppressXcodeOutput: Suppress the output of xcodebuild to stdout. Output is still saved in buildlog_path
  */
 public func snapshot(workspace: Any? = snapshotfile.workspace,
@@ -11523,7 +7220,6 @@ public func snapshot(workspace: Any? = snapshotfile.workspace,
                                                                                             RubyCommand.Argument(name: "disable_xcpretty", value: disableXcpretty),
                                                                                             RubyCommand.Argument(name: "suppress_xcode_output", value: suppressXcodeOutput)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -11551,40 +7247,6 @@ public func snapshot(workspace: Any? = snapshotfile.workspace,
 
  See [http://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner](http://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) for details.
  It can process unit test results if formatted as junit report as shown in [xctest](https://docs.fastlane.tools/actions/xctest/) action. It can also integrate coverage reports in Cobertura format, which can be transformed into by the [slather](https://docs.fastlane.tools/actions/slather/) action.
-<<<<<<< Updated upstream
-*/
-func sonar(projectConfigurationPath: String? = nil,
-           projectKey: String? = nil,
-           projectName: String? = nil,
-           projectVersion: String? = nil,
-           sourcesPath: String? = nil,
-           projectLanguage: String? = nil,
-           sourceEncoding: String? = nil,
-           sonarRunnerArgs: String? = nil,
-           sonarLogin: String? = nil,
-           sonarUrl: String? = nil,
-           sonarOrganization: String? = nil,
-           branchName: String? = nil,
-           pullRequestBranch: String? = nil,
-           pullRequestBase: String? = nil,
-           pullRequestKey: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "sonar", className: nil, args: [RubyCommand.Argument(name: "project_configuration_path", value: projectConfigurationPath),
-                                                                                       RubyCommand.Argument(name: "project_key", value: projectKey),
-                                                                                       RubyCommand.Argument(name: "project_name", value: projectName),
-                                                                                       RubyCommand.Argument(name: "project_version", value: projectVersion),
-                                                                                       RubyCommand.Argument(name: "sources_path", value: sourcesPath),
-                                                                                       RubyCommand.Argument(name: "project_language", value: projectLanguage),
-                                                                                       RubyCommand.Argument(name: "source_encoding", value: sourceEncoding),
-                                                                                       RubyCommand.Argument(name: "sonar_runner_args", value: sonarRunnerArgs),
-                                                                                       RubyCommand.Argument(name: "sonar_login", value: sonarLogin),
-                                                                                       RubyCommand.Argument(name: "sonar_url", value: sonarUrl),
-                                                                                       RubyCommand.Argument(name: "sonar_organization", value: sonarOrganization),
-                                                                                       RubyCommand.Argument(name: "branch_name", value: branchName),
-                                                                                       RubyCommand.Argument(name: "pull_request_branch", value: pullRequestBranch),
-                                                                                       RubyCommand.Argument(name: "pull_request_base", value: pullRequestBase),
-                                                                                       RubyCommand.Argument(name: "pull_request_key", value: pullRequestKey)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func sonar(projectConfigurationPath: String? = nil,
                   projectKey: String? = nil,
@@ -11620,7 +7282,6 @@ public func sonar(projectConfigurationPath: String? = nil,
                                                                                          RubyCommand.Argument(name: "pull_request_base", value: pullRequestBase),
                                                                                          RubyCommand.Argument(name: "pull_request_key", value: pullRequestKey)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -11634,20 +7295,6 @@ public func sonar(projectConfigurationPath: String? = nil,
    - copyToClipboard: Copies the contents of the found Spaceship log file(s) to the clipboard
 
  - returns: The array of Spaceship logs
-<<<<<<< Updated upstream
-*/
-func spaceshipLogs(latest: Bool = true,
-                   printContents: Bool = false,
-                   printPaths: Bool = false,
-                   copyToPath: String? = nil,
-                   copyToClipboard: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "spaceship_logs", className: nil, args: [RubyCommand.Argument(name: "latest", value: latest),
-                                                                                                RubyCommand.Argument(name: "print_contents", value: printContents),
-                                                                                                RubyCommand.Argument(name: "print_paths", value: printPaths),
-                                                                                                RubyCommand.Argument(name: "copy_to_path", value: copyToPath),
-                                                                                                RubyCommand.Argument(name: "copy_to_clipboard", value: copyToClipboard)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func spaceshipLogs(latest: Bool = true,
                           printContents: Bool = false,
@@ -11661,7 +7308,6 @@ public func spaceshipLogs(latest: Bool = true,
                                                                                                   RubyCommand.Argument(name: "copy_to_path", value: copyToPath),
                                                                                                   RubyCommand.Argument(name: "copy_to_clipboard", value: copyToClipboard)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -11687,28 +7333,6 @@ public func spaceshipStats(printRequestLogs: Bool = false) {
    - proxyPassword: Proxy password
    - proxyAddress: Proxy address
    - proxyPort: Proxy port
-<<<<<<< Updated upstream
-*/
-func splunkmint(dsym: String? = nil,
-                apiKey: String,
-                apiToken: String,
-                verbose: Bool = false,
-                uploadProgress: Bool = false,
-                proxyUsername: String? = nil,
-                proxyPassword: String? = nil,
-                proxyAddress: String? = nil,
-                proxyPort: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "splunkmint", className: nil, args: [RubyCommand.Argument(name: "dsym", value: dsym),
-                                                                                            RubyCommand.Argument(name: "api_key", value: apiKey),
-                                                                                            RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                            RubyCommand.Argument(name: "verbose", value: verbose),
-                                                                                            RubyCommand.Argument(name: "upload_progress", value: uploadProgress),
-                                                                                            RubyCommand.Argument(name: "proxy_username", value: proxyUsername),
-                                                                                            RubyCommand.Argument(name: "proxy_password", value: proxyPassword),
-                                                                                            RubyCommand.Argument(name: "proxy_address", value: proxyAddress),
-                                                                                            RubyCommand.Argument(name: "proxy_port", value: proxyPort)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func splunkmint(dsym: String? = nil,
                        apiKey: String,
@@ -11730,7 +7354,6 @@ public func splunkmint(dsym: String? = nil,
                                                                                               RubyCommand.Argument(name: "proxy_address", value: proxyAddress),
                                                                                               RubyCommand.Argument(name: "proxy_port", value: proxyPort)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -11742,29 +7365,10 @@ public func splunkmint(dsym: String? = nil,
    - packagePath: Change working directory before any other operation
    - xcconfig: Use xcconfig file to override swift package generate-xcodeproj defaults
    - configuration: Build with configuration (debug|release) [default: debug]
+   - disableSandbox: Disable using the sandbox when executing subprocesses
    - xcprettyOutput: Specifies the output type for xcpretty. eg. 'test', or 'simple'
    - xcprettyArgs: Pass in xcpretty additional command line arguments (e.g. '--test --no-color' or '--tap --no-utf'), requires xcpretty_output to be specified also
    - verbose: Increase verbosity of informational output
-<<<<<<< Updated upstream
-*/
-func spm(command: String = "build",
-         buildPath: String? = nil,
-         packagePath: String? = nil,
-         xcconfig: String? = nil,
-         configuration: String? = nil,
-         xcprettyOutput: String? = nil,
-         xcprettyArgs: String? = nil,
-         verbose: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "spm", className: nil, args: [RubyCommand.Argument(name: "command", value: command),
-                                                                                     RubyCommand.Argument(name: "build_path", value: buildPath),
-                                                                                     RubyCommand.Argument(name: "package_path", value: packagePath),
-                                                                                     RubyCommand.Argument(name: "xcconfig", value: xcconfig),
-                                                                                     RubyCommand.Argument(name: "configuration", value: configuration),
-                                                                                     RubyCommand.Argument(name: "xcpretty_output", value: xcprettyOutput),
-                                                                                     RubyCommand.Argument(name: "xcpretty_args", value: xcprettyArgs),
-                                                                                     RubyCommand.Argument(name: "verbose", value: verbose)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func spm(command: String = "build",
                 buildPath: String? = nil,
@@ -11786,7 +7390,6 @@ public func spm(command: String = "build",
                                                                                        RubyCommand.Argument(name: "xcpretty_args", value: xcprettyArgs),
                                                                                        RubyCommand.Argument(name: "verbose", value: verbose)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -11801,22 +7404,6 @@ public func spm(command: String = "build",
    - log: Log commands and output
 
  Lets you execute remote commands via ssh using username/password or ssh-agent. If one of the commands in command-array returns non 0, it fails.
-<<<<<<< Updated upstream
-*/
-func ssh(username: String,
-         password: String? = nil,
-         host: String,
-         port: String = "22",
-         commands: [String]? = nil,
-         log: Bool = true) {
-  let command = RubyCommand(commandID: "", methodName: "ssh", className: nil, args: [RubyCommand.Argument(name: "username", value: username),
-                                                                                     RubyCommand.Argument(name: "password", value: password),
-                                                                                     RubyCommand.Argument(name: "host", value: host),
-                                                                                     RubyCommand.Argument(name: "port", value: port),
-                                                                                     RubyCommand.Argument(name: "commands", value: commands),
-                                                                                     RubyCommand.Argument(name: "log", value: log)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func ssh(username: String,
                 password: String? = nil,
@@ -11832,7 +7419,6 @@ public func ssh(username: String,
                                                                                        RubyCommand.Argument(name: "commands", value: commands),
                                                                                        RubyCommand.Argument(name: "log", value: log)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -11877,80 +7463,6 @@ public func ssh(username: String,
    - ackBundleInstallationWarning: Must be set to true if the bundle installation may trigger a warning on user devices (e.g can only be downloaded over wifi). Typically this is required for bundles over 150MB
 
  More information: https://docs.fastlane.tools/actions/supply/
-<<<<<<< Updated upstream
-*/
-func supply(packageName: String,
-            versionName: String? = nil,
-            versionCode: Int? = nil,
-            releaseStatus: String = "completed",
-            track: String = "production",
-            rollout: String? = nil,
-            metadataPath: String? = nil,
-            key: String? = nil,
-            issuer: String? = nil,
-            jsonKey: String? = nil,
-            jsonKeyData: String? = nil,
-            apk: String? = nil,
-            apkPaths: [String]? = nil,
-            aab: String? = nil,
-            aabPaths: [String]? = nil,
-            skipUploadApk: Bool = false,
-            skipUploadAab: Bool = false,
-            skipUploadMetadata: Bool = false,
-            skipUploadChangelogs: Bool = false,
-            skipUploadImages: Bool = false,
-            skipUploadScreenshots: Bool = false,
-            trackPromoteTo: String? = nil,
-            validateOnly: Bool = false,
-            mapping: String? = nil,
-            mappingPaths: [String]? = nil,
-            rootUrl: String? = nil,
-            checkSupersededTracks: Bool = false,
-            timeout: Int = 300,
-            deactivateOnPromote: Bool = true,
-            versionCodesToRetain: [String]? = nil,
-            inAppUpdatePriority: Int? = nil,
-            obbMainReferencesVersion: String? = nil,
-            obbMainFileSize: String? = nil,
-            obbPatchReferencesVersion: String? = nil,
-            obbPatchFileSize: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "supply", className: nil, args: [RubyCommand.Argument(name: "package_name", value: packageName),
-                                                                                        RubyCommand.Argument(name: "version_name", value: versionName),
-                                                                                        RubyCommand.Argument(name: "version_code", value: versionCode),
-                                                                                        RubyCommand.Argument(name: "release_status", value: releaseStatus),
-                                                                                        RubyCommand.Argument(name: "track", value: track),
-                                                                                        RubyCommand.Argument(name: "rollout", value: rollout),
-                                                                                        RubyCommand.Argument(name: "metadata_path", value: metadataPath),
-                                                                                        RubyCommand.Argument(name: "key", value: key),
-                                                                                        RubyCommand.Argument(name: "issuer", value: issuer),
-                                                                                        RubyCommand.Argument(name: "json_key", value: jsonKey),
-                                                                                        RubyCommand.Argument(name: "json_key_data", value: jsonKeyData),
-                                                                                        RubyCommand.Argument(name: "apk", value: apk),
-                                                                                        RubyCommand.Argument(name: "apk_paths", value: apkPaths),
-                                                                                        RubyCommand.Argument(name: "aab", value: aab),
-                                                                                        RubyCommand.Argument(name: "aab_paths", value: aabPaths),
-                                                                                        RubyCommand.Argument(name: "skip_upload_apk", value: skipUploadApk),
-                                                                                        RubyCommand.Argument(name: "skip_upload_aab", value: skipUploadAab),
-                                                                                        RubyCommand.Argument(name: "skip_upload_metadata", value: skipUploadMetadata),
-                                                                                        RubyCommand.Argument(name: "skip_upload_changelogs", value: skipUploadChangelogs),
-                                                                                        RubyCommand.Argument(name: "skip_upload_images", value: skipUploadImages),
-                                                                                        RubyCommand.Argument(name: "skip_upload_screenshots", value: skipUploadScreenshots),
-                                                                                        RubyCommand.Argument(name: "track_promote_to", value: trackPromoteTo),
-                                                                                        RubyCommand.Argument(name: "validate_only", value: validateOnly),
-                                                                                        RubyCommand.Argument(name: "mapping", value: mapping),
-                                                                                        RubyCommand.Argument(name: "mapping_paths", value: mappingPaths),
-                                                                                        RubyCommand.Argument(name: "root_url", value: rootUrl),
-                                                                                        RubyCommand.Argument(name: "check_superseded_tracks", value: checkSupersededTracks),
-                                                                                        RubyCommand.Argument(name: "timeout", value: timeout),
-                                                                                        RubyCommand.Argument(name: "deactivate_on_promote", value: deactivateOnPromote),
-                                                                                        RubyCommand.Argument(name: "version_codes_to_retain", value: versionCodesToRetain),
-                                                                                        RubyCommand.Argument(name: "in_app_update_priority", value: inAppUpdatePriority),
-                                                                                        RubyCommand.Argument(name: "obb_main_references_version", value: obbMainReferencesVersion),
-                                                                                        RubyCommand.Argument(name: "obb_main_file_size", value: obbMainFileSize),
-                                                                                        RubyCommand.Argument(name: "obb_patch_references_version", value: obbPatchReferencesVersion),
-                                                                                        RubyCommand.Argument(name: "obb_patch_file_size", value: obbPatchFileSize)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func supply(packageName: String,
                    versionName: String? = nil,
@@ -12026,7 +7538,6 @@ public func supply(packageName: String,
                                                                                           RubyCommand.Argument(name: "obb_patch_file_size", value: obbPatchFileSize),
                                                                                           RubyCommand.Argument(name: "ack_bundle_installation_warning", value: ackBundleInstallationWarning)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -12047,38 +7558,6 @@ public func supply(packageName: String,
    - format: Format code when mode is :autocorrect
    - noCache: Ignore the cache when mode is :autocorrect or :lint
    - compilerLogPath: Compiler log path when mode is :analyze
-<<<<<<< Updated upstream
-*/
-func swiftlint(mode: Any = "lint",
-               path: String? = nil,
-               outputFile: String? = nil,
-               configFile: String? = nil,
-               strict: Bool = false,
-               files: Any? = nil,
-               ignoreExitStatus: Bool = false,
-               raiseIfSwiftlintError: Bool = false,
-               reporter: String? = nil,
-               quiet: Bool = false,
-               executable: String? = nil,
-               format: Bool = false,
-               noCache: Bool = false,
-               compilerLogPath: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "swiftlint", className: nil, args: [RubyCommand.Argument(name: "mode", value: mode),
-                                                                                           RubyCommand.Argument(name: "path", value: path),
-                                                                                           RubyCommand.Argument(name: "output_file", value: outputFile),
-                                                                                           RubyCommand.Argument(name: "config_file", value: configFile),
-                                                                                           RubyCommand.Argument(name: "strict", value: strict),
-                                                                                           RubyCommand.Argument(name: "files", value: files),
-                                                                                           RubyCommand.Argument(name: "ignore_exit_status", value: ignoreExitStatus),
-                                                                                           RubyCommand.Argument(name: "raise_if_swiftlint_error", value: raiseIfSwiftlintError),
-                                                                                           RubyCommand.Argument(name: "reporter", value: reporter),
-                                                                                           RubyCommand.Argument(name: "quiet", value: quiet),
-                                                                                           RubyCommand.Argument(name: "executable", value: executable),
-                                                                                           RubyCommand.Argument(name: "format", value: format),
-                                                                                           RubyCommand.Argument(name: "no_cache", value: noCache),
-                                                                                           RubyCommand.Argument(name: "compiler_log_path", value: compilerLogPath)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func swiftlint(mode: Any = "lint",
                       path: String? = nil,
@@ -12110,7 +7589,6 @@ public func swiftlint(mode: Any = "lint",
                                                                                              RubyCommand.Argument(name: "no_cache", value: noCache),
                                                                                              RubyCommand.Argument(name: "compiler_log_path", value: compilerLogPath)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -12143,6 +7621,7 @@ public func swiftlint(mode: Any = "lint",
    - s3AccessKey: S3 access key
    - s3SecretAccessKey: S3 secret access key
    - s3Bucket: Name of the S3 bucket
+   - s3ObjectPrefix: Prefix to be used on all objects uploaded to S3
    - keychainName: Keychain the items should be imported to
    - keychainPassword: This might be required the first time you access certificates on a new mac. For the login/default keychain this is your account password
    - force: Renew the provisioning profiles every time you run match
@@ -12158,84 +7637,6 @@ public func swiftlint(mode: Any = "lint",
    - verbose: Print out extra information and all commands
 
  More information: https://docs.fastlane.tools/actions/match/
-<<<<<<< Updated upstream
-*/
-func syncCodeSigning(type: String = "development",
-                     additionalCertTypes: [String]? = nil,
-                     readonly: Bool = false,
-                     generateAppleCerts: Bool = true,
-                     skipProvisioningProfiles: Bool = false,
-                     appIdentifier: [String],
-                     username: String,
-                     teamId: String? = nil,
-                     teamName: String? = nil,
-                     storageMode: String = "git",
-                     gitUrl: String,
-                     gitBranch: String = "master",
-                     gitFullName: String? = nil,
-                     gitUserEmail: String? = nil,
-                     shallowClone: Bool = false,
-                     cloneBranchDirectly: Bool = false,
-                     gitBasicAuthorization: String? = nil,
-                     gitBearerAuthorization: String? = nil,
-                     googleCloudBucketName: String? = nil,
-                     googleCloudKeysFile: String? = nil,
-                     googleCloudProjectId: String? = nil,
-                     s3Region: String? = nil,
-                     s3AccessKey: String? = nil,
-                     s3SecretAccessKey: String? = nil,
-                     s3Bucket: String? = nil,
-                     keychainName: String = "login.keychain",
-                     keychainPassword: String? = nil,
-                     force: Bool = false,
-                     forceForNewDevices: Bool = false,
-                     skipConfirmation: Bool = false,
-                     skipDocs: Bool = false,
-                     platform: String = "ios",
-                     templateName: String? = nil,
-                     profileName: String? = nil,
-                     failOnNameTaken: Bool = false,
-                     outputPath: String? = nil,
-                     verbose: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "sync_code_signing", className: nil, args: [RubyCommand.Argument(name: "type", value: type),
-                                                                                                   RubyCommand.Argument(name: "additional_cert_types", value: additionalCertTypes),
-                                                                                                   RubyCommand.Argument(name: "readonly", value: readonly),
-                                                                                                   RubyCommand.Argument(name: "generate_apple_certs", value: generateAppleCerts),
-                                                                                                   RubyCommand.Argument(name: "skip_provisioning_profiles", value: skipProvisioningProfiles),
-                                                                                                   RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                                   RubyCommand.Argument(name: "username", value: username),
-                                                                                                   RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                   RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                                   RubyCommand.Argument(name: "storage_mode", value: storageMode),
-                                                                                                   RubyCommand.Argument(name: "git_url", value: gitUrl),
-                                                                                                   RubyCommand.Argument(name: "git_branch", value: gitBranch),
-                                                                                                   RubyCommand.Argument(name: "git_full_name", value: gitFullName),
-                                                                                                   RubyCommand.Argument(name: "git_user_email", value: gitUserEmail),
-                                                                                                   RubyCommand.Argument(name: "shallow_clone", value: shallowClone),
-                                                                                                   RubyCommand.Argument(name: "clone_branch_directly", value: cloneBranchDirectly),
-                                                                                                   RubyCommand.Argument(name: "git_basic_authorization", value: gitBasicAuthorization),
-                                                                                                   RubyCommand.Argument(name: "git_bearer_authorization", value: gitBearerAuthorization),
-                                                                                                   RubyCommand.Argument(name: "google_cloud_bucket_name", value: googleCloudBucketName),
-                                                                                                   RubyCommand.Argument(name: "google_cloud_keys_file", value: googleCloudKeysFile),
-                                                                                                   RubyCommand.Argument(name: "google_cloud_project_id", value: googleCloudProjectId),
-                                                                                                   RubyCommand.Argument(name: "s3_region", value: s3Region),
-                                                                                                   RubyCommand.Argument(name: "s3_access_key", value: s3AccessKey),
-                                                                                                   RubyCommand.Argument(name: "s3_secret_access_key", value: s3SecretAccessKey),
-                                                                                                   RubyCommand.Argument(name: "s3_bucket", value: s3Bucket),
-                                                                                                   RubyCommand.Argument(name: "keychain_name", value: keychainName),
-                                                                                                   RubyCommand.Argument(name: "keychain_password", value: keychainPassword),
-                                                                                                   RubyCommand.Argument(name: "force", value: force),
-                                                                                                   RubyCommand.Argument(name: "force_for_new_devices", value: forceForNewDevices),
-                                                                                                   RubyCommand.Argument(name: "skip_confirmation", value: skipConfirmation),
-                                                                                                   RubyCommand.Argument(name: "skip_docs", value: skipDocs),
-                                                                                                   RubyCommand.Argument(name: "platform", value: platform),
-                                                                                                   RubyCommand.Argument(name: "template_name", value: templateName),
-                                                                                                   RubyCommand.Argument(name: "profile_name", value: profileName),
-                                                                                                   RubyCommand.Argument(name: "fail_on_name_taken", value: failOnNameTaken),
-                                                                                                   RubyCommand.Argument(name: "output_path", value: outputPath),
-                                                                                                   RubyCommand.Argument(name: "verbose", value: verbose)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func syncCodeSigning(type: String = "development",
                             additionalCertTypes: [String]? = nil,
@@ -12319,37 +7720,22 @@ public func syncCodeSigning(type: String = "development",
                                                                                                      RubyCommand.Argument(name: "output_path", value: outputPath),
                                                                                                      RubyCommand.Argument(name: "verbose", value: verbose)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Specify the Team ID you want to use for the Apple Developer Portal
-<<<<<<< Updated upstream
-*/
-func teamId() {
-  let command = RubyCommand(commandID: "", methodName: "team_id", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func teamId() {
     let command = RubyCommand(commandID: "", methodName: "team_id", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Set a team to use by its name
-<<<<<<< Updated upstream
-*/
-func teamName() {
-  let command = RubyCommand(commandID: "", methodName: "team_name", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func teamName() {
     let command = RubyCommand(commandID: "", methodName: "team_name", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -12371,36 +7757,6 @@ public func teamName() {
    - timeout: Request timeout in seconds
 
  You can retrieve your API key on [your settings page](https://free.testfairy.com/settings/)
-<<<<<<< Updated upstream
-*/
-func testfairy(apiKey: String,
-               ipa: String? = nil,
-               apk: String? = nil,
-               symbolsFile: String? = nil,
-               uploadUrl: String = "https://upload.testfairy.com",
-               testersGroups: [String] = [],
-               metrics: [String] = [],
-               comment: String = "No comment provided",
-               autoUpdate: String = "off",
-               notify: String = "off",
-               options: [String] = [],
-               custom: String = "",
-               timeout: Int? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "testfairy", className: nil, args: [RubyCommand.Argument(name: "api_key", value: apiKey),
-                                                                                           RubyCommand.Argument(name: "ipa", value: ipa),
-                                                                                           RubyCommand.Argument(name: "apk", value: apk),
-                                                                                           RubyCommand.Argument(name: "symbols_file", value: symbolsFile),
-                                                                                           RubyCommand.Argument(name: "upload_url", value: uploadUrl),
-                                                                                           RubyCommand.Argument(name: "testers_groups", value: testersGroups),
-                                                                                           RubyCommand.Argument(name: "metrics", value: metrics),
-                                                                                           RubyCommand.Argument(name: "comment", value: comment),
-                                                                                           RubyCommand.Argument(name: "auto_update", value: autoUpdate),
-                                                                                           RubyCommand.Argument(name: "notify", value: notify),
-                                                                                           RubyCommand.Argument(name: "options", value: options),
-                                                                                           RubyCommand.Argument(name: "custom", value: custom),
-                                                                                           RubyCommand.Argument(name: "timeout", value: timeout)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func testfairy(apiKey: String,
                       ipa: String? = nil,
@@ -12430,7 +7786,6 @@ public func testfairy(apiKey: String,
                                                                                              RubyCommand.Argument(name: "custom", value: custom),
                                                                                              RubyCommand.Argument(name: "timeout", value: timeout)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -12476,76 +7831,6 @@ public func testfairy(apiKey: String,
 
  More details can be found on https://docs.fastlane.tools/actions/pilot/.
  This integration will only do the TestFlight upload.
-<<<<<<< Updated upstream
-*/
-func testflight(username: String,
-                appIdentifier: String? = nil,
-                appPlatform: String = "ios",
-                appleId: String? = nil,
-                ipa: String? = nil,
-                demoAccountRequired: Bool = false,
-                betaAppReviewInfo: [String : Any]? = nil,
-                localizedAppInfo: [String : Any]? = nil,
-                betaAppDescription: String? = nil,
-                betaAppFeedbackEmail: String? = nil,
-                localizedBuildInfo: [String : Any]? = nil,
-                changelog: String? = nil,
-                skipSubmission: Bool = false,
-                skipWaitingForBuildProcessing: Bool = false,
-                updateBuildInfoOnUpload: Bool = false,
-                usesNonExemptEncryption: Bool = false,
-                distributeExternal: Bool = false,
-                notifyExternalTesters: Bool = true,
-                appVersion: String? = nil,
-                buildNumber: String? = nil,
-                expirePreviousBuilds: Bool = false,
-                firstName: String? = nil,
-                lastName: String? = nil,
-                email: String? = nil,
-                testersFilePath: String = "./testers.csv",
-                groups: [String]? = nil,
-                teamId: Any? = nil,
-                teamName: String? = nil,
-                devPortalTeamId: String? = nil,
-                itcProvider: String? = nil,
-                waitProcessingInterval: Int = 30,
-                waitForUploadedBuild: Bool = false,
-                rejectBuildWaitingForReview: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "testflight", className: nil, args: [RubyCommand.Argument(name: "username", value: username),
-                                                                                            RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                            RubyCommand.Argument(name: "app_platform", value: appPlatform),
-                                                                                            RubyCommand.Argument(name: "apple_id", value: appleId),
-                                                                                            RubyCommand.Argument(name: "ipa", value: ipa),
-                                                                                            RubyCommand.Argument(name: "demo_account_required", value: demoAccountRequired),
-                                                                                            RubyCommand.Argument(name: "beta_app_review_info", value: betaAppReviewInfo),
-                                                                                            RubyCommand.Argument(name: "localized_app_info", value: localizedAppInfo),
-                                                                                            RubyCommand.Argument(name: "beta_app_description", value: betaAppDescription),
-                                                                                            RubyCommand.Argument(name: "beta_app_feedback_email", value: betaAppFeedbackEmail),
-                                                                                            RubyCommand.Argument(name: "localized_build_info", value: localizedBuildInfo),
-                                                                                            RubyCommand.Argument(name: "changelog", value: changelog),
-                                                                                            RubyCommand.Argument(name: "skip_submission", value: skipSubmission),
-                                                                                            RubyCommand.Argument(name: "skip_waiting_for_build_processing", value: skipWaitingForBuildProcessing),
-                                                                                            RubyCommand.Argument(name: "update_build_info_on_upload", value: updateBuildInfoOnUpload),
-                                                                                            RubyCommand.Argument(name: "uses_non_exempt_encryption", value: usesNonExemptEncryption),
-                                                                                            RubyCommand.Argument(name: "distribute_external", value: distributeExternal),
-                                                                                            RubyCommand.Argument(name: "notify_external_testers", value: notifyExternalTesters),
-                                                                                            RubyCommand.Argument(name: "app_version", value: appVersion),
-                                                                                            RubyCommand.Argument(name: "build_number", value: buildNumber),
-                                                                                            RubyCommand.Argument(name: "expire_previous_builds", value: expirePreviousBuilds),
-                                                                                            RubyCommand.Argument(name: "first_name", value: firstName),
-                                                                                            RubyCommand.Argument(name: "last_name", value: lastName),
-                                                                                            RubyCommand.Argument(name: "email", value: email),
-                                                                                            RubyCommand.Argument(name: "testers_file_path", value: testersFilePath),
-                                                                                            RubyCommand.Argument(name: "groups", value: groups),
-                                                                                            RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                            RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                            RubyCommand.Argument(name: "dev_portal_team_id", value: devPortalTeamId),
-                                                                                            RubyCommand.Argument(name: "itc_provider", value: itcProvider),
-                                                                                            RubyCommand.Argument(name: "wait_processing_interval", value: waitProcessingInterval),
-                                                                                            RubyCommand.Argument(name: "wait_for_uploaded_build", value: waitForUploadedBuild),
-                                                                                            RubyCommand.Argument(name: "reject_build_waiting_for_review", value: rejectBuildWaitingForReview)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func testflight(apiKeyPath: String? = nil,
                        apiKey: [String: Any]? = nil,
@@ -12621,7 +7906,6 @@ public func testflight(apiKeyPath: String? = nil,
                                                                                               RubyCommand.Argument(name: "wait_for_uploaded_build", value: waitForUploadedBuild),
                                                                                               RubyCommand.Argument(name: "reject_build_waiting_for_review", value: rejectBuildWaitingForReview)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -12637,24 +7921,6 @@ public func testflight(apiKeyPath: String? = nil,
    - status: 2 to make your release public. Release will be distributed to available testers. 1 to make your release private. Release won't be distributed to testers. This also prevents release from showing up for SDK update
 
  More information: [http://tryouts.readthedocs.org/en/latest/releases.html#create-release](http://tryouts.readthedocs.org/en/latest/releases.html#create-release)
-<<<<<<< Updated upstream
-*/
-func tryouts(appId: String,
-             apiToken: String,
-             buildFile: String,
-             notes: String? = nil,
-             notesPath: String? = nil,
-             notify: Int = 1,
-             status: Int = 2) {
-  let command = RubyCommand(commandID: "", methodName: "tryouts", className: nil, args: [RubyCommand.Argument(name: "app_id", value: appId),
-                                                                                         RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                         RubyCommand.Argument(name: "build_file", value: buildFile),
-                                                                                         RubyCommand.Argument(name: "notes", value: notes),
-                                                                                         RubyCommand.Argument(name: "notes_path", value: notesPath),
-                                                                                         RubyCommand.Argument(name: "notify", value: notify),
-                                                                                         RubyCommand.Argument(name: "status", value: status)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func tryouts(appId: String,
                     apiToken: String,
@@ -12672,7 +7938,6 @@ public func tryouts(appId: String,
                                                                                            RubyCommand.Argument(name: "notify", value: notify),
                                                                                            RubyCommand.Argument(name: "status", value: status)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -12686,20 +7951,6 @@ public func tryouts(appId: String,
    - message: The tweet
 
  Post a tweet on Twitter. Requires you to setup an app on [twitter.com](https://twitter.com) and obtain `consumer` and `access_token`.
-<<<<<<< Updated upstream
-*/
-func twitter(consumerKey: String,
-             consumerSecret: String,
-             accessToken: String,
-             accessTokenSecret: String,
-             message: String) {
-  let command = RubyCommand(commandID: "", methodName: "twitter", className: nil, args: [RubyCommand.Argument(name: "consumer_key", value: consumerKey),
-                                                                                         RubyCommand.Argument(name: "consumer_secret", value: consumerSecret),
-                                                                                         RubyCommand.Argument(name: "access_token", value: accessToken),
-                                                                                         RubyCommand.Argument(name: "access_token_secret", value: accessTokenSecret),
-                                                                                         RubyCommand.Argument(name: "message", value: message)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func twitter(consumerKey: String,
                     consumerSecret: String,
@@ -12713,22 +7964,14 @@ public func twitter(consumerKey: String,
                                                                                            RubyCommand.Argument(name: "access_token_secret", value: accessTokenSecret),
                                                                                            RubyCommand.Argument(name: "message", value: message)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Post a message to [Typetalk](https://www.typetalk.com/)
-<<<<<<< Updated upstream
-*/
-func typetalk() {
-  let command = RubyCommand(commandID: "", methodName: "typetalk", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func typetalk() {
     let command = RubyCommand(commandID: "", methodName: "typetalk", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -12742,18 +7985,6 @@ public func typetalk() {
 
  Unlocks the given keychain file and adds it to the keychain search list.
  Keychains can be replaced with `add_to_search_list: :replace`.
-<<<<<<< Updated upstream
-*/
-func unlockKeychain(path: String = "login",
-                    password: String,
-                    addToSearchList: Bool = true,
-                    setDefault: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "unlock_keychain", className: nil, args: [RubyCommand.Argument(name: "path", value: path),
-                                                                                                 RubyCommand.Argument(name: "password", value: password),
-                                                                                                 RubyCommand.Argument(name: "add_to_search_list", value: addToSearchList),
-                                                                                                 RubyCommand.Argument(name: "set_default", value: setDefault)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func unlockKeychain(path: String = "login",
                            password: String,
@@ -12765,7 +7996,6 @@ public func unlockKeychain(path: String = "login",
                                                                                                    RubyCommand.Argument(name: "add_to_search_list", value: addToSearchList),
                                                                                                    RubyCommand.Argument(name: "set_default", value: setDefault)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -12776,14 +8006,6 @@ public func unlockKeychain(path: String = "login",
    - appGroupIdentifiers: An Array of unique identifiers for the app groups. Eg. ['group.com.test.testapp']
 
  Updates the App Group Identifiers in the given Entitlements file, so you can have app groups for the app store build and app groups for an enterprise build.
-<<<<<<< Updated upstream
-*/
-func updateAppGroupIdentifiers(entitlementsFile: String,
-                               appGroupIdentifiers: Any) {
-  let command = RubyCommand(commandID: "", methodName: "update_app_group_identifiers", className: nil, args: [RubyCommand.Argument(name: "entitlements_file", value: entitlementsFile),
-                                                                                                              RubyCommand.Argument(name: "app_group_identifiers", value: appGroupIdentifiers)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func updateAppGroupIdentifiers(entitlementsFile: String,
                                       appGroupIdentifiers: Any)
@@ -12791,7 +8013,6 @@ public func updateAppGroupIdentifiers(entitlementsFile: String,
     let command = RubyCommand(commandID: "", methodName: "update_app_group_identifiers", className: nil, args: [RubyCommand.Argument(name: "entitlements_file", value: entitlementsFile),
                                                                                                                 RubyCommand.Argument(name: "app_group_identifiers", value: appGroupIdentifiers)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -12803,16 +8024,6 @@ public func updateAppGroupIdentifiers(entitlementsFile: String,
    - appIdentifier: The app Identifier you want to set
 
  Update an app identifier by either setting `CFBundleIdentifier` or `PRODUCT_BUNDLE_IDENTIFIER`, depending on which is already in use.
-<<<<<<< Updated upstream
-*/
-func updateAppIdentifier(xcodeproj: String,
-                         plistPath: String,
-                         appIdentifier: String) {
-  let command = RubyCommand(commandID: "", methodName: "update_app_identifier", className: nil, args: [RubyCommand.Argument(name: "xcodeproj", value: xcodeproj),
-                                                                                                       RubyCommand.Argument(name: "plist_path", value: plistPath),
-                                                                                                       RubyCommand.Argument(name: "app_identifier", value: appIdentifier)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func updateAppIdentifier(xcodeproj: String,
                                 plistPath: String,
@@ -12822,7 +8033,6 @@ public func updateAppIdentifier(xcodeproj: String,
                                                                                                          RubyCommand.Argument(name: "plist_path", value: plistPath),
                                                                                                          RubyCommand.Argument(name: "app_identifier", value: appIdentifier)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -12842,28 +8052,6 @@ public func updateAppIdentifier(xcodeproj: String,
  - returns: The current status (boolean) of codesigning after modification
 
  Configures Xcode's Codesigning options of all targets in the project
-<<<<<<< Updated upstream
-*/
-func updateCodeSigningSettings(path: String,
-                               useAutomaticSigning: Bool = false,
-                               teamId: String? = nil,
-                               targets: [String]? = nil,
-                               buildConfigurations: [String]? = nil,
-                               codeSignIdentity: String? = nil,
-                               profileName: String? = nil,
-                               profileUuid: String? = nil,
-                               bundleIdentifier: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "update_code_signing_settings", className: nil, args: [RubyCommand.Argument(name: "path", value: path),
-                                                                                                              RubyCommand.Argument(name: "use_automatic_signing", value: useAutomaticSigning),
-                                                                                                              RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                              RubyCommand.Argument(name: "targets", value: targets),
-                                                                                                              RubyCommand.Argument(name: "build_configurations", value: buildConfigurations),
-                                                                                                              RubyCommand.Argument(name: "code_sign_identity", value: codeSignIdentity),
-                                                                                                              RubyCommand.Argument(name: "profile_name", value: profileName),
-                                                                                                              RubyCommand.Argument(name: "profile_uuid", value: profileUuid),
-                                                                                                              RubyCommand.Argument(name: "bundle_identifier", value: bundleIdentifier)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func updateCodeSigningSettings(path: String,
                                       useAutomaticSigning: Bool = false,
@@ -12885,7 +8073,6 @@ public func updateCodeSigningSettings(path: String,
                                                                                                                 RubyCommand.Argument(name: "profile_uuid", value: profileUuid),
                                                                                                                 RubyCommand.Argument(name: "bundle_identifier", value: bundleIdentifier)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -12896,9 +8083,9 @@ public func updateCodeSigningSettings(path: String,
    - nightly: **DEPRECATED!** Nightly builds are no longer being made available - Opt-in to install and use nightly fastlane builds
 
  This action will update fastlane to the most recent version - major version updates will not be performed automatically, as they might include breaking changes. If an update was performed, fastlane will be restarted before the run continues.
- 
+
  If you are using rbenv or rvm, everything should be good to go. However, if you are using the system's default ruby, some additional setup is needed for this action to work correctly. In short, fastlane needs to be able to access your gem library without running in `sudo` mode.
- 
+
  The simplest possible fix for this is putting the following lines into your `~/.bashrc` or `~/.zshrc` file:|
  |
  ```bash|
@@ -12907,16 +8094,8 @@ public func updateCodeSigningSettings(path: String,
  ```|
  >|
  After the above changes, restart your terminal, then run `mkdir $GEM_HOME` to create the new gem directory. After this, you're good to go!
- 
+
  Recommended usage of the `update_fastlane` action is at the top inside of the `before_all` block, before running any other action.
-<<<<<<< Updated upstream
-*/
-func updateFastlane(noUpdate: Bool = false,
-                    nightly: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "update_fastlane", className: nil, args: [RubyCommand.Argument(name: "no_update", value: noUpdate),
-                                                                                                 RubyCommand.Argument(name: "nightly", value: nightly)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func updateFastlane(noUpdate: Bool = false,
                            nightly: Bool = false)
@@ -12924,7 +8103,6 @@ public func updateFastlane(noUpdate: Bool = false,
     let command = RubyCommand(commandID: "", methodName: "update_fastlane", className: nil, args: [RubyCommand.Argument(name: "no_update", value: noUpdate),
                                                                                                    RubyCommand.Argument(name: "nightly", value: nightly)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -12935,14 +8113,6 @@ public func updateFastlane(noUpdate: Bool = false,
    - icloudContainerIdentifiers: An Array of unique identifiers for the iCloud containers. Eg. ['iCloud.com.test.testapp']
 
  Updates the iCloud Container Identifiers in the given Entitlements file, so you can use different iCloud containers for different builds like Adhoc, App Store, etc.
-<<<<<<< Updated upstream
-*/
-func updateIcloudContainerIdentifiers(entitlementsFile: String,
-                                      icloudContainerIdentifiers: Any) {
-  let command = RubyCommand(commandID: "", methodName: "update_icloud_container_identifiers", className: nil, args: [RubyCommand.Argument(name: "entitlements_file", value: entitlementsFile),
-                                                                                                                     RubyCommand.Argument(name: "icloud_container_identifiers", value: icloudContainerIdentifiers)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func updateIcloudContainerIdentifiers(entitlementsFile: String,
                                              icloudContainerIdentifiers: Any)
@@ -12950,7 +8120,6 @@ public func updateIcloudContainerIdentifiers(entitlementsFile: String,
     let command = RubyCommand(commandID: "", methodName: "update_icloud_container_identifiers", className: nil, args: [RubyCommand.Argument(name: "entitlements_file", value: entitlementsFile),
                                                                                                                        RubyCommand.Argument(name: "icloud_container_identifiers", value: icloudContainerIdentifiers)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -12965,22 +8134,6 @@ public func updateIcloudContainerIdentifiers(entitlementsFile: String,
    - block: A block to process plist with custom logic
 
  This action allows you to modify your `Info.plist` file before building. This may be useful if you want a separate build for alpha, beta or nightly builds, but don't want a separate target.
-<<<<<<< Updated upstream
-*/
-func updateInfoPlist(xcodeproj: String? = nil,
-                     plistPath: String? = nil,
-                     scheme: String? = nil,
-                     appIdentifier: String? = nil,
-                     displayName: String? = nil,
-                     block: Any? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "update_info_plist", className: nil, args: [RubyCommand.Argument(name: "xcodeproj", value: xcodeproj),
-                                                                                                   RubyCommand.Argument(name: "plist_path", value: plistPath),
-                                                                                                   RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                                   RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                                   RubyCommand.Argument(name: "display_name", value: displayName),
-                                                                                                   RubyCommand.Argument(name: "block", value: block)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func updateInfoPlist(xcodeproj: String? = nil,
                             plistPath: String? = nil,
@@ -12996,7 +8149,6 @@ public func updateInfoPlist(xcodeproj: String? = nil,
                                                                                                      RubyCommand.Argument(name: "display_name", value: displayName),
                                                                                                      RubyCommand.Argument(name: "block", value: block)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -13007,14 +8159,6 @@ public func updateInfoPlist(xcodeproj: String? = nil,
    - identifiers: An Array of unique identifiers for the keychain access groups. Eg. ['your.keychain.access.groups.identifiers']
 
  Updates the Keychain Group Access Groups in the given Entitlements file, so you can have keychain access groups for the app store build and keychain access groups for an enterprise build.
-<<<<<<< Updated upstream
-*/
-func updateKeychainAccessGroups(entitlementsFile: String,
-                                identifiers: Any) {
-  let command = RubyCommand(commandID: "", methodName: "update_keychain_access_groups", className: nil, args: [RubyCommand.Argument(name: "entitlements_file", value: entitlementsFile),
-                                                                                                               RubyCommand.Argument(name: "identifiers", value: identifiers)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func updateKeychainAccessGroups(entitlementsFile: String,
                                        identifiers: Any)
@@ -13022,7 +8166,6 @@ public func updateKeychainAccessGroups(entitlementsFile: String,
     let command = RubyCommand(commandID: "", methodName: "update_keychain_access_groups", className: nil, args: [RubyCommand.Argument(name: "entitlements_file", value: entitlementsFile),
                                                                                                                  RubyCommand.Argument(name: "identifiers", value: identifiers)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -13033,14 +8176,6 @@ public func updateKeychainAccessGroups(entitlementsFile: String,
    - block: A block to process plist with custom logic
 
  This action allows you to modify any value inside any `plist` file.
-<<<<<<< Updated upstream
-*/
-func updatePlist(plistPath: String? = nil,
-                 block: Any) {
-  let command = RubyCommand(commandID: "", methodName: "update_plist", className: nil, args: [RubyCommand.Argument(name: "plist_path", value: plistPath),
-                                                                                              RubyCommand.Argument(name: "block", value: block)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func updatePlist(plistPath: String? = nil,
                         block: Any)
@@ -13048,7 +8183,6 @@ public func updatePlist(plistPath: String? = nil,
     let command = RubyCommand(commandID: "", methodName: "update_plist", className: nil, args: [RubyCommand.Argument(name: "plist_path", value: plistPath),
                                                                                                 RubyCommand.Argument(name: "block", value: block)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -13058,16 +8192,6 @@ public func updatePlist(plistPath: String? = nil,
    - path: Path to your Xcode project
    - udid: **DEPRECATED!** Use `:uuid` instead
    - uuid: The UUID of the provisioning profile you want to use
-<<<<<<< Updated upstream
-*/
-func updateProjectCodeSigning(path: String,
-                              udid: String? = nil,
-                              uuid: String) {
-  let command = RubyCommand(commandID: "", methodName: "update_project_code_signing", className: nil, args: [RubyCommand.Argument(name: "path", value: path),
-                                                                                                             RubyCommand.Argument(name: "udid", value: udid),
-                                                                                                             RubyCommand.Argument(name: "uuid", value: uuid)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func updateProjectCodeSigning(path: String,
                                      udid: String? = nil,
@@ -13077,7 +8201,6 @@ public func updateProjectCodeSigning(path: String,
                                                                                                                RubyCommand.Argument(name: "udid", value: udid),
                                                                                                                RubyCommand.Argument(name: "uuid", value: uuid)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -13098,24 +8221,6 @@ public func updateProjectCodeSigning(path: String,
  The `:build_configuration` value can be used to only update code signing for the specified build configurations of the targets passing through the `:target_filter`.
  Example usage is the WatchKit Extension or WatchKit App, where you need separate provisioning profiles.
  Example: `update_project_provisioning(xcodeproj: "..", target_filter: ".*WatchKit App.*")`.
-<<<<<<< Updated upstream
-*/
-func updateProjectProvisioning(xcodeproj: String? = nil,
-                               profile: String,
-                               targetFilter: Any? = nil,
-                               buildConfigurationFilter: String? = nil,
-                               buildConfiguration: Any? = nil,
-                               certificate: String = "/tmp/AppleIncRootCertificate.cer",
-                               codeSigningIdentity: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "update_project_provisioning", className: nil, args: [RubyCommand.Argument(name: "xcodeproj", value: xcodeproj),
-                                                                                                             RubyCommand.Argument(name: "profile", value: profile),
-                                                                                                             RubyCommand.Argument(name: "target_filter", value: targetFilter),
-                                                                                                             RubyCommand.Argument(name: "build_configuration_filter", value: buildConfigurationFilter),
-                                                                                                             RubyCommand.Argument(name: "build_configuration", value: buildConfiguration),
-                                                                                                             RubyCommand.Argument(name: "certificate", value: certificate),
-                                                                                                             RubyCommand.Argument(name: "code_signing_identity", value: codeSigningIdentity)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func updateProjectProvisioning(xcodeproj: String? = nil,
                                       profile: String,
@@ -13133,7 +8238,6 @@ public func updateProjectProvisioning(xcodeproj: String? = nil,
                                                                                                                RubyCommand.Argument(name: "certificate", value: certificate),
                                                                                                                RubyCommand.Argument(name: "code_signing_identity", value: codeSigningIdentity)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -13145,16 +8249,6 @@ public func updateProjectProvisioning(xcodeproj: String? = nil,
    - teamid: The Team ID you want to use
 
  This action updates the Developer Team ID of your Xcode project.
-<<<<<<< Updated upstream
-*/
-func updateProjectTeam(path: String,
-                       targets: [String]? = nil,
-                       teamid: String) {
-  let command = RubyCommand(commandID: "", methodName: "update_project_team", className: nil, args: [RubyCommand.Argument(name: "path", value: path),
-                                                                                                     RubyCommand.Argument(name: "targets", value: targets),
-                                                                                                     RubyCommand.Argument(name: "teamid", value: teamid)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func updateProjectTeam(path: String,
                               targets: [String]? = nil,
@@ -13164,7 +8258,6 @@ public func updateProjectTeam(path: String,
                                                                                                        RubyCommand.Argument(name: "targets", value: targets),
                                                                                                        RubyCommand.Argument(name: "teamid", value: teamid)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -13179,22 +8272,6 @@ public func updateProjectTeam(path: String,
    - detectProvisioningMode: Automatically detect provisioning mode
 
  This action updates the `AirshipConfig.plist` needed to configure the Urban Airship SDK at runtime, allowing keys and secrets to easily be set for the Enterprise and Production versions of the application.
-<<<<<<< Updated upstream
-*/
-func updateUrbanAirshipConfiguration(plistPath: String,
-                                     developmentAppKey: String? = nil,
-                                     developmentAppSecret: String? = nil,
-                                     productionAppKey: String? = nil,
-                                     productionAppSecret: String? = nil,
-                                     detectProvisioningMode: Bool? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "update_urban_airship_configuration", className: nil, args: [RubyCommand.Argument(name: "plist_path", value: plistPath),
-                                                                                                                    RubyCommand.Argument(name: "development_app_key", value: developmentAppKey),
-                                                                                                                    RubyCommand.Argument(name: "development_app_secret", value: developmentAppSecret),
-                                                                                                                    RubyCommand.Argument(name: "production_app_key", value: productionAppKey),
-                                                                                                                    RubyCommand.Argument(name: "production_app_secret", value: productionAppSecret),
-                                                                                                                    RubyCommand.Argument(name: "detect_provisioning_mode", value: detectProvisioningMode)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func updateUrbanAirshipConfiguration(plistPath: String,
                                             developmentAppKey: String? = nil,
@@ -13210,7 +8287,6 @@ public func updateUrbanAirshipConfiguration(plistPath: String,
                                                                                                                       RubyCommand.Argument(name: "production_app_secret", value: productionAppSecret),
                                                                                                                       RubyCommand.Argument(name: "detect_provisioning_mode", value: detectProvisioningMode)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -13223,16 +8299,6 @@ public func updateUrbanAirshipConfiguration(plistPath: String,
 
  This action allows you to update the URL schemes of the app before building it.
  For example, you can use this to set a different URL scheme for the alpha or beta version of the app.
-<<<<<<< Updated upstream
-*/
-func updateUrlSchemes(path: String,
-                      urlSchemes: Any? = nil,
-                      updateUrlSchemes: Any? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "update_url_schemes", className: nil, args: [RubyCommand.Argument(name: "path", value: path),
-                                                                                                    RubyCommand.Argument(name: "url_schemes", value: urlSchemes),
-                                                                                                    RubyCommand.Argument(name: "update_url_schemes", value: updateUrlSchemes)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func updateUrlSchemes(path: String,
                              urlSchemes: Any? = nil,
@@ -13242,7 +8308,6 @@ public func updateUrlSchemes(path: String,
                                                                                                       RubyCommand.Argument(name: "url_schemes", value: urlSchemes),
                                                                                                       RubyCommand.Argument(name: "update_url_schemes", value: updateUrlSchemes)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -13257,28 +8322,9 @@ public func updateUrlSchemes(path: String,
    - binaryPath: The path to the upload-symbols file of the Fabric app
    - platform: The platform of the app (ios, appletvos, mac)
    - dsymWorkerThreads: The number of threads to use for simultaneous dSYM upload
+   - debug: Enable debug mode for upload-symbols
 
  This action allows you to upload symbolication files to Crashlytics. It's extra useful if you use it to download the latest dSYM files from Apple when you use Bitcode. This action will not fail the build if one of the uploads failed. The reason for that is that sometimes some of dSYM files are invalid, and we don't want them to fail the complete build.
-<<<<<<< Updated upstream
-*/
-func uploadSymbolsToCrashlytics(dsymPath: String = "./spec/fixtures/dSYM/Themoji2.dSYM",
-                                dsymPaths: [String]? = nil,
-                                apiToken: String? = nil,
-                                gspPath: String? = nil,
-                                appId: String? = nil,
-                                binaryPath: String? = nil,
-                                platform: String = "ios",
-                                dsymWorkerThreads: Int = 1) {
-  let command = RubyCommand(commandID: "", methodName: "upload_symbols_to_crashlytics", className: nil, args: [RubyCommand.Argument(name: "dsym_path", value: dsymPath),
-                                                                                                               RubyCommand.Argument(name: "dsym_paths", value: dsymPaths),
-                                                                                                               RubyCommand.Argument(name: "api_token", value: apiToken),
-                                                                                                               RubyCommand.Argument(name: "gsp_path", value: gspPath),
-                                                                                                               RubyCommand.Argument(name: "app_id", value: appId),
-                                                                                                               RubyCommand.Argument(name: "binary_path", value: binaryPath),
-                                                                                                               RubyCommand.Argument(name: "platform", value: platform),
-                                                                                                               RubyCommand.Argument(name: "dsym_worker_threads", value: dsymWorkerThreads)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func uploadSymbolsToCrashlytics(dsymPath: String = "./spec/fixtures/dSYM/Themoji2.dSYM",
                                        dsymPaths: [String]? = nil,
@@ -13300,7 +8346,6 @@ public func uploadSymbolsToCrashlytics(dsymPath: String = "./spec/fixtures/dSYM/
                                                                                                                  RubyCommand.Argument(name: "dsym_worker_threads", value: dsymWorkerThreads),
                                                                                                                  RubyCommand.Argument(name: "debug", value: debug)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -13318,24 +8363,6 @@ public func uploadSymbolsToCrashlytics(dsymPath: String = "./spec/fixtures/dSYM/
  - returns: The uploaded dSYM path(s)
 
  This action allows you to upload symbolication files to Sentry. It's extra useful if you use it to download the latest dSYM files from Apple when you use Bitcode.
-<<<<<<< Updated upstream
-*/
-func uploadSymbolsToSentry(apiHost: String = "https://app.getsentry.com/api/0",
-                           apiKey: String? = nil,
-                           authToken: String? = nil,
-                           orgSlug: String,
-                           projectSlug: String,
-                           dsymPath: String? = nil,
-                           dsymPaths: Any? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "upload_symbols_to_sentry", className: nil, args: [RubyCommand.Argument(name: "api_host", value: apiHost),
-                                                                                                          RubyCommand.Argument(name: "api_key", value: apiKey),
-                                                                                                          RubyCommand.Argument(name: "auth_token", value: authToken),
-                                                                                                          RubyCommand.Argument(name: "org_slug", value: orgSlug),
-                                                                                                          RubyCommand.Argument(name: "project_slug", value: projectSlug),
-                                                                                                          RubyCommand.Argument(name: "dsym_path", value: dsymPath),
-                                                                                                          RubyCommand.Argument(name: "dsym_paths", value: dsymPaths)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func uploadSymbolsToSentry(apiHost: String = "https://app.getsentry.com/api/0",
                                   apiKey: String? = nil,
@@ -13353,7 +8380,6 @@ public func uploadSymbolsToSentry(apiHost: String = "https://app.getsentry.com/a
                                                                                                             RubyCommand.Argument(name: "dsym_path", value: dsymPath),
                                                                                                             RubyCommand.Argument(name: "dsym_paths", value: dsymPaths)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -13395,9 +8421,9 @@ public func uploadSymbolsToSentry(apiHost: String = "https://app.getsentry.com/a
    - itcProvider: The provider short name to be used with the iTMSTransporter to identify your team. This value will override the automatically detected provider short name. To get provider short name run `pathToXcode.app/Contents/Applications/Application\ Loader.app/Contents/itms/bin/iTMSTransporter -m provider -u 'USERNAME' -p 'PASSWORD' -account_type itunes_connect -v off`. The short names of providers should be listed in the second column
    - runPrecheckBeforeSubmit: Run precheck before submitting to app review
    - precheckDefaultRuleLevel: The default precheck rule level unless otherwise configured
-   - individualMetadataItems: An array of localized metadata items to upload individually by language so that errors can be identified. E.g. ['name', 'keywords', 'description']. Note: slow
-   - appIcon: Metadata: The path to the app icon
-   - appleWatchAppIcon: Metadata: The path to the Apple Watch app icon
+   - individualMetadataItems: **DEPRECATED!** Removed after the migration to the new App Store Connect API in June 2020 - An array of localized metadata items to upload individually by language so that errors can be identified. E.g. ['name', 'keywords', 'description']. Note: slow
+   - appIcon: **DEPRECATED!** Removed after the migration to the new App Store Connect API in June 2020 - Metadata: The path to the app icon
+   - appleWatchAppIcon: **DEPRECATED!** Removed after the migration to the new App Store Connect API in June 2020 - Metadata: The path to the Apple Watch app icon
    - copyright: Metadata: The copyright notice
    - primaryCategory: Metadata: The english name of the primary category (e.g. `Business`, `Books`)
    - secondaryCategory: Metadata: The english name of the secondary category (e.g. `Business`, `Books`)
@@ -13424,135 +8450,11 @@ public func uploadSymbolsToSentry(apiHost: String = "https://app.getsentry.com/a
    - app: The (spaceship) app ID of the app you want to use/modify
 
  Using _upload_to_app_store_ after _build_app_ and _capture_screenshots_ will automatically upload the latest ipa and screenshots with no other configuration.
- 
+
  If you don't want a PDF report for App Store builds, use the `:force` option.
  This is useful when running _fastlane_ on your Continuous Integration server:
  `_upload_to_app_store_(force: true)`
  If your account is on multiple teams and you need to tell the `iTMSTransporter` which 'provider' to use, you can set the `:itc_provider` option to pass this info.
-<<<<<<< Updated upstream
-*/
-func uploadToAppStore(username: String,
-                      appIdentifier: String? = nil,
-                      appVersion: String? = nil,
-                      ipa: String? = nil,
-                      pkg: String? = nil,
-                      buildNumber: String? = nil,
-                      platform: String = "ios",
-                      editLive: Bool = false,
-                      useLiveVersion: Bool = false,
-                      metadataPath: String? = nil,
-                      screenshotsPath: String? = nil,
-                      skipBinaryUpload: Bool = false,
-                      skipScreenshots: Bool = false,
-                      skipMetadata: Bool = false,
-                      skipAppVersionUpdate: Bool = false,
-                      force: Bool = false,
-                      overwriteScreenshots: Bool = false,
-                      submitForReview: Bool = false,
-                      rejectIfPossible: Bool = false,
-                      automaticRelease: Bool = false,
-                      autoReleaseDate: Any? = nil,
-                      phasedRelease: Bool = false,
-                      resetRatings: Bool = false,
-                      priceTier: Any? = nil,
-                      appRatingConfigPath: String? = nil,
-                      submissionInformation: Any? = nil,
-                      teamId: Any? = nil,
-                      teamName: String? = nil,
-                      devPortalTeamId: String? = nil,
-                      devPortalTeamName: String? = nil,
-                      itcProvider: String? = nil,
-                      runPrecheckBeforeSubmit: Bool = true,
-                      precheckDefaultRuleLevel: Any = "warn",
-                      individualMetadataItems: [String] = [],
-                      appIcon: String? = nil,
-                      appleWatchAppIcon: String? = nil,
-                      copyright: String? = nil,
-                      primaryCategory: String? = nil,
-                      secondaryCategory: String? = nil,
-                      primaryFirstSubCategory: String? = nil,
-                      primarySecondSubCategory: String? = nil,
-                      secondaryFirstSubCategory: String? = nil,
-                      secondarySecondSubCategory: String? = nil,
-                      tradeRepresentativeContactInformation: [String : Any]? = nil,
-                      appReviewInformation: [String : Any]? = nil,
-                      appReviewAttachmentFile: String? = nil,
-                      description: Any? = nil,
-                      name: Any? = nil,
-                      subtitle: [String : Any]? = nil,
-                      keywords: [String : Any]? = nil,
-                      promotionalText: [String : Any]? = nil,
-                      releaseNotes: Any? = nil,
-                      privacyUrl: Any? = nil,
-                      appleTvPrivacyPolicy: Any? = nil,
-                      supportUrl: Any? = nil,
-                      marketingUrl: Any? = nil,
-                      languages: [String]? = nil,
-                      ignoreLanguageDirectoryValidation: Bool = false,
-                      precheckIncludeInAppPurchases: Bool = true,
-                      app: Any) {
-  let command = RubyCommand(commandID: "", methodName: "upload_to_app_store", className: nil, args: [RubyCommand.Argument(name: "username", value: username),
-                                                                                                     RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                                     RubyCommand.Argument(name: "app_version", value: appVersion),
-                                                                                                     RubyCommand.Argument(name: "ipa", value: ipa),
-                                                                                                     RubyCommand.Argument(name: "pkg", value: pkg),
-                                                                                                     RubyCommand.Argument(name: "build_number", value: buildNumber),
-                                                                                                     RubyCommand.Argument(name: "platform", value: platform),
-                                                                                                     RubyCommand.Argument(name: "edit_live", value: editLive),
-                                                                                                     RubyCommand.Argument(name: "use_live_version", value: useLiveVersion),
-                                                                                                     RubyCommand.Argument(name: "metadata_path", value: metadataPath),
-                                                                                                     RubyCommand.Argument(name: "screenshots_path", value: screenshotsPath),
-                                                                                                     RubyCommand.Argument(name: "skip_binary_upload", value: skipBinaryUpload),
-                                                                                                     RubyCommand.Argument(name: "skip_screenshots", value: skipScreenshots),
-                                                                                                     RubyCommand.Argument(name: "skip_metadata", value: skipMetadata),
-                                                                                                     RubyCommand.Argument(name: "skip_app_version_update", value: skipAppVersionUpdate),
-                                                                                                     RubyCommand.Argument(name: "force", value: force),
-                                                                                                     RubyCommand.Argument(name: "overwrite_screenshots", value: overwriteScreenshots),
-                                                                                                     RubyCommand.Argument(name: "submit_for_review", value: submitForReview),
-                                                                                                     RubyCommand.Argument(name: "reject_if_possible", value: rejectIfPossible),
-                                                                                                     RubyCommand.Argument(name: "automatic_release", value: automaticRelease),
-                                                                                                     RubyCommand.Argument(name: "auto_release_date", value: autoReleaseDate),
-                                                                                                     RubyCommand.Argument(name: "phased_release", value: phasedRelease),
-                                                                                                     RubyCommand.Argument(name: "reset_ratings", value: resetRatings),
-                                                                                                     RubyCommand.Argument(name: "price_tier", value: priceTier),
-                                                                                                     RubyCommand.Argument(name: "app_rating_config_path", value: appRatingConfigPath),
-                                                                                                     RubyCommand.Argument(name: "submission_information", value: submissionInformation),
-                                                                                                     RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                     RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                                     RubyCommand.Argument(name: "dev_portal_team_id", value: devPortalTeamId),
-                                                                                                     RubyCommand.Argument(name: "dev_portal_team_name", value: devPortalTeamName),
-                                                                                                     RubyCommand.Argument(name: "itc_provider", value: itcProvider),
-                                                                                                     RubyCommand.Argument(name: "run_precheck_before_submit", value: runPrecheckBeforeSubmit),
-                                                                                                     RubyCommand.Argument(name: "precheck_default_rule_level", value: precheckDefaultRuleLevel),
-                                                                                                     RubyCommand.Argument(name: "individual_metadata_items", value: individualMetadataItems),
-                                                                                                     RubyCommand.Argument(name: "app_icon", value: appIcon),
-                                                                                                     RubyCommand.Argument(name: "apple_watch_app_icon", value: appleWatchAppIcon),
-                                                                                                     RubyCommand.Argument(name: "copyright", value: copyright),
-                                                                                                     RubyCommand.Argument(name: "primary_category", value: primaryCategory),
-                                                                                                     RubyCommand.Argument(name: "secondary_category", value: secondaryCategory),
-                                                                                                     RubyCommand.Argument(name: "primary_first_sub_category", value: primaryFirstSubCategory),
-                                                                                                     RubyCommand.Argument(name: "primary_second_sub_category", value: primarySecondSubCategory),
-                                                                                                     RubyCommand.Argument(name: "secondary_first_sub_category", value: secondaryFirstSubCategory),
-                                                                                                     RubyCommand.Argument(name: "secondary_second_sub_category", value: secondarySecondSubCategory),
-                                                                                                     RubyCommand.Argument(name: "trade_representative_contact_information", value: tradeRepresentativeContactInformation),
-                                                                                                     RubyCommand.Argument(name: "app_review_information", value: appReviewInformation),
-                                                                                                     RubyCommand.Argument(name: "app_review_attachment_file", value: appReviewAttachmentFile),
-                                                                                                     RubyCommand.Argument(name: "description", value: description),
-                                                                                                     RubyCommand.Argument(name: "name", value: name),
-                                                                                                     RubyCommand.Argument(name: "subtitle", value: subtitle),
-                                                                                                     RubyCommand.Argument(name: "keywords", value: keywords),
-                                                                                                     RubyCommand.Argument(name: "promotional_text", value: promotionalText),
-                                                                                                     RubyCommand.Argument(name: "release_notes", value: releaseNotes),
-                                                                                                     RubyCommand.Argument(name: "privacy_url", value: privacyUrl),
-                                                                                                     RubyCommand.Argument(name: "apple_tv_privacy_policy", value: appleTvPrivacyPolicy),
-                                                                                                     RubyCommand.Argument(name: "support_url", value: supportUrl),
-                                                                                                     RubyCommand.Argument(name: "marketing_url", value: marketingUrl),
-                                                                                                     RubyCommand.Argument(name: "languages", value: languages),
-                                                                                                     RubyCommand.Argument(name: "ignore_language_directory_validation", value: ignoreLanguageDirectoryValidation),
-                                                                                                     RubyCommand.Argument(name: "precheck_include_in_app_purchases", value: precheckIncludeInAppPurchases),
-                                                                                                     RubyCommand.Argument(name: "app", value: app)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func uploadToAppStore(apiKeyPath: String? = nil,
                              apiKey: [String: Any]? = nil,
@@ -13680,7 +8582,6 @@ public func uploadToAppStore(apiKeyPath: String? = nil,
                                                                                                        RubyCommand.Argument(name: "precheck_include_in_app_purchases", value: precheckIncludeInAppPurchases),
                                                                                                        RubyCommand.Argument(name: "app", value: app)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -13725,80 +8626,6 @@ public func uploadToAppStore(apiKeyPath: String? = nil,
    - ackBundleInstallationWarning: Must be set to true if the bundle installation may trigger a warning on user devices (e.g can only be downloaded over wifi). Typically this is required for bundles over 150MB
 
  More information: https://docs.fastlane.tools/actions/supply/
-<<<<<<< Updated upstream
-*/
-func uploadToPlayStore(packageName: String,
-                       versionName: String? = nil,
-                       versionCode: Int? = nil,
-                       releaseStatus: String = "completed",
-                       track: String = "production",
-                       rollout: String? = nil,
-                       metadataPath: String? = nil,
-                       key: String? = nil,
-                       issuer: String? = nil,
-                       jsonKey: String? = nil,
-                       jsonKeyData: String? = nil,
-                       apk: String? = nil,
-                       apkPaths: [String]? = nil,
-                       aab: String? = nil,
-                       aabPaths: [String]? = nil,
-                       skipUploadApk: Bool = false,
-                       skipUploadAab: Bool = false,
-                       skipUploadMetadata: Bool = false,
-                       skipUploadChangelogs: Bool = false,
-                       skipUploadImages: Bool = false,
-                       skipUploadScreenshots: Bool = false,
-                       trackPromoteTo: String? = nil,
-                       validateOnly: Bool = false,
-                       mapping: String? = nil,
-                       mappingPaths: [String]? = nil,
-                       rootUrl: String? = nil,
-                       checkSupersededTracks: Bool = false,
-                       timeout: Int = 300,
-                       deactivateOnPromote: Bool = true,
-                       versionCodesToRetain: [String]? = nil,
-                       inAppUpdatePriority: Int? = nil,
-                       obbMainReferencesVersion: String? = nil,
-                       obbMainFileSize: String? = nil,
-                       obbPatchReferencesVersion: String? = nil,
-                       obbPatchFileSize: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "upload_to_play_store", className: nil, args: [RubyCommand.Argument(name: "package_name", value: packageName),
-                                                                                                      RubyCommand.Argument(name: "version_name", value: versionName),
-                                                                                                      RubyCommand.Argument(name: "version_code", value: versionCode),
-                                                                                                      RubyCommand.Argument(name: "release_status", value: releaseStatus),
-                                                                                                      RubyCommand.Argument(name: "track", value: track),
-                                                                                                      RubyCommand.Argument(name: "rollout", value: rollout),
-                                                                                                      RubyCommand.Argument(name: "metadata_path", value: metadataPath),
-                                                                                                      RubyCommand.Argument(name: "key", value: key),
-                                                                                                      RubyCommand.Argument(name: "issuer", value: issuer),
-                                                                                                      RubyCommand.Argument(name: "json_key", value: jsonKey),
-                                                                                                      RubyCommand.Argument(name: "json_key_data", value: jsonKeyData),
-                                                                                                      RubyCommand.Argument(name: "apk", value: apk),
-                                                                                                      RubyCommand.Argument(name: "apk_paths", value: apkPaths),
-                                                                                                      RubyCommand.Argument(name: "aab", value: aab),
-                                                                                                      RubyCommand.Argument(name: "aab_paths", value: aabPaths),
-                                                                                                      RubyCommand.Argument(name: "skip_upload_apk", value: skipUploadApk),
-                                                                                                      RubyCommand.Argument(name: "skip_upload_aab", value: skipUploadAab),
-                                                                                                      RubyCommand.Argument(name: "skip_upload_metadata", value: skipUploadMetadata),
-                                                                                                      RubyCommand.Argument(name: "skip_upload_changelogs", value: skipUploadChangelogs),
-                                                                                                      RubyCommand.Argument(name: "skip_upload_images", value: skipUploadImages),
-                                                                                                      RubyCommand.Argument(name: "skip_upload_screenshots", value: skipUploadScreenshots),
-                                                                                                      RubyCommand.Argument(name: "track_promote_to", value: trackPromoteTo),
-                                                                                                      RubyCommand.Argument(name: "validate_only", value: validateOnly),
-                                                                                                      RubyCommand.Argument(name: "mapping", value: mapping),
-                                                                                                      RubyCommand.Argument(name: "mapping_paths", value: mappingPaths),
-                                                                                                      RubyCommand.Argument(name: "root_url", value: rootUrl),
-                                                                                                      RubyCommand.Argument(name: "check_superseded_tracks", value: checkSupersededTracks),
-                                                                                                      RubyCommand.Argument(name: "timeout", value: timeout),
-                                                                                                      RubyCommand.Argument(name: "deactivate_on_promote", value: deactivateOnPromote),
-                                                                                                      RubyCommand.Argument(name: "version_codes_to_retain", value: versionCodesToRetain),
-                                                                                                      RubyCommand.Argument(name: "in_app_update_priority", value: inAppUpdatePriority),
-                                                                                                      RubyCommand.Argument(name: "obb_main_references_version", value: obbMainReferencesVersion),
-                                                                                                      RubyCommand.Argument(name: "obb_main_file_size", value: obbMainFileSize),
-                                                                                                      RubyCommand.Argument(name: "obb_patch_references_version", value: obbPatchReferencesVersion),
-                                                                                                      RubyCommand.Argument(name: "obb_patch_file_size", value: obbPatchFileSize)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func uploadToPlayStore(packageName: String,
                               versionName: String? = nil,
@@ -13874,7 +8701,6 @@ public func uploadToPlayStore(packageName: String,
                                                                                                         RubyCommand.Argument(name: "obb_patch_file_size", value: obbPatchFileSize),
                                                                                                         RubyCommand.Argument(name: "ack_bundle_installation_warning", value: ackBundleInstallationWarning)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -13894,28 +8720,6 @@ public func uploadToPlayStore(packageName: String,
  - returns: Returns a string containing the download URL for the uploaded APK/AAB (or array of strings if multiple were uploaded).
 
  More information: https://docs.fastlane.tools/actions/upload_to_play_store_internal_app_sharing/
-<<<<<<< Updated upstream
-*/
-func uploadToPlayStoreInternalAppSharing(packageName: String,
-                                         jsonKey: String? = nil,
-                                         jsonKeyData: String? = nil,
-                                         apk: String? = nil,
-                                         apkPaths: [String]? = nil,
-                                         aab: String? = nil,
-                                         aabPaths: [String]? = nil,
-                                         rootUrl: String? = nil,
-                                         timeout: Int = 300) {
-  let command = RubyCommand(commandID: "", methodName: "upload_to_play_store_internal_app_sharing", className: nil, args: [RubyCommand.Argument(name: "package_name", value: packageName),
-                                                                                                                           RubyCommand.Argument(name: "json_key", value: jsonKey),
-                                                                                                                           RubyCommand.Argument(name: "json_key_data", value: jsonKeyData),
-                                                                                                                           RubyCommand.Argument(name: "apk", value: apk),
-                                                                                                                           RubyCommand.Argument(name: "apk_paths", value: apkPaths),
-                                                                                                                           RubyCommand.Argument(name: "aab", value: aab),
-                                                                                                                           RubyCommand.Argument(name: "aab_paths", value: aabPaths),
-                                                                                                                           RubyCommand.Argument(name: "root_url", value: rootUrl),
-                                                                                                                           RubyCommand.Argument(name: "timeout", value: timeout)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func uploadToPlayStoreInternalAppSharing(packageName: String,
                                                 jsonKey: String? = nil,
@@ -13937,7 +8741,6 @@ public func uploadToPlayStoreInternalAppSharing(packageName: String,
                                                                                                                              RubyCommand.Argument(name: "root_url", value: rootUrl),
                                                                                                                              RubyCommand.Argument(name: "timeout", value: timeout)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -13983,76 +8786,6 @@ public func uploadToPlayStoreInternalAppSharing(packageName: String,
 
  More details can be found on https://docs.fastlane.tools/actions/pilot/.
  This integration will only do the TestFlight upload.
-<<<<<<< Updated upstream
-*/
-func uploadToTestflight(username: String,
-                        appIdentifier: String? = nil,
-                        appPlatform: String = "ios",
-                        appleId: String? = nil,
-                        ipa: String? = nil,
-                        demoAccountRequired: Bool = false,
-                        betaAppReviewInfo: [String : Any]? = nil,
-                        localizedAppInfo: [String : Any]? = nil,
-                        betaAppDescription: String? = nil,
-                        betaAppFeedbackEmail: String? = nil,
-                        localizedBuildInfo: [String : Any]? = nil,
-                        changelog: String? = nil,
-                        skipSubmission: Bool = false,
-                        skipWaitingForBuildProcessing: Bool = false,
-                        updateBuildInfoOnUpload: Bool = false,
-                        usesNonExemptEncryption: Bool = false,
-                        distributeExternal: Bool = false,
-                        notifyExternalTesters: Bool = true,
-                        appVersion: String? = nil,
-                        buildNumber: String? = nil,
-                        expirePreviousBuilds: Bool = false,
-                        firstName: String? = nil,
-                        lastName: String? = nil,
-                        email: String? = nil,
-                        testersFilePath: String = "./testers.csv",
-                        groups: [String]? = nil,
-                        teamId: Any? = nil,
-                        teamName: String? = nil,
-                        devPortalTeamId: String? = nil,
-                        itcProvider: String? = nil,
-                        waitProcessingInterval: Int = 30,
-                        waitForUploadedBuild: Bool = false,
-                        rejectBuildWaitingForReview: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "upload_to_testflight", className: nil, args: [RubyCommand.Argument(name: "username", value: username),
-                                                                                                      RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
-                                                                                                      RubyCommand.Argument(name: "app_platform", value: appPlatform),
-                                                                                                      RubyCommand.Argument(name: "apple_id", value: appleId),
-                                                                                                      RubyCommand.Argument(name: "ipa", value: ipa),
-                                                                                                      RubyCommand.Argument(name: "demo_account_required", value: demoAccountRequired),
-                                                                                                      RubyCommand.Argument(name: "beta_app_review_info", value: betaAppReviewInfo),
-                                                                                                      RubyCommand.Argument(name: "localized_app_info", value: localizedAppInfo),
-                                                                                                      RubyCommand.Argument(name: "beta_app_description", value: betaAppDescription),
-                                                                                                      RubyCommand.Argument(name: "beta_app_feedback_email", value: betaAppFeedbackEmail),
-                                                                                                      RubyCommand.Argument(name: "localized_build_info", value: localizedBuildInfo),
-                                                                                                      RubyCommand.Argument(name: "changelog", value: changelog),
-                                                                                                      RubyCommand.Argument(name: "skip_submission", value: skipSubmission),
-                                                                                                      RubyCommand.Argument(name: "skip_waiting_for_build_processing", value: skipWaitingForBuildProcessing),
-                                                                                                      RubyCommand.Argument(name: "update_build_info_on_upload", value: updateBuildInfoOnUpload),
-                                                                                                      RubyCommand.Argument(name: "uses_non_exempt_encryption", value: usesNonExemptEncryption),
-                                                                                                      RubyCommand.Argument(name: "distribute_external", value: distributeExternal),
-                                                                                                      RubyCommand.Argument(name: "notify_external_testers", value: notifyExternalTesters),
-                                                                                                      RubyCommand.Argument(name: "app_version", value: appVersion),
-                                                                                                      RubyCommand.Argument(name: "build_number", value: buildNumber),
-                                                                                                      RubyCommand.Argument(name: "expire_previous_builds", value: expirePreviousBuilds),
-                                                                                                      RubyCommand.Argument(name: "first_name", value: firstName),
-                                                                                                      RubyCommand.Argument(name: "last_name", value: lastName),
-                                                                                                      RubyCommand.Argument(name: "email", value: email),
-                                                                                                      RubyCommand.Argument(name: "testers_file_path", value: testersFilePath),
-                                                                                                      RubyCommand.Argument(name: "groups", value: groups),
-                                                                                                      RubyCommand.Argument(name: "team_id", value: teamId),
-                                                                                                      RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                                      RubyCommand.Argument(name: "dev_portal_team_id", value: devPortalTeamId),
-                                                                                                      RubyCommand.Argument(name: "itc_provider", value: itcProvider),
-                                                                                                      RubyCommand.Argument(name: "wait_processing_interval", value: waitProcessingInterval),
-                                                                                                      RubyCommand.Argument(name: "wait_for_uploaded_build", value: waitForUploadedBuild),
-                                                                                                      RubyCommand.Argument(name: "reject_build_waiting_for_review", value: rejectBuildWaitingForReview)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func uploadToTestflight(apiKeyPath: String? = nil,
                                apiKey: [String: Any]? = nil,
@@ -14128,7 +8861,6 @@ public func uploadToTestflight(apiKeyPath: String? = nil,
                                                                                                         RubyCommand.Argument(name: "wait_for_uploaded_build", value: waitForUploadedBuild),
                                                                                                         RubyCommand.Argument(name: "reject_build_waiting_for_review", value: rejectBuildWaitingForReview)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -14141,18 +8873,6 @@ public func uploadToTestflight(apiKeyPath: String? = nil,
    - timeout: Timeout for read, open, and send (in seconds)
 
  Use this action to test and validate your private key json key file used to connect and authenticate with the Google Play API
-<<<<<<< Updated upstream
-*/
-func validatePlayStoreJsonKey(jsonKey: String? = nil,
-                              jsonKeyData: String? = nil,
-                              rootUrl: String? = nil,
-                              timeout: Int = 300) {
-  let command = RubyCommand(commandID: "", methodName: "validate_play_store_json_key", className: nil, args: [RubyCommand.Argument(name: "json_key", value: jsonKey),
-                                                                                                              RubyCommand.Argument(name: "json_key_data", value: jsonKeyData),
-                                                                                                              RubyCommand.Argument(name: "root_url", value: rootUrl),
-                                                                                                              RubyCommand.Argument(name: "timeout", value: timeout)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func validatePlayStoreJsonKey(jsonKey: String? = nil,
                                      jsonKeyData: String? = nil,
@@ -14164,7 +8884,6 @@ public func validatePlayStoreJsonKey(jsonKey: String? = nil,
                                                                                                                 RubyCommand.Argument(name: "root_url", value: rootUrl),
                                                                                                                 RubyCommand.Argument(name: "timeout", value: timeout)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -14181,26 +8900,6 @@ public func validatePlayStoreJsonKey(jsonKey: String? = nil,
    - buildPath: Explicitly set the ipa, app or xcarchive path
 
  Verifies that the built app was built using the expected build resources. This is relevant for people who build on machines that are used to build apps with different profiles, certificates and/or bundle identifiers to guard against configuration mistakes.
-<<<<<<< Updated upstream
-*/
-func verifyBuild(provisioningType: String? = nil,
-                 provisioningUuid: String? = nil,
-                 teamIdentifier: String? = nil,
-                 teamName: String? = nil,
-                 appName: String? = nil,
-                 bundleIdentifier: String? = nil,
-                 ipaPath: String? = nil,
-                 buildPath: String? = nil) {
-  let command = RubyCommand(commandID: "", methodName: "verify_build", className: nil, args: [RubyCommand.Argument(name: "provisioning_type", value: provisioningType),
-                                                                                              RubyCommand.Argument(name: "provisioning_uuid", value: provisioningUuid),
-                                                                                              RubyCommand.Argument(name: "team_identifier", value: teamIdentifier),
-                                                                                              RubyCommand.Argument(name: "team_name", value: teamName),
-                                                                                              RubyCommand.Argument(name: "app_name", value: appName),
-                                                                                              RubyCommand.Argument(name: "bundle_identifier", value: bundleIdentifier),
-                                                                                              RubyCommand.Argument(name: "ipa_path", value: ipaPath),
-                                                                                              RubyCommand.Argument(name: "build_path", value: buildPath)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func verifyBuild(provisioningType: String? = nil,
                         provisioningUuid: String? = nil,
@@ -14220,24 +8919,16 @@ public func verifyBuild(provisioningType: String? = nil,
                                                                                                 RubyCommand.Argument(name: "ipa_path", value: ipaPath),
                                                                                                 RubyCommand.Argument(name: "build_path", value: buildPath)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Verifies all keys referenced from the Podfile are non-empty
 
  Runs a check against all keys specified in your Podfile to make sure they're more than a single character long. This is to ensure you don't deploy with stubbed keys.
-<<<<<<< Updated upstream
-*/
-func verifyPodKeys() {
-  let command = RubyCommand(commandID: "", methodName: "verify_pod_keys", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func verifyPodKeys() {
     let command = RubyCommand(commandID: "", methodName: "verify_pod_keys", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -14246,17 +8937,10 @@ public func verifyPodKeys() {
  - parameter xcodePath: The path to the Xcode installation to test
 
  This action was implemented after the recent Xcode attack to make sure you're not using a [hacked Xcode installation](http://researchcenter.paloaltonetworks.com/2015/09/novel-malware-xcodeghost-modifies-xcode-infects-apple-ios-apps-and-hits-app-store/).
-<<<<<<< Updated upstream
-*/
-func verifyXcode(xcodePath: String) {
-  let command = RubyCommand(commandID: "", methodName: "verify_xcode", className: nil, args: [RubyCommand.Argument(name: "xcode_path", value: xcodePath)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func verifyXcode(xcodePath: String) {
     let command = RubyCommand(commandID: "", methodName: "verify_xcode", className: nil, args: [RubyCommand.Argument(name: "xcode_path", value: xcodePath)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -14273,20 +8957,6 @@ public func verifyXcode(xcodePath: String) {
  For example, you can use it to bump the version of a CocoaPods' podspec file.
  It also supports versions that are not semantic: `1.4.14.4.1`.
  For such versions, there is an option to change the appendix (e.g. `4.1`).
-<<<<<<< Updated upstream
-*/
-func versionBumpPodspec(path: String,
-                        bumpType: String = "patch",
-                        versionNumber: String? = nil,
-                        versionAppendix: String? = nil,
-                        requireVariablePrefix: Bool = true) {
-  let command = RubyCommand(commandID: "", methodName: "version_bump_podspec", className: nil, args: [RubyCommand.Argument(name: "path", value: path),
-                                                                                                      RubyCommand.Argument(name: "bump_type", value: bumpType),
-                                                                                                      RubyCommand.Argument(name: "version_number", value: versionNumber),
-                                                                                                      RubyCommand.Argument(name: "version_appendix", value: versionAppendix),
-                                                                                                      RubyCommand.Argument(name: "require_variable_prefix", value: requireVariablePrefix)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func versionBumpPodspec(path: String,
                                bumpType: String = "patch",
@@ -14300,7 +8970,6 @@ public func versionBumpPodspec(path: String,
                                                                                                         RubyCommand.Argument(name: "version_appendix", value: versionAppendix),
                                                                                                         RubyCommand.Argument(name: "require_variable_prefix", value: requireVariablePrefix)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -14309,14 +8978,6 @@ public func versionBumpPodspec(path: String,
  - parameters:
    - path: You must specify the path to the podspec file
    - requireVariablePrefix: true by default, this is used for non CocoaPods version bumps only
-<<<<<<< Updated upstream
-*/
-func versionGetPodspec(path: String,
-                       requireVariablePrefix: Bool = true) {
-  let command = RubyCommand(commandID: "", methodName: "version_get_podspec", className: nil, args: [RubyCommand.Argument(name: "path", value: path),
-                                                                                                     RubyCommand.Argument(name: "require_variable_prefix", value: requireVariablePrefix)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func versionGetPodspec(path: String,
                               requireVariablePrefix: Bool = true)
@@ -14324,67 +8985,38 @@ public func versionGetPodspec(path: String,
     let command = RubyCommand(commandID: "", methodName: "version_get_podspec", className: nil, args: [RubyCommand.Argument(name: "path", value: path),
                                                                                                        RubyCommand.Argument(name: "require_variable_prefix", value: requireVariablePrefix)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Archives the project using `xcodebuild`
-<<<<<<< Updated upstream
-*/
-func xcarchive() {
-  let command = RubyCommand(commandID: "", methodName: "xcarchive", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func xcarchive() {
     let command = RubyCommand(commandID: "", methodName: "xcarchive", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Builds the project using `xcodebuild`
-<<<<<<< Updated upstream
-*/
-func xcbuild() {
-  let command = RubyCommand(commandID: "", methodName: "xcbuild", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func xcbuild() {
     let command = RubyCommand(commandID: "", methodName: "xcbuild", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Cleans the project using `xcodebuild`
-<<<<<<< Updated upstream
-*/
-func xcclean() {
-  let command = RubyCommand(commandID: "", methodName: "xcclean", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func xcclean() {
     let command = RubyCommand(commandID: "", methodName: "xcclean", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Exports the project using `xcodebuild`
-<<<<<<< Updated upstream
-*/
-func xcexport() {
-  let command = RubyCommand(commandID: "", methodName: "xcexport", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func xcexport() {
     let command = RubyCommand(commandID: "", methodName: "xcexport", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -14398,16 +9030,6 @@ public func xcexport() {
  - returns: The path to the newly installed Xcode version
 
  Makes sure a specific version of Xcode is installed. If that's not the case, it will automatically be downloaded by the [xcode_install](https://github.com/neonichu/xcode-install) gem. This will make sure to use the correct Xcode for later actions.
-<<<<<<< Updated upstream
-*/
-@discardableResult func xcodeInstall(version: String,
-                                     username: String,
-                                     teamId: String? = nil) -> String {
-  let command = RubyCommand(commandID: "", methodName: "xcode_install", className: nil, args: [RubyCommand.Argument(name: "version", value: version),
-                                                                                               RubyCommand.Argument(name: "username", value: username),
-                                                                                               RubyCommand.Argument(name: "team_id", value: teamId)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func xcodeInstall(version: String,
                                             username: String,
@@ -14417,7 +9039,6 @@ public func xcexport() {
                                                                                                  RubyCommand.Argument(name: "username", value: username),
                                                                                                  RubyCommand.Argument(name: "team_id", value: teamId)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -14427,17 +9048,10 @@ public func xcexport() {
  Use the `xcversion` action if you want to select an Xcode:
  - Based on a version specifier or
  - You don't have known, stable paths, as may happen in a CI environment.
-<<<<<<< Updated upstream
-*/
-func xcodeSelect() {
-  let command = RubyCommand(commandID: "", methodName: "xcode_select", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func xcodeSelect() {
     let command = RubyCommand(commandID: "", methodName: "xcode_select", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -14456,26 +9070,6 @@ public func xcodeSelect() {
  This action downloads assets from your Xcode Server Bot (works with Xcode Server using Xcode 6 and 7. By default, this action downloads all assets, unzips them and deletes everything except for the `.xcarchive`.
  If you'd like to keep all downloaded assets, pass `keep_all_assets: true`.
  This action returns the path to the downloaded assets folder and puts into shared values the paths to the asset folder and to the `.xcarchive` inside it.
-<<<<<<< Updated upstream
-*/
-@discardableResult func xcodeServerGetAssets(host: String,
-                                             botName: String,
-                                             integrationNumber: Any? = nil,
-                                             username: String = "",
-                                             password: String? = nil,
-                                             targetFolder: String = "./xcs_assets",
-                                             keepAllAssets: Bool = false,
-                                             trustSelfSignedCerts: Bool = true) -> [String] {
-  let command = RubyCommand(commandID: "", methodName: "xcode_server_get_assets", className: nil, args: [RubyCommand.Argument(name: "host", value: host),
-                                                                                                         RubyCommand.Argument(name: "bot_name", value: botName),
-                                                                                                         RubyCommand.Argument(name: "integration_number", value: integrationNumber),
-                                                                                                         RubyCommand.Argument(name: "username", value: username),
-                                                                                                         RubyCommand.Argument(name: "password", value: password),
-                                                                                                         RubyCommand.Argument(name: "target_folder", value: targetFolder),
-                                                                                                         RubyCommand.Argument(name: "keep_all_assets", value: keepAllAssets),
-                                                                                                         RubyCommand.Argument(name: "trust_self_signed_certs", value: trustSelfSignedCerts)])
-  return parseArray(fromString: runner.executeCommand(command))
-=======
  */
 @discardableResult public func xcodeServerGetAssets(host: String,
                                                     botName: String,
@@ -14495,24 +9089,16 @@ public func xcodeSelect() {
                                                                                                            RubyCommand.Argument(name: "keep_all_assets", value: keepAllAssets),
                                                                                                            RubyCommand.Argument(name: "trust_self_signed_certs", value: trustSelfSignedCerts)])
     return parseArray(fromString: runner.executeCommand(command))
->>>>>>> Stashed changes
 }
 
 /**
  Use the `xcodebuild` command to build and sign your app
 
  **Note**: `xcodebuild` is a complex command, so it is recommended to use [_gym_](https://docs.fastlane.tools/actions/gym/) for building your ipa file and [_scan_](https://docs.fastlane.tools/actions/scan/) for testing your app instead.
-<<<<<<< Updated upstream
-*/
-func xcodebuild() {
-  let command = RubyCommand(commandID: "", methodName: "xcodebuild", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func xcodebuild() {
     let command = RubyCommand(commandID: "", methodName: "xcodebuild", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -14550,66 +9136,6 @@ public func xcodebuild() {
 
  Create nice code coverage reports and post coverage summaries on Slack *(xcov gem is required)*.
  More information: [https://github.com/nakiostudio/xcov](https://github.com/nakiostudio/xcov).
-<<<<<<< Updated upstream
-*/
-func xcov(workspace: String? = nil,
-          project: String? = nil,
-          scheme: String? = nil,
-          configuration: String? = nil,
-          sourceDirectory: String? = nil,
-          derivedDataPath: String? = nil,
-          outputDirectory: String = "./xcov_report",
-          htmlReport: Bool = true,
-          markdownReport: Bool = false,
-          jsonReport: Bool = false,
-          minimumCoveragePercentage: Float = 0,
-          slackUrl: String? = nil,
-          slackChannel: String? = nil,
-          skipSlack: Bool = false,
-          slackUsername: String = "xcov",
-          slackMessage: String = "Your *xcov* coverage report",
-          ignoreFilePath: String = "./.xcovignore",
-          includeTestTargets: Bool = false,
-          excludeTargets: String? = nil,
-          includeTargets: String? = nil,
-          onlyProjectTargets: Bool = false,
-          disableCoveralls: Bool = false,
-          coverallsServiceName: String? = nil,
-          coverallsServiceJobId: String? = nil,
-          coverallsRepoToken: String? = nil,
-          xcconfig: String? = nil,
-          ideFoundationPath: String = "/Applications/Xcode-11.5.app/Contents/Developer/../Frameworks/IDEFoundation.framework/Versions/A/IDEFoundation",
-          legacySupport: Bool = false) {
-  let command = RubyCommand(commandID: "", methodName: "xcov", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
-                                                                                      RubyCommand.Argument(name: "project", value: project),
-                                                                                      RubyCommand.Argument(name: "scheme", value: scheme),
-                                                                                      RubyCommand.Argument(name: "configuration", value: configuration),
-                                                                                      RubyCommand.Argument(name: "source_directory", value: sourceDirectory),
-                                                                                      RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath),
-                                                                                      RubyCommand.Argument(name: "output_directory", value: outputDirectory),
-                                                                                      RubyCommand.Argument(name: "html_report", value: htmlReport),
-                                                                                      RubyCommand.Argument(name: "markdown_report", value: markdownReport),
-                                                                                      RubyCommand.Argument(name: "json_report", value: jsonReport),
-                                                                                      RubyCommand.Argument(name: "minimum_coverage_percentage", value: minimumCoveragePercentage),
-                                                                                      RubyCommand.Argument(name: "slack_url", value: slackUrl),
-                                                                                      RubyCommand.Argument(name: "slack_channel", value: slackChannel),
-                                                                                      RubyCommand.Argument(name: "skip_slack", value: skipSlack),
-                                                                                      RubyCommand.Argument(name: "slack_username", value: slackUsername),
-                                                                                      RubyCommand.Argument(name: "slack_message", value: slackMessage),
-                                                                                      RubyCommand.Argument(name: "ignore_file_path", value: ignoreFilePath),
-                                                                                      RubyCommand.Argument(name: "include_test_targets", value: includeTestTargets),
-                                                                                      RubyCommand.Argument(name: "exclude_targets", value: excludeTargets),
-                                                                                      RubyCommand.Argument(name: "include_targets", value: includeTargets),
-                                                                                      RubyCommand.Argument(name: "only_project_targets", value: onlyProjectTargets),
-                                                                                      RubyCommand.Argument(name: "disable_coveralls", value: disableCoveralls),
-                                                                                      RubyCommand.Argument(name: "coveralls_service_name", value: coverallsServiceName),
-                                                                                      RubyCommand.Argument(name: "coveralls_service_job_id", value: coverallsServiceJobId),
-                                                                                      RubyCommand.Argument(name: "coveralls_repo_token", value: coverallsRepoToken),
-                                                                                      RubyCommand.Argument(name: "xcconfig", value: xcconfig),
-                                                                                      RubyCommand.Argument(name: "ideFoundationPath", value: ideFoundationPath),
-                                                                                      RubyCommand.Argument(name: "legacy_support", value: legacySupport)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func xcov(workspace: String? = nil,
                  project: String? = nil,
@@ -14669,22 +9195,14 @@ public func xcov(workspace: String? = nil,
                                                                                         RubyCommand.Argument(name: "ideFoundationPath", value: ideFoundationPath),
                                                                                         RubyCommand.Argument(name: "legacy_support", value: legacySupport)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
  Runs tests on the given simulator
-<<<<<<< Updated upstream
-*/
-func xctest() {
-  let command = RubyCommand(commandID: "", methodName: "xctest", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func xctest() {
     let command = RubyCommand(commandID: "", methodName: "xctest", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -14693,17 +9211,10 @@ public func xctest() {
  You can run any `xctool` action. This will require having [xctool](https://github.com/facebook/xctool) installed through [Homebrew](http://brew.sh).
  It is recommended to store the build configuration in the `.xctool-args` file.
  More information: [https://docs.fastlane.tools/actions/xctool/](https://docs.fastlane.tools/actions/xctool/).
-<<<<<<< Updated upstream
-*/
-func xctool() {
-  let command = RubyCommand(commandID: "", methodName: "xctool", className: nil, args: [])
-  _ = runner.executeCommand(command)
-=======
  */
 public func xctool() {
     let command = RubyCommand(commandID: "", methodName: "xctool", className: nil, args: [])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -14712,17 +9223,10 @@ public func xctool() {
  - parameter version: The version of Xcode to select specified as a Gem::Version requirement string (e.g. '~> 7.1.0')
 
  Finds and selects a version of an installed Xcode that best matches the provided [`Gem::Version` requirement specifier](http://www.rubydoc.info/github/rubygems/rubygems/Gem/Version)
-<<<<<<< Updated upstream
-*/
-func xcversion(version: String) {
-  let command = RubyCommand(commandID: "", methodName: "xcversion", className: nil, args: [RubyCommand.Argument(name: "version", value: version)])
-  _ = runner.executeCommand(command)
-=======
  */
 public func xcversion(version: String) {
     let command = RubyCommand(commandID: "", methodName: "xcversion", className: nil, args: [RubyCommand.Argument(name: "version", value: version)])
     _ = runner.executeCommand(command)
->>>>>>> Stashed changes
 }
 
 /**
@@ -14736,20 +9240,6 @@ public func xcversion(version: String) {
    - symlinks: Store symbolic links as such in the zip archive
 
  - returns: The path to the output zip file
-<<<<<<< Updated upstream
-*/
-@discardableResult func zip(path: String,
-                            outputPath: String? = nil,
-                            verbose: Bool = true,
-                            password: String? = nil,
-                            symlinks: Bool = false) -> String {
-  let command = RubyCommand(commandID: "", methodName: "zip", className: nil, args: [RubyCommand.Argument(name: "path", value: path),
-                                                                                     RubyCommand.Argument(name: "output_path", value: outputPath),
-                                                                                     RubyCommand.Argument(name: "verbose", value: verbose),
-                                                                                     RubyCommand.Argument(name: "password", value: password),
-                                                                                     RubyCommand.Argument(name: "symlinks", value: symlinks)])
-  return runner.executeCommand(command)
-=======
  */
 @discardableResult public func zip(path: String,
                                    outputPath: String? = nil,
@@ -14763,63 +9253,51 @@ public func xcversion(version: String) {
                                                                                        RubyCommand.Argument(name: "password", value: password),
                                                                                        RubyCommand.Argument(name: "symlinks", value: symlinks)])
     return runner.executeCommand(command)
->>>>>>> Stashed changes
 }
-
 
 // These are all the parsing functions needed to transform our data into the expected types
 func parseArray(fromString: String, function: String = #function) -> [String] {
-  verbose(message: "parsing an Array from data: \(fromString), from function: \(function)")
-  let potentialArray: String
-  if fromString.count < 2 {
-    potentialArray = "[\(fromString)]"
-  } else {
-    potentialArray = fromString
-  }
-  let array: [String] = try! JSONSerialization.jsonObject(with: potentialArray.data(using: .utf8)!, options: []) as! [String]
-  return array
+    verbose(message: "parsing an Array from data: \(fromString), from function: \(function)")
+    let potentialArray: String
+    if fromString.count < 2 {
+        potentialArray = "[\(fromString)]"
+    } else {
+        potentialArray = fromString
+    }
+    let array: [String] = try! JSONSerialization.jsonObject(with: potentialArray.data(using: .utf8)!, options: []) as! [String]
+    return array
 }
 
-func parseDictionary(fromString: String, function: String = #function) -> [String : String] {
+func parseDictionary(fromString: String, function: String = #function) -> [String: String] {
     return parseDictionaryHelper(fromString: fromString, function: function) as! [String: String]
 }
 
-func parseDictionary(fromString: String, function: String = #function) -> [String : Any] {
+func parseDictionary(fromString: String, function: String = #function) -> [String: Any] {
     return parseDictionaryHelper(fromString: fromString, function: function)
 }
 
-func parseDictionaryHelper(fromString: String, function: String = #function) -> [String : Any] {
-  verbose(message: "parsing an Array from data: \(fromString), from function: \(function)")
-  let potentialDictionary: String
-  if fromString.count < 2 {
-    verbose(message: "Dictionary value too small: \(fromString), from function: \(function)")
-    potentialDictionary = "{}"
-  } else {
-      potentialDictionary = fromString
-  }
-  let dictionary: [String : Any] = try! JSONSerialization.jsonObject(with: potentialDictionary.data(using: .utf8)!, options: []) as! [String : Any]
-  return dictionary
+func parseDictionaryHelper(fromString: String, function: String = #function) -> [String: Any] {
+    verbose(message: "parsing an Array from data: \(fromString), from function: \(function)")
+    let potentialDictionary: String
+    if fromString.count < 2 {
+        verbose(message: "Dictionary value too small: \(fromString), from function: \(function)")
+        potentialDictionary = "{}"
+    } else {
+        potentialDictionary = fromString
+    }
+    let dictionary: [String: Any] = try! JSONSerialization.jsonObject(with: potentialDictionary.data(using: .utf8)!, options: []) as! [String: Any]
+    return dictionary
 }
 
 func parseBool(fromString: String, function: String = #function) -> Bool {
-  verbose(message: "parsing a Bool from data: \(fromString), from function: \(function)")
-  return NSString(string: fromString.trimmingCharacters(in: .punctuationCharacters)).boolValue
+    verbose(message: "parsing a Bool from data: \(fromString), from function: \(function)")
+    return NSString(string: fromString.trimmingCharacters(in: .punctuationCharacters)).boolValue
 }
 
 func parseInt(fromString: String, function: String = #function) -> Int {
-  verbose(message: "parsing an Int from data: \(fromString), from function: \(function)")
-  return NSString(string: fromString.trimmingCharacters(in: .punctuationCharacters)).integerValue
+    verbose(message: "parsing an Int from data: \(fromString), from function: \(function)")
+    return NSString(string: fromString.trimmingCharacters(in: .punctuationCharacters)).integerValue
 }
-<<<<<<< Updated upstream
-      
-let deliverfile: Deliverfile = Deliverfile()
-let gymfile: Gymfile = Gymfile()
-let matchfile: Matchfile = Matchfile()
-let precheckfile: Precheckfile = Precheckfile()
-let scanfile: Scanfile = Scanfile()
-let screengrabfile: Screengrabfile = Screengrabfile()
-let snapshotfile: Snapshotfile = Snapshotfile()
-=======
 
 public let deliverfile = Deliverfile()
 public let gymfile = Gymfile()
@@ -14828,7 +9306,6 @@ public let precheckfile = Precheckfile()
 public let scanfile = Scanfile()
 public let screengrabfile = Screengrabfile()
 public let snapshotfile = Snapshotfile()
->>>>>>> Stashed changes
 
 // Please don't remove the lines below
 // They are used to detect outdated files

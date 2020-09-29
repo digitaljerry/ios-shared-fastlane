@@ -13,7 +13,7 @@ import Foundation
 protocol SocketClientDelegateProtocol: class {
     func connectionsOpened()
     func connectionsClosed()
-    func commandExecuted(serverResponse: SocketClientResponse)
+    func commandExecuted(serverResponse: SocketClientResponse, completion: (SocketClient) -> Void)
 }
 
 // Please don't remove the lines below
