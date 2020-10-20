@@ -53,6 +53,8 @@ class Fastfile: LaneFile {
     var dsymFilePath: String { return "./\(scheme).app.dSYM.zip" }
     
     func beforeAll() {
+        setupCircleCi()
+        
 //        if let appleIDenv = environmentVariable(get: "APPLEID") as? String {
 //            appleID = appleIDenv
 //        } else {
