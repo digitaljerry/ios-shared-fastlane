@@ -354,7 +354,7 @@ class Fastfile: LaneFile {
         }
         
         let newBuildNumber = incrementBuildNumber(buildNumber: buildNumber).trim()
-        let message = "\(commitPrefix) \(newBuildNumber) by fastlane"
+        let message = "\(commitPrefix) \(newBuildNumber) by fastlane [skip ci]"
         
         commitVersionBump(
             message: message,
