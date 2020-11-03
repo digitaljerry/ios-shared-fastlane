@@ -202,8 +202,7 @@ class Fastfile: LaneFile {
         cocoapods()
         buildApp(
             workspace: projectWorkspace,
-            scheme: scheme,
-            xcargs: "-UseModernBuildSystem=NO"
+            scheme: scheme
         )
         uploadIPA()
         uploadDSYM()
@@ -245,7 +244,7 @@ class Fastfile: LaneFile {
     }
     
     public func uploadDSYM() {
-        let gspPath = enviorment == .prod ? "./\(projectScheme)/GoogleService-Info.plist" : "./\(projectScheme)/(enviorment.schemeSuffix)/GoogleService-Info.plist"
+        let gspPath = enviorment == .prod ? "./\(projectScheme)/GoogleService-Info.plist" : "./\(projectScheme)/\(enviorment.schemeSuffix)/GoogleService-Info.plist"
         uploadSymbolsToCrashlytics(
             dsymPath: dsymFilePath,
             gspPath: gspPath,
