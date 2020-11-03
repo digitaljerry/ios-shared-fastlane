@@ -52,14 +52,17 @@ class Fastfile: LaneFile {
     var IPAFilePath: String { return "./\(scheme).ipa" }
     var dsymFilePath: String { return "./\(scheme).app.dSYM.zip" }
     
-    func beforeAll() {
-        setupCircleCi()
+    func beforeAll(with lane: String) {
+        if isCi() == true {
+            setupCircleCi()
+        } else {
         
 //        if let appleIDenv = environmentVariable(get: "APPLEID") as? String {
 //            appleID = appleIDenv
 //        } else {
             appleID = prompt(text: "Apple ID: ", ciInput: "developer@rallyreader.com")
 //        }
+        }
     }
     
     func envPrompt() {
