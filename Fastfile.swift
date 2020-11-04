@@ -283,21 +283,35 @@ class Fastfile: LaneFile {
         }
     }
     
-    public func refreshProfilesLane() {
-        refreshAppstoreProfiles()
+    public func renewProfilesLane() {
+        renewAppstoreProfiles()
     }
     
     // MARK: Private lanes
     
-    private func refreshAppstoreProfiles() {
+    private func renewAppstoreProfiles() {
         match(
             type: "appstore",
             readonly: false,
             appIdentifier: [appID],
             teamId: teamID,
             gitUrl: matchGitUrl,
-            gitBranch: matchGitBranch
+            gitBranch: matchGitBranch,
+            force: true
         )
+        for extensionSuffix in extensionIdentifiersSuffixes {
+            match(
+                type: "appstore",
+                readonly: false,
+                appIdentifier: [appID+"."+extensionSuffix],
+                username: appleID,
+                teamId: teamID,
+                teamName: teamID,
+                gitUrl: matchGitUrl,
+                gitBranch: matchGitBranch,
+                force: true
+            )
+        }
     }
     
     // MARK: Helpers
