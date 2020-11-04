@@ -202,8 +202,7 @@ class Fastfile: LaneFile {
         cocoapods()
         buildApp(
             workspace: projectWorkspace,
-            scheme: scheme,
-            xcargs: "-allowProvisioningUpdates"
+            scheme: scheme
         )
         uploadIPA()
         uploadDSYM()
