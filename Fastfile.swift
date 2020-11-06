@@ -54,7 +54,15 @@ class Fastfile: LaneFile {
     
     func beforeAll(with lane: String) {
         if isCi() == true {
-            setupCircleCi()
+//            setupCircleCi()
+            createKeychain(
+                name: "ci-keychain",
+                password: "",
+                defaultKeychain: true,
+                unlock: true,
+                timeout: 3600,
+                addToSearchList: true
+            )
         } else {
         
 //        if let appleIDenv = environmentVariable(get: "APPLEID") as? String {
@@ -100,7 +108,11 @@ class Fastfile: LaneFile {
         puts(message: "----------------------")
     }
     
-    func afterAll(currentLane: String) {}
+    func afterAll(currentLane: String) {
+        if isCi() == true {
+            deleteKeychain()
+        }
+    }
     
     func onError(currentLane: String, errorInfo: String) {
         slackError(message: errorInfo)
@@ -169,22 +181,43 @@ class Fastfile: LaneFile {
         checkTargetsLane()
         
         if automaticCodeSigning == false {
-            syncCodeSigning(
-                type: "appstore",
-                readonly: true,
-                appIdentifier: [appID],
-                username: appleID ?? defaultAppleId,
-                teamId: teamID,
-                gitUrl: matchGitUrl,
-                gitBranch: matchGitBranch,
-                shallowClone: true,
-                cloneBranchDirectly: true
-            )
-            for extensionSuffix in extensionIdentifiersSuffixes {
+            if isCi() == true {
+                
                 syncCodeSigning(
                     type: "appstore",
                     readonly: true,
-                    appIdentifier: [appID+"."+extensionSuffix],
+                    appIdentifier: [appID],
+                    username: appleID ?? defaultAppleId,
+                    teamId: teamID,
+                    gitUrl: matchGitUrl,
+                    gitBranch: matchGitBranch,
+                    shallowClone: true,
+                    cloneBranchDirectly: true,
+                    keychainName: "ci-keychain",
+                    keychainPassword: ""
+                )
+                for extensionSuffix in extensionIdentifiersSuffixes {
+                    syncCodeSigning(
+                        type: "appstore",
+                        readonly: true,
+                        appIdentifier: [appID+"."+extensionSuffix],
+                        username: appleID ?? defaultAppleId,
+                        teamId: teamID,
+                        gitUrl: matchGitUrl,
+                        gitBranch: matchGitBranch,
+                        shallowClone: true,
+                        cloneBranchDirectly: true,
+                        keychainName: "ci-keychain",
+                        keychainPassword: ""
+                    )
+                }
+                
+            } else {
+                
+                syncCodeSigning(
+                    type: "appstore",
+                    readonly: true,
+                    appIdentifier: [appID],
                     username: appleID ?? defaultAppleId,
                     teamId: teamID,
                     gitUrl: matchGitUrl,
@@ -192,6 +225,19 @@ class Fastfile: LaneFile {
                     shallowClone: true,
                     cloneBranchDirectly: true
                 )
+                for extensionSuffix in extensionIdentifiersSuffixes {
+                    syncCodeSigning(
+                        type: "appstore",
+                        readonly: true,
+                        appIdentifier: [appID+"."+extensionSuffix],
+                        username: appleID ?? defaultAppleId,
+                        teamId: teamID,
+                        gitUrl: matchGitUrl,
+                        gitBranch: matchGitBranch,
+                        shallowClone: true,
+                        cloneBranchDirectly: true
+                    )
+                }
             }
         }
         
