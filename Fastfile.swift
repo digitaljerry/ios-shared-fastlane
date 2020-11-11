@@ -65,11 +65,11 @@ class Fastfile: LaneFile {
             )
         } else {
         
-//        if let appleIDenv = environmentVariable(get: "APPLEID") as? String {
-//            appleID = appleIDenv
-//        } else {
+        if let appleIDenv = environmentVariable(get: "APPLEID") as? String {
+            appleID = appleIDenv
+        } else {
             appleID = prompt(text: "Apple ID: ", ciInput: "developer@rallyreader.com")
-//        }
+        }
         }
     }
     
