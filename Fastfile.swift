@@ -79,7 +79,9 @@ class Fastfile: LaneFile {
             ciInput = "1"
         }
         
-        if supportedEnviorments.count > 1 {
+        if supportsDevApp == false {
+            enviorment = .prod
+        } else if supportedEnviorments.count > 1 {
             println(message: "Which env would you like to use? Type in the number.")
             for (index, value) in supportedEnviorments.enumerated() {
                 println(message: "\(index+1)) \(value.description)")
@@ -157,7 +159,7 @@ class Fastfile: LaneFile {
     public func newBuildLane() {
         envPrompt()
         
-        if enviorment == .dev {
+        if enviorment == .dev || supportsDevApp == false {
             betaLane(bumpLane: true)
         } else {
             betaLane(bumpLane: false)
@@ -248,7 +250,8 @@ class Fastfile: LaneFile {
         cocoapods()
         buildApp(
             workspace: projectWorkspace,
-            scheme: scheme
+            scheme: scheme,
+            xcargs: "-allowProvisioningUpdates"
         )
         uploadIPA()
         uploadDSYM()

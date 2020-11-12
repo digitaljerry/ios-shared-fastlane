@@ -1,5 +1,9 @@
-// RunnerArgument.swift
-// Copyright (c) 2020 FastlaneTools
+//
+//  RunnerArgument.swift
+//  FastlaneSwiftRunner
+//
+//  Created by Joshua Liebowitz on 9/1/17.
+//
 
 //
 //  ** NOTE **

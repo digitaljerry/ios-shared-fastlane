@@ -1,5 +1,9 @@
-// SocketClientDelegateProtocol.swift
-// Copyright (c) 2020 FastlaneTools
+//
+//  SocketClientDelegateProtocol.swift
+//  FastlaneSwiftRunner
+//
+//  Created by Joshua Liebowitz on 8/12/17.
+//
 
 //
 //  ** NOTE **
@@ -13,7 +17,7 @@ import Foundation
 protocol SocketClientDelegateProtocol: class {
     func connectionsOpened()
     func connectionsClosed()
-    func commandExecuted(serverResponse: SocketClientResponse, completion: (SocketClient) -> Void)
+    func commandExecuted(serverResponse: SocketClientResponse)
 }
 
 // Please don't remove the lines below

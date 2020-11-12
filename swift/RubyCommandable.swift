@@ -1,5 +1,9 @@
-// RubyCommandable.swift
-// Copyright (c) 2020 FastlaneTools
+//
+//  RubyCommandable.swift
+//  FastlaneRunner
+//
+//  Created by Joshua Liebowitz on 1/4/18.
+//
 
 //
 //  ** NOTE **
@@ -27,14 +31,11 @@ enum CommandType {
 protocol RubyCommandable {
     var type: CommandType { get }
     var commandJson: String { get }
-    var id: String { get }
 }
 
 extension RubyCommandable {
     var json: String {
-        return """
-        { "commandType": "\(type.token)", "command": \(commandJson) }
-        """
+        return "{\"commandType\" : \"\(self.type.token)\", \"command\" : \(self.commandJson)}"
     }
 }
 
