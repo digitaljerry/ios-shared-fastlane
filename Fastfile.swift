@@ -404,6 +404,10 @@ class Fastfile: LaneFile {
         }
     }
     
+    public func buildBumpLane() {
+        buildBumpLane(force: true)
+    }
+    
     public func specificBuildBumpLane() {
         let build = prompt(text: "New build number: ")
         buildBumpLane(buildNumber: build, force: true)
