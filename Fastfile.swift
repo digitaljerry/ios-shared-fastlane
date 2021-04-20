@@ -52,9 +52,11 @@ class Fastfile: LaneFile {
     var IPAFilePath: String { return "./\(scheme).ipa" }
     var dsymFilePath: String { return "./\(scheme).app.dSYM.zip" }
     
+    let branchTruthSource = "develop"
+    
     func beforeAll(with lane: String) {
         if isCi() == true {
-//            setupCircleCi()
+            setupCircleCi()
             createKeychain(
                 name: "ci-keychain",
                 password: "",
@@ -63,13 +65,14 @@ class Fastfile: LaneFile {
                 timeout: 3600,
                 addToSearchList: true
             )
+            loadAppstoreApiKey()
         } else {
-        
-        if let appleIDenv = environmentVariable(get: "APPLEID") as? String {
-            appleID = appleIDenv
-        } else {
-            appleID = prompt(text: "Apple ID: ", ciInput: "developer@rallyreader.com")
-        }
+            let appleIDenv = environmentVariable(get: "APPLEID")
+            if appleIDenv != "" {
+                appleID = appleIDenv
+            } else {
+                appleID = prompt(text: "Apple ID: ", ciInput: "developer@rallyreader.com")
+            }
         }
     }
     
@@ -118,6 +121,13 @@ class Fastfile: LaneFile {
     
     func onError(currentLane: String, errorInfo: String) {
         slackError(message: errorInfo)
+    }
+    
+    private func loadAppstoreApiKey() {
+        let id = environmentVariable(get: "APPSTORE_API_KEY_ID")
+        let issuer = environmentVariable(get: "APPSTORE_API_ISSUER_ID")
+        let content = environmentVariable(get: "APPSTORE_API_KEY")
+        appStoreConnectApiKey(keyId: id, issuerId: issuer, keyContent: content, inHouse: false)
     }
     
     public func distributeLatestBuildLane() {
@@ -172,10 +182,18 @@ class Fastfile: LaneFile {
     }
     
     private func latestBuildNumber() -> String {
-        let buildGitBranch = sh(command: "git rev-parse --abbrev-ref HEAD")
-        sh(command: "git checkout develop")
+        let buildGitBranch = gitBranch()
+        
+        if buildGitBranch != branchTruthSource {
+            sh(command: "git checkout \(branchTruthSource)")
+        }
+        
         let latestBuildNumber = getBuildNumber().trim()
-        sh(command: "git checkout \(buildGitBranch)")
+        
+        if buildGitBranch != branchTruthSource {
+            sh(command: "git checkout \(buildGitBranch)")
+        }
+        
         return latestBuildNumber
     }
     
@@ -447,8 +465,20 @@ class Fastfile: LaneFile {
         
         pushToGitRemote(force: false)
         
+        let bumpGitTag = lastGitTag()
+        
+        let currentBranch = gitBranch()
+        
+        // push build bump to the branch holding the truth
+        if currentBranch != branchTruthSource {
+            sh(command: "git checkout \(branchTruthSource)")
+            sh(command: "git cherry-pick \(bumpGitTag)")
+            pushToGitRemote(force: false)
+            sh(command: "git checkout \(currentBranch)")
+        }
+        
         let versionNumber = getVersionNumber(target: scheme).trim()
-        let slackMessage = "\(commitPrefix) version \(newBuildNumber) build \(versionNumber) for \(appID)"
+        let slackMessage = "\(commitPrefix) version \(newBuildNumber) build \(versionNumber) for \(appID) on branch \(currentBranch)"
         slackSuccess(message: slackMessage)
     }
     
