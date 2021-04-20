@@ -166,6 +166,19 @@ class Fastfile: LaneFile {
         }
     }
     
+    public func getLatestBuildNumberLane() {
+        let buildNumber = latestBuildNumber()
+        puts(message: "Latest build number: \(buildNumber)")
+    }
+    
+    private func latestBuildNumber() -> String {
+        let buildGitBranch = sh(command: "git rev-parse --abbrev-ref HEAD")
+        sh(command: "git checkout develop")
+        let latestBuildNumber = getBuildNumber().trim()
+        sh(command: "git checkout \(buildGitBranch)")
+        return latestBuildNumber
+    }
+    
     private func betaLane(bumpLane: Bool? = true) {
 	desc("Push a new beta build to TestFlight")
         if FileManager.default.fileExists(atPath: filePath) {

@@ -20,6 +20,9 @@ public protocol ScanfileProtocol: class {
     /// Should skip auto detecting of devices if none were specified
     var skipDetectDevices: Bool { get }
 
+    /// Should fail if devices not found
+    var ensureDevicesFound: Bool { get }
+
     /// Enabling this option will automatically killall Simulator processes before the run
     var forceQuitSimulator: Bool { get }
 
@@ -109,6 +112,9 @@ public protocol ScanfileProtocol: class {
 
     /// Should zip the derived data build products and place in output path?
     var shouldZipBuildProducts: Bool { get }
+
+    /// Should provide additional copy of .xctestrun file (settings.xctestrun) and place in output path?
+    var outputXctestrun: Bool { get }
 
     /// Should an Xcode result bundle be generated in the output directory
     var resultBundle: Bool { get }
@@ -203,6 +209,9 @@ public protocol ScanfileProtocol: class {
     /// Lets xcodebuild use system's scm configuration
     var useSystemScm: Bool { get }
 
+    /// The number of times a test can fail before scan should stop retrying
+    var numberOfRetries: Int { get }
+
     /// Should this step stop the build if the tests fail? Set this to false if you're using trainer
     var failBuild: Bool { get }
 }
@@ -214,6 +223,7 @@ public extension ScanfileProtocol {
     var device: String? { return nil }
     var devices: [String]? { return nil }
     var skipDetectDevices: Bool { return false }
+    var ensureDevicesFound: Bool { return false }
     var forceQuitSimulator: Bool { return false }
     var resetSimulator: Bool { return false }
     var disableSlideToType: Bool { return true }
@@ -244,6 +254,7 @@ public extension ScanfileProtocol {
     var xcprettyArgs: String? { return nil }
     var derivedDataPath: String? { return nil }
     var shouldZipBuildProducts: Bool { return false }
+    var outputXctestrun: Bool { return false }
     var resultBundle: Bool { return false }
     var useClangReportName: Bool { return false }
     var concurrentWorkers: Int? { return nil }
@@ -275,9 +286,10 @@ public extension ScanfileProtocol {
     var skipPackageDependenciesResolution: Bool { return false }
     var disablePackageAutomaticUpdates: Bool { return false }
     var useSystemScm: Bool { return false }
+    var numberOfRetries: Int { return 0 }
     var failBuild: Bool { return true }
 }
 
 // Please don't remove the lines below
 // They are used to detect outdated files
-// FastlaneRunnerAPIVersion [0.9.63]
+// FastlaneRunnerAPIVersion [0.9.73]
