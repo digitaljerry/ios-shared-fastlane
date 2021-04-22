@@ -454,7 +454,8 @@ class Fastfile: LaneFile {
             }
         }
         
-        let newBuildNumber = incrementBuildNumber(buildNumber: buildNumber).trim()
+        let lastBuildNumber = latestBuildNumber()
+        let newBuildNumber = buildNumber == nil ? incrementBuildNumber(buildNumber: lastBuildNumber).trim() : incrementBuildNumber(buildNumber: buildNumber).trim()
         let message = "\(commitPrefix) \(newBuildNumber) by fastlane [skip ci]"
         
         commitVersionBump(
