@@ -454,8 +454,8 @@ class Fastfile: LaneFile {
             }
         }
         
-        let lastBuildNumber = latestBuildNumber()
-        let newBuildNumber = buildNumber == nil ? incrementBuildNumber(buildNumber: lastBuildNumber).trim() : incrementBuildNumber(buildNumber: buildNumber).trim()
+        let oldBuildNumber: String = buildNumber ?? "\( (Int(latestBuildNumber()) ?? 0)+1 )"
+        let newBuildNumber = incrementBuildNumber(buildNumber: oldBuildNumber).trim()
         let message = "\(commitPrefix) \(newBuildNumber) by fastlane [skip ci]"
         
         commitVersionBump(
@@ -466,14 +466,14 @@ class Fastfile: LaneFile {
         
         pushToGitRemote(force: false)
         
-        let bumpGitTag = lastGitTag()
+        let bumpGitTag = lastGitCommit()["commit_hash"] ?? ""
         
         let currentBranch = gitBranch()
         
         // push build bump to the branch holding the truth
         if currentBranch != branchTruthSource {
             sh(command: "git checkout \(branchTruthSource)")
-            sh(command: "git cherry-pick \(bumpGitTag)")
+            sh(command: "git cherry-pick --strategy=recursive -X theirs \(bumpGitTag)")
             pushToGitRemote(force: false)
             sh(command: "git checkout \(currentBranch)")
         }
@@ -554,6 +554,7 @@ class Fastfile: LaneFile {
 
 extension Fastfile {
     private func slackNotify(message: String, pretext: String = "") {
+        puts(message: "posting to \(slackChannel) with \(slackUrl)")
         slack(message: message,
               channel: slackChannel,
               slackUrl: slackUrl,

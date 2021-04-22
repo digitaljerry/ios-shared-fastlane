@@ -1,5 +1,5 @@
 // SocketResponse.swift
-// Copyright (c) 2021 FastlaneTools
+// Copyright (c) 2020 FastlaneTools
 
 //
 //  ** NOTE **
@@ -13,7 +13,7 @@ import Foundation
 struct SocketResponse {
     enum ResponseType {
         case parseFailure(failureInformation: [String])
-        case failure(failureInformation: [String], failureClass: String?, failureMessage: String?)
+        case failure(failureInformation: [String])
         case readyForNext(returnedObject: String?, closureArgumentValue: String?)
         case clientInitiatedCancel
 
@@ -40,9 +40,7 @@ struct SocketResponse {
                     return
                 }
 
-                let failureClass = statusDictionary["failure_class"] as? String
-                let failureMessage = statusDictionary["failure_message"] as? String
-                self = .failure(failureInformation: failureInformation, failureClass: failureClass, failureMessage: failureMessage)
+                self = .failure(failureInformation: failureInformation)
                 return
             }
             self = .parseFailure(failureInformation: ["Message status: \(status) not a supported status"])
