@@ -8,7 +8,7 @@ import Foundation
  - parameters:
    - serial: Android serial of the device to use for this command
    - command: All commands you want to pass to the adb command, e.g. `kill-server`
-   - adbPath: The path to your `adb` binary (can be left blank if the ANDROID_SDK_ROOT environment variable is set)
+   - adbPath: The path to your `adb` binary (can be left blank if the ANDROID_SDK_ROOT, ANDROID_HOME or ANDROID_SDK environment variable is set)
 
  - returns: The output of the adb command
 
@@ -119,7 +119,7 @@ public func appStoreBuildNumber(apiKeyPath: String? = nil,
                                 apiKey: [String: Any]? = nil,
                                 initialBuildNumber: Any,
                                 appIdentifier: String,
-                                username: String,
+                                username: String? = nil,
                                 teamId: Any? = nil,
                                 live: Bool = true,
                                 version: String? = nil,
@@ -149,7 +149,7 @@ public func appStoreBuildNumber(apiKeyPath: String? = nil,
    - keyContent: The content of the key p8 file
    - isKeyContentBase64: Whether :key_content is Base64 encoded or not
    - duration: The token session duration
-   - inHouse: Is App Store or Enterprise (in house) team? App Store Connect API cannot not determine this on its own (yet)
+   - inHouse: Is App Store or Enterprise (in house) team? App Store Connect API cannot determine this on its own (yet)
 
  Load the App Store Connect API token to use in other fastlane tools and actions
  */
@@ -158,7 +158,7 @@ public func appStoreConnectApiKey(keyId: String,
                                   keyFilepath: String? = nil,
                                   keyContent: String? = nil,
                                   isKeyContentBase64: Bool = false,
-                                  duration: Int? = nil,
+                                  duration: Int = 1200,
                                   inHouse: Bool? = nil)
 {
     let command = RubyCommand(commandID: "", methodName: "app_store_connect_api_key", className: nil, args: [RubyCommand.Argument(name: "key_id", value: keyId),
@@ -183,6 +183,7 @@ public func appStoreConnectApiKey(keyId: String,
    - locale: Select the folder locale for your screenshots
    - device: Select the device format for your screenshots
    - description: Your app description
+   - changelog: Your app changelog
 
  Appaloosa is a private mobile application store. This action offers a quick deployment on the platform.
  You can create an account, push to your existing account, or manage your user groups.
@@ -195,7 +196,8 @@ public func appaloosa(binary: String,
                       screenshots: String,
                       locale: String = "en-US",
                       device: String? = nil,
-                      description: String? = nil)
+                      description: String? = nil,
+                      changelog: String? = nil)
 {
     let command = RubyCommand(commandID: "", methodName: "appaloosa", className: nil, args: [RubyCommand.Argument(name: "binary", value: binary),
                                                                                              RubyCommand.Argument(name: "api_token", value: apiToken),
@@ -204,7 +206,8 @@ public func appaloosa(binary: String,
                                                                                              RubyCommand.Argument(name: "screenshots", value: screenshots),
                                                                                              RubyCommand.Argument(name: "locale", value: locale),
                                                                                              RubyCommand.Argument(name: "device", value: device),
-                                                                                             RubyCommand.Argument(name: "description", value: description)])
+                                                                                             RubyCommand.Argument(name: "description", value: description),
+                                                                                             RubyCommand.Argument(name: "changelog", value: changelog)])
     _ = runner.executeCommand(command)
 }
 
@@ -219,6 +222,7 @@ public func appaloosa(binary: String,
    - path: Path to zipped build on the local filesystem. Either this or `url` must be specified
    - publicKey: If not provided, a new app will be created. If provided, the existing build will be overwritten
    - note: Notes you wish to add to the uploaded app
+   - timeout: The number of seconds to wait until automatically ending the session due to user inactivity. Must be 30, 60, 90, 120, 180, 300, 600, 1800, 3600 or 7200. Default is 120
 
  If you provide a `public_key`, this will overwrite an existing application. If you want to have this build as a new app version, you shouldn't provide this value.
 
@@ -230,7 +234,8 @@ public func appetize(apiHost: String = "api.appetize.io",
                      platform: String = "ios",
                      path: String? = nil,
                      publicKey: String? = nil,
-                     note: String? = nil)
+                     note: String? = nil,
+                     timeout: Int? = nil)
 {
     let command = RubyCommand(commandID: "", methodName: "appetize", className: nil, args: [RubyCommand.Argument(name: "api_host", value: apiHost),
                                                                                             RubyCommand.Argument(name: "api_token", value: apiToken),
@@ -238,7 +243,8 @@ public func appetize(apiHost: String = "api.appetize.io",
                                                                                             RubyCommand.Argument(name: "platform", value: platform),
                                                                                             RubyCommand.Argument(name: "path", value: path),
                                                                                             RubyCommand.Argument(name: "public_key", value: publicKey),
-                                                                                            RubyCommand.Argument(name: "note", value: note)])
+                                                                                            RubyCommand.Argument(name: "note", value: note),
+                                                                                            RubyCommand.Argument(name: "timeout", value: timeout)])
     _ = runner.executeCommand(command)
 }
 
@@ -546,7 +552,7 @@ public func appledoc(input: Any,
  */
 public func appstore(apiKeyPath: String? = nil,
                      apiKey: [String: Any]? = nil,
-                     username: String,
+                     username: String? = nil,
                      appIdentifier: String? = nil,
                      appVersion: String? = nil,
                      ipa: String? = nil,
@@ -874,6 +880,7 @@ public func badge(dark: Any? = nil,
    - apiToken: Appetize.io API Token
    - publicKey: If not provided, a new app will be created. If provided, the existing build will be overwritten
    - note: Notes you wish to add to the uploaded app
+   - timeout: The number of seconds to wait until automatically ending the session due to user inactivity. Must be 30, 60, 90, 120, 180, 300, 600, 1800, 3600 or 7200. Default is 120
 
  This should be called from danger.
  More information in the [device_grid guide](https://github.com/fastlane/fastlane/blob/master/fastlane/lib/fastlane/actions/device_grid/README.md).
@@ -882,13 +889,15 @@ public func buildAndUploadToAppetize(xcodebuild: [String: Any] = [:],
                                      scheme: String? = nil,
                                      apiToken: String,
                                      publicKey: String? = nil,
-                                     note: String? = nil)
+                                     note: String? = nil,
+                                     timeout: Int? = nil)
 {
     let command = RubyCommand(commandID: "", methodName: "build_and_upload_to_appetize", className: nil, args: [RubyCommand.Argument(name: "xcodebuild", value: xcodebuild),
                                                                                                                 RubyCommand.Argument(name: "scheme", value: scheme),
                                                                                                                 RubyCommand.Argument(name: "api_token", value: apiToken),
                                                                                                                 RubyCommand.Argument(name: "public_key", value: publicKey),
-                                                                                                                RubyCommand.Argument(name: "note", value: note)])
+                                                                                                                RubyCommand.Argument(name: "note", value: note),
+                                                                                                                RubyCommand.Argument(name: "timeout", value: timeout)])
     _ = runner.executeCommand(command)
 }
 
@@ -997,53 +1006,53 @@ public func buildAndroidApp(task: String? = nil,
 
  More information: https://fastlane.tools/gym
  */
-public func buildApp(workspace: String? = nil,
-                     project: String? = nil,
-                     scheme: String? = nil,
-                     clean: Bool = false,
-                     outputDirectory: String = ".",
-                     outputName: String? = nil,
-                     configuration: String? = nil,
-                     silent: Bool = false,
-                     codesigningIdentity: String? = nil,
-                     skipPackageIpa: Bool = false,
-                     skipPackagePkg: Bool = false,
-                     includeSymbols: Bool? = nil,
-                     includeBitcode: Bool? = nil,
-                     exportMethod: String? = nil,
-                     exportOptions: [String: Any]? = nil,
-                     exportXcargs: String? = nil,
-                     skipBuildArchive: Bool? = nil,
-                     skipArchive: Bool? = nil,
-                     skipCodesigning: Bool? = nil,
-                     catalystPlatform: String? = nil,
-                     installerCertName: String? = nil,
-                     buildPath: String? = nil,
-                     archivePath: String? = nil,
-                     derivedDataPath: String? = nil,
-                     resultBundle: Bool = false,
-                     resultBundlePath: String? = nil,
-                     buildlogPath: String = "~/Library/Logs/gym",
-                     sdk: String? = nil,
-                     toolchain: String? = nil,
-                     destination: String? = nil,
-                     exportTeamId: String? = nil,
-                     xcargs: String? = nil,
-                     xcconfig: String? = nil,
-                     suppressXcodeOutput: Bool? = nil,
-                     disableXcpretty: Bool? = nil,
-                     xcprettyTestFormat: Bool? = nil,
-                     xcprettyFormatter: String? = nil,
-                     xcprettyReportJunit: String? = nil,
-                     xcprettyReportHtml: String? = nil,
-                     xcprettyReportJson: String? = nil,
-                     analyzeBuildTime: Bool? = nil,
-                     xcprettyUtf: Bool? = nil,
-                     skipProfileDetection: Bool = false,
-                     clonedSourcePackagesPath: String? = nil,
-                     skipPackageDependenciesResolution: Bool = false,
-                     disablePackageAutomaticUpdates: Bool = false,
-                     useSystemScm: Bool = false)
+@discardableResult public func buildApp(workspace: String? = nil,
+                                        project: String? = nil,
+                                        scheme: String? = nil,
+                                        clean: Bool = false,
+                                        outputDirectory: String = ".",
+                                        outputName: String? = nil,
+                                        configuration: String? = nil,
+                                        silent: Bool = false,
+                                        codesigningIdentity: String? = nil,
+                                        skipPackageIpa: Bool = false,
+                                        skipPackagePkg: Bool = false,
+                                        includeSymbols: Bool? = nil,
+                                        includeBitcode: Bool? = nil,
+                                        exportMethod: String? = nil,
+                                        exportOptions: [String: Any]? = nil,
+                                        exportXcargs: String? = nil,
+                                        skipBuildArchive: Bool? = nil,
+                                        skipArchive: Bool? = nil,
+                                        skipCodesigning: Bool? = nil,
+                                        catalystPlatform: String? = nil,
+                                        installerCertName: String? = nil,
+                                        buildPath: String? = nil,
+                                        archivePath: String? = nil,
+                                        derivedDataPath: String? = nil,
+                                        resultBundle: Bool = false,
+                                        resultBundlePath: String? = nil,
+                                        buildlogPath: String = "~/Library/Logs/gym",
+                                        sdk: String? = nil,
+                                        toolchain: String? = nil,
+                                        destination: String? = nil,
+                                        exportTeamId: String? = nil,
+                                        xcargs: String? = nil,
+                                        xcconfig: String? = nil,
+                                        suppressXcodeOutput: Bool? = nil,
+                                        disableXcpretty: Bool? = nil,
+                                        xcprettyTestFormat: Bool? = nil,
+                                        xcprettyFormatter: String? = nil,
+                                        xcprettyReportJunit: String? = nil,
+                                        xcprettyReportHtml: String? = nil,
+                                        xcprettyReportJson: String? = nil,
+                                        analyzeBuildTime: Bool? = nil,
+                                        xcprettyUtf: Bool? = nil,
+                                        skipProfileDetection: Bool = false,
+                                        clonedSourcePackagesPath: String? = nil,
+                                        skipPackageDependenciesResolution: Bool = false,
+                                        disablePackageAutomaticUpdates: Bool = false,
+                                        useSystemScm: Bool = false) -> String
 {
     let command = RubyCommand(commandID: "", methodName: "build_app", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
                                                                                              RubyCommand.Argument(name: "project", value: project),
@@ -1092,7 +1101,7 @@ public func buildApp(workspace: String? = nil,
                                                                                              RubyCommand.Argument(name: "skip_package_dependencies_resolution", value: skipPackageDependenciesResolution),
                                                                                              RubyCommand.Argument(name: "disable_package_automatic_updates", value: disablePackageAutomaticUpdates),
                                                                                              RubyCommand.Argument(name: "use_system_scm", value: useSystemScm)])
-    _ = runner.executeCommand(command)
+    return runner.executeCommand(command)
 }
 
 /**
@@ -1148,50 +1157,50 @@ public func buildApp(workspace: String? = nil,
 
  More information: https://fastlane.tools/gym
  */
-public func buildIosApp(workspace: String? = nil,
-                        project: String? = nil,
-                        scheme: String? = nil,
-                        clean: Bool = false,
-                        outputDirectory: String = ".",
-                        outputName: String? = nil,
-                        configuration: String? = nil,
-                        silent: Bool = false,
-                        codesigningIdentity: String? = nil,
-                        skipPackageIpa: Bool = false,
-                        includeSymbols: Bool? = nil,
-                        includeBitcode: Bool? = nil,
-                        exportMethod: String? = nil,
-                        exportOptions: [String: Any]? = nil,
-                        exportXcargs: String? = nil,
-                        skipBuildArchive: Bool? = nil,
-                        skipArchive: Bool? = nil,
-                        skipCodesigning: Bool? = nil,
-                        buildPath: String? = nil,
-                        archivePath: String? = nil,
-                        derivedDataPath: String? = nil,
-                        resultBundle: Bool = false,
-                        resultBundlePath: String? = nil,
-                        buildlogPath: String = "~/Library/Logs/gym",
-                        sdk: String? = nil,
-                        toolchain: String? = nil,
-                        destination: String? = nil,
-                        exportTeamId: String? = nil,
-                        xcargs: String? = nil,
-                        xcconfig: String? = nil,
-                        suppressXcodeOutput: Bool? = nil,
-                        disableXcpretty: Bool? = nil,
-                        xcprettyTestFormat: Bool? = nil,
-                        xcprettyFormatter: String? = nil,
-                        xcprettyReportJunit: String? = nil,
-                        xcprettyReportHtml: String? = nil,
-                        xcprettyReportJson: String? = nil,
-                        analyzeBuildTime: Bool? = nil,
-                        xcprettyUtf: Bool? = nil,
-                        skipProfileDetection: Bool = false,
-                        clonedSourcePackagesPath: String? = nil,
-                        skipPackageDependenciesResolution: Bool = false,
-                        disablePackageAutomaticUpdates: Bool = false,
-                        useSystemScm: Bool = false)
+@discardableResult public func buildIosApp(workspace: String? = nil,
+                                           project: String? = nil,
+                                           scheme: String? = nil,
+                                           clean: Bool = false,
+                                           outputDirectory: String = ".",
+                                           outputName: String? = nil,
+                                           configuration: String? = nil,
+                                           silent: Bool = false,
+                                           codesigningIdentity: String? = nil,
+                                           skipPackageIpa: Bool = false,
+                                           includeSymbols: Bool? = nil,
+                                           includeBitcode: Bool? = nil,
+                                           exportMethod: String? = nil,
+                                           exportOptions: [String: Any]? = nil,
+                                           exportXcargs: String? = nil,
+                                           skipBuildArchive: Bool? = nil,
+                                           skipArchive: Bool? = nil,
+                                           skipCodesigning: Bool? = nil,
+                                           buildPath: String? = nil,
+                                           archivePath: String? = nil,
+                                           derivedDataPath: String? = nil,
+                                           resultBundle: Bool = false,
+                                           resultBundlePath: String? = nil,
+                                           buildlogPath: String = "~/Library/Logs/gym",
+                                           sdk: String? = nil,
+                                           toolchain: String? = nil,
+                                           destination: String? = nil,
+                                           exportTeamId: String? = nil,
+                                           xcargs: String? = nil,
+                                           xcconfig: String? = nil,
+                                           suppressXcodeOutput: Bool? = nil,
+                                           disableXcpretty: Bool? = nil,
+                                           xcprettyTestFormat: Bool? = nil,
+                                           xcprettyFormatter: String? = nil,
+                                           xcprettyReportJunit: String? = nil,
+                                           xcprettyReportHtml: String? = nil,
+                                           xcprettyReportJson: String? = nil,
+                                           analyzeBuildTime: Bool? = nil,
+                                           xcprettyUtf: Bool? = nil,
+                                           skipProfileDetection: Bool = false,
+                                           clonedSourcePackagesPath: String? = nil,
+                                           skipPackageDependenciesResolution: Bool = false,
+                                           disablePackageAutomaticUpdates: Bool = false,
+                                           useSystemScm: Bool = false) -> String
 {
     let command = RubyCommand(commandID: "", methodName: "build_ios_app", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
                                                                                                  RubyCommand.Argument(name: "project", value: project),
@@ -1237,7 +1246,7 @@ public func buildIosApp(workspace: String? = nil,
                                                                                                  RubyCommand.Argument(name: "skip_package_dependencies_resolution", value: skipPackageDependenciesResolution),
                                                                                                  RubyCommand.Argument(name: "disable_package_automatic_updates", value: disablePackageAutomaticUpdates),
                                                                                                  RubyCommand.Argument(name: "use_system_scm", value: useSystemScm)])
-    _ = runner.executeCommand(command)
+    return runner.executeCommand(command)
 }
 
 /**
@@ -1294,51 +1303,51 @@ public func buildIosApp(workspace: String? = nil,
 
  More information: https://fastlane.tools/gym
  */
-public func buildMacApp(workspace: String? = nil,
-                        project: String? = nil,
-                        scheme: String? = nil,
-                        clean: Bool = false,
-                        outputDirectory: String = ".",
-                        outputName: String? = nil,
-                        configuration: String? = nil,
-                        silent: Bool = false,
-                        codesigningIdentity: String? = nil,
-                        skipPackagePkg: Bool = false,
-                        includeSymbols: Bool? = nil,
-                        includeBitcode: Bool? = nil,
-                        exportMethod: String? = nil,
-                        exportOptions: [String: Any]? = nil,
-                        exportXcargs: String? = nil,
-                        skipBuildArchive: Bool? = nil,
-                        skipArchive: Bool? = nil,
-                        skipCodesigning: Bool? = nil,
-                        installerCertName: String? = nil,
-                        buildPath: String? = nil,
-                        archivePath: String? = nil,
-                        derivedDataPath: String? = nil,
-                        resultBundle: Bool = false,
-                        resultBundlePath: String? = nil,
-                        buildlogPath: String = "~/Library/Logs/gym",
-                        sdk: String? = nil,
-                        toolchain: String? = nil,
-                        destination: String? = nil,
-                        exportTeamId: String? = nil,
-                        xcargs: String? = nil,
-                        xcconfig: String? = nil,
-                        suppressXcodeOutput: Bool? = nil,
-                        disableXcpretty: Bool? = nil,
-                        xcprettyTestFormat: Bool? = nil,
-                        xcprettyFormatter: String? = nil,
-                        xcprettyReportJunit: String? = nil,
-                        xcprettyReportHtml: String? = nil,
-                        xcprettyReportJson: String? = nil,
-                        analyzeBuildTime: Bool? = nil,
-                        xcprettyUtf: Bool? = nil,
-                        skipProfileDetection: Bool = false,
-                        clonedSourcePackagesPath: String? = nil,
-                        skipPackageDependenciesResolution: Bool = false,
-                        disablePackageAutomaticUpdates: Bool = false,
-                        useSystemScm: Bool = false)
+@discardableResult public func buildMacApp(workspace: String? = nil,
+                                           project: String? = nil,
+                                           scheme: String? = nil,
+                                           clean: Bool = false,
+                                           outputDirectory: String = ".",
+                                           outputName: String? = nil,
+                                           configuration: String? = nil,
+                                           silent: Bool = false,
+                                           codesigningIdentity: String? = nil,
+                                           skipPackagePkg: Bool = false,
+                                           includeSymbols: Bool? = nil,
+                                           includeBitcode: Bool? = nil,
+                                           exportMethod: String? = nil,
+                                           exportOptions: [String: Any]? = nil,
+                                           exportXcargs: String? = nil,
+                                           skipBuildArchive: Bool? = nil,
+                                           skipArchive: Bool? = nil,
+                                           skipCodesigning: Bool? = nil,
+                                           installerCertName: String? = nil,
+                                           buildPath: String? = nil,
+                                           archivePath: String? = nil,
+                                           derivedDataPath: String? = nil,
+                                           resultBundle: Bool = false,
+                                           resultBundlePath: String? = nil,
+                                           buildlogPath: String = "~/Library/Logs/gym",
+                                           sdk: String? = nil,
+                                           toolchain: String? = nil,
+                                           destination: String? = nil,
+                                           exportTeamId: String? = nil,
+                                           xcargs: String? = nil,
+                                           xcconfig: String? = nil,
+                                           suppressXcodeOutput: Bool? = nil,
+                                           disableXcpretty: Bool? = nil,
+                                           xcprettyTestFormat: Bool? = nil,
+                                           xcprettyFormatter: String? = nil,
+                                           xcprettyReportJunit: String? = nil,
+                                           xcprettyReportHtml: String? = nil,
+                                           xcprettyReportJson: String? = nil,
+                                           analyzeBuildTime: Bool? = nil,
+                                           xcprettyUtf: Bool? = nil,
+                                           skipProfileDetection: Bool = false,
+                                           clonedSourcePackagesPath: String? = nil,
+                                           skipPackageDependenciesResolution: Bool = false,
+                                           disablePackageAutomaticUpdates: Bool = false,
+                                           useSystemScm: Bool = false) -> String
 {
     let command = RubyCommand(commandID: "", methodName: "build_mac_app", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
                                                                                                  RubyCommand.Argument(name: "project", value: project),
@@ -1385,7 +1394,7 @@ public func buildMacApp(workspace: String? = nil,
                                                                                                  RubyCommand.Argument(name: "skip_package_dependencies_resolution", value: skipPackageDependenciesResolution),
                                                                                                  RubyCommand.Argument(name: "disable_package_automatic_updates", value: disablePackageAutomaticUpdates),
                                                                                                  RubyCommand.Argument(name: "use_system_scm", value: useSystemScm)])
-    _ = runner.executeCommand(command)
+    return runner.executeCommand(command)
 }
 
 /**
@@ -1850,6 +1859,8 @@ public func captureScreenshots(workspace: String? = nil,
    - projectDirectory: Define the directory containing the Carthage project
    - newResolver: Use new resolver when resolving dependency graph
    - logPath: Path to the xcode build output
+   - useXcframeworks: Create xcframework bundles instead of one framework per platform (requires Xcode 12+)
+   - archive: Archive built frameworks from the current project
    - executable: Path to the `carthage` executable on your machine
  */
 public func carthage(command: String = "bootstrap",
@@ -1872,6 +1883,8 @@ public func carthage(command: String = "bootstrap",
                      projectDirectory: String? = nil,
                      newResolver: Bool? = nil,
                      logPath: String? = nil,
+                     useXcframeworks: Bool = false,
+                     archive: Bool = false,
                      executable: String = "carthage")
 {
     let command = RubyCommand(commandID: "", methodName: "carthage", className: nil, args: [RubyCommand.Argument(name: "command", value: command),
@@ -1894,6 +1907,8 @@ public func carthage(command: String = "bootstrap",
                                                                                             RubyCommand.Argument(name: "project_directory", value: projectDirectory),
                                                                                             RubyCommand.Argument(name: "new_resolver", value: newResolver),
                                                                                             RubyCommand.Argument(name: "log_path", value: logPath),
+                                                                                            RubyCommand.Argument(name: "use_xcframeworks", value: useXcframeworks),
+                                                                                            RubyCommand.Argument(name: "archive", value: archive),
                                                                                             RubyCommand.Argument(name: "executable", value: executable)])
     _ = runner.executeCommand(command)
 }
@@ -1927,7 +1942,7 @@ public func cert(development: Bool = false,
                  generateAppleCerts: Bool = true,
                  apiKeyPath: String? = nil,
                  apiKey: [String: Any]? = nil,
-                 username: String,
+                 username: String? = nil,
                  teamId: String? = nil,
                  teamName: String? = nil,
                  filename: String? = nil,
@@ -2053,26 +2068,26 @@ public func chatwork(apiToken: String,
 
  More information: https://fastlane.tools/precheck
  */
-public func checkAppStoreMetadata(apiKeyPath: String? = nil,
-                                  apiKey: [String: Any]? = nil,
-                                  appIdentifier: String,
-                                  username: String,
-                                  teamId: String? = nil,
-                                  teamName: String? = nil,
-                                  platform: String = "ios",
-                                  defaultRuleLevel: Any = "error",
-                                  includeInAppPurchases: Bool = true,
-                                  useLive: Bool = false,
-                                  negativeAppleSentiment: Any? = nil,
-                                  placeholderText: Any? = nil,
-                                  otherPlatforms: Any? = nil,
-                                  futureFunctionality: Any? = nil,
-                                  testWords: Any? = nil,
-                                  curseWords: Any? = nil,
-                                  freeStuffInIap: Any? = nil,
-                                  customText: Any? = nil,
-                                  copyrightDate: Any? = nil,
-                                  unreachableUrls: Any? = nil)
+@discardableResult public func checkAppStoreMetadata(apiKeyPath: String? = nil,
+                                                     apiKey: [String: Any]? = nil,
+                                                     appIdentifier: String,
+                                                     username: String? = nil,
+                                                     teamId: String? = nil,
+                                                     teamName: String? = nil,
+                                                     platform: String = "ios",
+                                                     defaultRuleLevel: Any = "error",
+                                                     includeInAppPurchases: Bool = true,
+                                                     useLive: Bool = false,
+                                                     negativeAppleSentiment: Any? = nil,
+                                                     placeholderText: Any? = nil,
+                                                     otherPlatforms: Any? = nil,
+                                                     futureFunctionality: Any? = nil,
+                                                     testWords: Any? = nil,
+                                                     curseWords: Any? = nil,
+                                                     freeStuffInIap: Any? = nil,
+                                                     customText: Any? = nil,
+                                                     copyrightDate: Any? = nil,
+                                                     unreachableUrls: Any? = nil) -> Bool
 {
     let command = RubyCommand(commandID: "", methodName: "check_app_store_metadata", className: nil, args: [RubyCommand.Argument(name: "api_key_path", value: apiKeyPath),
                                                                                                             RubyCommand.Argument(name: "api_key", value: apiKey),
@@ -2094,7 +2109,7 @@ public func checkAppStoreMetadata(apiKeyPath: String? = nil,
                                                                                                             RubyCommand.Argument(name: "custom_text", value: customText),
                                                                                                             RubyCommand.Argument(name: "copyright_date", value: copyrightDate),
                                                                                                             RubyCommand.Argument(name: "unreachable_urls", value: unreachableUrls)])
-    _ = runner.executeCommand(command)
+    return parseBool(fromString: runner.executeCommand(command))
 }
 
 /**
@@ -2192,6 +2207,7 @@ public func clubmate() {
    - errorCallback: A callback invoked with the command output if there is a non-zero exit status
    - tryRepoUpdateOnError: Retry with --repo-update if action was finished with error
    - deployment: Disallow any changes to the Podfile or the Podfile.lock during installation
+   - allowRoot: Allows CocoaPods to run as root
    - clean: **DEPRECATED!** (Option renamed as clean_install) Remove SCM directories
    - integrate: **DEPRECATED!** (Option removed from cocoapods) Integrate the Pods libraries into the Xcode project(s)
 
@@ -2207,6 +2223,7 @@ public func cocoapods(repoUpdate: Bool = false,
                       errorCallback: ((String) -> Void)? = nil,
                       tryRepoUpdateOnError: Bool = false,
                       deployment: Bool = false,
+                      allowRoot: Bool = false,
                       clean: Bool = true,
                       integrate: Bool = true)
 {
@@ -2220,6 +2237,7 @@ public func cocoapods(repoUpdate: Bool = false,
                                                                                              RubyCommand.Argument(name: "error_callback", value: errorCallback, type: .stringClosure),
                                                                                              RubyCommand.Argument(name: "try_repo_update_on_error", value: tryRepoUpdateOnError),
                                                                                              RubyCommand.Argument(name: "deployment", value: deployment),
+                                                                                             RubyCommand.Argument(name: "allow_root", value: allowRoot),
                                                                                              RubyCommand.Argument(name: "clean", value: clean),
                                                                                              RubyCommand.Argument(name: "integrate", value: integrate)])
     _ = runner.executeCommand(command)
@@ -2232,6 +2250,7 @@ public func cocoapods(repoUpdate: Bool = false,
     - repositoryName: The path to your repo, e.g. 'fastlane/fastlane'
     - serverUrl: The server url. e.g. 'https://your.internal.github.host/api/v3' (Default: 'https://api.github.com')
     - apiToken: Personal API Token for GitHub - generate one at https://github.com/settings/tokens
+    - apiBearer: Use a Bearer authorization token. Usually generated by Github Apps, e.g. GitHub Actions GITHUB_TOKEN environment variable
     - branch: The branch that the file should be committed on (default: master)
     - path: The relative path to your file from project root e.g. assets/my_app.xcarchive
     - message: The commit message. Defaults to the file name
@@ -2246,7 +2265,8 @@ public func cocoapods(repoUpdate: Bool = false,
  */
 @discardableResult public func commitGithubFile(repositoryName: String,
                                                 serverUrl: String = "https://api.github.com",
-                                                apiToken: String,
+                                                apiToken: String? = nil,
+                                                apiBearer: String? = nil,
                                                 branch: String = "master",
                                                 path: String,
                                                 message: String? = nil,
@@ -2255,6 +2275,7 @@ public func cocoapods(repoUpdate: Bool = false,
     let command = RubyCommand(commandID: "", methodName: "commit_github_file", className: nil, args: [RubyCommand.Argument(name: "repository_name", value: repositoryName),
                                                                                                       RubyCommand.Argument(name: "server_url", value: serverUrl),
                                                                                                       RubyCommand.Argument(name: "api_token", value: apiToken),
+                                                                                                      RubyCommand.Argument(name: "api_bearer", value: apiBearer),
                                                                                                       RubyCommand.Argument(name: "branch", value: branch),
                                                                                                       RubyCommand.Argument(name: "path", value: path),
                                                                                                       RubyCommand.Argument(name: "message", value: message),
@@ -2759,7 +2780,7 @@ public func deleteKeychain(name: String? = nil,
  */
 public func deliver(apiKeyPath: Any? = deliverfile.apiKeyPath,
                     apiKey: [String: Any]? = deliverfile.apiKey,
-                    username: Any = deliverfile.username,
+                    username: Any? = deliverfile.username,
                     appIdentifier: Any? = deliverfile.appIdentifier,
                     appVersion: Any? = deliverfile.appVersion,
                     ipa: Any? = deliverfile.ipa,
@@ -3483,7 +3504,7 @@ public func getCertificates(development: Bool = false,
                             generateAppleCerts: Bool = true,
                             apiKeyPath: String? = nil,
                             apiKey: [String: Any]? = nil,
-                            username: String,
+                            username: String? = nil,
                             teamId: String? = nil,
                             teamName: String? = nil,
                             filename: String? = nil,
@@ -3519,6 +3540,7 @@ public func getCertificates(development: Bool = false,
    - serverUrl: The server url. e.g. 'https://your.github.server/api/v3' (Default: 'https://api.github.com')
    - version: The version tag of the release to check
    - apiToken: GitHub Personal Token (required for private repositories)
+   - apiBearer: Use a Bearer authorization token. Usually generated by Github Apps, e.g. GitHub Actions GITHUB_TOKEN environment variable
 
  This will return all information about a release. For example:|
  |
@@ -3566,12 +3588,14 @@ public func getCertificates(development: Bool = false,
 public func getGithubRelease(url: String,
                              serverUrl: String = "https://api.github.com",
                              version: String,
-                             apiToken: String? = nil)
+                             apiToken: String? = nil,
+                             apiBearer: String? = nil)
 {
     let command = RubyCommand(commandID: "", methodName: "get_github_release", className: nil, args: [RubyCommand.Argument(name: "url", value: url),
                                                                                                       RubyCommand.Argument(name: "server_url", value: serverUrl),
                                                                                                       RubyCommand.Argument(name: "version", value: version),
-                                                                                                      RubyCommand.Argument(name: "api_token", value: apiToken)])
+                                                                                                      RubyCommand.Argument(name: "api_token", value: apiToken),
+                                                                                                      RubyCommand.Argument(name: "api_bearer", value: apiBearer)])
     _ = runner.executeCommand(command)
 }
 
@@ -3665,29 +3689,29 @@ public func getManagedPlayStorePublishingRights(jsonKey: String? = nil,
 
  **Note**: It is recommended to use [match](https://docs.fastlane.tools/actions/match/) according to the [codesigning.guide](https://codesigning.guide) for generating and maintaining your provisioning profiles. Use _sigh_ directly only if you want full control over what's going on and know more about codesigning.
  */
-public func getProvisioningProfile(adhoc: Bool = false,
-                                   developerId: Bool = false,
-                                   development: Bool = false,
-                                   skipInstall: Bool = false,
-                                   force: Bool = false,
-                                   appIdentifier: String,
-                                   apiKeyPath: String? = nil,
-                                   apiKey: [String: Any]? = nil,
-                                   username: String,
-                                   teamId: String? = nil,
-                                   teamName: String? = nil,
-                                   provisioningName: String? = nil,
-                                   ignoreProfilesWithDifferentName: Bool = false,
-                                   outputPath: String = ".",
-                                   certId: String? = nil,
-                                   certOwnerName: String? = nil,
-                                   filename: String? = nil,
-                                   skipFetchProfiles: Bool = false,
-                                   skipCertificateVerification: Bool = false,
-                                   platform: Any = "ios",
-                                   readonly: Bool = false,
-                                   templateName: String? = nil,
-                                   failOnNameTaken: Bool = false)
+@discardableResult public func getProvisioningProfile(adhoc: Bool = false,
+                                                      developerId: Bool = false,
+                                                      development: Bool = false,
+                                                      skipInstall: Bool = false,
+                                                      force: Bool = false,
+                                                      appIdentifier: String,
+                                                      apiKeyPath: String? = nil,
+                                                      apiKey: [String: Any]? = nil,
+                                                      username: String? = nil,
+                                                      teamId: String? = nil,
+                                                      teamName: String? = nil,
+                                                      provisioningName: String? = nil,
+                                                      ignoreProfilesWithDifferentName: Bool = false,
+                                                      outputPath: String = ".",
+                                                      certId: String? = nil,
+                                                      certOwnerName: String? = nil,
+                                                      filename: String? = nil,
+                                                      skipFetchProfiles: Bool = false,
+                                                      skipCertificateVerification: Bool = false,
+                                                      platform: Any = "ios",
+                                                      readonly: Bool = false,
+                                                      templateName: String? = nil,
+                                                      failOnNameTaken: Bool = false) -> String
 {
     let command = RubyCommand(commandID: "", methodName: "get_provisioning_profile", className: nil, args: [RubyCommand.Argument(name: "adhoc", value: adhoc),
                                                                                                             RubyCommand.Argument(name: "developer_id", value: developerId),
@@ -3712,7 +3736,7 @@ public func getProvisioningProfile(adhoc: Bool = false,
                                                                                                             RubyCommand.Argument(name: "readonly", value: readonly),
                                                                                                             RubyCommand.Argument(name: "template_name", value: templateName),
                                                                                                             RubyCommand.Argument(name: "fail_on_name_taken", value: failOnNameTaken)])
-    _ = runner.executeCommand(command)
+    return runner.executeCommand(command)
 }
 
 /**
@@ -3782,7 +3806,7 @@ public func getPushCertificate(development: Bool = false,
  Get the version number of your project
 
  - parameters:
-   - xcodeproj: Path to the main Xcode project to read version number from, optional. By default will use the first Xcode project found within the project root directory
+   - xcodeproj: Path to the Xcode project to read version number from, or its containing directory, optional. If ommitted, or if a directory is passed instead, it will use the first Xcode project found within the given directory, or the project root directory if none is passed
    - target: Target name, optional. Will be needed if you have more than one non-test target to avoid being prompted to select one
    - configuration: Configuration name, optional. Will be needed if you have altered the configurations from the default or your version number depends on the configuration selected
 
@@ -3819,7 +3843,7 @@ public func gitAdd(path: Any? = nil,
 /**
  Returns the name of the current git branch, possibly as managed by CI ENV vars
 
- If no branch could be found, this action will return an empty string
+ If no branch could be found, this action will return an empty string. This is a wrapper for the internal action Actions.git_branch
  */
 @discardableResult public func gitBranch() -> String {
     let command = RubyCommand(commandID: "", methodName: "git_branch", className: nil, args: [])
@@ -3830,7 +3854,7 @@ public func gitAdd(path: Any? = nil,
  Directly commit the given file with the given message
 
  - parameters:
-   - path: The file you want to commit
+   - path: The file(s) or directory(ies) you want to commit. You can pass an array of multiple file-paths or fileglobs "*.txt" to commit all matching files. The files already staged but not specified and untracked files won't be committed
    - message: The commit message that should be used
    - skipGitHooks: Set to true to pass --no-verify to git
    - allowNothingToCommit: Set to true to allow commit without any git changes in the files you want to commit
@@ -3887,14 +3911,14 @@ public func gitSubmoduleUpdate(recursive: Bool = false,
 
  - returns: Boolean value whether the tag exists or not
  */
-public func gitTagExists(tag: String,
-                         remote: Bool = false,
-                         remoteName: String = "origin")
+@discardableResult public func gitTagExists(tag: String,
+                                            remote: Bool = false,
+                                            remoteName: String = "origin") -> Bool
 {
     let command = RubyCommand(commandID: "", methodName: "git_tag_exists", className: nil, args: [RubyCommand.Argument(name: "tag", value: tag),
                                                                                                   RubyCommand.Argument(name: "remote", value: remote),
                                                                                                   RubyCommand.Argument(name: "remote_name", value: remoteName)])
-    _ = runner.executeCommand(command)
+    return parseBool(fromString: runner.executeCommand(command))
 }
 
 /**
@@ -4124,53 +4148,53 @@ public func gradle(task: String? = nil,
 
  More information: https://fastlane.tools/gym
  */
-public func gym(workspace: Any? = gymfile.workspace,
-                project: Any? = gymfile.project,
-                scheme: Any? = gymfile.scheme,
-                clean: Bool = gymfile.clean,
-                outputDirectory: Any = gymfile.outputDirectory,
-                outputName: Any? = gymfile.outputName,
-                configuration: Any? = gymfile.configuration,
-                silent: Bool = gymfile.silent,
-                codesigningIdentity: Any? = gymfile.codesigningIdentity,
-                skipPackageIpa: Bool = gymfile.skipPackageIpa,
-                skipPackagePkg: Bool = gymfile.skipPackagePkg,
-                includeSymbols: Bool? = gymfile.includeSymbols,
-                includeBitcode: Bool? = gymfile.includeBitcode,
-                exportMethod: Any? = gymfile.exportMethod,
-                exportOptions: [String: Any]? = gymfile.exportOptions,
-                exportXcargs: Any? = gymfile.exportXcargs,
-                skipBuildArchive: Bool? = gymfile.skipBuildArchive,
-                skipArchive: Bool? = gymfile.skipArchive,
-                skipCodesigning: Bool? = gymfile.skipCodesigning,
-                catalystPlatform: Any? = gymfile.catalystPlatform,
-                installerCertName: Any? = gymfile.installerCertName,
-                buildPath: Any? = gymfile.buildPath,
-                archivePath: Any? = gymfile.archivePath,
-                derivedDataPath: Any? = gymfile.derivedDataPath,
-                resultBundle: Bool = gymfile.resultBundle,
-                resultBundlePath: Any? = gymfile.resultBundlePath,
-                buildlogPath: Any = gymfile.buildlogPath,
-                sdk: Any? = gymfile.sdk,
-                toolchain: Any? = gymfile.toolchain,
-                destination: Any? = gymfile.destination,
-                exportTeamId: Any? = gymfile.exportTeamId,
-                xcargs: Any? = gymfile.xcargs,
-                xcconfig: Any? = gymfile.xcconfig,
-                suppressXcodeOutput: Bool? = gymfile.suppressXcodeOutput,
-                disableXcpretty: Bool? = gymfile.disableXcpretty,
-                xcprettyTestFormat: Bool? = gymfile.xcprettyTestFormat,
-                xcprettyFormatter: Any? = gymfile.xcprettyFormatter,
-                xcprettyReportJunit: Any? = gymfile.xcprettyReportJunit,
-                xcprettyReportHtml: Any? = gymfile.xcprettyReportHtml,
-                xcprettyReportJson: Any? = gymfile.xcprettyReportJson,
-                analyzeBuildTime: Bool? = gymfile.analyzeBuildTime,
-                xcprettyUtf: Bool? = gymfile.xcprettyUtf,
-                skipProfileDetection: Bool = gymfile.skipProfileDetection,
-                clonedSourcePackagesPath: Any? = gymfile.clonedSourcePackagesPath,
-                skipPackageDependenciesResolution: Bool = gymfile.skipPackageDependenciesResolution,
-                disablePackageAutomaticUpdates: Bool = gymfile.disablePackageAutomaticUpdates,
-                useSystemScm: Bool = gymfile.useSystemScm)
+@discardableResult public func gym(workspace: Any? = gymfile.workspace,
+                                   project: Any? = gymfile.project,
+                                   scheme: Any? = gymfile.scheme,
+                                   clean: Bool = gymfile.clean,
+                                   outputDirectory: Any = gymfile.outputDirectory,
+                                   outputName: Any? = gymfile.outputName,
+                                   configuration: Any? = gymfile.configuration,
+                                   silent: Bool = gymfile.silent,
+                                   codesigningIdentity: Any? = gymfile.codesigningIdentity,
+                                   skipPackageIpa: Bool = gymfile.skipPackageIpa,
+                                   skipPackagePkg: Bool = gymfile.skipPackagePkg,
+                                   includeSymbols: Bool? = gymfile.includeSymbols,
+                                   includeBitcode: Bool? = gymfile.includeBitcode,
+                                   exportMethod: Any? = gymfile.exportMethod,
+                                   exportOptions: [String: Any]? = gymfile.exportOptions,
+                                   exportXcargs: Any? = gymfile.exportXcargs,
+                                   skipBuildArchive: Bool? = gymfile.skipBuildArchive,
+                                   skipArchive: Bool? = gymfile.skipArchive,
+                                   skipCodesigning: Bool? = gymfile.skipCodesigning,
+                                   catalystPlatform: Any? = gymfile.catalystPlatform,
+                                   installerCertName: Any? = gymfile.installerCertName,
+                                   buildPath: Any? = gymfile.buildPath,
+                                   archivePath: Any? = gymfile.archivePath,
+                                   derivedDataPath: Any? = gymfile.derivedDataPath,
+                                   resultBundle: Bool = gymfile.resultBundle,
+                                   resultBundlePath: Any? = gymfile.resultBundlePath,
+                                   buildlogPath: Any = gymfile.buildlogPath,
+                                   sdk: Any? = gymfile.sdk,
+                                   toolchain: Any? = gymfile.toolchain,
+                                   destination: Any? = gymfile.destination,
+                                   exportTeamId: Any? = gymfile.exportTeamId,
+                                   xcargs: Any? = gymfile.xcargs,
+                                   xcconfig: Any? = gymfile.xcconfig,
+                                   suppressXcodeOutput: Bool? = gymfile.suppressXcodeOutput,
+                                   disableXcpretty: Bool? = gymfile.disableXcpretty,
+                                   xcprettyTestFormat: Bool? = gymfile.xcprettyTestFormat,
+                                   xcprettyFormatter: Any? = gymfile.xcprettyFormatter,
+                                   xcprettyReportJunit: Any? = gymfile.xcprettyReportJunit,
+                                   xcprettyReportHtml: Any? = gymfile.xcprettyReportHtml,
+                                   xcprettyReportJson: Any? = gymfile.xcprettyReportJson,
+                                   analyzeBuildTime: Bool? = gymfile.analyzeBuildTime,
+                                   xcprettyUtf: Bool? = gymfile.xcprettyUtf,
+                                   skipProfileDetection: Bool = gymfile.skipProfileDetection,
+                                   clonedSourcePackagesPath: Any? = gymfile.clonedSourcePackagesPath,
+                                   skipPackageDependenciesResolution: Bool = gymfile.skipPackageDependenciesResolution,
+                                   disablePackageAutomaticUpdates: Bool = gymfile.disablePackageAutomaticUpdates,
+                                   useSystemScm: Bool = gymfile.useSystemScm) -> String
 {
     let command = RubyCommand(commandID: "", methodName: "gym", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
                                                                                        RubyCommand.Argument(name: "project", value: project),
@@ -4219,7 +4243,7 @@ public func gym(workspace: Any? = gymfile.workspace,
                                                                                        RubyCommand.Argument(name: "skip_package_dependencies_resolution", value: skipPackageDependenciesResolution),
                                                                                        RubyCommand.Argument(name: "disable_package_automatic_updates", value: disablePackageAutomaticUpdates),
                                                                                        RubyCommand.Argument(name: "use_system_scm", value: useSystemScm)])
-    _ = runner.executeCommand(command)
+    return runner.executeCommand(command)
 }
 
 /**
@@ -4493,14 +4517,17 @@ public func importCertificate(certificatePath: String,
 
  - parameters:
    - buildNumber: Change to a specific version. When you provide this parameter, Apple Generic Versioning does not have to be enabled
+   - skipInfoPlist: Don't update Info.plist files when updating the build version
    - xcodeproj: optional, you must specify the path to your main Xcode project if it is not in the project root directory
 
  - returns: The new build number
  */
 @discardableResult public func incrementBuildNumber(buildNumber: Any? = nil,
+                                                    skipInfoPlist: Bool = false,
                                                     xcodeproj: String? = nil) -> String
 {
     let command = RubyCommand(commandID: "", methodName: "increment_build_number", className: nil, args: [RubyCommand.Argument(name: "build_number", value: buildNumber),
+                                                                                                          RubyCommand.Argument(name: "skip_info_plist", value: skipInfoPlist),
                                                                                                           RubyCommand.Argument(name: "xcodeproj", value: xcodeproj)])
     return runner.executeCommand(command)
 }
@@ -4560,9 +4587,9 @@ public func installOnDevice(extra: String? = nil,
 
  Install provisioning profile from path for current user
  */
-public func installProvisioningProfile(path: String) {
+@discardableResult public func installProvisioningProfile(path: String) -> String {
     let command = RubyCommand(commandID: "", methodName: "install_provisioning_profile", className: nil, args: [RubyCommand.Argument(name: "path", value: path)])
-    _ = runner.executeCommand(command)
+    return runner.executeCommand(command)
 }
 
 /**
@@ -4665,38 +4692,49 @@ public func ipa(workspace: String? = nil,
 /**
  Generate docs using Jazzy
 
- - parameter config: Path to jazzy config file
+ - parameters:
+   - config: Path to jazzy config file
+   - moduleVersion: Version string to use as part of the the default docs title and inside the docset
  */
-public func jazzy(config: String? = nil) {
-    let command = RubyCommand(commandID: "", methodName: "jazzy", className: nil, args: [RubyCommand.Argument(name: "config", value: config)])
+public func jazzy(config: String? = nil,
+                  moduleVersion: String? = nil)
+{
+    let command = RubyCommand(commandID: "", methodName: "jazzy", className: nil, args: [RubyCommand.Argument(name: "config", value: config),
+                                                                                         RubyCommand.Argument(name: "module_version", value: moduleVersion)])
     _ = runner.executeCommand(command)
 }
 
 /**
- Leave a comment on JIRA tickets
+  Leave a comment on a Jira ticket
 
- - parameters:
-   - url: URL for Jira instance
-   - contextPath: Appends to the url (ex: "/jira")
-   - username: Username for JIRA instance
-   - password: Password for Jira
-   - ticketId: Ticket ID for Jira, i.e. IOS-123
-   - commentText: Text to add to the ticket as a comment
+  - parameters:
+    - url: URL for Jira instance
+    - contextPath: Appends to the url (ex: "/jira")
+    - username: Username for Jira instance
+    - password: Password or API token for Jira
+    - ticketId: Ticket ID for Jira, i.e. IOS-123
+    - commentText: Text to add to the ticket as a comment
+    - failOnError: Should an error adding the Jira comment cause a failure?
+
+  - returns: A hash containing all relevant information of the Jira comment
+ Access Jira comment 'id', 'author', 'body', and more
  */
-public func jira(url: String,
-                 contextPath: String = "",
-                 username: String,
-                 password: String,
-                 ticketId: String,
-                 commentText: String)
+@discardableResult public func jira(url: String,
+                                    contextPath: String = "",
+                                    username: String,
+                                    password: String,
+                                    ticketId: String,
+                                    commentText: String,
+                                    failOnError: Bool = true) -> [String: Any]
 {
     let command = RubyCommand(commandID: "", methodName: "jira", className: nil, args: [RubyCommand.Argument(name: "url", value: url),
                                                                                         RubyCommand.Argument(name: "context_path", value: contextPath),
                                                                                         RubyCommand.Argument(name: "username", value: username),
                                                                                         RubyCommand.Argument(name: "password", value: password),
                                                                                         RubyCommand.Argument(name: "ticket_id", value: ticketId),
-                                                                                        RubyCommand.Argument(name: "comment_text", value: commentText)])
-    _ = runner.executeCommand(command)
+                                                                                        RubyCommand.Argument(name: "comment_text", value: commentText),
+                                                                                        RubyCommand.Argument(name: "fail_on_error", value: failOnError)])
+    return parseDictionary(fromString: runner.executeCommand(command))
 }
 
 /**
@@ -4757,7 +4795,7 @@ public func jira(url: String,
                                                            apiKey: [String: Any]? = nil,
                                                            live: Bool = false,
                                                            appIdentifier: String,
-                                                           username: String,
+                                                           username: String? = nil,
                                                            version: String? = nil,
                                                            platform: String = "ios",
                                                            initialBuildNumber: Int = 1,
@@ -5016,6 +5054,153 @@ public func match(type: Any = matchfile.type,
 }
 
 /**
+ Easily nuke your certificate and provisioning profiles (via _match_)
+
+ - parameters:
+   - type: Define the profile type, can be appstore, adhoc, development, enterprise, developer_id, mac_installer_distribution
+   - additionalCertTypes: Create additional cert types needed for macOS installers (valid values: mac_installer_distribution, developer_id_installer)
+   - readonly: Only fetch existing certificates and profiles, don't generate new ones
+   - generateAppleCerts: Create a certificate type for Xcode 11 and later (Apple Development or Apple Distribution)
+   - skipProvisioningProfiles: Skip syncing provisioning profiles
+   - appIdentifier: The bundle identifier(s) of your app (comma-separated string or array of strings)
+   - apiKeyPath: Path to your App Store Connect API Key JSON file (https://docs.fastlane.tools/app-store-connect-api/#using-fastlane-api-key-json-file)
+   - apiKey: Your App Store Connect API Key information (https://docs.fastlane.tools/app-store-connect-api/#use-return-value-and-pass-in-as-an-option)
+   - username: Your Apple ID Username
+   - teamId: The ID of your Developer Portal team if you're in multiple teams
+   - teamName: The name of your Developer Portal team if you're in multiple teams
+   - storageMode: Define where you want to store your certificates
+   - gitUrl: URL to the git repo containing all the certificates
+   - gitBranch: Specific git branch to use
+   - gitFullName: git user full name to commit
+   - gitUserEmail: git user email to commit
+   - shallowClone: Make a shallow clone of the repository (truncate the history to 1 revision)
+   - cloneBranchDirectly: Clone just the branch specified, instead of the whole repo. This requires that the branch already exists. Otherwise the command will fail
+   - gitBasicAuthorization: Use a basic authorization header to access the git repo (e.g.: access via HTTPS, GitHub Actions, etc), usually a string in Base64
+   - gitBearerAuthorization: Use a bearer authorization header to access the git repo (e.g.: access to an Azure DevOps repository), usually a string in Base64
+   - gitPrivateKey: Use a private key to access the git repo (e.g.: access to GitHub repository via Deploy keys), usually a id_rsa named file or the contents hereof
+   - googleCloudBucketName: Name of the Google Cloud Storage bucket to use
+   - googleCloudKeysFile: Path to the gc_keys.json file
+   - googleCloudProjectId: ID of the Google Cloud project to use for authentication
+   - s3Region: Name of the S3 region
+   - s3AccessKey: S3 access key
+   - s3SecretAccessKey: S3 secret access key
+   - s3Bucket: Name of the S3 bucket
+   - s3ObjectPrefix: Prefix to be used on all objects uploaded to S3
+   - keychainName: Keychain the items should be imported to
+   - keychainPassword: This might be required the first time you access certificates on a new mac. For the login/default keychain this is your macOS account password
+   - force: Renew the provisioning profiles every time you run match
+   - forceForNewDevices: Renew the provisioning profiles if the device count on the developer portal has changed. Ignored for profile type 'appstore'
+   - skipConfirmation: Disables confirmation prompts during nuke, answering them with yes
+   - skipDocs: Skip generation of a README.md for the created git repository
+   - platform: Set the provisioning profile's platform to work with (i.e. ios, tvos, macos, catalyst)
+   - deriveCatalystAppIdentifier: Enable this if you have the Mac Catalyst capability enabled and your project was created with Xcode 11.3 or earlier. Prepends 'maccatalyst.' to the app identifier for the provisioning profile mapping
+   - templateName: The name of provisioning profile template. If the developer account has provisioning profile templates (aka: custom entitlements), the template name can be found by inspecting the Entitlements drop-down while creating/editing a provisioning profile (e.g. "Apple Pay Pass Suppression Development")
+   - profileName: A custom name for the provisioning profile. This will replace the default provisioning profile name if specified
+   - failOnNameTaken: Should the command fail if it was about to create a duplicate of an existing provisioning profile. It can happen due to issues on Apple Developer Portal, when profile to be recreated was not properly deleted first
+   - skipCertificateMatching: Set to true if there is no access to Apple developer portal but there are certificates, keys and profiles provided. Only works with match import action
+   - outputPath: Path in which to export certificates, key and profile
+   - skipSetPartitionList: Skips setting the partition list (which can sometimes take a long time). Setting the partition list is usually needed to prevent Xcode from prompting to allow a cert to be used for signing
+   - verbose: Print out extra information and all commands
+
+ Use the match_nuke action to revoke your certificates and provisioning profiles.
+ Don't worry, apps that are already available in the App Store / TestFlight will still work.
+ Builds distributed via Ad Hoc or Enterprise will be disabled after nuking your account, so you'll have to re-upload a new build.
+ After clearing your account you'll start from a clean state, and you can run match to generate your certificates and profiles again.
+ More information: https://docs.fastlane.tools/actions/match/
+ */
+public func matchNuke(type: String = "development",
+                      additionalCertTypes: [String]? = nil,
+                      readonly: Bool = false,
+                      generateAppleCerts: Bool = true,
+                      skipProvisioningProfiles: Bool = false,
+                      appIdentifier: [String],
+                      apiKeyPath: String? = nil,
+                      apiKey: [String: Any]? = nil,
+                      username: String? = nil,
+                      teamId: String? = nil,
+                      teamName: String? = nil,
+                      storageMode: String = "git",
+                      gitUrl: String,
+                      gitBranch: String = "master",
+                      gitFullName: String? = nil,
+                      gitUserEmail: String? = nil,
+                      shallowClone: Bool = false,
+                      cloneBranchDirectly: Bool = false,
+                      gitBasicAuthorization: String? = nil,
+                      gitBearerAuthorization: String? = nil,
+                      gitPrivateKey: String? = nil,
+                      googleCloudBucketName: String? = nil,
+                      googleCloudKeysFile: String? = nil,
+                      googleCloudProjectId: String? = nil,
+                      s3Region: String? = nil,
+                      s3AccessKey: String? = nil,
+                      s3SecretAccessKey: String? = nil,
+                      s3Bucket: String? = nil,
+                      s3ObjectPrefix: String? = nil,
+                      keychainName: String = "login.keychain",
+                      keychainPassword: String? = nil,
+                      force: Bool = false,
+                      forceForNewDevices: Bool = false,
+                      skipConfirmation: Bool = false,
+                      skipDocs: Bool = false,
+                      platform: String = "ios",
+                      deriveCatalystAppIdentifier: Bool = false,
+                      templateName: String? = nil,
+                      profileName: String? = nil,
+                      failOnNameTaken: Bool = false,
+                      skipCertificateMatching: Bool = false,
+                      outputPath: String? = nil,
+                      skipSetPartitionList: Bool = false,
+                      verbose: Bool = false)
+{
+    let command = RubyCommand(commandID: "", methodName: "match_nuke", className: nil, args: [RubyCommand.Argument(name: "type", value: type),
+                                                                                              RubyCommand.Argument(name: "additional_cert_types", value: additionalCertTypes),
+                                                                                              RubyCommand.Argument(name: "readonly", value: readonly),
+                                                                                              RubyCommand.Argument(name: "generate_apple_certs", value: generateAppleCerts),
+                                                                                              RubyCommand.Argument(name: "skip_provisioning_profiles", value: skipProvisioningProfiles),
+                                                                                              RubyCommand.Argument(name: "app_identifier", value: appIdentifier),
+                                                                                              RubyCommand.Argument(name: "api_key_path", value: apiKeyPath),
+                                                                                              RubyCommand.Argument(name: "api_key", value: apiKey),
+                                                                                              RubyCommand.Argument(name: "username", value: username),
+                                                                                              RubyCommand.Argument(name: "team_id", value: teamId),
+                                                                                              RubyCommand.Argument(name: "team_name", value: teamName),
+                                                                                              RubyCommand.Argument(name: "storage_mode", value: storageMode),
+                                                                                              RubyCommand.Argument(name: "git_url", value: gitUrl),
+                                                                                              RubyCommand.Argument(name: "git_branch", value: gitBranch),
+                                                                                              RubyCommand.Argument(name: "git_full_name", value: gitFullName),
+                                                                                              RubyCommand.Argument(name: "git_user_email", value: gitUserEmail),
+                                                                                              RubyCommand.Argument(name: "shallow_clone", value: shallowClone),
+                                                                                              RubyCommand.Argument(name: "clone_branch_directly", value: cloneBranchDirectly),
+                                                                                              RubyCommand.Argument(name: "git_basic_authorization", value: gitBasicAuthorization),
+                                                                                              RubyCommand.Argument(name: "git_bearer_authorization", value: gitBearerAuthorization),
+                                                                                              RubyCommand.Argument(name: "git_private_key", value: gitPrivateKey),
+                                                                                              RubyCommand.Argument(name: "google_cloud_bucket_name", value: googleCloudBucketName),
+                                                                                              RubyCommand.Argument(name: "google_cloud_keys_file", value: googleCloudKeysFile),
+                                                                                              RubyCommand.Argument(name: "google_cloud_project_id", value: googleCloudProjectId),
+                                                                                              RubyCommand.Argument(name: "s3_region", value: s3Region),
+                                                                                              RubyCommand.Argument(name: "s3_access_key", value: s3AccessKey),
+                                                                                              RubyCommand.Argument(name: "s3_secret_access_key", value: s3SecretAccessKey),
+                                                                                              RubyCommand.Argument(name: "s3_bucket", value: s3Bucket),
+                                                                                              RubyCommand.Argument(name: "s3_object_prefix", value: s3ObjectPrefix),
+                                                                                              RubyCommand.Argument(name: "keychain_name", value: keychainName),
+                                                                                              RubyCommand.Argument(name: "keychain_password", value: keychainPassword),
+                                                                                              RubyCommand.Argument(name: "force", value: force),
+                                                                                              RubyCommand.Argument(name: "force_for_new_devices", value: forceForNewDevices),
+                                                                                              RubyCommand.Argument(name: "skip_confirmation", value: skipConfirmation),
+                                                                                              RubyCommand.Argument(name: "skip_docs", value: skipDocs),
+                                                                                              RubyCommand.Argument(name: "platform", value: platform),
+                                                                                              RubyCommand.Argument(name: "derive_catalyst_app_identifier", value: deriveCatalystAppIdentifier),
+                                                                                              RubyCommand.Argument(name: "template_name", value: templateName),
+                                                                                              RubyCommand.Argument(name: "profile_name", value: profileName),
+                                                                                              RubyCommand.Argument(name: "fail_on_name_taken", value: failOnNameTaken),
+                                                                                              RubyCommand.Argument(name: "skip_certificate_matching", value: skipCertificateMatching),
+                                                                                              RubyCommand.Argument(name: "output_path", value: outputPath),
+                                                                                              RubyCommand.Argument(name: "skip_set_partition_list", value: skipSetPartitionList),
+                                                                                              RubyCommand.Argument(name: "verbose", value: verbose)])
+    _ = runner.executeCommand(command)
+}
+
+/**
  Verifies the minimum fastlane version required
 
  Add this to your `Fastfile` to require a certain version of _fastlane_.
@@ -5123,14 +5308,16 @@ public func nexusUpload(file: String,
    - ascProvider: Provider short name for accounts associated with multiple providers
    - printLog: Whether to print notarization log file, listing issues on failure and warnings on success
    - verbose: Whether to log requests
+   - apiKeyPath: Path to AppStore Connect API key
  */
 public func notarize(package: String,
                      tryEarlyStapling: Bool = false,
                      bundleId: String? = nil,
-                     username: String,
+                     username: String? = nil,
                      ascProvider: String? = nil,
                      printLog: Bool = false,
-                     verbose: Bool = false)
+                     verbose: Bool = false,
+                     apiKeyPath: String? = nil)
 {
     let command = RubyCommand(commandID: "", methodName: "notarize", className: nil, args: [RubyCommand.Argument(name: "package", value: package),
                                                                                             RubyCommand.Argument(name: "try_early_stapling", value: tryEarlyStapling),
@@ -5138,7 +5325,8 @@ public func notarize(package: String,
                                                                                             RubyCommand.Argument(name: "username", value: username),
                                                                                             RubyCommand.Argument(name: "asc_provider", value: ascProvider),
                                                                                             RubyCommand.Argument(name: "print_log", value: printLog),
-                                                                                            RubyCommand.Argument(name: "verbose", value: verbose)])
+                                                                                            RubyCommand.Argument(name: "verbose", value: verbose),
+                                                                                            RubyCommand.Argument(name: "api_key_path", value: apiKeyPath)])
     _ = runner.executeCommand(command)
 }
 
@@ -5415,7 +5603,7 @@ public func pem(development: Bool = false,
    - distributeOnly: Distribute a previously uploaded build (equivalent to the `fastlane pilot distribute` command)
    - usesNonExemptEncryption: Provide the 'Uses Non-Exempt Encryption' for export compliance. This is used if there is 'ITSAppUsesNonExemptEncryption' is not set in the Info.plist
    - distributeExternal: Should the build be distributed to external testers?
-   - notifyExternalTesters: Should notify external testers?
+   - notifyExternalTesters: Should notify external testers? (Not setting a value will use App Store Connect's default which is to notify)
    - appVersion: The version number of the application build to distribute. If the version number is not specified, then the most recent build uploaded to TestFlight will be distributed. If specified, the most recent build for the version number will be distributed
    - buildNumber: The build number of the application build to distribute. If the build number is not specified, the most recent build is distributed
    - expirePreviousBuilds: Should expire previous builds?
@@ -5437,12 +5625,12 @@ public func pem(development: Bool = false,
  */
 public func pilot(apiKeyPath: String? = nil,
                   apiKey: [String: Any]? = nil,
-                  username: String,
+                  username: String? = nil,
                   appIdentifier: String? = nil,
                   appPlatform: String = "ios",
                   appleId: String? = nil,
                   ipa: String? = nil,
-                  demoAccountRequired: Bool = false,
+                  demoAccountRequired: Bool? = nil,
                   betaAppReviewInfo: [String: Any]? = nil,
                   localizedAppInfo: [String: Any]? = nil,
                   betaAppDescription: String? = nil,
@@ -5455,7 +5643,7 @@ public func pilot(apiKeyPath: String? = nil,
                   distributeOnly: Bool = false,
                   usesNonExemptEncryption: Bool = false,
                   distributeExternal: Bool = false,
-                  notifyExternalTesters: Bool = true,
+                  notifyExternalTesters: Any? = nil,
                   appVersion: String? = nil,
                   buildNumber: String? = nil,
                   expirePreviousBuilds: Bool = false,
@@ -5702,17 +5890,17 @@ public func podioItem(clientId: String,
 
  More information: https://fastlane.tools/precheck
  */
-public func precheck(apiKeyPath: Any? = precheckfile.apiKeyPath,
-                     apiKey: [String: Any]? = precheckfile.apiKey,
-                     appIdentifier: Any = precheckfile.appIdentifier,
-                     username: Any = precheckfile.username,
-                     teamId: Any? = precheckfile.teamId,
-                     teamName: Any? = precheckfile.teamName,
-                     platform: Any = precheckfile.platform,
-                     defaultRuleLevel: Any = precheckfile.defaultRuleLevel,
-                     includeInAppPurchases: Bool = precheckfile.includeInAppPurchases,
-                     useLive: Bool = precheckfile.useLive,
-                     freeStuffInIap: Any? = precheckfile.freeStuffInIap)
+@discardableResult public func precheck(apiKeyPath: Any? = precheckfile.apiKeyPath,
+                                        apiKey: [String: Any]? = precheckfile.apiKey,
+                                        appIdentifier: Any = precheckfile.appIdentifier,
+                                        username: Any? = precheckfile.username,
+                                        teamId: Any? = precheckfile.teamId,
+                                        teamName: Any? = precheckfile.teamName,
+                                        platform: Any = precheckfile.platform,
+                                        defaultRuleLevel: Any = precheckfile.defaultRuleLevel,
+                                        includeInAppPurchases: Bool = precheckfile.includeInAppPurchases,
+                                        useLive: Bool = precheckfile.useLive,
+                                        freeStuffInIap: Any? = precheckfile.freeStuffInIap) -> Bool
 {
     let command = RubyCommand(commandID: "", methodName: "precheck", className: nil, args: [RubyCommand.Argument(name: "api_key_path", value: apiKeyPath),
                                                                                             RubyCommand.Argument(name: "api_key", value: apiKey),
@@ -5725,7 +5913,7 @@ public func precheck(apiKeyPath: Any? = precheckfile.apiKeyPath,
                                                                                             RubyCommand.Argument(name: "include_in_app_purchases", value: includeInAppPurchases),
                                                                                             RubyCommand.Argument(name: "use_live", value: useLive),
                                                                                             RubyCommand.Argument(name: "free_stuff_in_iap", value: freeStuffInIap)])
-    _ = runner.executeCommand(command)
+    return parseBool(fromString: runner.executeCommand(command))
 }
 
 /**
@@ -6169,6 +6357,7 @@ public func rubyVersion() {
    - device: The name of the simulator type you want to run tests on (e.g. 'iPhone 6')
    - devices: Array of devices to run the tests on (e.g. ['iPhone 6', 'iPad Air'])
    - skipDetectDevices: Should skip auto detecting of devices if none were specified
+   - ensureDevicesFound: Should fail if devices not found
    - forceQuitSimulator: Enabling this option will automatically killall Simulator processes before the run
    - resetSimulator: Enabling this option will automatically erase the simulator before running the application
    - disableSlideToType: Enabling this option will disable the simulator from showing the 'Slide to type' prompt
@@ -6199,6 +6388,7 @@ public func rubyVersion() {
    - xcprettyArgs: Pass in xcpretty additional command line arguments (e.g. '--test --no-color' or '--tap --no-utf')
    - derivedDataPath: The directory where build products and other derived data will go
    - shouldZipBuildProducts: Should zip the derived data build products and place in output path?
+   - outputXctestrun: Should provide additional copy of .xctestrun file (settings.xctestrun) and place in output path?
    - resultBundle: Should an Xcode result bundle be generated in the output directory
    - useClangReportName: Generate the json compilation database with clang naming convention (compile_commands.json)
    - concurrentWorkers: Specify the exact number of test runners that will be spawned during parallel testing. Equivalent to -parallel-testing-worker-count
@@ -6230,6 +6420,7 @@ public func rubyVersion() {
    - skipPackageDependenciesResolution: Skips resolution of Swift Package Manager dependencies
    - disablePackageAutomaticUpdates: Prevents packages from automatically being resolved to versions other than those recorded in the `Package.resolved` file
    - useSystemScm: Lets xcodebuild use system's scm configuration
+   - numberOfRetries: The number of times a test can fail before scan should stop retrying
    - failBuild: Should this step stop the build if the tests fail? Set this to false if you're using trainer
 
  More information: https://docs.fastlane.tools/actions/scan/
@@ -6240,6 +6431,7 @@ public func runTests(workspace: String? = nil,
                      device: String? = nil,
                      devices: [String]? = nil,
                      skipDetectDevices: Bool = false,
+                     ensureDevicesFound: Bool = false,
                      forceQuitSimulator: Bool = false,
                      resetSimulator: Bool = false,
                      disableSlideToType: Bool = true,
@@ -6270,6 +6462,7 @@ public func runTests(workspace: String? = nil,
                      xcprettyArgs: String? = nil,
                      derivedDataPath: String? = nil,
                      shouldZipBuildProducts: Bool = false,
+                     outputXctestrun: Bool = false,
                      resultBundle: Bool = false,
                      useClangReportName: Bool = false,
                      concurrentWorkers: Int? = nil,
@@ -6301,6 +6494,7 @@ public func runTests(workspace: String? = nil,
                      skipPackageDependenciesResolution: Bool = false,
                      disablePackageAutomaticUpdates: Bool = false,
                      useSystemScm: Bool = false,
+                     numberOfRetries: Int = 0,
                      failBuild: Bool = true)
 {
     let command = RubyCommand(commandID: "", methodName: "run_tests", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
@@ -6309,6 +6503,7 @@ public func runTests(workspace: String? = nil,
                                                                                              RubyCommand.Argument(name: "device", value: device),
                                                                                              RubyCommand.Argument(name: "devices", value: devices),
                                                                                              RubyCommand.Argument(name: "skip_detect_devices", value: skipDetectDevices),
+                                                                                             RubyCommand.Argument(name: "ensure_devices_found", value: ensureDevicesFound),
                                                                                              RubyCommand.Argument(name: "force_quit_simulator", value: forceQuitSimulator),
                                                                                              RubyCommand.Argument(name: "reset_simulator", value: resetSimulator),
                                                                                              RubyCommand.Argument(name: "disable_slide_to_type", value: disableSlideToType),
@@ -6339,6 +6534,7 @@ public func runTests(workspace: String? = nil,
                                                                                              RubyCommand.Argument(name: "xcpretty_args", value: xcprettyArgs),
                                                                                              RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath),
                                                                                              RubyCommand.Argument(name: "should_zip_build_products", value: shouldZipBuildProducts),
+                                                                                             RubyCommand.Argument(name: "output_xctestrun", value: outputXctestrun),
                                                                                              RubyCommand.Argument(name: "result_bundle", value: resultBundle),
                                                                                              RubyCommand.Argument(name: "use_clang_report_name", value: useClangReportName),
                                                                                              RubyCommand.Argument(name: "concurrent_workers", value: concurrentWorkers),
@@ -6370,6 +6566,7 @@ public func runTests(workspace: String? = nil,
                                                                                              RubyCommand.Argument(name: "skip_package_dependencies_resolution", value: skipPackageDependenciesResolution),
                                                                                              RubyCommand.Argument(name: "disable_package_automatic_updates", value: disablePackageAutomaticUpdates),
                                                                                              RubyCommand.Argument(name: "use_system_scm", value: useSystemScm),
+                                                                                             RubyCommand.Argument(name: "number_of_retries", value: numberOfRetries),
                                                                                              RubyCommand.Argument(name: "fail_build", value: failBuild)])
     _ = runner.executeCommand(command)
 }
@@ -6460,6 +6657,7 @@ public func say(text: Any,
    - device: The name of the simulator type you want to run tests on (e.g. 'iPhone 6')
    - devices: Array of devices to run the tests on (e.g. ['iPhone 6', 'iPad Air'])
    - skipDetectDevices: Should skip auto detecting of devices if none were specified
+   - ensureDevicesFound: Should fail if devices not found
    - forceQuitSimulator: Enabling this option will automatically killall Simulator processes before the run
    - resetSimulator: Enabling this option will automatically erase the simulator before running the application
    - disableSlideToType: Enabling this option will disable the simulator from showing the 'Slide to type' prompt
@@ -6490,6 +6688,7 @@ public func say(text: Any,
    - xcprettyArgs: Pass in xcpretty additional command line arguments (e.g. '--test --no-color' or '--tap --no-utf')
    - derivedDataPath: The directory where build products and other derived data will go
    - shouldZipBuildProducts: Should zip the derived data build products and place in output path?
+   - outputXctestrun: Should provide additional copy of .xctestrun file (settings.xctestrun) and place in output path?
    - resultBundle: Should an Xcode result bundle be generated in the output directory
    - useClangReportName: Generate the json compilation database with clang naming convention (compile_commands.json)
    - concurrentWorkers: Specify the exact number of test runners that will be spawned during parallel testing. Equivalent to -parallel-testing-worker-count
@@ -6521,6 +6720,7 @@ public func say(text: Any,
    - skipPackageDependenciesResolution: Skips resolution of Swift Package Manager dependencies
    - disablePackageAutomaticUpdates: Prevents packages from automatically being resolved to versions other than those recorded in the `Package.resolved` file
    - useSystemScm: Lets xcodebuild use system's scm configuration
+   - numberOfRetries: The number of times a test can fail before scan should stop retrying
    - failBuild: Should this step stop the build if the tests fail? Set this to false if you're using trainer
 
  More information: https://docs.fastlane.tools/actions/scan/
@@ -6531,6 +6731,7 @@ public func scan(workspace: Any? = scanfile.workspace,
                  device: Any? = scanfile.device,
                  devices: [String]? = scanfile.devices,
                  skipDetectDevices: Bool = scanfile.skipDetectDevices,
+                 ensureDevicesFound: Bool = scanfile.ensureDevicesFound,
                  forceQuitSimulator: Bool = scanfile.forceQuitSimulator,
                  resetSimulator: Bool = scanfile.resetSimulator,
                  disableSlideToType: Bool = scanfile.disableSlideToType,
@@ -6561,6 +6762,7 @@ public func scan(workspace: Any? = scanfile.workspace,
                  xcprettyArgs: Any? = scanfile.xcprettyArgs,
                  derivedDataPath: Any? = scanfile.derivedDataPath,
                  shouldZipBuildProducts: Bool = scanfile.shouldZipBuildProducts,
+                 outputXctestrun: Bool = scanfile.outputXctestrun,
                  resultBundle: Bool = scanfile.resultBundle,
                  useClangReportName: Bool = scanfile.useClangReportName,
                  concurrentWorkers: Int? = scanfile.concurrentWorkers,
@@ -6592,6 +6794,7 @@ public func scan(workspace: Any? = scanfile.workspace,
                  skipPackageDependenciesResolution: Bool = scanfile.skipPackageDependenciesResolution,
                  disablePackageAutomaticUpdates: Bool = scanfile.disablePackageAutomaticUpdates,
                  useSystemScm: Bool = scanfile.useSystemScm,
+                 numberOfRetries: Int = scanfile.numberOfRetries,
                  failBuild: Bool = scanfile.failBuild)
 {
     let command = RubyCommand(commandID: "", methodName: "scan", className: nil, args: [RubyCommand.Argument(name: "workspace", value: workspace),
@@ -6600,6 +6803,7 @@ public func scan(workspace: Any? = scanfile.workspace,
                                                                                         RubyCommand.Argument(name: "device", value: device),
                                                                                         RubyCommand.Argument(name: "devices", value: devices),
                                                                                         RubyCommand.Argument(name: "skip_detect_devices", value: skipDetectDevices),
+                                                                                        RubyCommand.Argument(name: "ensure_devices_found", value: ensureDevicesFound),
                                                                                         RubyCommand.Argument(name: "force_quit_simulator", value: forceQuitSimulator),
                                                                                         RubyCommand.Argument(name: "reset_simulator", value: resetSimulator),
                                                                                         RubyCommand.Argument(name: "disable_slide_to_type", value: disableSlideToType),
@@ -6630,6 +6834,7 @@ public func scan(workspace: Any? = scanfile.workspace,
                                                                                         RubyCommand.Argument(name: "xcpretty_args", value: xcprettyArgs),
                                                                                         RubyCommand.Argument(name: "derived_data_path", value: derivedDataPath),
                                                                                         RubyCommand.Argument(name: "should_zip_build_products", value: shouldZipBuildProducts),
+                                                                                        RubyCommand.Argument(name: "output_xctestrun", value: outputXctestrun),
                                                                                         RubyCommand.Argument(name: "result_bundle", value: resultBundle),
                                                                                         RubyCommand.Argument(name: "use_clang_report_name", value: useClangReportName),
                                                                                         RubyCommand.Argument(name: "concurrent_workers", value: concurrentWorkers),
@@ -6661,6 +6866,7 @@ public func scan(workspace: Any? = scanfile.workspace,
                                                                                         RubyCommand.Argument(name: "skip_package_dependencies_resolution", value: skipPackageDependenciesResolution),
                                                                                         RubyCommand.Argument(name: "disable_package_automatic_updates", value: disablePackageAutomaticUpdates),
                                                                                         RubyCommand.Argument(name: "use_system_scm", value: useSystemScm),
+                                                                                        RubyCommand.Argument(name: "number_of_retries", value: numberOfRetries),
                                                                                         RubyCommand.Argument(name: "fail_build", value: failBuild)])
     _ = runner.executeCommand(command)
 }
@@ -7083,29 +7289,29 @@ public func setupTravis(force: Bool = false) {
 
  **Note**: It is recommended to use [match](https://docs.fastlane.tools/actions/match/) according to the [codesigning.guide](https://codesigning.guide) for generating and maintaining your provisioning profiles. Use _sigh_ directly only if you want full control over what's going on and know more about codesigning.
  */
-public func sigh(adhoc: Bool = false,
-                 developerId: Bool = false,
-                 development: Bool = false,
-                 skipInstall: Bool = false,
-                 force: Bool = false,
-                 appIdentifier: String,
-                 apiKeyPath: String? = nil,
-                 apiKey: [String: Any]? = nil,
-                 username: String,
-                 teamId: String? = nil,
-                 teamName: String? = nil,
-                 provisioningName: String? = nil,
-                 ignoreProfilesWithDifferentName: Bool = false,
-                 outputPath: String = ".",
-                 certId: String? = nil,
-                 certOwnerName: String? = nil,
-                 filename: String? = nil,
-                 skipFetchProfiles: Bool = false,
-                 skipCertificateVerification: Bool = false,
-                 platform: Any = "ios",
-                 readonly: Bool = false,
-                 templateName: String? = nil,
-                 failOnNameTaken: Bool = false)
+@discardableResult public func sigh(adhoc: Bool = false,
+                                    developerId: Bool = false,
+                                    development: Bool = false,
+                                    skipInstall: Bool = false,
+                                    force: Bool = false,
+                                    appIdentifier: String,
+                                    apiKeyPath: String? = nil,
+                                    apiKey: [String: Any]? = nil,
+                                    username: String? = nil,
+                                    teamId: String? = nil,
+                                    teamName: String? = nil,
+                                    provisioningName: String? = nil,
+                                    ignoreProfilesWithDifferentName: Bool = false,
+                                    outputPath: String = ".",
+                                    certId: String? = nil,
+                                    certOwnerName: String? = nil,
+                                    filename: String? = nil,
+                                    skipFetchProfiles: Bool = false,
+                                    skipCertificateVerification: Bool = false,
+                                    platform: Any = "ios",
+                                    readonly: Bool = false,
+                                    templateName: String? = nil,
+                                    failOnNameTaken: Bool = false) -> String
 {
     let command = RubyCommand(commandID: "", methodName: "sigh", className: nil, args: [RubyCommand.Argument(name: "adhoc", value: adhoc),
                                                                                         RubyCommand.Argument(name: "developer_id", value: developerId),
@@ -7130,7 +7336,7 @@ public func sigh(adhoc: Bool = false,
                                                                                         RubyCommand.Argument(name: "readonly", value: readonly),
                                                                                         RubyCommand.Argument(name: "template_name", value: templateName),
                                                                                         RubyCommand.Argument(name: "fail_on_name_taken", value: failOnNameTaken)])
-    _ = runner.executeCommand(command)
+    return runner.executeCommand(command)
 }
 
 /**
@@ -7550,6 +7756,57 @@ public func sonar(projectConfigurationPath: String? = nil,
 }
 
 /**
+ Generate docs using SourceDocs
+
+ - parameters:
+   - allModules: Generate documentation for all modules in a Swift package
+   - spmModule: Generate documentation for Swift Package Manager module
+   - moduleName: Generate documentation for a Swift module
+   - linkBeginning: The text to begin links with
+   - linkEnding: The text to end links with (default: .md)
+   - outputFolder: Output directory to clean (default: Documentation/Reference)
+   - minAcl: Access level to include in documentation [private, fileprivate, internal, public, open] (default: public)
+   - moduleNamePath: Include the module name as part of the output folder path
+   - clean: Delete output folder before generating documentation
+   - collapsible: Put methods, properties and enum cases inside collapsible blocks
+   - tableOfContents: Generate a table of contents with properties and methods for each type
+   - reproducible: Generate documentation that is reproducible: only depends on the sources
+   - scheme: Create documentation for specific scheme
+   - sdkPlatform: Create documentation for specific sdk platform
+ */
+public func sourcedocs(allModules: Bool? = nil,
+                       spmModule: String? = nil,
+                       moduleName: String? = nil,
+                       linkBeginning: String? = nil,
+                       linkEnding: String? = nil,
+                       outputFolder: String,
+                       minAcl: String? = nil,
+                       moduleNamePath: Bool? = nil,
+                       clean: Bool? = nil,
+                       collapsible: Bool? = nil,
+                       tableOfContents: Bool? = nil,
+                       reproducible: Bool? = nil,
+                       scheme: String? = nil,
+                       sdkPlatform: String? = nil)
+{
+    let command = RubyCommand(commandID: "", methodName: "sourcedocs", className: nil, args: [RubyCommand.Argument(name: "all_modules", value: allModules),
+                                                                                              RubyCommand.Argument(name: "spm_module", value: spmModule),
+                                                                                              RubyCommand.Argument(name: "module_name", value: moduleName),
+                                                                                              RubyCommand.Argument(name: "link_beginning", value: linkBeginning),
+                                                                                              RubyCommand.Argument(name: "link_ending", value: linkEnding),
+                                                                                              RubyCommand.Argument(name: "output_folder", value: outputFolder),
+                                                                                              RubyCommand.Argument(name: "min_acl", value: minAcl),
+                                                                                              RubyCommand.Argument(name: "module_name_path", value: moduleNamePath),
+                                                                                              RubyCommand.Argument(name: "clean", value: clean),
+                                                                                              RubyCommand.Argument(name: "collapsible", value: collapsible),
+                                                                                              RubyCommand.Argument(name: "table_of_contents", value: tableOfContents),
+                                                                                              RubyCommand.Argument(name: "reproducible", value: reproducible),
+                                                                                              RubyCommand.Argument(name: "scheme", value: scheme),
+                                                                                              RubyCommand.Argument(name: "sdk_platform", value: sdkPlatform)])
+    _ = runner.executeCommand(command)
+}
+
+/**
  Find, print, and copy Spaceship logs
 
  - parameters:
@@ -7561,18 +7818,18 @@ public func sonar(projectConfigurationPath: String? = nil,
 
  - returns: The array of Spaceship logs
  */
-public func spaceshipLogs(latest: Bool = true,
-                          printContents: Bool = false,
-                          printPaths: Bool = false,
-                          copyToPath: String? = nil,
-                          copyToClipboard: Bool = false)
+@discardableResult public func spaceshipLogs(latest: Bool = true,
+                                             printContents: Bool = false,
+                                             printPaths: Bool = false,
+                                             copyToPath: String? = nil,
+                                             copyToClipboard: Bool = false) -> [String]
 {
     let command = RubyCommand(commandID: "", methodName: "spaceship_logs", className: nil, args: [RubyCommand.Argument(name: "latest", value: latest),
                                                                                                   RubyCommand.Argument(name: "print_contents", value: printContents),
                                                                                                   RubyCommand.Argument(name: "print_paths", value: printPaths),
                                                                                                   RubyCommand.Argument(name: "copy_to_path", value: copyToPath),
                                                                                                   RubyCommand.Argument(name: "copy_to_clipboard", value: copyToClipboard)])
-    _ = runner.executeCommand(command)
+    return parseArray(fromString: runner.executeCommand(command))
 }
 
 /**
@@ -7716,8 +7973,8 @@ public func ssh(username: String,
    - skipUploadScreenshots: Whether to skip uploading SCREENSHOTS
    - trackPromoteTo: The track to promote to. The default available tracks are: production, beta, alpha, internal
    - validateOnly: Only validate changes with Google Play rather than actually publish
-   - mapping: Path to the mapping file to upload
-   - mappingPaths: An array of paths to mapping files to upload
+   - mapping: Path to the mapping file to upload (mapping.txt or native-debug-symbols.zip alike)
+   - mappingPaths: An array of paths to mapping files to upload (mapping.txt or native-debug-symbols.zip alike)
    - rootUrl: Root URL for the Google Play API. The provided URL will be used for API calls in place of https://www.googleapis.com/
    - checkSupersededTracks: **DEPRECATED!** Google Play does this automatically now - Check the other tracks for superseded versions and disable them
    - timeout: Timeout for read, open, and send (in seconds)
@@ -8092,7 +8349,7 @@ public func testfairy(apiKey: String,
    - distributeOnly: Distribute a previously uploaded build (equivalent to the `fastlane pilot distribute` command)
    - usesNonExemptEncryption: Provide the 'Uses Non-Exempt Encryption' for export compliance. This is used if there is 'ITSAppUsesNonExemptEncryption' is not set in the Info.plist
    - distributeExternal: Should the build be distributed to external testers?
-   - notifyExternalTesters: Should notify external testers?
+   - notifyExternalTesters: Should notify external testers? (Not setting a value will use App Store Connect's default which is to notify)
    - appVersion: The version number of the application build to distribute. If the version number is not specified, then the most recent build uploaded to TestFlight will be distributed. If specified, the most recent build for the version number will be distributed
    - buildNumber: The build number of the application build to distribute. If the build number is not specified, the most recent build is distributed
    - expirePreviousBuilds: Should expire previous builds?
@@ -8114,12 +8371,12 @@ public func testfairy(apiKey: String,
  */
 public func testflight(apiKeyPath: String? = nil,
                        apiKey: [String: Any]? = nil,
-                       username: String,
+                       username: String? = nil,
                        appIdentifier: String? = nil,
                        appPlatform: String = "ios",
                        appleId: String? = nil,
                        ipa: String? = nil,
-                       demoAccountRequired: Bool = false,
+                       demoAccountRequired: Bool? = nil,
                        betaAppReviewInfo: [String: Any]? = nil,
                        localizedAppInfo: [String: Any]? = nil,
                        betaAppDescription: String? = nil,
@@ -8132,7 +8389,7 @@ public func testflight(apiKeyPath: String? = nil,
                        distributeOnly: Bool = false,
                        usesNonExemptEncryption: Bool = false,
                        distributeExternal: Bool = false,
-                       notifyExternalTesters: Bool = true,
+                       notifyExternalTesters: Any? = nil,
                        appVersion: String? = nil,
                        buildNumber: String? = nil,
                        expirePreviousBuilds: Bool = false,
@@ -8323,7 +8580,7 @@ public func updateAppIdentifier(xcodeproj: String,
    - useAutomaticSigning: Defines if project should use automatic signing
    - teamId: Team ID, is used when upgrading project
    - targets: Specify targets you want to toggle the signing mech. (default to all targets)
-   - buildConfigurations: Specify build_configurations you want to toggle the signing mech. (default to all targets)
+   - buildConfigurations: Specify build_configurations you want to toggle the signing mech. (default to all configurations)
    - codeSignIdentity: Code signing identity type (iPhone Developer, iPhone Distribution)
    - profileName: Provisioning profile name to use for code signing
    - profileUuid: Provisioning profile UUID to use for code signing
@@ -8776,7 +9033,7 @@ public func uploadSymbolsToSentry(apiHost: String = "https://app.getsentry.com/a
  */
 public func uploadToAppStore(apiKeyPath: String? = nil,
                              apiKey: [String: Any]? = nil,
-                             username: String,
+                             username: String? = nil,
                              appIdentifier: String? = nil,
                              appVersion: String? = nil,
                              ipa: String? = nil,
@@ -8929,8 +9186,8 @@ public func uploadToAppStore(apiKeyPath: String? = nil,
    - skipUploadScreenshots: Whether to skip uploading SCREENSHOTS
    - trackPromoteTo: The track to promote to. The default available tracks are: production, beta, alpha, internal
    - validateOnly: Only validate changes with Google Play rather than actually publish
-   - mapping: Path to the mapping file to upload
-   - mappingPaths: An array of paths to mapping files to upload
+   - mapping: Path to the mapping file to upload (mapping.txt or native-debug-symbols.zip alike)
+   - mappingPaths: An array of paths to mapping files to upload (mapping.txt or native-debug-symbols.zip alike)
    - rootUrl: Root URL for the Google Play API. The provided URL will be used for API calls in place of https://www.googleapis.com/
    - checkSupersededTracks: **DEPRECATED!** Google Play does this automatically now - Check the other tracks for superseded versions and disable them
    - timeout: Timeout for read, open, and send (in seconds)
@@ -9085,7 +9342,7 @@ public func uploadToPlayStoreInternalAppSharing(packageName: String,
    - distributeOnly: Distribute a previously uploaded build (equivalent to the `fastlane pilot distribute` command)
    - usesNonExemptEncryption: Provide the 'Uses Non-Exempt Encryption' for export compliance. This is used if there is 'ITSAppUsesNonExemptEncryption' is not set in the Info.plist
    - distributeExternal: Should the build be distributed to external testers?
-   - notifyExternalTesters: Should notify external testers?
+   - notifyExternalTesters: Should notify external testers? (Not setting a value will use App Store Connect's default which is to notify)
    - appVersion: The version number of the application build to distribute. If the version number is not specified, then the most recent build uploaded to TestFlight will be distributed. If specified, the most recent build for the version number will be distributed
    - buildNumber: The build number of the application build to distribute. If the build number is not specified, the most recent build is distributed
    - expirePreviousBuilds: Should expire previous builds?
@@ -9107,12 +9364,12 @@ public func uploadToPlayStoreInternalAppSharing(packageName: String,
  */
 public func uploadToTestflight(apiKeyPath: String? = nil,
                                apiKey: [String: Any]? = nil,
-                               username: String,
+                               username: String? = nil,
                                appIdentifier: String? = nil,
                                appPlatform: String = "ios",
                                appleId: String? = nil,
                                ipa: String? = nil,
-                               demoAccountRequired: Bool = false,
+                               demoAccountRequired: Bool? = nil,
                                betaAppReviewInfo: [String: Any]? = nil,
                                localizedAppInfo: [String: Any]? = nil,
                                betaAppDescription: String? = nil,
@@ -9125,7 +9382,7 @@ public func uploadToTestflight(apiKeyPath: String? = nil,
                                distributeOnly: Bool = false,
                                usesNonExemptEncryption: Bool = false,
                                distributeExternal: Bool = false,
-                               notifyExternalTesters: Bool = true,
+                               notifyExternalTesters: Any? = nil,
                                appVersion: String? = nil,
                                buildNumber: String? = nil,
                                expirePreviousBuilds: Bool = false,
@@ -9468,7 +9725,7 @@ public func xcov(workspace: String? = nil,
                  htmlReport: Bool = true,
                  markdownReport: Bool = false,
                  jsonReport: Bool = false,
-                 minimumCoveragePercentage: Float = 0,
+                 minimumCoveragePercentage: Float = 0.0,
                  slackUrl: String? = nil,
                  slackChannel: String? = nil,
                  skipSlack: Bool = false,
@@ -9630,4 +9887,4 @@ public let snapshotfile = Snapshotfile()
 
 // Please don't remove the lines below
 // They are used to detect outdated files
-// FastlaneRunnerAPIVersion [0.9.108]
+// FastlaneRunnerAPIVersion [0.9.118]
