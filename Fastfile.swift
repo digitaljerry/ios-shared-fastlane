@@ -152,17 +152,32 @@ class Fastfile: LaneFile {
     
     public func devBuildLane() {
         enviorment = .dev
-        betaLane(bumpLane: true)
+        buildArchiveLane(bumpLane: true)
     }
     
     public func stageBuildLane() {
         enviorment = .stage
-        betaLane(bumpLane: false)
+        buildArchiveLane(bumpLane: false)
     }
     
     public func prodBuildLane() {
         enviorment = .prod
-        betaLane(bumpLane: false)
+        buildArchiveLane(bumpLane: false)
+    }
+    
+    public func uploadDevBuildLane() {
+        enviorment = .dev
+        buildAndUpload(bumpLane: true)
+    }
+    
+    public func uploadStageBuildLane() {
+        enviorment = .stage
+        buildAndUpload(bumpLane: false)
+    }
+    
+    public func uploadProdBuildLane() {
+        enviorment = .prod
+        buildAndUpload(bumpLane: false)
         tagTestflightBuildLane()
     }
     
@@ -170,9 +185,9 @@ class Fastfile: LaneFile {
         envPrompt()
         
         if enviorment == .dev || supportsDevApp == false {
-            betaLane(bumpLane: true)
+            buildAndUpload(bumpLane: true)
         } else {
-            betaLane(bumpLane: false)
+            buildAndUpload(bumpLane: false)
         }
     }
     
@@ -197,7 +212,7 @@ class Fastfile: LaneFile {
         return latestBuildNumber
     }
     
-    private func betaLane(bumpLane: Bool? = true) {
+    private func buildAndUpload(bumpLane: Bool? = true) {
 	desc("Push a new beta build to TestFlight")
         if FileManager.default.fileExists(atPath: filePath) {
             if let attributes = try? FileManager.default.attributesOfItem(atPath: filePath) as [FileAttributeKey: Any],
@@ -211,6 +226,24 @@ class Fastfile: LaneFile {
             }
         }
         
+        buildArchiveLane(bumpLane: bumpLane)
+        
+        uploadIPA()
+        uploadDSYM()
+        deleteArchiveFilesLane()
+        cleanBuildArtifacts()
+	}
+    
+    public func deleteArchiveFilesLane() {
+        if FileManager.default.fileExists(atPath: IPAFilePath) == true {
+            try! FileManager.default.removeItem(atPath: IPAFilePath)
+        }
+        if FileManager.default.fileExists(atPath: dsymFilePath) == true {
+            try! FileManager.default.removeItem(atPath: dsymFilePath)
+        }
+    }
+    
+    public func buildArchiveLane(bumpLane: Bool? = true) {
         checkTargetsLane()
         
         if automaticCodeSigning == false {
@@ -284,19 +317,6 @@ class Fastfile: LaneFile {
             scheme: scheme,
             xcargs: "-allowProvisioningUpdates"
         )
-        uploadIPA()
-        uploadDSYM()
-        deleteArchiveFilesLane()
-        cleanBuildArtifacts()
-	}
-    
-    public func deleteArchiveFilesLane() {
-        if FileManager.default.fileExists(atPath: IPAFilePath) == true {
-            try! FileManager.default.removeItem(atPath: IPAFilePath)
-        }
-        if FileManager.default.fileExists(atPath: dsymFilePath) == true {
-            try! FileManager.default.removeItem(atPath: dsymFilePath)
-        }
     }
     
     private func uploadIPA() {
