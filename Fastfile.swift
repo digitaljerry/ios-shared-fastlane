@@ -312,11 +312,16 @@ class Fastfile: LaneFile {
         }
         
         cocoapods()
+        buildInfoFile()
         buildApp(
             workspace: projectWorkspace,
             scheme: scheme,
             xcargs: "-allowProvisioningUpdates"
         )
+    }
+    
+    private func buildInfoFile() {
+        sh(command: "./Scripts/build_info.sh")
     }
     
     private func uploadIPA() {
