@@ -152,7 +152,7 @@ class Fastfile: LaneFile {
     
     public func devBuildLane() {
         enviorment = .dev
-        buildArchiveLane(bumpLane: true)
+        buildArchiveLane(bumpLane: false)
     }
     
     public func stageBuildLane() {
