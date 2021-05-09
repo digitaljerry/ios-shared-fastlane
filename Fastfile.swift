@@ -453,8 +453,8 @@ class Fastfile: LaneFile {
         slackSuccess(message: slackMessage)
     }
     
-    public func testingLane() {
-        buildBump()
+    public func buildBumpLane() {
+        buildBump(force: false)
     }
 
     public func bumpLane(withOptions options:[String: String]?) {
