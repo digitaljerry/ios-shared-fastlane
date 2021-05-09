@@ -491,29 +491,29 @@ class Fastfile: LaneFile {
         puts(message: "force: \(force)")
         puts(message: message)
         
-//        commitVersionBump(
-//            message: message,
-//            xcodeproj: projectPath,
-//            force: true
-//        )
-//
-//        pushToGitRemote(force: false)
-//
-//        let bumpGitTag = lastGitCommit()["commit_hash"] ?? ""
-//
-//        let currentBranch = gitBranch()
-//
-//        // push build bump to the branch holding the truth
-//        if currentBranch != branchTruthSource {
-//            sh(command: "git checkout \(branchTruthSource)")
-//            sh(command: "git cherry-pick --strategy=recursive -X theirs \(bumpGitTag)")
-//            pushToGitRemote(force: false)
-//            sh(command: "git checkout \(currentBranch)")
-//        }
-//
-//        let versionNumber = getVersionNumber(target: scheme).trim()
-//        let slackMessage = "\(commitPrefix) version \(newBuildNumber) build \(versionNumber) for \(appID) on branch \(currentBranch)"
-//        slackSuccess(message: slackMessage)
+        commitVersionBump(
+            message: message,
+            xcodeproj: projectPath,
+            force: true
+        )
+
+        pushToGitRemote(force: false)
+
+        let bumpGitTag = lastGitCommit()["commit_hash"] ?? ""
+
+        let currentBranch = gitBranch()
+
+        // push build bump to the branch holding the truth
+        if currentBranch != branchTruthSource {
+            sh(command: "git checkout \(branchTruthSource)")
+            sh(command: "git cherry-pick --strategy=recursive -X theirs \(bumpGitTag)")
+            pushToGitRemote(force: false)
+            sh(command: "git checkout \(currentBranch)")
+        }
+
+        let versionNumber = getVersionNumber(target: scheme).trim()
+        let slackMessage = "\(commitPrefix) version \(newBuildNumber) build \(versionNumber) for \(appID) on branch \(currentBranch)"
+        slackSuccess(message: slackMessage)
     }
     
     public func checkTargetsLane() {
