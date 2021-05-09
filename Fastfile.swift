@@ -65,7 +65,6 @@ class Fastfile: LaneFile {
                 timeout: 3600,
                 addToSearchList: true
             )
-            loadAppstoreApiKey()
         } else {
             let appleIDenv = environmentVariable(get: "APPLEID")
             if appleIDenv != "" {
@@ -127,7 +126,9 @@ class Fastfile: LaneFile {
         let id = environmentVariable(get: "APPSTORE_API_KEY_ID")
         let issuer = environmentVariable(get: "APPSTORE_API_ISSUER_ID")
         let content = environmentVariable(get: "APPSTORE_API_KEY")
-        puts(message: "Loading Appstore Key: \(id)")
+        puts(message: "Appstore Key Id: \(id)")
+        puts(message: "Appstore Key Issuer: \(issuer)")
+        puts(message: "Loading Appstore Key: \(content)")
         appStoreConnectApiKey(keyId: id, issuerId: issuer, keyContent: content, inHouse: false)
     }
     
@@ -215,6 +216,11 @@ class Fastfile: LaneFile {
     
     private func buildAndUpload(bumpLane: Bool? = true) {
 	desc("Push a new beta build to TestFlight")
+        
+        if isCi() == true {
+            loadAppstoreApiKey()
+        }
+        
         if FileManager.default.fileExists(atPath: filePath) {
             if let attributes = try? FileManager.default.attributesOfItem(atPath: filePath) as [FileAttributeKey: Any],
                 let creationDate = attributes[FileAttributeKey.creationDate] as? Date {
