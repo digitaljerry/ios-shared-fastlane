@@ -127,6 +127,7 @@ class Fastfile: LaneFile {
         let id = environmentVariable(get: "APPSTORE_API_KEY_ID")
         let issuer = environmentVariable(get: "APPSTORE_API_ISSUER_ID")
         let content = environmentVariable(get: "APPSTORE_API_KEY")
+        puts(message: "Loading Appstore Key: \(id)")
         appStoreConnectApiKey(keyId: id, issuerId: issuer, keyContent: content, inHouse: false)
     }
     
@@ -308,7 +309,7 @@ class Fastfile: LaneFile {
         }
         
         if bumpLane == true {
-            buildBumpLane()
+            buildBump()
         }
         
         cocoapods()
@@ -451,25 +452,29 @@ class Fastfile: LaneFile {
         let slackMessage = "Version bump \(newVersionNumber) for \(appID)"
         slackSuccess(message: slackMessage)
     }
+    
+    public func testingLane() {
+        buildBump()
+    }
 
     public func bumpLane(withOptions options:[String: String]?) {
         if options?["force"] == "true" {
-            buildBumpLane(force: true)
+            buildBump(force: true)
         } else {
-            buildBumpLane(force: false)
+            buildBump(force: false)
         }
     }
     
-    public func buildBumpLane() {
-        buildBumpLane(force: true)
+    public func forceBuildBumpLane() {
+        buildBump(force: true)
     }
     
     public func specificBuildBumpLane() {
         let build = prompt(text: "New build number: ")
-        buildBumpLane(buildNumber: build, force: true)
+        buildBump(buildNumber: build, force: true)
     }
     
-    private func buildBumpLane(buildNumber: String? = nil, commitPrefix: String = "Build bump", force: Bool = false) {
+    private func buildBump(buildNumber: String? = nil, commitPrefix: String = "Build bump", force: Bool = false) {
         let lastCommit = lastGitCommit()
         
         if force == false {
@@ -483,29 +488,32 @@ class Fastfile: LaneFile {
         let newBuildNumber = incrementBuildNumber(buildNumber: oldBuildNumber).trim()
         let message = "\(commitPrefix) \(newBuildNumber) by fastlane [skip ci]"
         
-        commitVersionBump(
-            message: message,
-            xcodeproj: projectPath,
-            force: true
-        )
+        puts(message: "force: \(force)")
+        puts(message: message)
         
-        pushToGitRemote(force: false)
-        
-        let bumpGitTag = lastGitCommit()["commit_hash"] ?? ""
-        
-        let currentBranch = gitBranch()
-        
-        // push build bump to the branch holding the truth
-        if currentBranch != branchTruthSource {
-            sh(command: "git checkout \(branchTruthSource)")
-            sh(command: "git cherry-pick --strategy=recursive -X theirs \(bumpGitTag)")
-            pushToGitRemote(force: false)
-            sh(command: "git checkout \(currentBranch)")
-        }
-        
-        let versionNumber = getVersionNumber(target: scheme).trim()
-        let slackMessage = "\(commitPrefix) version \(newBuildNumber) build \(versionNumber) for \(appID) on branch \(currentBranch)"
-        slackSuccess(message: slackMessage)
+//        commitVersionBump(
+//            message: message,
+//            xcodeproj: projectPath,
+//            force: true
+//        )
+//
+//        pushToGitRemote(force: false)
+//
+//        let bumpGitTag = lastGitCommit()["commit_hash"] ?? ""
+//
+//        let currentBranch = gitBranch()
+//
+//        // push build bump to the branch holding the truth
+//        if currentBranch != branchTruthSource {
+//            sh(command: "git checkout \(branchTruthSource)")
+//            sh(command: "git cherry-pick --strategy=recursive -X theirs \(bumpGitTag)")
+//            pushToGitRemote(force: false)
+//            sh(command: "git checkout \(currentBranch)")
+//        }
+//
+//        let versionNumber = getVersionNumber(target: scheme).trim()
+//        let slackMessage = "\(commitPrefix) version \(newBuildNumber) build \(versionNumber) for \(appID) on branch \(currentBranch)"
+//        slackSuccess(message: slackMessage)
     }
     
     public func checkTargetsLane() {
