@@ -126,7 +126,7 @@ class Fastfile: LaneFile {
     private func loadAppstoreApiKey() {
         let appstoreApiKeyJson = environmentVariable(get: "APPSTORE_API_KEY_JSON")
         if appstoreApiKeyJson != "" {
-            sh(command: "echo \(appstoreApiKeyJson) > appstore_connect.json")
+            sh(command: "echo '\(appstoreApiKeyJson)' > appstore_connect.json")
             puts(message: "Appstore Connect key stored")
         } else {
             puts(message: "Appstore Connect key missing")
