@@ -65,6 +65,7 @@ class Fastfile: LaneFile {
                 timeout: 3600,
                 addToSearchList: true
             )
+            loadAppstoreApiKey()
         } else {
             let appleIDenv = environmentVariable(get: "APPLEID")
             if appleIDenv != "" {
@@ -123,13 +124,13 @@ class Fastfile: LaneFile {
     }
     
     private func loadAppstoreApiKey() {
-        let id = environmentVariable(get: "APPSTORE_API_KEY_ID")
-        let issuer = environmentVariable(get: "APPSTORE_API_ISSUER_ID")
-        let content = environmentVariable(get: "APPSTORE_API_KEY")
-        puts(message: "Appstore Key Id: \(id)")
-        puts(message: "Appstore Key Issuer: \(issuer)")
-        puts(message: "Loading Appstore Key: \(content)")
-        appStoreConnectApiKey(keyId: id, issuerId: issuer, keyContent: content, inHouse: false)
+        let appstoreApiKeyJson = environmentVariable(get: "APPSTORE_API_KEY_JSON")
+        if appstoreApiKeyJson != "" {
+            sh(command: "echo \(appstoreApiKeyJson) > appstore_connect.json")
+            puts(message: "Appstore Connect key stored")
+        } else {
+            puts(message: "Appstore Connect key missing")
+        }
     }
     
     public func distributeLatestBuildLane() {
@@ -147,7 +148,7 @@ class Fastfile: LaneFile {
             groups = externalTestersGroup
         }
         
-        sh(command: "bundle exec fastlane pilot distribute --app_identifier \"\(appID)\" --username \"\(username)\" --distribute_external true --groups \(groups) --notify_external_testers true --beta_app_review_info '{\"contact_email\": \"\(reviewInfoContactEmail!)\",\"contact_first_name\": \"\(reviewInfoContactFirstName!)\", \"contact_last_name\": \"\(reviewInfoContactLastName!)\", \"contact_phone\": \"\(reviewInfoContactPhone!)\"}'")
+        sh(command: "bundle exec fastlane pilot distribute --api_key_path ./appstore_connect.json --app_identifier \"\(appID)\" --username \"\(username)\" --distribute_external true --groups \(groups) --notify_external_testers true --beta_app_review_info '{\"contact_email\": \"\(reviewInfoContactEmail!)\",\"contact_first_name\": \"\(reviewInfoContactFirstName!)\", \"contact_last_name\": \"\(reviewInfoContactLastName!)\", \"contact_phone\": \"\(reviewInfoContactPhone!)\"}'")
         
         slackSuccess(message: "Successfully distributed LATEST \(enviorment.description) build to External testers 🚀 Groups: \(groups)")
     }
@@ -215,12 +216,7 @@ class Fastfile: LaneFile {
     }
     
     private func buildAndUpload(bumpLane: Bool? = true) {
-	desc("Push a new beta build to TestFlight")
-        
-        if isCi() == true {
-            loadAppstoreApiKey()
-        }
-        
+    desc("Push a new beta build to TestFlight")
         if FileManager.default.fileExists(atPath: filePath) {
             if let attributes = try? FileManager.default.attributesOfItem(atPath: filePath) as [FileAttributeKey: Any],
                 let creationDate = attributes[FileAttributeKey.creationDate] as? Date {
@@ -239,7 +235,7 @@ class Fastfile: LaneFile {
         uploadDSYM()
         deleteArchiveFilesLane()
         cleanBuildArtifacts()
-	}
+    }
     
     public func deleteArchiveFilesLane() {
         if FileManager.default.fileExists(atPath: IPAFilePath) == true {
@@ -332,22 +328,37 @@ class Fastfile: LaneFile {
     }
     
     private func uploadIPA() {
-        uploadToTestflight(
-            username: appleID ?? defaultAppleId,
-            betaAppReviewInfo: [
-                "contact_email": reviewInfoContactEmail as Any,
-                "contact_first_name": reviewInfoContactFirstName as Any,
-                "contact_last_name": reviewInfoContactLastName as Any,
-                "contact_phone": reviewInfoContactPhone as Any,
-                "notes": "This is review note for the reviewer <3 thank you for reviewing"
-            ],
-            betaAppDescription: betaAppDescription,
-            betaAppFeedbackEmail: betaAppFeedbackEmail,
-            changelog: changelogSinceLastBuildBump(),
-            skipSubmission: true,
-            skipWaitingForBuildProcessing: true,
-            teamId: itcTeam
-        )
+        let appReviewInfo = [
+            "contact_email": reviewInfoContactEmail as Any,
+            "contact_first_name": reviewInfoContactFirstName as Any,
+            "contact_last_name": reviewInfoContactLastName as Any,
+            "contact_phone": reviewInfoContactPhone as Any,
+            "notes": "This is review note for the reviewer <3 thank you for reviewing"
+        ]
+        
+        if (isCi() == true) {
+            uploadToTestflight(
+                apiKeyPath: "./appstore_connect.json",
+                betaAppReviewInfo: appReviewInfo,
+                betaAppDescription: betaAppDescription,
+                betaAppFeedbackEmail: betaAppFeedbackEmail,
+                changelog: changelogSinceLastBuildBump(),
+                skipSubmission: true,
+                skipWaitingForBuildProcessing: true,
+                teamId: itcTeam
+            )
+        } else {
+            uploadToTestflight(
+                username: appleID ?? defaultAppleId,
+                betaAppReviewInfo: appReviewInfo,
+                betaAppDescription: betaAppDescription,
+                betaAppFeedbackEmail: betaAppFeedbackEmail,
+                changelog: changelogSinceLastBuildBump(),
+                skipSubmission: true,
+                skipWaitingForBuildProcessing: true,
+                teamId: itcTeam
+            )
+        }
         
         let buildNumber = getBuildNumber().trim()
         let versionNumber = getVersionNumber(target: scheme).trim()
