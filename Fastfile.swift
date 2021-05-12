@@ -126,7 +126,7 @@ class Fastfile: LaneFile {
     private func loadAppstoreApiKey() {
         let appstoreApiKeyJson = environmentVariable(get: "APPSTORE_API_KEY_JSON")
         if appstoreApiKeyJson != "" {
-            sh(command: "echo '\(appstoreApiKeyJson)' > appstore_connect.json")
+            sh(command: "echo \(appstoreApiKeyJson) > appstore_connect.json")
             puts(message: "Appstore Connect key stored")
         } else {
             puts(message: "Appstore Connect key missing")
@@ -337,16 +337,11 @@ class Fastfile: LaneFile {
         ]
         
         if (isCi() == true) {
-            uploadToTestflight(
-                apiKeyPath: "./appstore_connect.json",
-                betaAppReviewInfo: appReviewInfo,
-                betaAppDescription: betaAppDescription,
-                betaAppFeedbackEmail: betaAppFeedbackEmail,
-                changelog: changelogSinceLastBuildBump(),
-                skipSubmission: true,
-                skipWaitingForBuildProcessing: true,
-                teamId: itcTeam
-            )
+            let description = betaAppDescription ?? ""
+            let feedbackEmail = betaAppFeedbackEmail ?? ""
+            let changelog = changelogSinceLastBuildBump()
+            let team = itcTeam ?? ""
+            sh(command: "bundle exec fastlane pilot upload --api_key_path ./appstore_connect.json --beta_app_review_info '\(appReviewInfo)' --beta_app_description '\(description)' --beta_app_feedback_email '\(feedbackEmail)' --changelog '\(changelog)' --skip_submission true --skip_waiting_for_build_processing true --team_id \(team)")
         } else {
             uploadToTestflight(
                 username: appleID ?? defaultAppleId,
