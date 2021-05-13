@@ -215,6 +215,16 @@ class Fastfile: LaneFile {
         return latestBuildNumber
     }
     
+    public func configTestingLane() {
+        let buildNumber = getBuildNumber().trim()
+        let versionNumber = getVersionNumber(target: scheme).trim()
+        let slackMessage = "\(appID) testflight uploaded successfully :ok_hand: v\(versionNumber) #\(buildNumber)"
+        puts(message: slackMessage)
+        
+        let scheduledJob = environmentVariable(get: "CIRCLE_WORKFLOW_ID")
+        puts(message: "CIRCLE_WORKFLOW_ID: \(scheduledJob)")
+    }
+    
     private func buildAndUpload(bumpLane: Bool? = true) {
     desc("Push a new beta build to TestFlight")
         if FileManager.default.fileExists(atPath: filePath) {
@@ -226,6 +236,17 @@ class Fastfile: LaneFile {
                     uploadIPA()
                     return
                 }
+            }
+        }
+        
+        let scheduledJob = environmentVariable(get: "CIRCLE_WORKFLOW_ID")
+        if scheduledJob == "scheduled-dev-builds-workflow" {
+            let versionNumber = getVersionNumber(target: scheme).trim()
+            let latestTestflightBuild = latestTestflightBuildNumber(appIdentifier: appID, version: versionNumber, initialBuildNumber: 1)
+            let currentBuildNumber = Int(getBuildNumber().trim()) ?? Int.max
+            if latestTestflightBuild >= currentBuildNumber {
+                puts(message: "Latest testflight build is already at \(latestTestflightBuild). No need to build and upload.")
+                return
             }
         }
         
