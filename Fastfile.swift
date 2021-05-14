@@ -254,8 +254,12 @@ class Fastfile: LaneFile {
         
         uploadIPA()
         uploadDSYM()
-        deleteArchiveFilesLane()
-        cleanBuildArtifacts()
+        
+        // don't delete on CI so artifacts can be uploaded
+        if (isCi() == false) {
+            deleteArchiveFilesLane()
+            cleanBuildArtifacts()
+        }
     }
     
     public func deleteArchiveFilesLane() {
