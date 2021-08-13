@@ -350,7 +350,7 @@ class Fastfile: LaneFile {
     }
     
     public func resolvePackagesLane() {
-        sh(command: "xcodebuild -scheme \"\(scheme)\" -clonedSourcePackagesDirPath \"SourcePackages\"")
+        sh(command: "xcodebuild -workspace \"\(projectWorkspace)\" -scheme \"\(scheme)\" -destination generic/platform=iOS -clonedSourcePackagesDirPath \"SourcePackages\"")
     }
     
     private func buildInfoFile() {
