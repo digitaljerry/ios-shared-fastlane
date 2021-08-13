@@ -344,8 +344,13 @@ class Fastfile: LaneFile {
         buildApp(
             workspace: projectWorkspace,
             scheme: scheme,
-            xcargs: "-allowProvisioningUpdates"
+            xcargs: "-allowProvisioningUpdates",
+            clonedSourcePackagesPath: "SourcePackages"
         )
+    }
+    
+    public func resolvePackagesLane() {
+        sh(command: "xcodebuild -scheme \"\(scheme)\" -clonedSourcePackagesDirPath \"SourcePackages\"")
     }
     
     private func buildInfoFile() {
