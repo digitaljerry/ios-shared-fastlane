@@ -274,6 +274,28 @@ class Fastfile: LaneFile {
     public func buildArchiveLane(bumpLane: Bool? = true) {
         checkTargetsLane()
         
+        syncCodeSigningIfNeeded()
+        
+        if bumpLane == true {
+            buildBump()
+        }
+        
+        cocoapods()
+        buildInfoFile()
+        buildApp(
+            workspace: projectWorkspace,
+            scheme: scheme,
+            xcargs: "-allowProvisioningUpdates",
+            clonedSourcePackagesPath: "SourcePackages"
+        )
+    }
+    
+    public func resolvePackagesLane() {
+        syncCodeSigningIfNeeded()
+        sh(command: "xcodebuild -workspace \"\(projectWorkspace)\" -scheme \"\(scheme)\" -destination generic/platform=iOS -clonedSourcePackagesDirPath \"SourcePackages\"")
+    }
+    
+    private func syncCodeSigningIfNeeded() {
         if automaticCodeSigning == false {
             if isCi() == true {
                 
@@ -334,23 +356,6 @@ class Fastfile: LaneFile {
                 }
             }
         }
-        
-        if bumpLane == true {
-            buildBump()
-        }
-        
-        cocoapods()
-        buildInfoFile()
-        buildApp(
-            workspace: projectWorkspace,
-            scheme: scheme,
-            xcargs: "-allowProvisioningUpdates",
-            clonedSourcePackagesPath: "SourcePackages"
-        )
-    }
-    
-    public func resolvePackagesLane() {
-        sh(command: "xcodebuild -workspace \"\(projectWorkspace)\" -scheme \"\(scheme)\" -destination generic/platform=iOS -clonedSourcePackagesDirPath \"SourcePackages\"")
     }
     
     private func buildInfoFile() {
