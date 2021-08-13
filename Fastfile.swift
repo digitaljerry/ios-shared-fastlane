@@ -292,7 +292,7 @@ class Fastfile: LaneFile {
     
     public func resolvePackagesLane() {
         syncCodeSigningIfNeeded()
-        sh(command: "xcodebuild -workspace \"\(projectWorkspace)\" -scheme \"\(scheme)\" -destination generic/platform=iOS -clonedSourcePackagesDirPath \"SourcePackages\"")
+        sh(command: "xcodebuild -workspace \"\(projectWorkspace)\" -scheme \"\(scheme)\" -destination generic/platform=iOS -clonedSourcePackagesDirPath \"SourcePackages\" -allowProvisioningUpdates")
     }
     
     private func syncCodeSigningIfNeeded() {
