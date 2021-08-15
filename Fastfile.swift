@@ -133,6 +133,13 @@ class Fastfile: LaneFile {
         }
     }
     
+    public func selectXcodeversionLane(withOptions options:[String: String]?) {
+        if let version = options?["version"] {
+            puts(message: "Selecting xcode version: \(version)")
+            xcversion(version: version)
+        }
+    }
+    
     public func distributeLatestBuildLane() {
         slackNotify(message: "Distributing latest \(enviorment.description) build to External testers...")
         let username = String(describing: (appleID ?? defaultAppleId))
