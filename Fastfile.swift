@@ -412,7 +412,8 @@ class Fastfile: LaneFile {
         uploadSymbolsToCrashlytics(
             dsymPath: dsymFilePath,
             gspPath: gspPath,
-            dsymWorkerThreads: 3
+            dsymWorkerThreads: 3,
+            binaryPath: "./SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols"
         )
         let buildNumber = getBuildNumber().trim()
         let versionNumber = getVersionNumber(target: scheme).trim()
