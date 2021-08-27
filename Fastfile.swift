@@ -290,7 +290,6 @@ class Fastfile: LaneFile {
         cocoapods()
         buildInfoFile()
         buildApp(
-            workspace: projectWorkspace,
             scheme: scheme,
             xcargs: "-allowProvisioningUpdates",
             clonedSourcePackagesPath: "SourcePackages"
@@ -298,7 +297,7 @@ class Fastfile: LaneFile {
     }
     
     public func resolvePackagesLane() {
-        sh(command: "xcodebuild -workspace \"\(projectWorkspace)\" -scheme \"SPM\" -clonedSourcePackagesDirPath \"SourcePackages\" -list")
+        sh(command: "xcodebuild -scheme \"SPM\" -clonedSourcePackagesDirPath \"SourcePackages\" -list")
     }
     
     private func syncCodeSigningIfNeeded() {
