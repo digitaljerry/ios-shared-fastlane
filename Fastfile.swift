@@ -287,7 +287,6 @@ class Fastfile: LaneFile {
             buildBump()
         }
         
-        cocoapods()
         buildInfoFile()
         buildApp(
             scheme: scheme,
