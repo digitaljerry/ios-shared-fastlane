@@ -289,6 +289,7 @@ class Fastfile: LaneFile {
         
         buildInfoFile()
         buildApp(
+            project: projectPath,
             scheme: scheme,
             xcargs: "-allowProvisioningUpdates",
             clonedSourcePackagesPath: "SourcePackages"
