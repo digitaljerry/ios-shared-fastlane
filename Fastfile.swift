@@ -224,9 +224,9 @@ class Fastfile: LaneFile {
     
     public func configTestingLane() {
         let buildNumber = getBuildNumber().trim()
-        let versionNumber = getVersionNumber(target: scheme).trim()
+        let versionNumber = getVersionNumber(target: .userDefined(scheme)).trim()
         let slackMessage = "\(appID) testflight uploaded successfully :ok_hand: v\(versionNumber) #\(buildNumber)"
-        puts(message: slackMessage)
+        puts(message: .userDefined(slackMessage))
         
         let scheduledJob = environmentVariable(get: "CIRCLE_WORKFLOW_ID")
         puts(message: "CIRCLE_WORKFLOW_ID: \(scheduledJob)")
@@ -248,8 +248,8 @@ class Fastfile: LaneFile {
         
         let scheduledJob = environmentVariable(get: "CIRCLE_WORKFLOW_ID")
         if scheduledJob == "scheduled-dev-builds-workflow" {
-            let versionNumber = getVersionNumber(target: scheme).trim()
-            let latestTestflightBuild = latestTestflightBuildNumber(appIdentifier: appID, version: versionNumber, initialBuildNumber: 1)
+            let versionNumber = getVersionNumber(target: .userDefined(scheme)).trim()
+            let latestTestflightBuild = latestTestflightBuildNumber(appIdentifier: appID, version: .userDefined(versionNumber), initialBuildNumber: 1)
             let currentBuildNumber = Int(getBuildNumber().trim()) ?? Int.max
             if latestTestflightBuild >= currentBuildNumber {
                 puts(message: "Latest testflight build is already at \(latestTestflightBuild). No need to build and upload.")
@@ -289,8 +289,8 @@ class Fastfile: LaneFile {
         
         buildInfoFile()
         buildApp(
-            project: projectPath,
-            scheme: scheme,
+            project: .userDefined(projectPath),
+            scheme: .userDefined(scheme),
             xcargs: "-allowProvisioningUpdates",
             clonedSourcePackagesPath: "SourcePackages"
         )
@@ -308,8 +308,8 @@ class Fastfile: LaneFile {
                     type: "appstore",
                     readonly: true,
                     appIdentifier: [appID],
-                    username: appleID ?? defaultAppleId,
-                    teamId: teamID,
+                    username: .userDefined(appleID ?? defaultAppleId),
+                    teamId: .userDefined(teamID),
                     gitUrl: matchGitUrl,
                     gitBranch: matchGitBranch,
                     shallowClone: true,
@@ -322,8 +322,8 @@ class Fastfile: LaneFile {
                         type: "appstore",
                         readonly: true,
                         appIdentifier: [appID+"."+extensionSuffix],
-                        username: appleID ?? defaultAppleId,
-                        teamId: teamID,
+                        username: .userDefined(appleID ?? defaultAppleId),
+                        teamId: .userDefined(teamID),
                         gitUrl: matchGitUrl,
                         gitBranch: matchGitBranch,
                         shallowClone: true,
@@ -339,8 +339,8 @@ class Fastfile: LaneFile {
                     type: "appstore",
                     readonly: true,
                     appIdentifier: [appID],
-                    username: appleID ?? defaultAppleId,
-                    teamId: teamID,
+                    username: .userDefined(appleID ?? defaultAppleId),
+                    teamId: .userDefined(teamID),
                     gitUrl: matchGitUrl,
                     gitBranch: matchGitBranch,
                     shallowClone: true,
@@ -351,8 +351,8 @@ class Fastfile: LaneFile {
                         type: "appstore",
                         readonly: true,
                         appIdentifier: [appID+"."+extensionSuffix],
-                        username: appleID ?? defaultAppleId,
-                        teamId: teamID,
+                        username: .userDefined(appleID ?? defaultAppleId),
+                        teamId: .userDefined(teamID),
                         gitUrl: matchGitUrl,
                         gitBranch: matchGitBranch,
                         shallowClone: true,
@@ -379,21 +379,21 @@ class Fastfile: LaneFile {
         if (isCi() == true) {
             uploadToTestflight(
                 apiKeyPath: "./appstore_connect.json",
-                betaAppReviewInfo: appReviewInfo,
-                betaAppDescription: betaAppDescription,
-                betaAppFeedbackEmail: betaAppFeedbackEmail,
-                changelog: changelogSinceLastBuildBump(),
+                betaAppReviewInfo: .userDefined(appReviewInfo),
+                betaAppDescription: .userDefined(betaAppDescription),
+                betaAppFeedbackEmail: .userDefined(betaAppFeedbackEmail),
+                changelog: .userDefined(changelogSinceLastBuildBump()),
                 skipSubmission: true,
                 skipWaitingForBuildProcessing: true,
                 teamId: itcTeam
             )
         } else {
             uploadToTestflight(
-                username: appleID ?? defaultAppleId,
-                betaAppReviewInfo: appReviewInfo,
-                betaAppDescription: betaAppDescription,
-                betaAppFeedbackEmail: betaAppFeedbackEmail,
-                changelog: changelogSinceLastBuildBump(),
+                username: .userDefined(appleID ?? defaultAppleId),
+                betaAppReviewInfo: .userDefined(appReviewInfo),
+                betaAppDescription: .userDefined(betaAppDescription),
+                betaAppFeedbackEmail: .userDefined(betaAppFeedbackEmail),
+                changelog: .userDefined(changelogSinceLastBuildBump()),
                 skipSubmission: true,
                 skipWaitingForBuildProcessing: true,
                 teamId: itcTeam
@@ -401,7 +401,7 @@ class Fastfile: LaneFile {
         }
         
         let buildNumber = getBuildNumber().trim()
-        let versionNumber = getVersionNumber(target: scheme).trim()
+        let versionNumber = getVersionNumber(target: .userDefined(scheme)).trim()
         let slackMessage = "\(appID) testflight uploaded successfully :ok_hand: v\(versionNumber) #\(buildNumber)"
         slackSuccess(message: slackMessage)
     }
@@ -410,12 +410,12 @@ class Fastfile: LaneFile {
         let gspPath = enviorment == .prod ? "./\(projectScheme)/GoogleService-Info.plist" : "./\(projectScheme)/\(enviorment.schemeSuffix)/GoogleService-Info.plist"
         uploadSymbolsToCrashlytics(
             dsymPath: dsymFilePath,
-            gspPath: gspPath,
+            gspPath: .userDefined(gspPath),
             binaryPath: "./SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols",
             dsymWorkerThreads: 3
         )
         let buildNumber = getBuildNumber().trim()
-        let versionNumber = getVersionNumber(target: scheme).trim()
+        let versionNumber = getVersionNumber(target: .userDefined(scheme)).trim()
         let slackMessage = "\(appID) dSYM files uploaded :ok_hand: v\(versionNumber) #\(buildNumber)"
         slackSuccess(message: slackMessage)
     }
@@ -427,9 +427,9 @@ class Fastfile: LaneFile {
             type: "appstore",
             readonly: false,
             appIdentifier: [appID],
-            username: appleID,
-            teamId: teamID,
-            teamName: teamID,
+            username: .userDefined(appleID),
+            teamId: .userDefined(teamID),
+            teamName: .userDefined(teamID),
             gitUrl: matchGitUrl,
             gitBranch: matchGitBranch
         )
@@ -438,9 +438,9 @@ class Fastfile: LaneFile {
                 type: "appstore",
                 readonly: false,
                 appIdentifier: [appID+"."+extensionSuffix],
-                username: appleID,
-                teamId: teamID,
-                teamName: teamID,
+                username: .userDefined(appleID),
+                teamId: .userDefined(teamID),
+                teamName: .userDefined(teamID),
                 gitUrl: matchGitUrl,
                 gitBranch: matchGitBranch
             )
@@ -458,7 +458,7 @@ class Fastfile: LaneFile {
             type: "appstore",
             readonly: false,
             appIdentifier: [appID],
-            teamId: teamID,
+            teamId: .userDefined(teamID),
             gitUrl: matchGitUrl,
             gitBranch: matchGitBranch,
             force: true
@@ -468,9 +468,9 @@ class Fastfile: LaneFile {
                 type: "appstore",
                 readonly: false,
                 appIdentifier: [appID+"."+extensionSuffix],
-                username: appleID,
-                teamId: teamID,
-                teamName: teamID,
+                username: .userDefined(appleID),
+                teamId: .userDefined(teamID),
+                teamName: .userDefined(teamID),
                 gitUrl: matchGitUrl,
                 gitBranch: matchGitBranch,
                 force: true
@@ -496,12 +496,12 @@ class Fastfile: LaneFile {
     }
     
     private func appVersionBumpLane(versionNumber: String? = nil) {
-        let newVersionNumber = incrementVersionNumber(versionNumber: versionNumber).trim()
+        let newVersionNumber = incrementVersionNumber(versionNumber: .userDefined(versionNumber)).trim()
         let message = "Version bump \(newVersionNumber) by fastlane"
         
         commitVersionBump(
-            message: message,
-            xcodeproj: projectPath,
+            message: .userDefined(message),
+            xcodeproj: .userDefined(projectPath),
             force: true
         )
         
@@ -543,15 +543,15 @@ class Fastfile: LaneFile {
         }
         
         let oldBuildNumber: String = buildNumber ?? "\( (Int(latestBuildNumber()) ?? 0)+1 )"
-        let newBuildNumber = incrementBuildNumber(buildNumber: oldBuildNumber).trim()
+        let newBuildNumber = incrementBuildNumber(buildNumber: .userDefined(oldBuildNumber)).trim()
         let message = "\(commitPrefix) \(newBuildNumber) by fastlane [skip ci]"
         
         puts(message: "force: \(force)")
-        puts(message: message)
+        puts(message: .userDefined(message))
         
         commitVersionBump(
-            message: message,
-            xcodeproj: projectPath,
+            message: .userDefined(message),
+            xcodeproj: .userDefined(projectPath),
             force: true
         )
 
@@ -569,7 +569,7 @@ class Fastfile: LaneFile {
             sh(command: "git checkout \(currentBranch)")
         }
 
-        let versionNumber = getVersionNumber(target: scheme).trim()
+        let versionNumber = getVersionNumber(target: .userDefined(scheme)).trim()
         let slackMessage = "\(commitPrefix) version \(newBuildNumber) build \(versionNumber) for \(appID) on branch \(currentBranch)"
         slackSuccess(message: slackMessage)
     }
@@ -600,7 +600,7 @@ class Fastfile: LaneFile {
         let lastBuildBumpCommit = sh(command: "git log --pretty=format:'%H' --grep='Build bump' --skip 2 -n 1 ")
         
         let changelog = changelogFromGitCommits(
-            between: "\(lastCommit),\(lastBuildBumpCommit)",
+            between: .userDefined(["\(lastCommit)", "\(lastBuildBumpCommit)"]),
             pretty: "%s",
             dateFormat: "short",
             mergeCommitFiltering: "exclude_merges"
@@ -623,22 +623,22 @@ class Fastfile: LaneFile {
     func tagTestflightBuildLane() {
         let lastCommit = lastGitCommit()
         let buildNumber = getBuildNumber().trim()
-        addGitTag(tag: "testflight/\(buildNumber)", buildNumber: buildNumber, commit: lastCommit["commit_hash"])
+        addGitTag(tag: .userDefined("testflight/\(buildNumber)"), buildNumber: .userDefined(buildNumber), commit: .userDefined(lastCommit["commit_hash"]))
         pushGitTags()
     }
     
     func tagStageBuildLane() {
         let lastCommit = lastGitCommit()
         let buildNumber = getBuildNumber().trim()
-        addGitTag(tag: "stage/\(buildNumber)", buildNumber: buildNumber, commit: lastCommit["commit_hash"])
+        addGitTag(tag: .userDefined("stage/\(buildNumber)"), buildNumber: .userDefined(buildNumber), commit: .userDefined(lastCommit["commit_hash"]))
         pushGitTags()
     }
     
     func tagAppstoreVersionLane() {
         let lastCommit = lastGitCommit()
-        let versionNumber = getVersionNumber(target: scheme).trim()
+        // let versionNumber = getVersionNumber(target: .userDefined(scheme)).trim()
         let buildNumber = getBuildNumber().trim()
-        addGitTag(tag: "appstore/\(versionNumber)", buildNumber: buildNumber, commit: lastCommit["commit_hash"])
+        addGitTag(tag: .userDefined("appstore/\(buildNumber)"), buildNumber: .userDefined(buildNumber), commit: .userDefined(lastCommit["commit_hash"]))
         pushGitTags()
     }
 }
@@ -646,8 +646,8 @@ class Fastfile: LaneFile {
 extension Fastfile {
     private func slackNotify(message: String, pretext: String = "") {
         puts(message: "posting to \(slackChannel) with \(slackUrl)")
-        slack(message: message,
-              channel: slackChannel,
+        slack(message: .userDefined(message),
+              channel: .userDefined(slackChannel),
               slackUrl: slackUrl,
               defaultPayloads: [],
               attachmentProperties: [
@@ -658,10 +658,10 @@ extension Fastfile {
         )
     }
     private func slackSuccess(message: String) {
-        slack(message: message, channel: slackChannel, slackUrl: slackUrl, defaultPayloads: [], success: true)
+        slack(message: .userDefined(message), channel: .userDefined(slackChannel), slackUrl: slackUrl, defaultPayloads: [], success: true)
     }
     private func slackError(message: String) {
-        slack(message: message, channel: slackChannel, slackUrl: slackUrl, defaultPayloads: [], success: false)
+        slack(message: .userDefined(message), channel: .userDefined(slackChannel), slackUrl: slackUrl, defaultPayloads: [], success: false)
     }
 }
 
