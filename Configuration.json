@@ -1,0 +1,902 @@
+[
+  {
+    "displayPrice": "0.99",
+    "familyShareable": false,
+    "internalID": "TV2W4HLS",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$0.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.1.A",
+    "referenceName": "$0.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "1.99",
+    "familyShareable": false,
+    "internalID": "BXGLU4MP",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$1.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.2.A",
+    "referenceName": "$1.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "2.99",
+    "familyShareable": false,
+    "internalID": "7T9Q5K8F",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$2.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.3.A",
+    "referenceName": "$2.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "3.99",
+    "familyShareable": false,
+    "internalID": "AVBQJH28",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$3.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.4.A",
+    "referenceName": "$3.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "4.99",
+    "familyShareable": false,
+    "internalID": "7Y2CFKDP",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$4.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.5.A",
+    "referenceName": "$4.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "5.99",
+    "familyShareable": false,
+    "internalID": "CSDJ54PF",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$5.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.6.A",
+    "referenceName": "$5.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "6.99",
+    "familyShareable": false,
+    "internalID": "Y2TZ79HQ",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$6.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.7.A",
+    "referenceName": "$6.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "7.99",
+    "familyShareable": false,
+    "internalID": "QC4LKMRW",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$7.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.8.A",
+    "referenceName": "$7.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "8.99",
+    "familyShareable": false,
+    "internalID": "ZNM9B6RL",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$8.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.9.A",
+    "referenceName": "$8.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "9.99",
+    "familyShareable": false,
+    "internalID": "3G9M7RFQ",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$9.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.10.A",
+    "referenceName": "$9.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "10.99",
+    "familyShareable": false,
+    "internalID": "K4BYU2PA",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$10.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.11.A",
+    "referenceName": "$10.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "11.99",
+    "familyShareable": false,
+    "internalID": "Y7QZDGMW",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$11.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.12.A",
+    "referenceName": "$11.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "12.99",
+    "familyShareable": false,
+    "internalID": "VXC6PBGZ",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$12.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.13.A",
+    "referenceName": "$12.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "13.99",
+    "familyShareable": false,
+    "internalID": "BYEDXGQV",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$13.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.14.A",
+    "referenceName": "$13.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "14.99",
+    "familyShareable": false,
+    "internalID": "4NJMC6FY",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$14.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.15.A",
+    "referenceName": "$14.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "15.99",
+    "familyShareable": false,
+    "internalID": "VJHMUC8D",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$15.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.16.A",
+    "referenceName": "$15.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "16.99",
+    "familyShareable": false,
+    "internalID": "DAQPX8LT",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$16.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.17.A",
+    "referenceName": "$16.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "17.99",
+    "familyShareable": false,
+    "internalID": "XQVB7KTR",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$17.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.18.A",
+    "referenceName": "$17.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "18.99",
+    "familyShareable": false,
+    "internalID": "LMXDT3F5",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$18.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.19.A",
+    "referenceName": "$18.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "19.99",
+    "familyShareable": false,
+    "internalID": "GSTFYX29",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$19.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.20.A",
+    "referenceName": "$19.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "20.99",
+    "familyShareable": false,
+    "internalID": "BTQJFHSW",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$20.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.21.A",
+    "referenceName": "$20.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "21.99",
+    "familyShareable": false,
+    "internalID": "J8FXYQN3",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$21.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.22.A",
+    "referenceName": "$21.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "22.99",
+    "familyShareable": false,
+    "internalID": "RTZ54MSW",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$22.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.23.A",
+    "referenceName": "$22.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "23.99",
+    "familyShareable": false,
+    "internalID": "7FCBTR6D",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$23.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.24.A",
+    "referenceName": "$23.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "24.99",
+    "familyShareable": false,
+    "internalID": "KB8LDP5E",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$24.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.25.A",
+    "referenceName": "$24.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "25.99",
+    "familyShareable": false,
+    "internalID": "4X6V2YAQ",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$25.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.26.A",
+    "referenceName": "$25.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "26.99",
+    "familyShareable": false,
+    "internalID": "GFND52TW",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$26.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.27.A",
+    "referenceName": "$26.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "27.99",
+    "familyShareable": false,
+    "internalID": "FN6H5SW9",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$27.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.28.A",
+    "referenceName": "$27.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "28.99",
+    "familyShareable": false,
+    "internalID": "ZVU29LMG",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$28.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.29.A",
+    "referenceName": "$28.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "29.99",
+    "familyShareable": false,
+    "internalID": "FY6CRM8S",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$29.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.30.A",
+    "referenceName": "$29.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "30.99",
+    "familyShareable": false,
+    "internalID": "BCHFXGQ3",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$30.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.31.A",
+    "referenceName": "$30.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "31.99",
+    "familyShareable": false,
+    "internalID": "ZQ94RJHU",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$31.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.32.A",
+    "referenceName": "$31.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "32.99",
+    "familyShareable": false,
+    "internalID": "AYJS586V",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$32.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.33.A",
+    "referenceName": "$32.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "33.99",
+    "familyShareable": false,
+    "internalID": "FLUYW86T",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$33.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.34.A",
+    "referenceName": "$33.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "34.99",
+    "familyShareable": false,
+    "internalID": "T9SDGMJU",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$34.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.35.A",
+    "referenceName": "$34.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "35.99",
+    "familyShareable": false,
+    "internalID": "796DGJ2P",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$35.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.36.A",
+    "referenceName": "$35.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "36.99",
+    "familyShareable": false,
+    "internalID": "M8DG5LTY",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$36.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.37.A",
+    "referenceName": "$36.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "37.99",
+    "familyShareable": false,
+    "internalID": "E2RKTNSL",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$37.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.38.A",
+    "referenceName": "$37.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "38.99",
+    "familyShareable": false,
+    "internalID": "QCSP83FL",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$38.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.39.A",
+    "referenceName": "$38.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "39.99",
+    "familyShareable": false,
+    "internalID": "LDVSAWH6",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$39.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.40.A",
+    "referenceName": "$39.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "40.99",
+    "familyShareable": false,
+    "internalID": "LHD89TMV",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$40.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.41.A",
+    "referenceName": "$40.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "41.99",
+    "familyShareable": false,
+    "internalID": "VXFMW74E",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$41.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.42.A",
+    "referenceName": "$41.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "42.99",
+    "familyShareable": false,
+    "internalID": "AN5YVKCE",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$42.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.43.A",
+    "referenceName": "$42.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "43.99",
+    "familyShareable": false,
+    "internalID": "YS39KMQG",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$43.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.44.A",
+    "referenceName": "$43.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "44.99",
+    "familyShareable": false,
+    "internalID": "F426RMWP",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$44.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.45.A",
+    "referenceName": "$44.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "45.99",
+    "familyShareable": false,
+    "internalID": "3F9ZPVLD",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$45.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.46.A",
+    "referenceName": "$45.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "46.99",
+    "familyShareable": false,
+    "internalID": "2AMLVKRX",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$46.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.47.A",
+    "referenceName": "$46.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "47.99",
+    "familyShareable": false,
+    "internalID": "JK7DVMHW",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$47.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.48.A",
+    "referenceName": "$47.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "48.99",
+    "familyShareable": false,
+    "internalID": "2N3CF758",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$48.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.49.A",
+    "referenceName": "$48.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "49.99",
+    "familyShareable": false,
+    "internalID": "JCFMRZ2Q",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$49.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.50.A",
+    "referenceName": "$49.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "54.99",
+    "familyShareable": false,
+    "internalID": "7D8Q532M",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$54.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.55.A",
+    "referenceName": "$54.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "59.99",
+    "familyShareable": false,
+    "internalID": "2U6TKJPE",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$59.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.60.A",
+    "referenceName": "$59.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "64.99",
+    "familyShareable": false,
+    "internalID": "FYHUQG9Z",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$64.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.65.A",
+    "referenceName": "$64.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "69.99",
+    "familyShareable": false,
+    "internalID": "QKTBV9NA",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$69.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.70.A",
+    "referenceName": "$69.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "74.99",
+    "familyShareable": false,
+    "internalID": "S5ARXTZH",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$74.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.75.A",
+    "referenceName": "$74.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "79.99",
+    "familyShareable": false,
+    "internalID": "JQV6KG3N",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$79.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.80.A",
+    "referenceName": "$79.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "84.99",
+    "familyShareable": false,
+    "internalID": "KYRX8LPT",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$84.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.85.A",
+    "referenceName": "$84.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "89.99",
+    "familyShareable": false,
+    "internalID": "4PVUCHYJ",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$89.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.90.A",
+    "referenceName": "$89.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "94.99",
+    "familyShareable": false,
+    "internalID": "Z27EVF86",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$94.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.95.A",
+    "referenceName": "$94.99 Book Credit Top-up",
+    "type": "Consumable"
+  },
+  {
+    "displayPrice": "99.99",
+    "familyShareable": false,
+    "internalID": "RVBW4EAZ",
+    "localizations": [
+      {
+        "description": "Book Credit Top-up for purchasing books.",
+        "displayName": "$99.99 Book Credit Top-up",
+        "locale": "en_US"
+      }
+    ],
+    "productID": "com.rallyreader.app.dev.inapp.credit.100.A",
+    "referenceName": "$99.99 Book Credit Top-up",
+    "type": "Consumable"
+  }
+]
