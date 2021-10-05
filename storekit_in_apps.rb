@@ -1,7 +1,7 @@
 
 require 'json'
 
-app_id = "com.rallyreader.app.dev"
+app_id = "com.rallyreader.app"
 
 tiers = Array[
     1,

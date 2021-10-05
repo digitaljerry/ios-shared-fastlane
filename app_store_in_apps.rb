@@ -2,7 +2,7 @@ require "spaceship"
 
 # exec("export FASTLANE_ITC_TEAM_ID=\"2280804\"")
 
-app_id = "com.rallyreader.app.dev"
+app_id = "com.rallyreader.app"
 
 Spaceship::Tunes.login("jernejz@gmail.com")
 Spaceship::Tunes.select_team
@@ -94,14 +94,14 @@ for i in 0..tiers.size - 1
         type: Spaceship::Tunes::IAPType::CONSUMABLE, 
         versions: {
           'en-US': {
-            name: "$#{price} Book Credit",
+            name: "Book Credit #{tier}",
             description: "Book Credit for purchasing books."
           }
         },
-        reference_name: "$#{price} Book Credit",
+        reference_name: "Book Credit #{tier}",
         product_id: product_id,
         cleared_for_sale: false,
-        review_notes: "Product for tier #{tier}",
+        review_notes: "Product for tier #{tier}. This can be access by tapping on your current balance in the Bookstore screen (top left, screenshot). Or by purchasing a book that costs the appropriate amount.",
         review_screenshot: "iap.jpg", 
         pricing_intervals: 
         [
