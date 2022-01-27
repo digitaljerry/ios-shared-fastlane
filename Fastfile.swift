@@ -535,12 +535,12 @@ class Fastfile: LaneFile {
     private func buildBump(buildNumber: String? = nil, commitPrefix: String = "Build bump", force: Bool = false) {
         let lastCommit = lastGitCommit()
         
-        // if force == false {
-        //     guard lastCommit["message"]?.hasPrefix("Build bump") == false && buildNumber == nil else {
-        //         println(message: "No need for a build bump")
-        //         return
-        //     }
-        // }
+        if force == false {
+            guard lastCommit["message"]?.hasPrefix("Build bump") == false && buildNumber == nil else {
+                println(message: "No need for a build bump")
+                return
+            }
+        }
         
         let oldBuildNumber: String = buildNumber ?? "\( (Int(latestBuildNumber()) ?? 0)+1 )"
         let newBuildNumber = incrementBuildNumber(buildNumber: .userDefined(oldBuildNumber)).trim()
@@ -562,20 +562,12 @@ class Fastfile: LaneFile {
         let currentBranch = gitBranch()
 
         // push build bump to the branch holding the truth
-        println(message: "1")
         if currentBranch != branchTruthSource {
-            println(message: "2")
             sh(command: "git checkout \(branchTruthSource)")
-            println(message: "3")
-            println(message: "git cherry-pick --strategy=recursive -X theirs \(bumpGitTag)")
             sh(command: "git cherry-pick --strategy=recursive -X theirs \(bumpGitTag)")
-            println(message: "4")
             pushToGitRemote(force: false)
-            println(message: "4")
             sh(command: "git checkout \(currentBranch)")
-            println(message: "5")
         }
-        println(message: "6")
 
         let versionNumber = getVersionNumber(target: .userDefined(scheme)).trim()
         let slackMessage = "\(commitPrefix) version \(newBuildNumber) build \(versionNumber) for \(appID) on branch \(currentBranch)"
