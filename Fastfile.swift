@@ -162,16 +162,19 @@ class Fastfile: LaneFile {
     
     public func devBuildLane() {
         enviorment = .dev
+        sh(command: "make dev")
         buildArchiveLane(bumpLane: false)
     }
     
     public func stageBuildLane() {
         enviorment = .stage
+        sh(command: "make stage")
         buildArchiveLane(bumpLane: false)
     }
     
     public func prodBuildLane() {
         enviorment = .prod
+        sh(command: "make prod")
         buildArchiveLane(bumpLane: false)
     }
     
