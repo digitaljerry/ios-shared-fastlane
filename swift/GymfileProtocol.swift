@@ -1,7 +1,7 @@
 // GymfileProtocol.swift
 // Copyright (c) 2022 FastlaneTools
 
-public protocol GymfileProtocol: class {
+public protocol GymfileProtocol: AnyObject {
     /// Path to the workspace file
     var workspace: String? { get }
 
@@ -204,4 +204,4 @@ public extension GymfileProtocol {
 
 // Please don't remove the lines below
 // They are used to detect outdated files
-// FastlaneRunnerAPIVersion [0.9.97]
+// FastlaneRunnerAPIVersion [0.9.104]

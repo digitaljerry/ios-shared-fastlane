@@ -1,7 +1,7 @@
 // MatchfileProtocol.swift
 // Copyright (c) 2022 FastlaneTools
 
-public protocol MatchfileProtocol: class {
+public protocol MatchfileProtocol: AnyObject {
     /// Define the profile type, can be appstore, adhoc, development, enterprise, developer_id, mac_installer_distribution
     var type: String { get }
 
@@ -104,11 +104,14 @@ public protocol MatchfileProtocol: class {
     /// Include all matching certificates in the provisioning profile. Works only for the 'development' provisioning profile type
     var includeAllCertificates: Bool { get }
 
-    /// Renew the provisioning profiles if the device count on the developer portal has changed. Works only for the 'development' provisioning profile type. Requires 'include_all_certificates' option to be 'true'
+    /// Renew the provisioning profiles if the certificate count on the developer portal has changed. Works only for the 'development' provisioning profile type. Requires 'include_all_certificates' option to be 'true'
     var forceForNewCertificates: Bool { get }
 
     /// Disables confirmation prompts during nuke, answering them with yes
     var skipConfirmation: Bool { get }
+
+    /// Remove certs from repository during nuke without revoking them on the developer portal
+    var safeRemoveCerts: Bool { get }
 
     /// Skip generation of a README.md for the created git repository
     var skipDocs: Bool { get }
@@ -178,6 +181,7 @@ public extension MatchfileProtocol {
     var includeAllCertificates: Bool { return false }
     var forceForNewCertificates: Bool { return false }
     var skipConfirmation: Bool { return false }
+    var safeRemoveCerts: Bool { return false }
     var skipDocs: Bool { return false }
     var platform: String { return "ios" }
     var deriveCatalystAppIdentifier: Bool { return false }
@@ -192,4 +196,4 @@ public extension MatchfileProtocol {
 
 // Please don't remove the lines below
 // They are used to detect outdated files
-// FastlaneRunnerAPIVersion [0.9.91]
+// FastlaneRunnerAPIVersion [0.9.98]
