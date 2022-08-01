@@ -284,7 +284,7 @@ class Fastfile: LaneFile {
     public func buildArchiveLane(bumpLane: Bool? = true) {
         checkTargetsLane()
         
-        syncCodeSigningIfNeeded()
+        // syncCodeSigningIfNeeded()
         
         if bumpLane == true {
             buildBump()
@@ -425,61 +425,7 @@ class Fastfile: LaneFile {
     
     // MARK: Codes signing
     
-    public func certificatesForReleaseLane() {
-        match(
-            type: "appstore",
-            readonly: false,
-            appIdentifier: [appID],
-            username: .userDefined(appleID),
-            teamId: .userDefined(teamID),
-            teamName: .userDefined(teamID),
-            gitUrl: matchGitUrl,
-            gitBranch: matchGitBranch
-        )
-        for extensionSuffix in extensionIdentifiersSuffixes {
-            match(
-                type: "appstore",
-                readonly: false,
-                appIdentifier: [appID+"."+extensionSuffix],
-                username: .userDefined(appleID),
-                teamId: .userDefined(teamID),
-                teamName: .userDefined(teamID),
-                gitUrl: matchGitUrl,
-                gitBranch: matchGitBranch
-            )
-        }
-    }
-    
-    public func renewProfilesLane() {
-        renewAppstoreProfiles()
-    }
-    
     // MARK: Private lanes
-    
-    private func renewAppstoreProfiles() {
-        match(
-            type: "appstore",
-            readonly: false,
-            appIdentifier: [appID],
-            teamId: .userDefined(teamID),
-            gitUrl: matchGitUrl,
-            gitBranch: matchGitBranch,
-            force: true
-        )
-        for extensionSuffix in extensionIdentifiersSuffixes {
-            match(
-                type: "appstore",
-                readonly: false,
-                appIdentifier: [appID+"."+extensionSuffix],
-                username: .userDefined(appleID),
-                teamId: .userDefined(teamID),
-                teamName: .userDefined(teamID),
-                gitUrl: matchGitUrl,
-                gitBranch: matchGitBranch,
-                force: true
-            )
-        }
-    }
     
     // MARK: Helpers
     
