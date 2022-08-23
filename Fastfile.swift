@@ -162,34 +162,37 @@ class Fastfile: LaneFile {
     
     public func devBuildLane() {
         enviorment = .dev
-        sh(command: "make dev")
+        makeDev()
         buildArchiveLane(bumpLane: false)
     }
     
     public func stageBuildLane() {
         enviorment = .stage
-        sh(command: "make stage")
+        makeStage()
         buildArchiveLane(bumpLane: false)
     }
     
     public func prodBuildLane() {
         enviorment = .prod
-        sh(command: "make prod")
+        makeProd()
         buildArchiveLane(bumpLane: false)
     }
     
     public func uploadDevBuildLane() {
         enviorment = .dev
+        makeDev()
         buildAndUpload(bumpLane: true)
     }
     
     public func uploadStageBuildLane() {
         enviorment = .stage
+        makeStage()
         buildAndUpload(bumpLane: false)
     }
     
     public func uploadProdBuildLane() {
         enviorment = .prod
+        makeProd()
         buildAndUpload(bumpLane: false)
         tagTestflightBuildLane()
     }
@@ -207,6 +210,27 @@ class Fastfile: LaneFile {
     public func getLatestBuildNumberLane() {
         let buildNumber = latestBuildNumber()
         puts(message: "Latest build number: \(buildNumber)")
+    }
+    
+    private func makeDev() {
+        sh(command: "make dev", log: true) { error in
+            puts("ERROR!!!")
+            sh(command: "sleep 1000000")
+        }
+    }
+    
+    private func makeStage() {
+        sh(command: "make stage", log: true) { error in
+            puts("ERROR!!!")
+            sh(command: "sleep 1000000")
+        }
+    }
+    
+    private func makeProd() {
+        sh(command: "make prod", log: true) { error in
+            puts("ERROR!!!")
+            sh(command: "sleep 1000000")
+        }
     }
     
     private func latestBuildNumber() -> String {
